@@ -1,9 +1,6 @@
 package com.ccc.admin.dto;
 
-import java.util.Date;
-
 public class AdminDTO {
-
     private int adminNumber;
     private String adminId;
     private String adminPw;

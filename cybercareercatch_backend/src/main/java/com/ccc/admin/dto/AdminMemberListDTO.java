@@ -1,7 +1,5 @@
 package com.ccc.admin.dto;
 
-import java.util.Date;
-
 public class AdminMemberListDTO {
 
     private int userNumber;

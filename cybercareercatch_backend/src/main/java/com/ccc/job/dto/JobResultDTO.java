@@ -1,7 +1,5 @@
 package com.ccc.job.dto;
 
-import java.util.Date;
-
 public class JobResultDTO {
 
     private int jobResultNumber;
