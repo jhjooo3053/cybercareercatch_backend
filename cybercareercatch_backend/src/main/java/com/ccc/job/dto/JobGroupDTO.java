@@ -17,8 +17,9 @@ public class JobGroupDTO {
 		}
 		@Override
 		public String toString() {
-			// TODO Auto-generated method stub
-			return super.toString();
+			return "JobGroupDTO [jobNumber=" + jobNumber + ", jobName=" + jobName + "]";
 		}
+	
+		
 	    
 }

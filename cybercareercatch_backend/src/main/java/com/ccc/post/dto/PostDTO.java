@@ -80,9 +80,11 @@ public class PostDTO {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "PostDTO [postNumber=" + postNumber + ", postType=" + postType + ", userNumber=" + userNumber
+				+ ", adminNumber=" + adminNumber + ", companyNumber=" + companyNumber + ", answerStatus=" + answerStatus
+				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", postDate=" + postDate
+				+ ", viewCount=" + viewCount + ", editDate=" + editDate + "]";
 	}
-    
-    
+	
+	
 }

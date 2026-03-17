@@ -32,9 +32,11 @@ public class NoticeEditDTO {
 	  }
 	  @Override
 	  public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "NoticeEditDTO [postNumber=" + postNumber + ", postTitle=" + postTitle + ", postContent=" + postContent
+				+ ", editDate=" + editDate + "]";
 	  }
+	
+	  
 	   
 	  
 	  

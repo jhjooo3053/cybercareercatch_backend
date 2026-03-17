@@ -17,9 +17,9 @@ public class PostSearchDTO {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "PostSearchDTO [keyword=" + keyword + ", searchType=" + searchType + "]";
 	}
+
 	
 	
 

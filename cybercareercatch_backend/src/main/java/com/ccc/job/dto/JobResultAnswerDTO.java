@@ -32,8 +32,11 @@ public class JobResultAnswerDTO {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "JobResultAnswerDTO [jobResultNumber=" + jobResultNumber + ", jobQuestionNumber=" + jobQuestionNumber
+				+ ", jobQuestionContentSnapshot=" + jobQuestionContentSnapshot + ", answerContent=" + answerContent
+				+ "]";
 	}
+
+	
 
 }

@@ -236,6 +236,20 @@ public class CompanyDetailDTO {
 	public void setCat4IsHiring(int cat4IsHiring) {
 		this.cat4IsHiring = cat4IsHiring;
 	}
+
+	@Override
+	public String toString() {
+		return "CompanyDetailDTO [companyNumber=" + companyNumber + ", companyName=" + companyName + ", companyAddress="
+				+ companyAddress + ", companyState=" + companyState + ", CompanyBrn=" + CompanyBrn + ", filePath="
+				+ filePath + ", compCeoName=" + compCeoName + ", compFndYear=" + compFndYear + ", compEmplCnt="
+				+ compEmplCnt + ", compRev=" + compRev + ", compCap=" + compCap + ", compType=" + compType
+				+ ", compSummary=" + compSummary + ", compTech=" + compTech + ", compMainBiz=" + compMainBiz
+				+ ", compInfo=" + compInfo + ", compSvcHist=" + compSvcHist + ", jobPostProfile=" + jobPostProfile
+				+ ", jobPostContent=" + jobPostContent + ", jobPostProcess=" + jobPostProcess + ", jobPostMethod="
+				+ jobPostMethod + ", jobPostDate=" + jobPostDate + ", cat1IsHiring=" + cat1IsHiring + ", cat2IsHiring="
+				+ cat2IsHiring + ", cat3IsHiring=" + cat3IsHiring + ", cat4IsHiring=" + cat4IsHiring + "]";
+	}
+	
 	
 
 	

@@ -52,9 +52,10 @@ public class PostPageDTO {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "PostPageDTO [page=" + page + ", rowCount=" + rowCount + ", totalCount=" + totalCount + ", startPage="
+				+ startPage + ", endPage=" + endPage + ", prev=" + prev + ", next=" + next + "]";
 	}
-    
+	
+	
     
 }

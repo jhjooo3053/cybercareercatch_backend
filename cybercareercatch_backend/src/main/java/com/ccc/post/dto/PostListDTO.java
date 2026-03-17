@@ -38,10 +38,11 @@ public class PostListDTO {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "PostListDTO [postNumber=" + postNumber + ", postTitle=" + postTitle + ", userId=" + userId
+				+ ", postDate=" + postDate + ", editDate=" + editDate + "]";
 	}
-
+	
+	
 	
 
 

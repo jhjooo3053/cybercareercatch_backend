@@ -49,4 +49,13 @@ public class JobTestSubmitDTO {
     public void setAnswerContent(String answerContent) {
         this.answerContent = answerContent;
     }
+
+	@Override
+	public String toString() {
+		return "JobTestSubmitDTO [jobResultNumber=" + jobResultNumber + ", userNumber=" + userNumber
+				+ ", jobQuestionNumber=" + jobQuestionNumber + ", jobQuestionContentSnapshot="
+				+ jobQuestionContentSnapshot + ", answerContent=" + answerContent + "]";
+	}
+    
+    
 }

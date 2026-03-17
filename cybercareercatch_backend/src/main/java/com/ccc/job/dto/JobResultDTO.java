@@ -58,4 +58,14 @@ public class JobResultDTO {
     public void setJobResultConfirmDate(String jobResultConfirmDate) {
         this.jobResultConfirmDate = jobResultConfirmDate;
     }
+
+	@Override
+	public String toString() {
+		return "JobResultDTO [jobResultNumber=" + jobResultNumber + ", userNumber=" + userNumber + ", jobNumber="
+				+ jobNumber + ", jobResultStatus=" + jobResultStatus + ", jobResultCreatedDate=" + jobResultCreatedDate
+				+ ", jobResultConfirmDate=" + jobResultConfirmDate + "]";
+	}
+    
+    
+    
 }
