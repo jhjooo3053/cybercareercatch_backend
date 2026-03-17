@@ -18,12 +18,6 @@
 		AND ADMIN_PW = #{adminPw}
 	</select>
 
-	<!-- 관리자 메인 총 일반 회원 수 -->
-	<select id="getMemberCount" resultType="int">
-		SELECT COUNT(USER_NUMBER)
-		FROM TBL_USER
-		WHERE USER_TYPE = '일반회원'
-	</select>
 
 	<!-- 관리자 메인 총 기업 회원 수 -->
 	<select id="getCompanyMemberCount" resultType="int">
