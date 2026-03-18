@@ -3,149 +3,118 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="roadmap">
+<mapper namespace="job">
 
-	<!-- 로드맵 기본 조회 -->
-	<select id="selectRoadmap" parameterType="int" resultType="RoadmapDTO">
+	<!-- 직군 목록 조회 -->
+	<select id="selectJobGroupList" resultType="JobGroupDTO">
 		SELECT
 			JOB_NUMBER,
-			ROADMAP_IMAGE_PATH
-		FROM TBL_ROADMAP
-		WHERE JOB_NUMBER = #{jobNumber}
+			JOB_NAME
+		FROM TBL_JOB_GROUP
+		ORDER BY JOB_NUMBER
 	</select>
 
-	<!-- 로드맵 이미지 수정 -->
-	<update id="updateRoadmap" parameterType="RoadmapDTO">
-		UPDATE TBL_ROADMAP
-		SET ROADMAP_IMAGE_PATH = #{roadmapImagePath}
-		WHERE JOB_NUMBER = #{jobNumber}
-	</update>
-
-	<!-- 로드맵 직업 목록 조회 -->
-	<select id="selectRoadmapJobList" parameterType="int" resultType="RoadmapJobDTO">
+	<!-- 질의문 목록 조회 -->
+	<select id="selectQuestionList" resultType="JobRecommendQuestionDTO">
 		SELECT
-			ROADMAP_JOB_NUMBER,
-			JOB_NUMBER,
-			ROADMAP_JOB_NAME,
-			ROADMAP_JOB_DESC
-		FROM TBL_ROADMAP_JOB
-		WHERE JOB_NUMBER = #{jobNumber}
-		ORDER BY ROADMAP_JOB_NUMBER
+			JOB_QUESTION_NUMBER,
+			JOB_QUESTION_CONTENT
+		FROM TBL_JOB_RECOMMEND_QUESTION
+		ORDER BY JOB_QUESTION_NUMBER
 	</select>
 
-	<!-- 로드맵 직업 수정 -->
-	<update id="updateRoadmapJob" parameterType="RoadmapJobDTO">
-		UPDATE TBL_ROADMAP_JOB
-		SET ROADMAP_JOB_NAME = #{roadmapJobName},
-			ROADMAP_JOB_DESC = #{roadmapJobDesc}
-		WHERE ROADMAP_JOB_NUMBER = #{roadmapJobNumber}
-	</update>
+	<!-- 질의문 단건 조회 -->
+	<select id="selectQuestion" parameterType="int" resultType="JobRecommendQuestionDTO">
+		SELECT
+			JOB_QUESTION_NUMBER,
+			JOB_QUESTION_CONTENT
+		FROM TBL_JOB_RECOMMEND_QUESTION
+		WHERE JOB_QUESTION_NUMBER = #{jobQuestionNumber}
+	</select>
 
-	<!-- 로드맵 직업 추가 -->
-	<insert id="insertRoadmapJob" parameterType="RoadmapJobDTO">
-		INSERT INTO TBL_ROADMAP_JOB (
-			ROADMAP_JOB_NUMBER,
-			JOB_NUMBER,
-			ROADMAP_JOB_NAME,
-			ROADMAP_JOB_DESC
+	<!-- 질의문 작성 -->
+	<insert id="insertQuestion" parameterType="JobRecommendQuestionDTO">
+		INSERT INTO TBL_JOB_RECOMMEND_QUESTION (
+			JOB_QUESTION_NUMBER,
+			JOB_QUESTION_CONTENT
 		) VALUES (
-			SEQ_ROADMAP_JOB_NUMBER.NEXTVAL,
-			#{jobNumber},
-			#{roadmapJobName},
-			#{roadmapJobDesc}
+			#{jobQuestionNumber},
+			#{jobQuestionContent}
 		)
 	</insert>
 
-	<!-- 로드맵 직업 삭제 -->
-	<delete id="deleteRoadmapJob" parameterType="int">
-		DELETE FROM TBL_ROADMAP_JOB
-		WHERE ROADMAP_JOB_NUMBER = #{roadmapJobNumber}
-	</delete>
-
-	<!-- 로드맵 커리큘럼 목록 조회 -->
-	<select id="selectCurriculumList" parameterType="int" resultType="RoadmapCurriculumDTO">
-		SELECT
-			CURRICULUM_NUMBER,
-			JOB_NUMBER,
-			SKILL_TYPE,
-			SKILL_NAME,
-			SKILL_DESC
-		FROM TBL_ROADMAP_CURRICULUM
-		WHERE JOB_NUMBER = #{jobNumber}
-		ORDER BY CURRICULUM_NUMBER
-	</select>
-
-	<!-- 로드맵 커리큘럼 수정 -->
-	<update id="updateCurriculum" parameterType="RoadmapCurriculumDTO">
-		UPDATE TBL_ROADMAP_CURRICULUM
-		SET SKILL_TYPE = #{skillType},
-			SKILL_NAME = #{skillName},
-			SKILL_DESC = #{skillDesc}
-		WHERE CURRICULUM_NUMBER = #{curriculumNumber}
+	<!-- 질의문 수정 -->
+	<update id="updateQuestion" parameterType="JobRecommendQuestionDTO">
+		UPDATE TBL_JOB_RECOMMEND_QUESTION
+		SET JOB_QUESTION_CONTENT = #{jobQuestionContent}
+		WHERE JOB_QUESTION_NUMBER = #{jobQuestionNumber}
 	</update>
 
-	<!-- 로드맵 커리큘럼 추가 -->
-	<insert id="insertCurriculum" parameterType="RoadmapCurriculumDTO">
-		INSERT INTO TBL_ROADMAP_CURRICULUM (
-			CURRICULUM_NUMBER,
-			JOB_NUMBER,
-			SKILL_TYPE,
-			SKILL_NAME,
-			SKILL_DESC
-		) VALUES (
-			SEQ_ROADMAP_CURRICULUM_NUMBER.NEXTVAL,
-			#{jobNumber},
-			#{skillType},
-			#{skillName},
-			#{skillDesc}
+	<!-- 관리자 질의문 답변 목록 조회 -->
+	<select id="selectJobResultList" parameterType="map" resultType="JobTestResultDTO">
+		<![CDATA[
+		SELECT * FROM (
+			SELECT ROWNUM AS RNUM, A.*
+			FROM (
+				SELECT
+					JR.JOB_RESULT_NUMBER,
+					JR.USER_NUMBER,
+					U.USER_NAME,
+					JR.JOB_NUMBER,
+					JG.JOB_NAME,
+					JR.JOB_RESULT_STATUS,
+					JR.JOB_RESULT_CREATED_DATE,
+					JR.JOB_RESULT_CONFIRM_DATE
+				FROM TBL_JOB_RESULT JR
+				JOIN TBL_USER U
+				ON JR.USER_NUMBER = U.USER_NUMBER
+				LEFT JOIN TBL_JOB_GROUP JG
+				ON JR.JOB_NUMBER = JG.JOB_NUMBER
+				ORDER BY JR.JOB_RESULT_NUMBER DESC
+			) A
 		)
-	</insert>
-
-	<!-- 로드맵 커리큘럼 삭제 -->
-	<delete id="deleteCurriculum" parameterType="int">
-		DELETE FROM TBL_ROADMAP_CURRICULUM
-		WHERE CURRICULUM_NUMBER = #{curriculumNumber}
-	</delete>
-
-	<!-- 로드맵 추천 목록 조회 -->
-	<select id="selectRecList" parameterType="int" resultType="RoadmapRecDTO">
-		SELECT
-			REC_NUMBER,
-			JOB_NUMBER,
-			REC_TYPE,
-			REC_NAME
-		FROM TBL_ROADMAP_REC
-		WHERE JOB_NUMBER = #{jobNumber}
-		ORDER BY REC_NUMBER
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+		]]>
 	</select>
 
-	<!-- 로드맵 추천 수정 -->
-	<update id="updateRec" parameterType="RoadmapRecDTO">
-		UPDATE TBL_ROADMAP_REC
-		SET REC_TYPE = #{recType},
-			REC_NAME = #{recName}
-		WHERE REC_NUMBER = #{recNumber}
+	<!-- 관리자 질의문 답변 총 개수 -->
+	<select id="getJobResultTotal" resultType="int">
+		SELECT COUNT(JOB_RESULT_NUMBER)
+		FROM TBL_JOB_RESULT
+	</select>
+
+	<!-- 관리자 질의문 답변 상세 조회 -->
+	<select id="selectJobResultDetail" parameterType="int" resultType="AdminJobResultDetailDTO">
+		SELECT
+			JR.JOB_RESULT_NUMBER,
+			JR.USER_NUMBER,
+			U.USER_NAME,
+			U.USER_ID,
+			JR.JOB_RESULT_STATUS,
+			JG.JOB_NAME,
+			JR.JOB_RESULT_CREATED_DATE,
+			JR.JOB_RESULT_CONFIRM_DATE,
+			JRA.JOB_QUESTION_NUMBER,
+			JRA.JOB_QUESTION_CONTENT_SNAPSHOT,
+			JRA.ANSWER_CONTENT
+		FROM TBL_JOB_RESULT JR
+		JOIN TBL_USER U
+		ON JR.USER_NUMBER = U.USER_NUMBER
+		LEFT JOIN TBL_JOB_GROUP JG
+		ON JR.JOB_NUMBER = JG.JOB_NUMBER
+		JOIN TBL_JOB_RESULT_ANSWER JRA
+		ON JR.JOB_RESULT_NUMBER = JRA.JOB_RESULT_NUMBER
+		WHERE JR.JOB_RESULT_NUMBER = #{jobResultNumber}
+		ORDER BY JRA.JOB_QUESTION_NUMBER
+	</select>
+
+	<!-- 직군 판정 -->
+	<update id="judgeJobResult" parameterType="JobResultDTO">
+		UPDATE TBL_JOB_RESULT
+		SET JOB_NUMBER = #{jobNumber},
+			JOB_RESULT_STATUS = '판정완료',
+			JOB_RESULT_CONFIRM_DATE = SYSDATE
+		WHERE JOB_RESULT_NUMBER = #{jobResultNumber}
 	</update>
-
-	<!-- 로드맵 추천 추가 -->
-	<insert id="insertRec" parameterType="RoadmapRecDTO">
-		INSERT INTO TBL_ROADMAP_REC (
-			REC_NUMBER,
-			JOB_NUMBER,
-			REC_TYPE,
-			REC_NAME
-		) VALUES (
-			SEQ_ROADMAP_REC_NUMBER.NEXTVAL,
-			#{jobNumber},
-			#{recType},
-			#{recName}
-		)
-	</insert>
-
-	<!-- 로드맵 추천 삭제 -->
-	<delete id="deleteRec" parameterType="int">
-		DELETE FROM TBL_ROADMAP_REC
-		WHERE REC_NUMBER = #{recNumber}
-	</delete>
 
 </mapper>

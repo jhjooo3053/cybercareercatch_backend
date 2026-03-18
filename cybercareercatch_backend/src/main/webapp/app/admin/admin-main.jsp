@@ -1,290 +1,186 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<title>관리자 메인대시보드</title>
-<link rel="stylesheet" href="../../assets/css/admin/admin-main.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>관리자 메인 페이지</title>
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/assets/css/admin/admin-main.css">
 </head>
 
-<body class="admin-main-body">
-
-<div class="admin-main-container">
-
-<header class="admin-main-top">
-
-<div class="admin-main-title">
-  <a href="./admin-main.html">관리자 페이지</a></div>
-
-<nav class="admin-main-menu">
-<a href="../admin/member-management/member-info.html">회원 관리</a>
-<a href="../admin/main-management/qna-management.html">메인 관리</a>
-<a href="../admin/community-management/expo-schedule.html">커뮤니티 관리</a>
-</nav>
-
-<button class="admin-main-logout">로그아웃</button>
-
-</header>
-
-<main class="admin-main-main">
-<!-- 
-<aside class="admin-main-leftbar">
-
-<div class="admin-main-left-item admin-main-active">
-<a href="./expo-schedule.html">일반회원 정보 조회</a>
-</div>
-
-<div class="admin-main-left-item">
-<a href="./community-management.html">기업회원 정보 조회</a>
-</div>
-
-<div class="admin-main-left-item">
-<a href="./company-qna.html">기업회원 승인, 반려</a>
-</div>
-
-</aside> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 오른쪽 콘텐츠 -->
-
-<section class="admin-main-content">
-
-<h2 class="admin-main-dashboard-title">대시보드</h2>
-
-<div class="admin-main-dashboard">
-
-<!-- 일반회원 카드 -->
-
-<div class="admin-main-card">
-
-<h3>일반회원</h3>
-
-<div class="admin-main-summary">
-<p>총 회원 수 : 200명</p>
-<p>오늘 가입 회원 : 5명</p>
-</div>
-
-<div class="admin-main-list">
-
-<div class="admin-main-row admin-main-row-head">
-<div>번호</div>
-<div>아이디</div>
-<div>회원이름</div>
-<div>가입날짜</div>
-</div>
-
-<div class="admin-main-row">
-<div>1</div>
-<div>id122</div>
-<div>김성민</div>
-<div>260304</div>
-</div>
-
-<div class="admin-main-row">
-<div>2</div>
-<div>id123</div>
-<div>김민서</div>
-<div>260304</div>
-</div>
-
-<div class="admin-main-row">
-<div>3</div>
-<div>id123</div>
-<div>김민서</div>
-<div>260304</div>
-</div>
-
-</div>
-</div>
-
-
-<!-- 기업회원 카드 -->
-
-<div class="admin-main-card">
-
-<h3>기업회원</h3>
-
-<div class="admin-main-summary">
-<p>총 회원 수 : 40명</p>
-<p>오늘 가입 기업회원 : 5명</p>
-</div>
-
-<div class="admin-main-list">
-
-<div class="admin-main-row admin-main-row-head">
-<div>번호</div>
-<div>아이디</div>
-<div>기업이름</div>
-<div>가입날짜</div>
-</div>
-
-<div class="admin-main-row">
-<div>1</div>
-<div>id122</div>
-<div>쿠크</div>
-<div>260304</div>
-</div>
-
-<div class="admin-main-row">
-<div>2</div>
-<div>id123</div>
-<div>안랩</div>
-<div>260304</div>
-</div>
-
-<div class="admin-main-row">
-<div>3</div>
-<div>id123</div>
-<div>안랩</div>
-<div>260304</div>
-</div>
-
-</div>
-</div>
-
-</div>
-
-
-<!-- 통계 -->
-<!-- 
-<div class="admin-main-stats">
-
-<div class="admin-main-stat-box">
-총 일반 회원 수<br><b>200</b>
-</div>
-
-<div class="admin-main-stat-box">
-총 기업 회원 수<br><b>100</b>
-</div>
-
-<div class="admin-main-stat-box">
-총 회원 수<br><b>300</b>
-</div>
-
-</div> -->
-<div class="admin-main-stats">
-
-  <div class="admin-main-stat-box-title">총 일반 회원 수</div>
-  <div class="admin-main-stat-box-title">총 기업 회원 수</div>
-  <div class="admin-main-stat-box-title">총 회원 수</div>
-
-  <div class="admin-main-stat-box-number">200</div>
-  <div class="admin-main-stat-box-number">100</div>
-  <div class="admin-main-stat-box-number">300</div>
-
-</div>
-
-<!-- 박람회 일정 -->
-
-<h2 class="admin-main-expo-title">박람회 일정</h2>
-<div class="admin-main-summary">
-<p>총 박람회 수 : 12명</p>
-<p>오늘 등록된 박람회 수 : 1개</p>
-</div>
-<div class="admin-main-card">
-
-<div class="admin-main-list">
-
-<div class="admin-main-expo-row admin-main-row-head">
-<div>번호</div>
-<div>박람회명</div>
-<div>시작일</div>
-<div>종료일</div>
-<div>장소</div>
-<div>참여기업수</div>
-<div>진행상태</div>
-</div>
-
-<div class="admin-main-expo-row">
-<div>1</div>
-<div>보안 취업 박람회</div>
-<div>26.04.10</div>
-<div>26.04.12</div>
-<div>63빌딩</div>
-<div>12</div>
-<div>예정</div>
-</div>
-
-<div class="admin-main-expo-row">
-<div>2</div>
-<div>IT 채용 박람회</div>
-<div>26.04.07</div>
-<div>26.04.12</div>
-<div>킨택스</div>
-<div>12</div>
-<div>진행중</div>
-</div>
-
-<div class="admin-main-expo-row">
-<div>3</div>
-<div>보안 취업 박람회</div>
-<div>26.04.10</div>
-<div>26.04.12</div>
-<div>63빌딩</div>
-<div>12</div>
-<div>예정</div>
-</div>
-
-<div class="admin-main-expo-row">
-<div>4</div>
-<div>IT 채용 박람회</div>
-<div>26.04.07</div>
-<div>26.04.12</div>
-<div>킨택스</div>
-<div>12</div>
-<div>진행중</div>
-</div>
-
-<div class="admin-main-expo-row">
-<div>5</div>
-<div>보안 취업 박람회</div>
-<div>26.04.10</div>
-<div>26.04.12</div>
-<div>63빌딩</div>
-<div>12</div>
-<div>예정</div>
-</div>
-
-
-</div>
-</div>
-
-
-<!-- 박람회 통계 -->
-<div class="admin-main-expo">
-
-  <div class="admin-main-stat-expobox-title">전체 박람회 수</div>
-  <div class="admin-main-stat-expobox-title">예정 박람회 수</div>
-  <div class="admin-main-stat-expobox-title">진행 증 박람회 수</div>
-<div class="admin-main-stat-expobox-title">종료</div>
-
-  <div class="admin-main-stat-expobox-number">12</div>
-  <div class="admin-main-stat-expobox-number">4</div>
-  <div class="admin-main-stat-expobox-number">1</div>
-<div class="admin-main-stat-expobox-number">7</div>
-
-</div>
-
-
-
-
-</section>
-
-</main>
-
-</div>
+<body>
+
+	<div class="container">
+
+		<header class="top-bar">
+			<div class="logo">
+				<a href="${pageContext.request.contextPath}/app/admin/admin-main.jsp">관리자 페이지</a>
+			</div>
+
+			<nav class="main-nav">
+				<a href="${pageContext.request.contextPath}/app/admin/member-management/member-info.jsp">회원 관리</a>
+				<a href="${pageContext.request.contextPath}/app/admin/main-management/qna-management.jsp">메인 관리</a>
+				<a href="${pageContext.request.contextPath}/app/admin/community-management/expo-schedule.jsp">커뮤니티 관리</a>
+			</nav>
+
+			<button class="logout-btn" type="button">로그아웃</button>
+		</header>
+
+		<main class="main-content">
+
+			<aside class="sidebar">
+				<div class="sidebar-item sidebar-active">
+					<a href="${pageContext.request.contextPath}/app/admin/admin-main.jsp">대시보드</a>
+				</div>
+				<div class="sidebar-item">
+					<a href="${pageContext.request.contextPath}/app/admin/main-management/qna-management.jsp">질의문 관리</a>
+				</div>
+				<div class="sidebar-item">
+					<a href="${pageContext.request.contextPath}/app/admin/main-management/company-info.jsp">기업 정보페이지</a>
+				</div>
+				<div class="sidebar-item">
+					<a href="${pageContext.request.contextPath}/app/admin/main-management/roadmap-management.jsp">로드맵 관리</a>
+				</div>
+			</aside>
+
+			<section class="dashboard">
+
+				<div class="summary-cards">
+					<div class="card">
+						<div class="card-title">총 일반 회원 수</div>
+						<div class="card-value">20</div>
+					</div>
+
+					<div class="card">
+						<div class="card-title">총 기업 회원 수</div>
+						<div class="card-value">20</div>
+					</div>
+
+					<div class="card">
+						<div class="card-title">총 박람회 수</div>
+						<div class="card-value">10</div>
+					</div>
+				</div>
+
+				<div class="dashboard-section">
+					<h3>최근 일반 회원</h3>
+
+					<div class="table-box">
+						<div class="table-row table-head">
+							<div>회원번호</div>
+							<div>아이디</div>
+							<div>이름</div>
+							<div>가입일</div>
+						</div>
+
+						<div class="table-row">
+							<div>20</div>
+							<div>user20</div>
+							<div>노태윤</div>
+							<div>2026-02-26</div>
+						</div>
+
+						<div class="table-row">
+							<div>19</div>
+							<div>user19</div>
+							<div>강수아</div>
+							<div>2026-02-25</div>
+						</div>
+
+						<div class="table-row">
+							<div>18</div>
+							<div>user18</div>
+							<div>조민성</div>
+							<div>2026-02-24</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="dashboard-section">
+					<h3>최근 기업 회원</h3>
+
+					<div class="table-box">
+						<div class="table-row table-head">
+							<div>회원번호</div>
+							<div>아이디</div>
+							<div>기업명</div>
+							<div>가입일</div>
+							<div>상태</div>
+						</div>
+
+						<div class="table-row">
+							<div>40</div>
+							<div>comp20</div>
+							<div>에버가드</div>
+							<div>2026-03-17</div>
+							<div>승인</div>
+						</div>
+
+						<div class="table-row">
+							<div>39</div>
+							<div>comp19</div>
+							<div>락포인트</div>
+							<div>2026-03-16</div>
+							<div>반려</div>
+						</div>
+
+						<div class="table-row">
+							<div>38</div>
+							<div>comp18</div>
+							<div>시큐브릿지</div>
+							<div>2026-03-15</div>
+							<div>승인</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="dashboard-section">
+					<h3>최근 박람회</h3>
+
+					<div class="table-box">
+						<div class="table-row table-head">
+							<div>박람회번호</div>
+							<div>박람회명</div>
+							<div>시작일</div>
+							<div>종료일</div>
+							<div>장소</div>
+						</div>
+
+						<div class="table-row">
+							<div>10</div>
+							<div>2026 청년 IT 보안 일자리 박람회</div>
+							<div>2026-07-01</div>
+							<div>2026-07-03</div>
+							<div>창원 컨벤션센터</div>
+						</div>
+
+						<div class="table-row">
+							<div>9</div>
+							<div>2026 AI 보안 기술 채용 박람회</div>
+							<div>2026-06-20</div>
+							<div>2026-06-21</div>
+							<div>서울 SETEC</div>
+						</div>
+
+						<div class="table-row">
+							<div>8</div>
+							<div>2026 개인정보보호 산업 박람회</div>
+							<div>2026-06-12</div>
+							<div>2026-06-14</div>
+							<div>수원 컨벤션센터</div>
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+		</main>
+
+	</div>
 
 </body>
+
 </html>

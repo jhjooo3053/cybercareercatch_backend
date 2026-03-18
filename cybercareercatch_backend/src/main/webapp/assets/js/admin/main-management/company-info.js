@@ -21,7 +21,57 @@ document.addEventListener("DOMContentLoaded", function () {
         if (span) span.classList.add("active");
 
         currentPage = page;
-    }
+    }		document.addEventListener("DOMContentLoaded", function () {
+		    // 기업 정보 목록의 모든 체크박스를 가져온다.
+		    const checkboxes = document.querySelectorAll(".companyInfo-col5 input[type='checkbox']");
+
+		    // 삭제 버튼을 가져온다.
+		    const deleteButton = document.querySelector(".companyInfo-delete button");
+
+		    // 페이지 번호를 가져온다.
+		    const pageButtons = document.querySelectorAll(".companyInfo-page span");
+
+		    // 삭제 버튼이 없으면 아래 코드를 실행하지 않는다.
+		    if (!deleteButton) {
+		        return;
+		    }
+
+		    // 삭제 버튼 클릭 시 하나라도 선택되었는지 검사한다.
+		    deleteButton.addEventListener("click", function () {
+		        let checkedCount = 0;
+
+		        checkboxes.forEach(function (checkbox) {
+		            if (checkbox.checked) {
+		                checkedCount++;
+		            }
+		        });
+
+		        // 선택된 항목이 없으면 삭제를 막는다.
+		        if (checkedCount === 0) {
+		            alert("삭제할 기업을 선택하세요.");
+		            return;
+		        }
+
+		        // 선택된 항목이 있으면 안내만 띄운다.
+		        alert("선택한 기업 정보가 삭제됩니다.");
+		    });
+
+		    // 페이지 번호 active 처리
+		    pageButtons.forEach(function (button) {
+		        button.addEventListener("click", function () {
+		            pageButtons.forEach(function (item) {
+		                item.classList.remove("active");
+		            });
+
+		            if (
+		                button.textContent.trim() !== "<" &&
+		                button.textContent.trim() !== ">"
+		            ) {
+		                button.classList.add("active");
+		            }
+		        });
+		    });
+		});
 
     showPage(1);
 

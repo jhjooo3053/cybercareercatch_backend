@@ -3,6 +3,7 @@ package com.ccc.job.dto;
 public class JobGroupDTO {
 	  private int jobNumber;
 	    private String jobName;
+	    
 		public int getJobNumber() {
 			return jobNumber;
 		}

@@ -3,6 +3,7 @@ package com.ccc.job.dto;
 public class JobRecommendQuestionDTO {
     private int jobQuestionNumber;
     private String jobQuestionContent;
+    
 	public int getJobQuestionNumber() {
 		return jobQuestionNumber;
 	}

@@ -1,47 +1,48 @@
 package com.ccc.roadmap.dto;
 
 public class RoadmapJobDTO {
-	   private int curriculumNumber;
-	   private int jobNumber;
-	   private String skillType;
-	   private String skillName;
-	   private String skillDesc;
-	   
-	   public int getCurriculumNumber() {
-		   return curriculumNumber;
-	   }
-	   public void setCurriculumNumber(int curriculumNumber) {
-		   this.curriculumNumber = curriculumNumber;
-	   }
-	   public int getJobNumber() {
-		   return jobNumber;
-	   }
-	   public void setJobNumber(int jobNumber) {
-		   this.jobNumber = jobNumber;
-	   }
-	   public String getSkillType() {
-		   return skillType;
-	   }
-	   public void setSkillType(String skillType) {
-		   this.skillType = skillType;
-	   }
-	   public String getSkillName() {
-		   return skillName;
-	   }
-	   public void setSkillName(String skillName) {
-		   this.skillName = skillName;
-	   }
-	   public String getSkillDesc() {
-		   return skillDesc;
-	   }
-	   public void setSkillDesc(String skillDesc) {
-		   this.skillDesc = skillDesc;
-	   }
-	   
-	   @Override
-	   public String toString() {
-		return "RoadmapJobDTO [curriculumNumber=" + curriculumNumber + ", jobNumber=" + jobNumber + ", skillType="
-				+ skillType + ", skillName=" + skillName + ", skillDesc=" + skillDesc + "]";
-	   }
-	   
+	private int roadmapJobNumber;
+	private int jobNumber;
+	private String roadmapJobName;
+	private String roadmapJobDesc;
+
+	public RoadmapJobDTO() {;}
+
+	public int getRoadmapJobNumber() {
+		return roadmapJobNumber;
+	}
+
+	public void setRoadmapJobNumber(int roadmapJobNumber) {
+		this.roadmapJobNumber = roadmapJobNumber;
+	}
+
+	public int getJobNumber() {
+		return jobNumber;
+	}
+
+	public void setJobNumber(int jobNumber) {
+		this.jobNumber = jobNumber;
+	}
+
+	public String getRoadmapJobName() {
+		return roadmapJobName;
+	}
+
+	public void setRoadmapJobName(String roadmapJobName) {
+		this.roadmapJobName = roadmapJobName;
+	}
+
+	public String getRoadmapJobDesc() {
+		return roadmapJobDesc;
+	}
+
+	public void setRoadmapJobDesc(String roadmapJobDesc) {
+		this.roadmapJobDesc = roadmapJobDesc;
+	}
+
+	@Override
+	public String toString() {
+		return "RoadmapJobDTO [roadmapJobNumber=" + roadmapJobNumber + ", jobNumber=" + jobNumber
+				+ ", roadmapJobName=" + roadmapJobName + ", roadmapJobDesc=" + roadmapJobDesc + "]";
+	}
 }

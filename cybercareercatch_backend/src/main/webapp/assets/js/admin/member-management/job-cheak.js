@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 기업 승인/반려 목록 행을 가져온다.
+    // 질의문 답변 목록 행을 가져온다.
     const rows = document.querySelectorAll(".company-check-row:not(.company-check-head)");
 
-    // 페이지 버튼을 가져온다.
+    // 페이지 번호를 가져온다.
     const pageButtons = document.querySelectorAll(".company-check-page");
 
     // 목록 행 hover 처리
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 페이지 active 처리
+    // 페이지 버튼 active 처리
     pageButtons.forEach(function (button) {
         button.addEventListener("click", function () {
             pageButtons.forEach(function (item) {

@@ -1,199 +1,95 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // 공지 textarea를 가져온다.
+    const noticeBox = document.querySelector("#notice-box");
 
-    const rowsPerPage = 10;
-    let currentPage = 1;
+    // 공지 수정 버튼을 가져온다.
+    const noticeButton = document.querySelector("#notice-btn");
 
-    const qnaTable = document.querySelector(".qna-table");
-    const pageSpans = document.querySelectorAll(".qna-page span");
-    const deleteBtn = document.getElementById("delete-btn");
+    // 기업 QnA 삭제 버튼을 가져온다.
+    const deleteButton = document.querySelector("#delete-btn");
+
+    // 기업 선택 select를 가져온다.
     const companySelect = document.querySelector(".qna-filter select");
-    const noticeBox = document.getElementById("notice-box");
-    const noticeBtn = document.getElementById("notice-btn");
 
-    let noticeRow = null;
+    // QnA 행을 전부 가져온다.
+    const qnaRows = document.querySelectorAll(".qna-row:not(.qna-head)");
 
-    let qnaRows = Array.from(
-        qnaTable.querySelectorAll(".qna-row:not(.qna-head)")
-    );
+    // 페이지 번호를 가져온다.
+    const pageSpans = document.querySelectorAll(".qna-page span");
 
+    // 체크박스를 가져온다.
+    const checkboxes = document.querySelectorAll(".qna-row input[type='checkbox']");
 
-    noticeBtn.addEventListener("click", function () {
-
-        if (!noticeBox.dataset.editing) {
-
-            noticeBox.dataset.editing = "true";
-            noticeBox.focus();
-            noticeBtn.textContent = "저장";
-
-        } else {
-
-            const content = noticeBox.value.trim();
-
-            if (!content) {
-                alert("공지 내용을 입력해주세요!");
+    // 공지 버튼 클릭 시 공지 입력값 검사를 한다.
+    if (noticeButton) {
+        noticeButton.addEventListener("click", function () {
+            if (!noticeBox.value.trim()) {
+                alert("공지 내용을 입력하세요.");
+                noticeBox.focus();
                 return;
             }
 
-            noticeBox.dataset.editing = "";
-            noticeBtn.textContent = "수정";
-
-            alert("공지 내용이 저장되었습니다!");
-
-            if (!noticeRow) {
-
-                noticeRow = document.createElement("div");
-                noticeRow.className = "qna-row";
-                noticeRow.style.background = "#fff3cd";
-
-                qnaTable.insertBefore(noticeRow, qnaRows[0]);
-
-            }
-
-            noticeRow.innerHTML = `
-<div class="col1">공지</div>
-<div class="col2">${content}</div>
-<div class="col3">관리자</div>
-<div class="col4">${new Date().toISOString().slice(2, 10).replace(/-/g, "")}</div>
-<div class="col5">-</div>
-<div class="col6"></div>
-`;
-
-        }
-
-    });
-
-
-    function showPage(page) {
-
-        currentPage = page;
-
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
-
-        qnaRows.forEach(function (row, i) {
-
-            if (i >= start && i < end) {
-                row.style.display = "flex";
-            } else {
-                row.style.display = "none";
-            }
-
+            alert("공지사항이 저장됩니다.");
         });
-
-        if (noticeRow) {
-            noticeRow.style.display = "flex";
-        }
-
-        pageSpans.forEach(function (s) {
-            s.classList.remove("active");
-        });
-
-        const span = Array.from(pageSpans).find(function (s) {
-            return parseInt(s.textContent) === page;
-        });
-
-        if (span) {
-            span.classList.add("active");
-        }
-
     }
 
-    showPage(1);
+    // 삭제 버튼 클릭 시 체크된 항목이 있는지 검사한다.
+    if (deleteButton) {
+        deleteButton.addEventListener("click", function () {
+            let checkedCount = 0;
 
-
-    pageSpans.forEach(function (span) {
-
-        span.addEventListener("click", function () {
-
-            const text = span.textContent.trim();
-
-            const totalPages = Math.ceil(qnaRows.length / rowsPerPage);
-
-            if (text === "<<") {
-                showPage(1);
-            }
-
-            else if (text === ">>") {
-                showPage(totalPages);
-            }
-
-            else if (text === "<") {
-                showPage(Math.max(1, currentPage - 1));
-            }
-
-            else if (text === ">") {
-                showPage(Math.min(totalPages, currentPage + 1));
-            }
-
-            else if (!isNaN(parseInt(text))) {
-                showPage(parseInt(text));
-            }
-
-        });
-
-    });
-
-
-    deleteBtn.addEventListener("click", function () {
-
-        const visibleRows = qnaRows.filter(function (r) {
-            return r.style.display !== "none";
-        });
-
-        const checkedBoxes = visibleRows
-            .map(function (r) {
-                return r.querySelector('input[type="checkbox"]');
-            })
-            .filter(function (b) {
-                return b.checked;
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    checkedCount++;
+                }
             });
 
-        if (checkedBoxes.length === 0) {
-            alert("삭제할 항목을 선택하세요.");
-            return;
-        }
+            if (checkedCount === 0) {
+                alert("삭제할 게시글을 선택하세요.");
+                return;
+            }
 
-        if (confirm("선택한 항목을 삭제하시겠습니까?")) {
+            alert("선택한 게시글이 삭제됩니다.");
+        });
+    }
 
-            checkedBoxes.forEach(function (box) {
+    // 기업 선택 필터
+    if (companySelect) {
+        companySelect.addEventListener("change", function () {
+            const selectedCompany = companySelect.value.trim();
 
-                const row = box.closest(".qna-row");
+            qnaRows.forEach(function (row) {
+                const companyCell = row.querySelector(".col3");
 
-                const idx = qnaRows.indexOf(row);
-
-                if (idx > -1) {
-                    qnaRows.splice(idx, 1);
+                if (!companyCell) {
+                    return;
                 }
 
-                row.remove();
+                const companyName = companyCell.textContent.trim();
 
+                if (selectedCompany === "기업선택" || selectedCompany === companyName) {
+                    row.style.display = "flex";
+                } else {
+                    row.style.display = "none";
+                }
             });
+        });
+    }
 
-            showPage(currentPage);
+    // 페이지 active 처리
+    pageSpans.forEach(function (span) {
+        span.addEventListener("click", function () {
+            const text = span.textContent.trim();
 
-        }
-
-    });
-
-
-    companySelect.addEventListener("change", function () {
-
-        const selected = companySelect.value;
-
-        qnaRows.forEach(function (row) {
-
-            const companyName = row.querySelector(".col3").textContent;
-
-            if (selected === "기업선택" || companyName === selected) {
-                row.style.display = "flex";
-            } else {
-                row.style.display = "none";
+            if (text === "<<" || text === "<" || text === ">" || text === ">>") {
+                return;
             }
 
+            pageSpans.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            span.classList.add("active");
         });
-
-        showPage(1);
-
     });
-
 });

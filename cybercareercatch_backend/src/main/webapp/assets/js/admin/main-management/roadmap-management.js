@@ -1,40 +1,25 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", function () {
+    // 로드맵 카테고리 버튼을 가져온다.
+    const categoryButtons = document.querySelectorAll(".roadmap-btn");
 
+    // 수정 버튼을 가져온다.
+    const editButtons = document.querySelectorAll(".roadmap-edit-btn");
 
-    const tabs = document.querySelectorAll('.rm-tabmenu a');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            e.preventDefault();
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            alert(tab.textContent + "  클릭");
+    // 카테고리 버튼 클릭 시 active 표시를 바꾼다.
+    categoryButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            categoryButtons.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            button.classList.add("active");
         });
     });
 
-
-    const uploadBtn = document.querySelector('.rm-upload-btn');
-    uploadBtn.addEventListener('click', () => {
-        const input = uploadBtn.previousElementSibling;
-        alert("이미지 업로드: " + input.value);
+    // 수정 버튼 클릭 시 안내를 띄운다.
+    editButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            alert("로드맵 수정 페이지로 이동합니다.");
+        });
     });
-
-  
-    const btnCheck = document.querySelector('.rm-btn1');
-    const btnEdit = document.querySelector('.rm-btn2');
-    const btnReset = document.querySelector('.rm-btn3');
-
-    btnCheck.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert("데이터 확인 완료");
-    });
-
-    btnEdit.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert("데이터 수정 완료");
-    });
-
-    btnReset.addEventListener('click', (e) => {
-        alert("입력 내용 초기화됨");
-    });
-
 });
