@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyberCareerCatch</title>
-    <link rel="stylesheet" href="../../../assets/css/main/company/company-info.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/company/company-info.css">
 </head>
 
 <body>
@@ -179,5 +179,5 @@
 
   </div>
 </body>
-<script src="../../../assets/js/main/company/company-info.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main/company/company-info.js"></script>
 </html>

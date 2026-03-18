@@ -16,7 +16,8 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="../../../assets/css/main/header/header-login-company.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/header/header-login-company.css" />
+  <!-- ../../../assets/css/main/header/header-login-company.css  -->
 </head>
 <body>
   <header class="header">
@@ -34,16 +35,16 @@
           <li class="nav-item dropdown">
             <a href="#" class="nav-link" onclick="toggleDropdown(event)">직군검사</a>
             <ul class="dropdown-menu">
-                   <li><a href="../mainpage/mainpage-login.html">직군 검사</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire1.html">보안컨설팅</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire2.html">시스템/네트워크/엔지니어</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire3.html">보안관제</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire4.html">침해사고/디지털포렌식</a></li>
+                   <li><a href="${pageContext.request.contextPath}/mainpage/mainpage-login.jsp"> <!--서블릿 -->직군 검사</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire1.jsp"><!--서블릿 -->보안컨설팅</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire2.jsp"><!--서블릿 -->시스템/네트워크/엔지니어</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire3.jsp"><!--서블릿 -->보안관제</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire4.jsp"><!--서블릿 -->침해사고/디지털포렌식</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a href="../company/company-ad.html" class="nav-link">기업홍보</a>
+            <a href="${pageContext.request.contextPath}/company/company-ad.jsp"<!--서블릿 --> class="nav-link">기업홍보</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -61,7 +62,7 @@
       <div class="auth-area">
         <!-- 로그인한 회원 이름이 들어갈 자리 -->
         <a
-          href="../mypage/mypage-company.html"
+          href="${pageContext.request.contextPath}/mypage/mypage-company.jsp"<!--서블릿 -->
           class="auth-btn auth-btn--member"
           aria-label="마이페이지로 이동"
         >
@@ -74,7 +75,7 @@
           </svg>
         </a>
 
-        <a href="../mainpage/mainpage-logout.html" class="auth-btn auth-btn--logout">로그아웃</a>
+        <a href="${pageContext.request.contextPath}/mainpage/mainpage-logout.html" <!-- 서블릿경로 -->class="auth-btn auth-btn--logout">로그아웃</a>
       </div>
     </div>
   </header>

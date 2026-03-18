@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>푸터</title>
-    <link rel="stylesheet" href="../../../assets/css/main/footer/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/footer/footer.css">
 </head>
 <body>
 

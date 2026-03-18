@@ -18,13 +18,13 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="../../../assets/css/main/header/header-login-member.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/header/header-login-member.css" />
 </head>
 <body>
   <header class="header">
     <div class="header-inner">
       <h1 class="logo">
-        <a href="../../main/mainpage/mainpage-logoin.html" class="logo-link" aria-label="CyberCareerCatch 홈">
+        <a href="${pageContext.request.contextPath}/main/mainpage/mainpage-logoin.jsp" class="logo-link" aria-label="CyberCareerCatch 홈">
           <span class="logo-strong">C</span><span class="logo-soft">yber</span>
           <span class="logo-strong">C</span><span class="logo-soft">areer</span>
           <span class="logo-strong">C</span><span class="logo-soft">atch</span>
@@ -36,25 +36,25 @@
           <li class="nav-item dropdown">
             <a href="#" class="nav-link" onclick="toggleDropdown(event)">직군검사</a>
             <ul class="dropdown-menu">
-                   <li><a href="../mainpage/mainpage-login.html">직군 검사</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire1.html">보안컨설팅</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire2.html">시스템/네트워크/엔지니어</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire3.html">보안관제</a></li>
-              <li><a href="../roadmap/roadmap-questionnaire4.html">침해사고/디지털포렌식</a></li>
+                   <li><a href="${pageContext.request.contextPath}/mainpage/mainpage-login.jsp">직군 검사</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire1.jsp">보안컨설팅</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire2.jsp">시스템/네트워크/엔지니어</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire3.jsp">보안관제</a></li>
+              <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire4.jsp">침해사고/디지털포렌식</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a href="../company/company-ad.html" class="nav-link">기업홍보</a>
+            <a href="${pageContext.request.contextPath}/company/company-ad.jsp" class="nav-link">기업홍보</a>
           </li>
 
           <li class="nav-item dropdown">
             <a href="#" class="nav-link" onclick="toggleDropdown(event)">커뮤니티</a>
             <ul class="dropdown-menu">
          
-              <li><a href="../community/post-list.html">자유게시판</a></li>
-              <li><a href="../qna/qna-list.html">기업QnA</a></li>
-              <li><a href="../expo/expo-calendar.html">박람회일정</a></li>
+              <li><a href="${pageContext.request.contextPath}/community/post-list.jsp">자유게시판</a></li>
+              <li><a href="${pageContext.request.contextPath}/qna/qna-list.jsp">기업QnA</a></li>
+              <li><a href="${pageContext.request.contextPath}/expo/expo-calendar.jsp">박람회일정</a></li>
             </ul>
           </li>
         </ul>
@@ -63,7 +63,7 @@
       <div class="auth-area">
         <!-- 로그인한 회원 이름이 들어갈 자리 -->
         <a
-          href="../mypage/mypage-member.html"
+          href="${pageContext.request.contextPath}/mypage/mypage-member.html"
           class="auth-btn auth-btn--member"
           aria-label="마이페이지로 이동"
         >
@@ -76,7 +76,7 @@
           </svg>
         </a>
 
-        <a href="../mainpage/mainpage-logout.html" class="auth-btn auth-btn--logout">로그아웃</a>
+        <a href="${pageContext.request.contextPath}/mainpage/mainpage-logout.jsp" class="auth-btn auth-btn--logout">로그아웃</a>
       </div>
     </div>
   </header>

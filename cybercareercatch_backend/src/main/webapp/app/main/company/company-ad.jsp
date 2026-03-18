@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyberCareerCatch</title>
-    <link rel="stylesheet" href="../../../assets/css/main/company/company-ad.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/company/company-ad.css">
     
 </head>
 <body>
@@ -27,5 +27,5 @@
     <div class="ad-pg" id="pagination"></div>
   </main>
 </body>
-<script src="../../../assets/js/main/company/company-ad.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main/company/company-ad.js"></script>
 </html>

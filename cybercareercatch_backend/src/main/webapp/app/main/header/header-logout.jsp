@@ -29,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- 실제로 Noto Sans KR과 Poppins 폰트의 스타일시트를 가져와 페이지에 적용함. -->
 
-    <link rel="stylesheet" href="../../../assets/css/main/header/header.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/header/header.css" />
     <!-- 앞서 작성한 외부 CSS 파일(header.css)을 불러와서 크기, 색상, 배치 등 디자인을 결정함. -->
 </head>
 
@@ -68,27 +68,27 @@
                         <!-- 이 텍스트를 클릭했을 때, 하단에 정의된 JS 함수(toggleDropdown)를 즉시 실행하라는 이벤트 리스너(트리거)가 포함되어 있음. -->
 
                         <ul class="dropdown-menu job-menu">
-                            <li><a href="../mainpage/mainpage-logout.html">직군 검사</a></li>
+                            <li><a href="${pageContext.request.contextPath}/mainpage/mainpage-logout.jsp">직군 검사</a></li>
                             <!-- '직군검사' 메뉴 하위에 종속된 서브 메뉴 리스트임. CSS에서 숨겨두었다가 자바스크립트가 개입하면 나타남. -->
 
-                            <li><a href="../roadmap/roadmap-questionnaire1.html">보안컨설팅</a></li>
+                            <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire1.jsp "<!-- 서블릿 -->>보안컨설팅</a></li>
                             <!-- 각 서브 메뉴 항목이며, href 속성에 정의된 특정 페이지 주소로 이동을 수행함. -->
-                            <li><a href="../roadmap/roadmap-questionnaire2.html">시스템/네트워크/엔지니어</a></li>
-                            <li><a href="../roadmap/roadmap-questionnaire3.html">보안관제</a></li>
-                            <li><a href="../roadmap/roadmap-questionnaire4.html">침해사고/디지털포렌식</a></li>
+                            <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire2.jsp"<!-- 서블릿 -->>시스템/네트워크/엔지니어</a></li>
+                            <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire3.jsp"<!-- 서블릿 -->>보안관제</a></li>
+                            <li><a href="${pageContext.request.contextPath}/roadmap/roadmap-questionnaire4.jsp"<!-- 서블릿 -->>침해사고/디지털포렌식</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a href="../company/company-ad.html" class="nav-link">기업홍보</a>
+                        <a href="${pageContext.request.contextPath}/company/company-ad.jsp" class="nav-link"<!-- 서블릿 -->>기업홍보</a>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" onclick="toggleDropdown(event)">커뮤니티</a>
                         <ul class="dropdown-menu community-menu">
-                            <li><a href="../community/post-list.html">자유게시판</a></li>
-                            <li><a href="../qna/qna-list.html">기업QnA</a></li>
-                            <li><a href="../expo/expo-calendar.html">박람회일정</a></li>
+                            <li><a href="${pageContext.request.contextPath}/post/postListOk.pfc"<!-- 서블릿 -->>자유게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/qna/qna-list.jsp"<!-- 서블릿 -->>기업QnA</a></li>
+                            <li><a href="${pageContext.request.contextPath}/expo/expo-calendar.jsp"<!-- 서블릿 -->>박람회일정</a></li>
                         </ul>
                     </li>
                 </ul>
