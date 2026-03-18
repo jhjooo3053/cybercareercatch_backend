@@ -1,14 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4"
+         id="WebApp_ID">
 
-	<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4" id="WebApp_ID">
-		<display-name>cybercareercatch_backend</display-name>
-		<welcome-file-list>
-			<welcome-file>index.html</welcome-file>
-			<welcome-file>index.htm</welcome-file>
-			<welcome-file>index.jsp</welcome-file>
-			<welcome-file>index.xhtml</welcome-file>
-			<welcome-file>default.html</welcome-file>
-			<welcome-file>default.htm</welcome-file>
-			<welcome-file>default.jsp</welcome-file>
-			<welcome-file>default.xhtml</welcome-file>
-		</welcome-file-list>
-	</web-app>
+    <display-name>cybercareercatch_backend</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+        <welcome-file>default.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <!-- 메인 페이지 -->
+    <servlet>
+        <servlet-name>MainFrontController</servlet-name>
+        <servlet-class>com.ccc.main.MainFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainFrontController</servlet-name>
+        <url-pattern>*.mafc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 계정 -->
+    <servlet>
+        <servlet-name>MemberFrontController</servlet-name>
+        <servlet-class>com.ccc.Member.MemberFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MemberFrontController</servlet-name>
+        <url-pattern>*.mefc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 자유게시판 -->
+    <servlet>
+        <servlet-name>PostFrontController</servlet-name>
+        <servlet-class>com.ccc.post.PostFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostFrontController</servlet-name>
+        <url-pattern>*.pfc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 기업 QnA -->
+    <servlet>
+        <servlet-name>QnaFrontController</servlet-name>
+        <servlet-class>com.ccc.qna.QnaFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QnaFrontController</servlet-name>
+        <url-pattern>*.qfc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 기업 정보 -->
+    <servlet>
+        <servlet-name>CompanyFrontController</servlet-name>
+        <servlet-class>com.ccc.company.CompanyFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompanyFrontController</servlet-name>
+        <url-pattern>*.cfc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 박람회 -->
+    <servlet>
+        <servlet-name>ExpoFrontController</servlet-name>
+        <servlet-class>com.ccc.expo.ExpoFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExpoFrontController</servlet-name>
+        <url-pattern>*.efc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 로드맵 / 직군검사 -->
+    <servlet>
+        <servlet-name>RoadmapFrontController</servlet-name>
+        <servlet-class>com.ccc.roadmap.RoadmapFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RoadmapFrontController</servlet-name>
+        <url-pattern>*.rfc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 마이페이지 -->
+    <servlet>
+        <servlet-name>MypageFrontController</servlet-name>
+        <servlet-class>com.ccc.mypage.MypageFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MypageFrontController</servlet-name>
+        <url-pattern>*.mpfc</url-pattern>
+    </servlet-mapping>
+
+    <!-- 관리자 -->
+    <servlet>
+        <servlet-name>AdminFrontController</servlet-name>
+        <servlet-class>com.ccc.admin.AdminFrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminFrontController</servlet-name>
+        <url-pattern>*.adfc</url-pattern>
+    </servlet-mapping>
+
+</web-app>

@@ -1,180 +1,119 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>기업회원마이페이지</title>
-  <link rel="stylesheet" href="../../../assets/css/main/mypage/mypage-company.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기업회원마이페이지</title>
+<link rel="stylesheet"
+	href="${contextPath}/assets/css/main/mypage/mypage-company.css">
 </head>
 
 <body>
-  <main>
-    <div class="main-container">
-      <div class="mypage-title">마이페이지</div>
+	<main>
+		<div class="main-container">
+			<div class="mypage-title">마이페이지</div>
 
-      <div class="mypage-section">
-        <div class="mypage-subtitle">기업정보 조회</div>
-        <div class="main-container-section-changeinfo">
-          <div class="mypage-info-box">
-            <div class="mypage-info-title">아이디</div>
-            <div name="company_id" class="mypage-info-text" id="company-id">id1234</div>
-          </div>
+			<div class="mypage-section">
+				<div class="mypage-subtitle">기업정보 조회</div>
 
-          <div class="mypage-info-box">
-            <div class="mypage-info-title">기업명</div>
-            <div name="company_name" class="mypage-info-text" id="company-name">IT솔리드</div>
-          </div>
+				<div class="main-container-section-changeinfo">
+					<div class="mypage-info-box">
+						<div class="mypage-info-title">아이디</div>
+						<div class="mypage-info-text" id="company-id">${companyInfo.userId}</div>
+					</div>
 
-          <div class="mypage-info-box">
-            <div class="mypage-info-title">사업자등록번호</div>
-            <div name="company_number" class="mypage-info-text" id="company-number">12345678</div>
-          </div>
+					<div class="mypage-info-box">
+						<div class="mypage-info-title">기업명</div>
+						<div class="mypage-info-text" id="company-name">${companyInfo.companyName}</div>
+					</div>
 
-          <div class="mypage-info-box">
-            <div class="mypage-info-title">기업 주소</div>
-            <div name="company_address" class="mypage-info-text" id="company-address">서울시 강남구</div>
-          </div>
+					<div class="mypage-info-box">
+						<div class="mypage-info-title">사업자등록번호</div>
+						<div class="mypage-info-text" id="company-number">${companyInfo.companyBrn}</div>
+					</div>
 
-          <div class="mypage-info-box">
-            <div class="mypage-info-title">채용담당자 이름</div>
-            <div name="company_manager_name" class="mypage-info-text" id="company-manager-name">홍길동</div>
-          </div>
+					<div class="mypage-info-box">
+						<div class="mypage-info-title">기업 주소</div>
+						<div class="mypage-info-text" id="company-address">${companyInfo.companyAddress}</div>
+					</div>
 
-          <div class="mypage-info-box">
-            <div class="mypage-info-title">채용담당자 연락처</div>
-            <div name="company_manager_phonenumber" class="mypage-info-text" id="company-manager-phonenumber">
-              010-0000-0000
-            </div>
-            <a href="./company-password-check.html" class="btn" id="company-phonenumber-submit-btn">회원정보수정</a>
-          </div>
+					<div class="mypage-info-box">
+						<div class="mypage-info-title">채용담당자 이름</div>
+						<div class="mypage-info-text" id="company-manager-name">${companyInfo.userName}</div>
+					</div>
 
-          <div class="mypage-button-box">
-            <a href="./mypage-company-edit-jobposting.html" class="btn" id="mypage-editinfopage-btn">기업정보페이지 등록/수정</a>
-          </div>
-        </div>
+					<div class="mypage-info-box">
+						<div class="mypage-info-title">채용담당자 연락처</div>
+						<div class="mypage-info-text" id="company-manager-phonenumber">${companyInfo.userPhone}</div>
 
-        <div class="mypage-section-QnAlist">
-          <div class="mypage-subtitle">Q&A 리스트</div>
+						<a href="${contextPath}/mypage/company/check-password.my"
+							class="btn" id="company-phonenumber-submit-btn">회원정보수정</a>
+					</div>
 
-          <ul class="mypage-QnAlist">
-            <li class="mypage-QnAlist-header">
-              <div class="no">번호</div>
-              <div class="QnAlist-title">제목</div>
-              <div class="companyname">기업명</div>
-              <div class="writer">작성자</div>
-              <div class="date">날짜</div>
-              <div class="answer-status">답변상태</div>
-            </li>
+					<div class="mypage-button-box">
+						<c:choose>
+							<c:when test="${empty companyPageCount or companyPageCount == 0}">
+								<a href="${contextPath}/mypage/company/company-page-register.my"
+									class="btn"> 기업정보페이지 등록 </a>
+							</c:when>
+							<c:otherwise>
+								<a
+									href="${contextPath}/mypage/company/company-page-edit.my?companyNumber=${companyInfo.companyNumber}"
+									class="btn"> 기업정보페이지 수정/삭제 </a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
 
-            <li class="mypage-QnAlist-content">
-              <div class="no">10</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
+				<div class="mypage-section-QnAlist">
+					<div class="mypage-subtitle">Q&amp;A 리스트</div>
 
-            <li class="mypage-QnAlist-content">
-              <div class="no">9</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
+					<ul class="mypage-QnAlist">
+						<li class="mypage-QnAlist-header">
+							<div class="no">번호</div>
+							<div class="QnAlist-title">제목</div>
+							<div class="companyname">기업명</div>
+							<div class="writer">작성자</div>
+							<div class="date">날짜</div>
+							<div class="answer-status">답변상태</div>
+						</li>
 
-            <li class="mypage-QnAlist-content">
-              <div class="no">8</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
+						<c:choose>
+							<c:when test="${empty waitingQnaList}">
+								<li class="mypage-QnAlist-content">
+									<div style="width: 100%; text-align: center; padding: 20px 0;">
+										답변대기 Q&amp;A가 없습니다.</div>
+								</li>
+							</c:when>
 
-            <li class="mypage-QnAlist-content">
-              <div class="no">7</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
+							<c:otherwise>
+								<c:forEach var="qna" items="${waitingQnaList}">
+									<li class="mypage-QnAlist-content">
+										<div class="no">${qna.postNumber}</div> <a
+										href="${contextPath}/qna/detail.qna?postNumber=${qna.postNumber}"
+										class="QnAlist-title"> ${qna.postTitle} </a>
 
-            <li class="mypage-QnAlist-content">
-              <div class="no">6</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
+										<div class="companyname">${qna.companyName}</div>
+										<div class="writer">${qna.userId}</div>
+										<div class="date">${qna.postDate}</div>
 
-            <li class="mypage-QnAlist-content">
-              <div class="no">5</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
-
-            <li class="mypage-QnAlist-content">
-              <div class="no">4</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
-
-            <li class="mypage-QnAlist-content">
-              <div class="no">3</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status answer-status-active">답변완료</div>
-            </li>
-
-            <li class="mypage-QnAlist-content">
-              <div class="no">2</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status">답변대기</div>
-            </li>
-
-            <li class="mypage-QnAlist-content">
-              <div class="no">1</div>
-              <a href="./../qna/qna-detail.html" class="QnAlist-title">제목</a>
-              <div class="companyname">구글</div>
-              <div class="writer">id1111</div>
-              <div class="date">2026.03.09</div>
-              <div class="answer-status">답변대기</div>
-            </li>
-          </ul>
-
-          <div class="mypage-QnAlist-bottom">
-            <div class="mypage-pagination">
-              <button type="button" class="page-btn page-arrow">&lt;</button>
-              <button type="button" class="page-btn">1</button>
-              <button type="button" class="page-btn">2</button>
-              <button type="button" class="page-btn">3</button>
-              <button type="button" class="page-btn">4</button>
-              <button type="button" class="page-btn">5</button>
-              <button type="button" class="page-btn page-arrow">&gt;</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+										<div
+											class="answer-status ${qna.answerStatus eq '답변완료' ? 'answer-status-active' : ''}">
+											${qna.answerStatus}</div>
+									</li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
-
 </html>

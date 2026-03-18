@@ -1,6 +1,6 @@
 package com.ccc.mypage.dto;
 
-public class MemberMypageInfoDTO {
+public class MemberMyPageInfoDTO {
 
 	private int userNumber;
 	private String userId;

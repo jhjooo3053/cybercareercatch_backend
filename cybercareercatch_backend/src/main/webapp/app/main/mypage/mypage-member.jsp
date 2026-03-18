@@ -1,57 +1,92 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>일반회원 마이페이지</title>
-  <link rel="stylesheet" href="./../../../assets/css/main/mypage/mypage-member.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일반회원 마이페이지</title>
+<link rel="stylesheet"
+	href="${contextPath}/assets/css/main/mypage/mypage-member.css">
 </head>
 
 <body>
-  <main>
-    <div class="main-container">
-      <div class="mypage-title">마이페이지</div>
-      <div class="mypage-subtitle">회원정보조회</div>
-      <div class="main-container-section">
-        <div class="mypage-info-box">
-          <div class="mypage-info-title">아이디</div>
-          <div class="mypage-info-text" data-field="member_id">hjd1234</div>
-        </div>
-        <div class="mypage-info-box">
-          <div class="mypage-info-title">이름</div>
-          <div class="mypage-info-text" data-field="member_name">홍길동</div>
-        </div>
-        <div class="mypage-info-box">
-          <div class="mypage-info-title">생년월일</div>
-          <div class="mypage-info-text" data-field="member_birth">2000.01.01</div>
-        </div>
-        <div class="mypage-info-box">
-          <div class="mypage-info-title">성별</div>
-          <div class="mypage-info-text" data-field="member_gender">남</div>
-        </div>
-        <div class="mypage-info-box">
-          <div class="mypage-info-title">전화번호</div>
-          <div class="mypage-info-text" data-field="member_phonenumber">010-0000-0000</div>
-        </div>
-        <div class="mypage-info-box">
-          <div class="mypage-info-title">직군</div>
-          <div class="mypage-info-text" data-field="member_job">공격</div>
-        </div>
+	<main>
+		<div class="main-container">
+			<div class="mypage-title">마이페이지</div>
+			<div class="mypage-subtitle">회원정보조회</div>
 
-        <div class="mypage-button-box">
-          <a href="./member-password-check.html" class="btn" id="mypage-edit-btn">회원 정보 수정</a>
-          <a href="./mypage-member-edit-postlist.html" class="btn" id="mypage-mycommunity-check">내가 작성한 게시물 목록 확인</a>
-        </div>
-      </div>
+			<div class="main-container-section">
+				<div class="mypage-info-box">
+					<div class="mypage-info-title">아이디</div>
+					<div class="mypage-info-text">${memberInfo.userId}</div>
+				</div>
 
-    </div>
+				<div class="mypage-info-box">
+					<div class="mypage-info-title">이름</div>
+					<div class="mypage-info-text">${memberInfo.userName}</div>
+				</div>
 
-  </main>
+				<div class="mypage-info-box">
+					<div class="mypage-info-title">생년월일</div>
+					<div class="mypage-info-text">${memberInfo.memberDob}</div>
+				</div>
 
+				<div class="mypage-info-box">
+					<div class="mypage-info-title">성별</div>
+					<div class="mypage-info-text">
+						<c:choose>
+							<c:when test="${memberInfo.memberGender eq 'M'}">남</c:when>
+							<c:when test="${memberInfo.memberGender eq 'F'}">여</c:when>
+							<c:otherwise>${memberInfo.memberGender}</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
 
+				<div class="mypage-info-box">
+					<div class="mypage-info-title">전화번호</div>
+					<div class="mypage-info-text">${memberInfo.userPhone}</div>
+				</div>
+
+				<div class="mypage-info-box">
+					<div class="mypage-info-title">직군</div>
+					<div class="mypage-info-text">
+						<c:choose>
+							<c:when test="${not empty memberInfo.jobName}">
+								${memberInfo.jobName}
+							</c:when>
+							<c:otherwise>미판정</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+
+				<div class="mypage-info-box">
+					<div class="mypage-info-title">직군판정일</div>
+					<div class="mypage-info-text">
+						<c:choose>
+							<c:when test="${not empty memberInfo.jobConfirmDate}">
+								${memberInfo.jobConfirmDate}
+							</c:when>
+							<c:otherwise>-</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+
+				<div class="mypage-button-box">
+					<a href="${contextPath}/mypage/member/check-password.my"
+						class="btn" id="mypage-edit-btn">회원 정보 수정</a>
+
+					<a href="${contextPath}/mypage/member/my-qna-list.my"
+						class="btn" id="mypage-mycommunity-check">내가 작성한 게시물 목록 확인</a>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
 
 </html>

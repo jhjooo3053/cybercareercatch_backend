@@ -1,38 +1,36 @@
 *{
-  margin:0px;
-  /* max-width: 1200px; */
-  padding:0px;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
   background-color: white;
 }
 
 .main-container{
   max-width:1200px;
   margin:auto;
-  padding: 70px 0px;  /* 위아래 + 좌우 */
-  min-height: 700px;   /* 화면 큰 경우 대비 */
-}
-
-
-.mypage-info-box{
-  display:flex;
+  padding:70px 0;
+  min-height:700px;
 }
 
 .mypage-title{
   font-size:40px;
   margin-bottom:30px;
-  font-weight: bold;
+  font-weight:bold;
 }
 
 .mypage-subtitle{
   font-size:20px;
-  margin:20px 0px;
+  margin:20px 0;
   font-weight:700;
 }
 
 .mypage-info-box{
   display:flex;
   align-items:flex-start;
-  margin-bottom: 10px;
+  margin-bottom:10px;
   gap:30px;
 }
 
@@ -41,7 +39,7 @@
   text-align:right;
   width:200px;
   height:30px;
-  align-content: center;
+  align-content:center;
 }
 
 .mypage-info-text{
@@ -51,7 +49,12 @@
   width:200px;
   height:30px;
   border-radius:6px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border:1px solid rgba(0, 0, 0, 0.2);
+  background-color:white;
+}
+
+input.mypage-info-text{
+  outline:none;
 }
 
 .btn{
@@ -70,48 +73,45 @@
   text-decoration:none;
 }
 
-
 .mypage-button-box{
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 30px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:30px;
 }
 
-#mypage-editcancel-btn{
-  background-color: rgba(244,7,7,0.5);
-}
-
+#mypage-editcancel-btn,
 #mypage-pwcancel-btn{
   background-color: rgba(244,7,7,0.5);
 }
 
 .company-quit-wrap{
-  display: flex;
-  justify-content: flex-end;
-  margin: 50px 0 30px;
+  display:flex;
+  justify-content:flex-end;
+  margin:50px 0 30px;
 }
 
 #company-quit{
   background-color: rgba(244,7,7,0.5);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .mypage-input-wrap{
   display:flex;
   flex-direction:column;
   width:200px;
-  height:50px;
+  min-height:50px;
 }
 
 .input-message{
   font-size:10px;
-  text-align: right;
+  text-align:right;
+  margin-top:4px;
+  min-height:12px;
 }
-
 
 .input-message.error{
   color:#ff6b6b;

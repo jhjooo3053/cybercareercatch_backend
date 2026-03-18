@@ -351,7 +351,7 @@
 	</insert>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 수정(기업소개 수정) -->
-	<!-- 사용 페이지 : companyPageForm.jsp -->
+	<!-- 사용 페이지 : companyPageEdit.jsp -->
 	<update id="updateCompInfo" parameterType="CompInfoDTO">
 		UPDATE TBL_COMP_INFO
 		SET COMP_CEO_NAME = #{compCeoName},
@@ -372,7 +372,7 @@
 	</update>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 수정(대표 이미지 경로 수정) -->
-	<!-- 사용 페이지 : companyPageForm.jsp -->
+	<!-- 사용 페이지 : companyPageEdit.jsp -->
 	<update id="updateFile"
 		parameterType="com.ccc.company.dto.FileDTO">
 		UPDATE TBL_FILE
@@ -382,7 +382,7 @@
 	</update>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 수정(채용정보수정) -->
-	<!-- 사용 페이지 : companyPageForm.jsp -->
+	<!-- 사용 페이지 : companyPageEdit.jsp -->
 	<update id="updateJobPost" parameterType="JobPostDTO">
 		UPDATE TBL_JOB_POST
 		SET
@@ -400,7 +400,7 @@
 	</update>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 삭제 -->
-	<!-- companyPageForm.jsp -->
+	<!-- companyPageEdit.jsp -->
 	<delete id="deleteFileByCompanyNumber" parameterType="int">
 		DELETE FROM
 		TBL_FILE
