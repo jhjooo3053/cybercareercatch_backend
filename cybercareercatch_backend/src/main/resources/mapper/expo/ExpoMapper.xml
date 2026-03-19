@@ -58,4 +58,38 @@
 		WHERE EXPO_NUMBER = #{expoNumber}
 	</delete>
 
+
+
+
+
+<!-- 달력에 뿌릴 박람회 일정 목록 -->
+    <select id="selectExpoCalendarList" resultType="com.example.app.expo.dto.ExpoCalendarDTO">
+        SELECT
+            EXPO_NUMBER,
+            EXPO_NAME,
+            START_DATE,
+            END_DATE
+        FROM TBL_EXPO
+        ORDER BY START_DATE
+    </select>
+
+    <!-- 클릭 시 박람회 상세 + 참여 기업 목록 -->
+    <select id="selectExpoDetailList"
+            parameterType="int"
+            resultType="com.example.app.expo.dto.ExpoDetailDTO">
+        SELECT
+            E.EXPO_NUMBER,
+            E.EXPO_NAME,
+            E.LOCATION,
+            C.COMPANY_NUMBER,
+            C.COMPANY_NAME,
+            C.COMPANY_ADDRESS
+        FROM TBL_EXPO E
+        LEFT JOIN TBL_EXPO_COMPANY EC
+            ON E.EXPO_NUMBER = EC.EXPO_NUMBER
+        LEFT JOIN TBL_COMPANY C
+            ON EC.COMPANY_NUMBER = C.COMPANY_NUMBER
+        WHERE E.EXPO_NUMBER = #{expoNumber}
+        ORDER BY C.COMPANY_NAME
+    </select>
 </mapper>
