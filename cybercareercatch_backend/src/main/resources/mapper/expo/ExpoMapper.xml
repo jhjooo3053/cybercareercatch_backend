@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="expo">
 
 	<!-- 관리자 박람회 일정 목록 조회 -->
@@ -63,7 +60,7 @@
 
 
 <!-- 달력에 뿌릴 박람회 일정 목록 -->
-    <select id="selectExpoCalendarList" resultType="com.example.app.expo.dto.ExpoCalendarDTO">
+    <select id="selectExpoCalendarList" resultType="com.ccc.expo.dto.ExpoCalendarDTO">
         SELECT
             EXPO_NUMBER,
             EXPO_NAME,
@@ -74,9 +71,7 @@
     </select>
 
     <!-- 클릭 시 박람회 상세 + 참여 기업 목록 -->
-    <select id="selectExpoDetailList"
-            parameterType="int"
-            resultType="com.example.app.expo.dto.ExpoDetailDTO">
+    <select id="selectExpoDetailList" parameterType="int" resultType="com.ccc.expo.dto.ExpoDetailDTO">
         SELECT
             E.EXPO_NUMBER,
             E.EXPO_NAME,
