@@ -1,103 +1,137 @@
-// ── 데이터: 박람회 참가 기업 (실제 서비스에서는 API로 교체)
-const expoData = {
-    section1: [
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-        { company: 'Google', location: '서울시 강남구', job: '공격, 방어' },
-    ]
-};
+document.addEventListener("DOMContentLoaded", function () {
+    const calendarEl = document.getElementById("calendar");
 
-// ── 박람회 이벤트 날짜 (캘린더 점 표시용)
-const expoDates = {
-    '2026-03-07': true,
-};
+    const calMonthNum = document.getElementById("calMonthNum");
+    const calMonthText = document.getElementById("calMonthText");
+    const calYearText = document.getElementById("calYearText");
 
-// ── 캘린더 상태
-let calYear = 2026;
-let calMonth = 2; // 0-indexed (2 = March)
+    const prevMonthBtn = document.getElementById("prevMonth");
+    const nextMonthBtn = document.getElementById("nextMonth");
 
-const MONTH_NAMES = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    const expoTitle = document.getElementById("expoTitle");
+    const expoLocation = document.getElementById("expoLocation");
+    const expoBody = document.getElementById("expoBody");
 
-// 임시 캘린더(추후 api 사용 예정)
-function renderCalendar(year, month) {
-  const today = new Date();
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const monthTextList = [
+        "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+        "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+    ];
 
-  document.getElementById('calMonthNum').textContent = month + 1;
-  document.getElementById('calMonthText').textContent = MONTH_NAMES[month];
-  // 연도 표시를 쓰고 있다면
-  const yearEl = document.getElementById('calYearText');
-  if (yearEl) yearEl.textContent = year;
+    function updateCustomHeader(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
 
-  let rows = '';
-  let day = 1;
-
-  // 최대 6주(6행)까지만 렌더
-  for (let week = 0; week < 6 && day <= daysInMonth; week++) {
-    rows += '<tr>';
-    for (let dow = 0; dow < 7; dow++) {
-      const cellIndex = week * 7 + dow;
-
-      let cellHtml = '';
-      let cls = '';
-
-      if (cellIndex >= firstDay && day <= daysInMonth) {
-        const num = day++;
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(num).padStart(2, '0')}`;
-        const isToday =
-          year === today.getFullYear() &&
-          month === today.getMonth() &&
-          num === today.getDate();
-        const hasexpo = expoDates[dateStr];
-
-        if (dow === 0) cls += ' expo-cal-tbl-day-sun';
-        if (dow === 6) cls += ' expo-cal-tbl-day-sat';
-        if (isToday) cls += ' expo-cal-tbl-day-today';
-
-        cellHtml = `
-          <span class="expo-cal-date-num">${num}</span>
-          ${hasexpo ? '<span class="expo-cal-event-dot"></span>' : ''}
-        `;
-      }
-
-      rows += `<td class="${cls.trim()}">${cellHtml}</td>`;
+        calMonthNum.textContent = month + 1;
+        calMonthText.textContent = monthTextList[month];
+        calYearText.textContent = year;
     }
-    rows += '</tr>';
-  }
 
-  document.getElementById('calBody').innerHTML = rows;
-}
+    function addOneDay(dateString) {
+        const date = new Date(dateString);
+        date.setDate(date.getDate() + 1);
 
-// ── 박람회 테이블 렌더링
-function renderexpoTable(tabKey) {
-    const rows = (expoData[tabKey] || []).map(item => `
-    <tr>
-      <td>${item.company}</td>
-      <td>${item.location}</td>
-      <td class="job">${item.job}</td>
-    </tr>
-  `).join('');
-    document.getElementById('expoBody').innerHTML = rows;
-}
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
 
-// ── 월 이동
-document.getElementById('prevMonth').addEventListener('click', () => {
-    if (calMonth === 0) { calMonth = 11; calYear--; }
-    else calMonth--;
-    renderCalendar(calYear, calMonth);
+        return `${year}-${month}-${day}`;
+    }
+
+    function renderEmptyDetail(message) {
+        expoTitle.textContent = "박람회 정보를 찾을 수 없습니다.";
+        expoLocation.textContent = "";
+        expoBody.innerHTML = `<div class="expo-company-empty">${message}</div>`;
+    }
+
+    function renderExpoDetail(data) {
+        expoTitle.textContent = data.expoName || "박람회 정보를 찾을 수 없습니다.";
+        expoLocation.textContent = data.location || "";
+
+        if (!data.companies || data.companies.length === 0) {
+            expoBody.innerHTML = `<div class="expo-company-empty">참가 기업 정보가 없습니다.</div>`;
+            return;
+        }
+
+        let html = "";
+
+        data.companies.forEach(company => {
+            html += `
+                <div class="expo-company-row">
+                    <div class="expo-company-name">${company.companyName}</div>
+                    <div class="expo-company-address">${company.companyAddress}</div>
+                </div>
+            `;
+        });
+
+        expoBody.innerHTML = html;
+    }
+
+    function loadExpoDetail(expoNumber) {
+        fetch(`${contextPath}/expo/detail.ex?expoNumber=${expoNumber}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("상세 조회 실패");
+                }
+                return response.json();
+            })
+            .then(data => {
+                renderExpoDetail(data);
+            })
+            .catch(error => {
+                console.error(error);
+                renderEmptyDetail("상세 정보를 불러오지 못했습니다.");
+            });
+    }
+
+    function loadExpoCalendarList() {
+        fetch(`${contextPath}/expo/list.ex`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("일정 목록 조회 실패");
+                }
+                return response.json();
+            })
+            .then(expoList => {
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: "dayGridMonth",
+                    locale: "ko",
+                    height: "auto",
+                    fixedWeekCount: false,
+                    showNonCurrentDates: true,
+                    headerToolbar: false,
+
+                    events: expoList.map(expo => ({
+                        id: String(expo.expoNumber),
+                        title: expo.expoName,
+                        start: expo.startDate,
+                        end: addOneDay(expo.endDate),
+                        display: "block"
+                    })),
+
+                    datesSet: function (info) {
+                        updateCustomHeader(info.view.currentStart);
+                    },
+
+                    eventClick: function (info) {
+                        loadExpoDetail(info.event.id);
+                    }
+                });
+
+                calendar.render();
+
+                prevMonthBtn.addEventListener("click", function () {
+                    calendar.prev();
+                });
+
+                nextMonthBtn.addEventListener("click", function () {
+                    calendar.next();
+                });
+            })
+            .catch(error => {
+                console.error(error);
+                renderEmptyDetail("박람회 일정을 불러오지 못했습니다.");
+            });
+    }
+
+    loadExpoCalendarList();
 });
-document.getElementById('nextMonth').addEventListener('click', () => {
-    if (calMonth === 11) { calMonth = 0; calYear++; }
-    else calMonth++;
-    renderCalendar(calYear, calMonth);
-});
-
-// ── 초기 렌더
-renderCalendar(calYear, calMonth);
-renderexpoTable('section1');

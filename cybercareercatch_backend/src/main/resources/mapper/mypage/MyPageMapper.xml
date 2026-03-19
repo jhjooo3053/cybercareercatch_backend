@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="myPage">
+<mapper namespace="mypage">
 	<!-- 일반회원 마이페이지 - 정보조회 -->
 	<!-- memberMyPage.jsp에서 사용 -->
-	<select id="selectMemberMyPageInfo" parameterType="int"
-		resultType="MemberMyPageInfoDTO">
+	<select id="selectMemberMypageInfo" parameterType="int"
+		resultType="MemberMypageInfoDTO">
 		SELECT
 		U.USER_NUMBER AS userNumber,
 		U.USER_ID AS userId,
 		U.USER_NAME AS userName,
 		U.USER_PHONE AS userPhone,
-		TO_CHAR(M.MEMBER_DOB, 'YYYY.MM.DD') AS
-		memberDob,
-		M.MEMBER_GENDER AS
-		memberGender,
+		TO_CHAR(M.MEMBER_DOB, 'YYYY.MM.DD') AS memberDob,
+		M.MEMBER_GENDER AS memberGender,
 		M.JOB_NUMBER AS jobNumber,
 		J.JOB_NAME AS jobName,
 		TO_CHAR(JR.JOB_RESULT_CONFIRM_DATE, 'YYYY.MM.DD') AS jobConfirmDate
 		FROM TBL_USER U
 		JOIN TBL_MEMBER M
 		ON U.USER_NUMBER = M.USER_NUMBER
-		LEFT
-		JOIN TBL_JOB_GROUP J
+		LEFT JOIN TBL_JOB_GROUP J
 		ON M.JOB_NUMBER = J.JOB_NUMBER
 		LEFT JOIN (
 		SELECT
@@ -45,7 +42,7 @@
 
 	<!-- 일반회원 마이페이지 - 정보수정 전 비밀번호 확인 -->
 	<!-- 사용페이지 : memberCheckPw.jsp -->
-	<select id="checkMemberPassword" parameterType="map"
+	<select id="checkMemberPw" parameterType="map"
 		resultType="int">
 		SELECT COUNT(*)
 		FROM TBL_USER
@@ -56,7 +53,7 @@
 	</select>
 
 	<!-- 일반회원 마이페이지 - 전화번호 수정 -->
-	<!-- 사용페이지 : memberMyPageEdit.jsp -->
+	<!-- 사용페이지 : memberMypageEdit.jsp -->
 	<update id="updateMemberPhone" parameterType="map">
 		UPDATE TBL_USER
 		SET
@@ -68,7 +65,7 @@
 
 	<!-- 일반회원 마이페이지 - 비밀번호 수정 -->
 	<!-- 사용페이지 : memberMyPageEdit.jsp -->
-	<update id="updateMemberPassword" parameterType="map">
+	<update id="updateMemberPw" parameterType="map">
 		UPDATE TBL_USER
 		SET USER_PW = #{newUserPw}
 		WHERE USER_NUMBER = #{userNumber}
@@ -129,8 +126,8 @@
 
 	<!-- 기업회원 마이페이지 - 기본정보조회 -->
 	<!-- 사용 페이지: companyMyPage.jsp -->
-	<select id="selectCompanyMemberMyPageInfo" parameterType="int"
-		resultType="CompanyMyPageInfoDTO">
+	<select id="selectCompanyMemberMypageInfo" parameterType="int"
+		resultType="CompanyMypageInfoDTO">
 		SELECT
 		U.USER_NUMBER AS userNumber,
 		U.USER_ID AS userId,
@@ -158,7 +155,7 @@
 	<!-- 기업회원 마이페이지 - 답변대기 QnA 목록 조회 -->
 	<!-- 사용 페이지 : companyMyPage.jsp -->
 	<select id="selectWaitingQnaListByCompanyUser"
-		parameterType="int" resultType="MyQnaListDTO">
+		parameterType="int" resultType="MypageQnaListDTO">
 		SELECT
 		P.POST_NUMBER AS postNumber,
 		P.POST_TITLE AS postTitle,
@@ -201,7 +198,7 @@
 
 	<!-- 기업회원 마이페이지 - 정보수정 전 비밀번호 확인 -->
 	<!-- 사용 페이지 : companyCheckPw.jsp -->
-	<select id="checkCompanyPassword" parameterType="map"
+	<select id="checkCompanyPw" parameterType="map"
 		resultType="int">
 		SELECT COUNT(*)
 		FROM TBL_USER
@@ -212,7 +209,7 @@
 	</select>
 
 	<!-- 기업회원 마이페이지 - 전화번호 수정 -->
-	<!-- 사용 페이지: companyMyPageEdit.jsp -->
+	<!-- 사용 페이지: companyMypageEdit.jsp -->
 	<update id="updateCompanyPhone" parameterType="map">
 		UPDATE TBL_USER
 		SET USER_PHONE = #{userPhone}
@@ -222,8 +219,8 @@
 	</update>
 
 	<!-- 기업회원 마이페이지 - 비밀번호 수정 -->
-	<!-- 사용 페이지: companyMyPageEdit.jsp -->
-	<update id="updateCompanyPassword" parameterType="map">
+	<!-- 사용 페이지: companyMypageEdit.jsp -->
+	<update id="updateCompanyPw" parameterType="map">
 		UPDATE TBL_USER
 		SET USER_PW = #{newUserPw}
 		WHERE USER_NUMBER = #{userNumber}

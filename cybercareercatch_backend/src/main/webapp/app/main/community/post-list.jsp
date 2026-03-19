@@ -16,6 +16,11 @@
 </head>
 
 <body>
+  <%-- 컨트롤러 경로 변수 --%>
+  <c:set var="listUrl" value="${pageContext.request.contextPath}/post/list.po" />
+  <c:set var="readUrl" value="${pageContext.request.contextPath}/post/read.po" />
+  <c:set var="writeUrl" value="${pageContext.request.contextPath}/post/write.po" />
+
   <%--
     자유게시판 접근 기준
     1. 비회원 접근 가능
@@ -68,12 +73,8 @@
                 <div class="cml-row-col-num">공지</div>
 
                 <div class="cml-row-col-ttl">
-                  <%--
-                    현재는 JSP 직접 이동
-                    나중에 Controller가 생기면 공지 상세 컨트롤러 경로로 변경
-                  --%>
                   <a
-                    href="${pageContext.request.contextPath}/app/main/community/post-notification.jsp?postNumber=${notice.postNumber}"
+                    href="${readUrl}?postNumber=${notice.postNumber}"
                     class="cml-link">
                     <c:out value="${notice.postTitle}" />
                   </a>
@@ -107,12 +108,8 @@
                   </div>
 
                   <div class="cml-row-col-ttl">
-                    <%--
-                      현재는 JSP 직접 이동
-                      나중에 Controller가 생기면 상세 컨트롤러 경로로 변경
-                    --%>
                     <a
-                      href="${pageContext.request.contextPath}/app/main/community/post-detail.jsp?postNumber=${post.postNumber}"
+                      href="${readUrl}?postNumber=${post.postNumber}"
                       class="cml-link">
                       <c:out value="${post.postTitle}" />
                     </a>
@@ -144,30 +141,26 @@
           <c:if test="${not empty pageInfo}">
 
             <c:if test="${pageInfo.prev}">
-              <a href="?page=${pageInfo.startPage - 1}" class="cml-pg-btn">&lt;</a>
+              <a href="${listUrl}?page=${pageInfo.startPage - 1}" class="cml-pg-btn">&lt;</a>
             </c:if>
 
             <c:forEach var="pageNum" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
               <a
-                href="?page=${pageNum}"
+                href="${listUrl}?page=${pageNum}"
                 class="cml-pg-btn ${pageInfo.page == pageNum ? 'cml-pg-btn-now' : ''}">
                 <c:out value="${pageNum}" />
               </a>
             </c:forEach>
 
             <c:if test="${pageInfo.next}">
-              <a href="?page=${pageInfo.endPage + 1}" class="cml-pg-btn">&gt;</a>
+              <a href="${listUrl}?page=${pageInfo.endPage + 1}" class="cml-pg-btn">&gt;</a>
             </c:if>
 
           </c:if>
         </div>
 
         <%-- 검색 폼 --%>
-        <form action="#" method="get" class="cml-sch">
-          <%--
-            현재는 action="#"
-            나중에 Controller가 생기면 목록 컨트롤러 경로로 변경
-          --%>
+        <form action="${listUrl}" method="get" class="cml-sch">
           <select name="searchType" class="cml-sch-sel">
             <option value="title" ${param.searchType == 'title' ? 'selected' : ''}>제목</option>
             <option value="writer" ${param.searchType == 'writer' ? 'selected' : ''}>작성자</option>
@@ -189,7 +182,7 @@
             비회원은 글쓰기 버튼을 보이지 않게 처리
           --%>
           <c:if test="${sessionScope.userType == '일반회원'}">
-            <a href="${pageContext.request.contextPath}/app/main/community/add-post.jsp" class="cml-sch-write">글쓰기</a>
+            <a href="${writeUrl}" class="cml-sch-write">글쓰기</a>
           </c:if>
         </form>
       </main>

@@ -36,5 +36,6 @@
 	<!-- Mapper.xml 등록 추후 필요 -->
 	<mappers>
 		<mapper resource="mapper/member/MemberMapper.xml" />
+		<mapper resource="mapper/expo/ExpoMapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,6 +1,7 @@
 package com.ccc.post.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -118,12 +119,14 @@ public class PostDAO {
     // 자유게시판 일반 게시글 목록 조회
     // 페이징용 DTO(page, rowCount 등)를 받아서 목록 조회
     // mapper id : post.selectAll
-    public List<PostListDTO> selectAll(PostPageDTO postPageDTO) {
-        System.out.println("자유게시판 전체 게시글 조회 - selectAll 실행 : " + postPageDTO);
-        List<PostListDTO> postList = sqlSession.selectList("post.selectAll", postPageDTO);
+    public List<PostListDTO> selectAll(Map<String, Integer> pageMap) {
+        System.out.println("자유게시판 전체 게시글 조회 - selectAll 실행 : " + pageMap);
+        List<PostListDTO> postList = sqlSession.selectList("post.selectAll", pageMap);
         System.out.println("조회 결과 : " + postList);
         return postList;
     }
+    
+
 
     // =========================================================
     // 댓글

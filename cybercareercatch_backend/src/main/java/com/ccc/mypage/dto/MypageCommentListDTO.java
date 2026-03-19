@@ -1,6 +1,6 @@
 package com.ccc.mypage.dto;
 //확장용
-public class MyPageCommentListDTO {
+public class MypageCommentListDTO {
     private int commentNumber;
     private int postNumber;
     private String postTitle;

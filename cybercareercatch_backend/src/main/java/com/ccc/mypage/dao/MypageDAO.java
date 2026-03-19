@@ -11,9 +11,9 @@ import com.ccc.company.dto.CompanyInfoDTO;
 import com.ccc.company.dto.CompanyDetailDTO;
 import com.ccc.company.dto.FileDTO;
 import com.ccc.company.dto.JobPostDTO;
-import com.ccc.mypage.dto.CompanyMyPageInfoDTO;
-import com.ccc.mypage.dto.MemberMyPageInfoDTO;
-import com.ccc.mypage.dto.MyQnaListDTO;
+import com.ccc.mypage.dto.CompanyMypageInfoDTO;
+import com.ccc.mypage.dto.MemberMypageInfoDTO;
+import com.ccc.mypage.dto.MypageQnaListDTO;
 
 public class MypageDAO {
 	private SqlSession sqlSession;
@@ -25,18 +25,18 @@ public class MypageDAO {
 //=========일반회원 마이페이지============
 
 	// 일반회원 정보조회
-	public MemberMyPageInfoDTO selectMemberMyPageInfo(int userNumber) {
+	public MemberMypageInfoDTO selectMemberMyPageInfo(int userNumber) {
 		return sqlSession.selectOne("myPage.selectMemberMyPageInfo", userNumber);
 	}
 
 	// 일반회원 비밀번호 확인
-	public int checkMemberPassword(int userNumber, String userPw) {
+	public boolean checkMemberPw(int userNumber, String userPw) {
 		System.out.println("일반회원 비밀번호 확인 메소드 실행");
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("userNumber", userNumber);
 		paramMap.put("userPw", userPw);
 
-		return sqlSession.selectOne("myPage.checkMemberPassword", paramMap);
+		return (Integer)sqlSession.selectOne("myPage.checkMemberPw", paramMap) < 1;
 	}
 
 	// 일반회원 전화번호 수정
@@ -50,17 +50,17 @@ public class MypageDAO {
 	}
 
 	// 일반회원 비밀번호 수정
-	public void updateMemberPassword(int userNumber, String newUserPw) {
+	public void updateMemberPw(int userNumber, String newUserPw) {
 		System.out.println("일반회원 비밀번호 수정 메소드 실행");
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("userNumber", userNumber);
 		paramMap.put("newUserPw", newUserPw);
 
-		sqlSession.update("myPage.updateMemberPassword", paramMap);
+		sqlSession.update("myPage.updateMemberPw", paramMap);
 	}
 
 	// 일반회원 나의 Q&A 리스트 조회
-	public List<MyQnaListDTO> selectMyQnaList(int userNumber) {
+	public List<MypageQnaListDTO> selectMyQnaList(int userNumber) {
 		System.out.println("일반회원 나의 Q&A 리스트 조회 메소드");
 		return sqlSession.selectList("myPage.selectMyQnaList", userNumber);
 	}
@@ -89,7 +89,7 @@ public class MypageDAO {
 //==========기업회원 마이페이지=============
 
 	// 기업회원 기본정보 조회
-	public CompanyMyPageInfoDTO selectCompanyMemberMyPageInfo(int userNumber) {
+	public CompanyMypageInfoDTO selectCompanyMemberMyPageInfo(int userNumber) {
 		System.out.println("기업회원 기본정보 조회 메소드 실행");
 		return sqlSession.selectOne("myPage.selectCompanyMemberMyPageInfo", userNumber);
 	}
@@ -101,19 +101,19 @@ public class MypageDAO {
 	}
 	
 	// 기업회원 답변대기 Q&A 조회
-	public List<MyQnaListDTO> selectWaitingQnaListByCompanyUser(int userNumber) {
+	public List<MypageQnaListDTO> selectWaitingQnaListByCompanyUser(int userNumber) {
 		System.out.println("기업회원 답변대기 Q&A 조회");
 		return sqlSession.selectList("myPage.selectWaitingQnaListByCompanyUser", userNumber);
 	}
 
 	// 기업회원 비밀번호 확인
-	public int checkCompanyPassword(int userNumber, String userPw) {
+	public int checkCompanyPw(int userNumber, String userPw) {
 		System.out.println("기업회원 비밀번호 확인 메소드 실행");
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("userNumber", userNumber);
 		paramMap.put("userPw", userPw);
 
-		return sqlSession.selectOne("myPage.checkCompanyPassword", paramMap);
+		return sqlSession.selectOne("myPage.checkCompanyPw", paramMap);
 	}
 
 	// 기업회원 전화번호 수정
@@ -127,13 +127,13 @@ public class MypageDAO {
 	}
 
 	// 기업회원 비밀번호 수정
-	public void updateCompanyPassword(int userNumber, String newUserPw) {
+	public void updateCompanyPw(int userNumber, String newUserPw) {
 		System.out.println("기업회원 비밀번호 수정 메소드 실행");
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("userNumber", userNumber);
 		paramMap.put("newUserPw", newUserPw);
 
-		sqlSession.update("myPage.updateCompanyPassword", paramMap);
+		sqlSession.update("myPage.updateCompanyPw", paramMap);
 	}
 
 	// 기업회원 회원탈퇴

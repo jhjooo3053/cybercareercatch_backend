@@ -88,3 +88,6 @@ jdbc.properties
 # eclipse .gitignore 파일 삭젝
 cybercareercatch_backend/.gitignore
 cybercareercatch_backend/bin
+cybercareercatch_backend/build
+cybercareercatch_backend/target/
+cybercareercatch_backend/out/
