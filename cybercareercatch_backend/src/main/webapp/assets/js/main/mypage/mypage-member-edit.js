@@ -152,9 +152,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // [취소] 버튼 클릭 시 마이페이지로 이동
+  // [취소] 버튼 클릭 시 확인창 띄운 후 이동
   cancelBtn.addEventListener("click", function () {
-    location.href = contextPath + "/member/mypage.mpfc";
+    const isCancel = confirm("수정 중인 내용이 저장되지 않을 수 있습니다. 취소하시겠습니까?");
+
+    if (isCancel) {
+      location.href = contextPath + "/member/mypage.mpfc";
+    }
   });
 
 });
