@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="companyInfo">
+
+    <!-- 1. 기업 정보 존재 여부 확인 -->
+    <select id="companyinfonum" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_COMP_INFO
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </select>
+
+    <!-- 2. 기업정보 등록 -->
+    <insert id="insertCompanyInfo" parameterType="CompanyInfoDTO">
+        INSERT INTO TBL_COMP_INFO (
+            COMPANY_NUMBER,
+            COMP_IMAGE_PATH,
+            COMP_CEO_NAME,
+            COMP_FND_YEAR,
+            COMP_EMPL_CNT,
+            COMP_REV,
+            COMP_CAP,
+            COMP_TYPE,
+            COMP_SUMMARY,
+            COMP_TECH,
+            COMP_MAIN_BIZ,
+            COMP_INFO,
+            COMP_SVC_HIST,
+            COMP_PAGE_DATE
+        ) VALUES (
+            #{companyNumber},
+            #{filePath},
+            #{compCeoName},
+            #{compFndYear},
+            #{compEmplCnt},
+            #{compRev},
+            #{compCap},
+            #{compType},
+            #{compSummary},
+            #{compTech},
+            #{compMainBiz},
+            #{compInfo},
+            #{compSvcHist},
+            SYSDATE
+        )
+    </insert>
+
+    <!-- 3. 기업정보 페이지 정보 조회 -->
+    <select id="selectCompanyInfoPage" parameterType="int" resultType="map">
+        SELECT
+            C.COMPANY_NUMBER,
+            C.COMPANY_NAME,
+            C.COMPANY_BRN,
+            C.COMPANY_ADDRESS,
+            C.COMPANY_STATE,
+            CI.COMP_IMAGE_PATH,
+            CI.COMP_CEO_NAME,
+            CI.COMP_FND_YEAR,
+            CI.COMP_EMPL_CNT,
+            CI.COMP_REV,
+            CI.COMP_CAP,
+            CI.COMP_TYPE,
+            CI.COMP_SUMMARY,
+            CI.COMP_TECH,
+            CI.COMP_MAIN_BIZ,
+            CI.COMP_INFO,
+            CI.COMP_SVC_HIST,
+            JP.JOB_POST_PROFILE,
+            JP.JOB_POST_CONTENT,
+            JP.JOB_POST_PROCESS,
+            JP.JOB_POST_METHOD,
+            JP.CAT1_IS_HIRING,
+            JP.CAT2_IS_HIRING,
+            JP.CAT3_IS_HIRING,
+            JP.CAT4_IS_HIRING
+        FROM TBL_COMPANY_MEMBER CM
+        JOIN TBL_COMPANY C
+            ON CM.COMPANY_NUMBER = C.COMPANY_NUMBER
+        LEFT JOIN TBL_COMP_INFO CI
+            ON C.COMPANY_NUMBER = CI.COMPANY_NUMBER
+        LEFT JOIN TBL_JOB_POST JP
+            ON C.COMPANY_NUMBER = JP.COMPANY_NUMBER
+        WHERE CM.USER_NUMBER = #{userNumber}
+    </select>
+
+</mapper>
+

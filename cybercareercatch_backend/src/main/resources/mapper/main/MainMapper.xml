@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main">
+
+    <!-- 메인 상단 질문 1개 조회 -->
+    <select id="selectMainQuestion"
+            resultType="com.ccc.job.dto.JobRecommendQuestionDTO">
+        SELECT
+            JOB_QUESTION_NUMBER AS jobQuestionNumber,
+            JOB_QUESTION_CONTENT AS jobQuestionContent
+        FROM TBL_JOB_RECOMMEND_QUESTION
+        WHERE JOB_QUESTION_NUMBER = 1
+    </select>
+
+    <!-- 메인 추천 직군 유형 4개 조회 -->
+    <select id="selectMainJobGroupList"
+            resultType="com.ccc.job.dto.JobGroupDTO">
+        SELECT
+            JOB_NUMBER AS jobNumber,
+            JOB_NAME AS jobName
+        FROM TBL_JOB_GROUP
+        ORDER BY JOB_NUMBER ASC
+    </select>
+
+    <!-- 메인 기업 홍보 카드 3개 조회 -->
+    <select id="selectMainCompanyList"
+            resultType="com.ccc.company.dto.CompanyCardDTO">
+        SELECT *
+        FROM (
+            SELECT
+                C.COMPANY_NUMBER AS companyNumber,
+                C.COMPANY_NAME AS companyName,
+                C.COMPANY_ADDRESS AS companyAddress,
+                C.COMPANY_STATE AS companyState,
+                CI.COMP_SUMMARY AS compSummary,
+                F.FILE_PATH AS filePath,
+                TO_CHAR(CI.COMP_PAGE_DATE, 'YYYY-MM-DD') AS compPageDate,
+                NVL(JP.CAT1_IS_HIRING, 0) AS cat1IsHiring,
+                NVL(JP.CAT2_IS_HIRING, 0) AS cat2IsHiring,
+                NVL(JP.CAT3_IS_HIRING, 0) AS cat3IsHiring,
+                NVL(JP.CAT4_IS_HIRING, 0) AS cat4IsHiring
+            FROM TBL_COMPANY C
+            JOIN TBL_COMP_INFO CI
+              ON C.COMPANY_NUMBER = CI.COMPANY_NUMBER
+            LEFT JOIN (
+                SELECT
+                    COMPANY_NUMBER,
+                    MIN(FILE_NUMBER) AS FILE_NUMBER
+                FROM TBL_FILE
+                GROUP BY COMPANY_NUMBER
+            ) FM
+              ON C.COMPANY_NUMBER = FM.COMPANY_NUMBER
+            LEFT JOIN TBL_FILE F
+              ON FM.FILE_NUMBER = F.FILE_NUMBER
+            LEFT JOIN TBL_JOB_POST JP
+              ON C.COMPANY_NUMBER = JP.COMPANY_NUMBER
+            WHERE C.COMPANY_STATE = '승인'
+            ORDER BY CI.COMP_PAGE_DATE DESC, C.COMPANY_NUMBER DESC
+        )
+        WHERE ROWNUM &lt;= 3
+    </select>
+
+    <!-- 메인 자유게시판 최신글 5개 조회 -->
+    <select id="selectMainFreePostList"
+            resultType="com.ccc.post.dto.PostListDTO">
+        SELECT *
+        FROM (
+            SELECT
+                P.POST_NUMBER AS postNumber,
+                P.POST_TITLE AS postTitle,
+                U.USER_ID AS userId,
+                TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS postDate,
+                TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS editDate
+            FROM TBL_POST P
+            JOIN TBL_USER U
+              ON P.USER_NUMBER = U.USER_NUMBER
+            WHERE P.POST_TYPE = 'FREE_POST'
+            ORDER BY P.POST_NUMBER DESC
+        )
+        WHERE ROWNUM &lt;= 5
+    </select>
+
+    <!-- 메인 기업 Q&A 최신글 5개 조회 -->
+    <select id="selectMainQnaList"
+            resultType="com.ccc.qna.dto.QnaListDTO">
+        SELECT *
+        FROM (
+            SELECT
+                P.POST_NUMBER AS postNumber,
+                P.POST_TITLE AS postTitle,
+                C.COMPANY_NAME AS companyName,
+                U.USER_ID AS userId,
+                TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS postDate,
+                P.VIEW_COUNT AS viewCount,
+                P.ANSWER_STATUS AS answerStatus
+            FROM TBL_POST P
+            JOIN TBL_USER U
+              ON P.USER_NUMBER = U.USER_NUMBER
+            JOIN TBL_COMPANY C
+              ON P.COMPANY_NUMBER = C.COMPANY_NUMBER
+            WHERE P.POST_TYPE = 'QNA_POST'
+            ORDER BY P.POST_NUMBER DESC
+        )
+        WHERE ROWNUM &lt;= 5
+    </select>
+
+    <!-- 메인 박람회 일정 조회 -->
+    <select id="selectMainExpoList"
+            resultType="com.ccc.expo.dto.ExpoListDTO">
+        SELECT
+            EXPO_NUMBER AS expoNumber,
+            EXPO_NAME AS expoName,
+            TO_CHAR(START_DATE, 'YYYY-MM-DD') AS startDate,
+            TO_CHAR(END_DATE, 'YYYY-MM-DD') AS endDate,
+            LOCATION AS location,
+            TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS regDate
+        FROM TBL_EXPO
+        WHERE END_DATE &gt;= TRUNC(SYSDATE)
+        ORDER BY START_DATE ASC, EXPO_NUMBER ASC
+    </select>
+
+</mapper>
