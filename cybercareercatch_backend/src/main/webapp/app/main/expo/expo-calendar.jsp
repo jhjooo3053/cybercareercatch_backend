@@ -7,60 +7,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CyberCareerCatch - 박람회 일정</title>
-    <link rel="stylesheet" href="../../../assets/css/main/expo/expo-calendar.css" />
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/expo/expo-calendar.css" />
+
+    <!-- FullCalendar -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 </head>
 
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+</script>
 <body>
     <header></header>
+
     <main class="expo-main">
 
-        <!-- expo-cal : 캘린더 섹션 (cal = calendar 축약) -->
+        <!-- 캘린더 -->
         <section class="expo-cal">
             <div class="expo-cal-hdr">
                 <button class="expo-cal-btn" id="prevMonth">&#8249;</button>
+
                 <div class="expo-cal-month">
-                    <span class="expo-cal-month-num" id="calMonthNum">3</span>
-                    <span class="expo-cal-month-txt" id="calMonthText">MAR</span>
-                    <span class="expo-cal-year" id="calYearText">2026</span>
+                    <span class="expo-cal-month-num" id="calMonthNum"></span>
+                    <span class="expo-cal-month-txt" id="calMonthText"></span>
+                    <span class="expo-cal-year" id="calYearText"></span>
                 </div>
+
                 <button class="expo-cal-btn" id="nextMonth">&#8250;</button>
             </div>
-            <!-- expo-cal-tbl : 캘린더 테이블 (tbl = table 축약) -->
-            <table class="expo-cal-tbl" id="calTable">
-                <thead>
-                    <tr>
-                        <th class="expo-cal-tbl-sun">SUN</th>
-                        <th>MON</th>
-                        <th>TUE</th>
-                        <th>WED</th>
-                        <th>THU</th>
-                        <th>FRI</th>
-                        <th class="expo-cal-tbl-sat">SAT</th>
-                    </tr>
-                </thead>
-                <tbody id="calBody"></tbody>
-            </table>
+
+            <div id="calendar"></div>
         </section>
 
-        <!-- expo-list : 박람회 참가 기업 리스트 섹션 -->
+        <!-- 박람회 상세 -->
         <section class="expo-list">
-            <h2 class="expo-list-title">박람회 이름</h2>
-            <!-- expo-list-tabs : 섹션 탭 -->
-            <div class="expo-list-tabs">
-                <button class="expo-list-tab expo-list-tab-active" data-tab="expo1">박람회 1</button>
+            <div class="expo-info-box">
+                <div class="expo-info-head">
+                    <h2 class="expo-list-title" id="expoTitle">박람회를 선택해주세요.</h2>
+                    <p class="expo-list-location" id="expoLocation">
+                        달력의 박람회 일정 바를 클릭하면 개최 장소와 참가 기업 정보가 표시됩니다.
+                    </p>
+                </div>
+
+                <div class="expo-info-divider"></div>
+
+                <div class="expo-company-list" id="expoBody">
+                    <div class="expo-company-empty">
+                        박람회 일정이 선택되지 않았습니다.
+                    </div>
+                </div>
             </div>
-            <!-- expo-list-tbl : 참가기업 테이블 (tbl = table 축약) -->
-            <table class="expo-list-tbl" id="expoTable">
-                <thead>
-                    <tr>
-                        <th>회사명</th>
-                        <th>위치</th>
-                        <th>모집 직군</th>
-                    </tr>
-                </thead>
-                <tbody id="expoBody"></tbody>
-            </table>
-            <!-- expo-list-notice : 기업 신청 안내 -->
+
             <div class="expo-list-notice">
                 <p><strong>기업 신청 이메일 : CyberCarrerCatch@gmail.com</strong></p>
                 <p><strong>기업 신청은 박람회 개최일 전 10일 까지 입니다</strong></p>
@@ -68,7 +66,8 @@
         </section>
 
     </main>
-    <script src="../../../assets/js/main/expo/expo-calendar.js"></script>
+
+    <script src="${pageContext.request.contextPath}/assets/js/main/expo/expo-calendar.js"></script>
 </body>
 
 </html>
