@@ -397,7 +397,7 @@
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 수정(기업소개 수정) -->
 	<!-- 사용 페이지 : companyPageEdit.jsp -->
-	<update id="updateCompInfo" parameterType="CompInfoDTO">
+	<update id="updateCompInfo" parameterType="CompanyInfoDTO">
 		UPDATE TBL_COMP_INFO
 		SET COMP_CEO_NAME = #{compCeoName},
 		COMP_FND_YEAR = #{compFndYear},

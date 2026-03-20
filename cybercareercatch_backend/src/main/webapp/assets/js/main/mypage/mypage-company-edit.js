@@ -1,34 +1,36 @@
 // 이동 경로
-const mypageUrl = "/cybercareercatch_backend/member/mypage.mpfc";
+const mypageUrl = "/cybercareercatch_backend/company/mypage.mpfc";
 
-
+// 공통 메시지 출력 함수
 function showMessage(target, message, color = "red") {
 	if (!target) return;
 	target.textContent = message;
 	target.style.color = color;
 }
 
+// 전화번호 검사
 function validatePhone(phone) {
 	// 010 + 숫자 8개
 	return /^010\d{8}$/.test(phone);
 }
 
+// 비밀번호 검사
 function validatePassword(password) {
 	// 영문 + 숫자 + 특수기호 포함, 8~20자
 	return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,20}$/.test(password);
 }
 
 //전화번호 수정
-const phoneForm = document.getElementById("member-phone-form");
-const phoneInput = document.getElementById("member-phonenumber");
-const phoneMsg = document.getElementById("member-phonenumber-message");
+const phoneForm = document.getElementById("company-phone-form");
+const phoneInput = document.getElementById("company-manager-phonenumber");
+const phoneMsg = document.getElementById("company-phonenumber-message");
 
-const authInput = document.getElementById("member-verificationcode");
-const authMsg = document.getElementById("member-verificationcode-message");
+const authInput = document.getElementById("company-verificationcode");
+const authMsg = document.getElementById("company-verificationcode-message");
 
-const sendBtn = document.getElementById("member-phonenumber-submit-btn");
-const authCheckBtn = document.getElementById("member-verificationcode-btn");
-const phoneCancelBtn = document.getElementById("mypage-infoeditcancel-btn");
+const sendBtn = document.getElementById("company-phonenumber-submit-btn");
+const authCheckBtn = document.getElementById("company-verificationcode-btn");
+const phoneCancelBtn = document.getElementById("mypage-editcancel-btn");
 
 let authCode = "";
 let phoneVerified = false;
@@ -50,6 +52,7 @@ if (sendBtn) {
 			return;
 		}
 
+		// 테스트용 인증번호 생성
 		authCode = String(Math.floor(100000 + Math.random() * 900000));
 		phoneVerified = false;
 
@@ -87,12 +90,16 @@ if (authCheckBtn) {
 	});
 }
 
-// 전화번호 바뀌면 인증 초기화
+// 전화번호가 바뀌면 인증 초기화
 if (phoneInput) {
 	phoneInput.addEventListener("input", function () {
 		authCode = "";
 		phoneVerified = false;
-		authInput.value = "";
+
+		if (authInput) {
+			authInput.value = "";
+		}
+
 		showMessage(phoneMsg, "");
 		showMessage(authMsg, "");
 	});
@@ -121,6 +128,7 @@ if (phoneForm) {
 			e.preventDefault();
 			showMessage(authMsg, "전화번호 인증을 완료해주세요.");
 			authInput.focus();
+			return;
 		}
 	});
 }
@@ -135,6 +143,7 @@ if (phoneCancelBtn) {
 }
 
 //비밀번호 수정
+
 const pwForm = document.getElementById("company-password-form");
 
 const currentPwInput = document.getElementById("company-current-pw");
@@ -146,10 +155,10 @@ const newPwMsg = document.getElementById("company-change-pw-message");
 const newPwConfirmInput = document.getElementById("company-check-pw");
 const newPwConfirmMsg = document.getElementById("company-check-pw-message");
 
-const currentPwBtn = document.getElementById("currentpw-check-btn");
-const newPwCheckBtn = document.getElementById("changepw-check-btn");
-const pwCancelBtn = document.getElementById("mypage-pweditcancel-btn");
-
+// JSP의 실제 id에 맞춤
+const currentPwBtn = document.getElementById("company-currentpwcheck-btn");
+const newPwCheckBtn = document.getElementById("company-changepwcheck-btn");
+const pwCancelBtn = document.getElementById("mypage-pwcancel-btn");
 
 // 새 비밀번호 확인 버튼
 if (newPwCheckBtn) {
@@ -173,6 +182,11 @@ if (newPwCheckBtn) {
 			return;
 		}
 
+		if (currentPw !== "" && currentPw === newPw) {
+			showMessage(newPwMsg, "현재 비밀번호와 다른 비밀번호를 입력해주세요.");
+			newPwInput.focus();
+			return;
+		}
 
 		if (newPwConfirm === "") {
 			showMessage(newPwConfirmMsg, "변경할 비밀번호 확인을 입력해주세요.");
@@ -205,13 +219,28 @@ if (newPwConfirmInput) {
 	});
 }
 
-// 비밀번호 수정 submit
+// 비밀번호 수정 / 현재 비밀번호 확인 submit 분기 처리
 if (pwForm) {
 	pwForm.addEventListener("submit", function (e) {
 		const currentPw = currentPwInput.value.trim();
 		const newPw = newPwInput.value.trim();
 		const newPwConfirm = newPwConfirmInput.value.trim();
 
+		// 어떤 submit 버튼으로 제출됐는지 확인
+		const submitter = e.submitter;
+
+		// 현재 비밀번호 확인 버튼 눌렀을 때는 현재 비밀번호만 검사
+		if (submitter && submitter.id === "company-currentpwcheck-btn") {
+			if (currentPw === "") {
+				e.preventDefault();
+				showMessage(currentPwMsg, "현재 비밀번호를 입력해주세요.");
+				currentPwInput.focus();
+				return;
+			}
+			return;
+		}
+
+		// 실제 비밀번호 수정 버튼 눌렀을 때 전체 검사
 		if (currentPw === "") {
 			e.preventDefault();
 			showMessage(currentPwMsg, "현재 비밀번호를 입력해주세요.");
@@ -245,6 +274,7 @@ if (pwForm) {
 			e.preventDefault();
 			showMessage(newPwConfirmMsg, "변경할 비밀번호가 일치하지 않습니다.");
 			newPwConfirmInput.focus();
+			return;
 		}
 	});
 }

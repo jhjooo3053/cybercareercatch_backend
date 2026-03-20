@@ -96,7 +96,7 @@ public class MypageFrontController extends HttpServlet {
 			result = new MypageMemberQuitController().execute(request, response);
 			System.out.println("일반회원 탈퇴 전 비밀번호 확인 진입 완료");
 			break;
-		case "/member/quitOk.mpfc":
+		case "/member/mypage/quitOk.mpfc":
 			System.out.println("일반회원 탈퇴 요청");
 			result = new MypageMemberDeleteController().execute(request, response);
 			System.out.println("일반회원 탈퇴 완료 ");
