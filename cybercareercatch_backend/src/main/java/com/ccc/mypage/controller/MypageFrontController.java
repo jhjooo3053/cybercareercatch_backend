@@ -91,20 +91,50 @@ public class MypageFrontController extends HttpServlet {
 			result = new MypageMemberDeleteMyQnaController().execute(request, response);
 			System.out.println("현재 마이페이지 나의 qna글 삭제 완료");
 			break;
-		case "/mypage/member/quit.mpfc":
+		case "/member/mypage/quit.mpfc":
 			System.out.println("일반회원 탈퇴 전 비밀번호 확인 진입 요청");
 			result = new MypageMemberQuitController().execute(request, response);
 			System.out.println("일반회원 탈퇴 전 비밀번호 확인 진입 완료");
 			break;
-		case "/mypage/member/quitOk.mpfc":
+		case "/member/mypage/quitOk.mpfc":
 			System.out.println("일반회원 탈퇴 요청");
 			result = new MypageMemberDeleteController().execute(request, response);
 			System.out.println("일반회원 탈퇴 완료 ");
 			break;
-		case "/compamy/mypage.mpfc":
+		case "/company/mypage.mpfc":
 			System.out.println("기업회원 마이페이지 처리 요청");
 			result = new MypageCompanyController().execute(request, response);
 			System.out.println("기업회원 마이페이지 처리 와료");
+			break;
+		case "/company/mypage/checkPw.mpfc":
+			System.out.println("기업회원 마이페이지 진입 전 비밀번호확인 페이지 진입 요청");
+			result = new MypageCompanyCheckPwController().execute(request, response);
+			System.out.println("기업회원 마이페이지 진입 전 비밀번호확인 페이지 진입 완료");
+			break;
+		case "/company/mypage/checkPwOk.mpfc":
+			System.out.println("기업회원 마이페이지 진입 전 비밀번호 처리 요청");
+			result = new MypageCompanyCheckPwOkController().execute(request, response);
+			System.out.println("기업회원 마이페이지 진입 전 비밀번호 처리 완료");
+			break;
+		case "/company/mypage/editInfo.mpfc":
+			System.out.println("기업회원 마이페이지 정보수정 진입 요청");
+			result = new MypageCompanyEditInfoController().execute(request, response);
+			System.out.println("기업회원 마이페이지 정보수정 진입 완료");
+			break;
+		case "/company/mypage/updatePhone.mpfc":
+			System.out.println("기업회원 마이페이지 전화번호 수정 요청");
+			result = new MypageCompanyEditPhonenumController().execute(request, response);
+			System.out.println("기업회원 마이페이지 전화번호 수정 완료");
+			break;
+		case "/company/mypage/updatePw.mpfc":
+			System.out.println("기업회원 마이패이지 비밀번호 수정 요청");
+			result = new MypageCompanyEditPwController().execute(request, response);
+			System.out.println("기업회원 마이페이지 비밀번호 수정 완료");
+			break;
+		case "/company/mypage/checkCurrentPw.mpfc":
+			System.out.println("기업회원 현재 비밀번호 확인 요청");
+			result = new MypageCompanyCheckCurrentPwController().execute(request, response);
+			System.out.println("기업회원 현재 비밀번호 확인 완료");
 			break;
 		}
 		

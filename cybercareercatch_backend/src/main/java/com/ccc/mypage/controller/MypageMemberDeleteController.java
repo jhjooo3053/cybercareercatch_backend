@@ -49,7 +49,7 @@ public class MypageMemberDeleteController implements Execute {
 		// 비밀번호 공백 체크
 		if (userPw == null || userPw.trim().isEmpty()) {
 			request.setAttribute("pwMessage", "비밀번호를 입력해주세요.");
-			result.setPath("/app/mypage/mypage-member-quit.jsp");
+			result.setPath("/app/main/mypage/mypage-member-quit.jsp");
 			result.setRedirect(false);
 			return result;
 		}

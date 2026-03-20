@@ -25,8 +25,8 @@ public class MypageDAO {
 //=========일반회원 마이페이지============
 
 	// 일반회원 정보조회
-	public MemberMypageInfoDTO selectMemberMyPageInfo(int userNumber) {
-		return sqlSession.selectOne("mypage.selectMemberMyPageInfo", userNumber);
+	public MemberMypageInfoDTO selectMemberMypageInfo(int userNumber) {
+		return sqlSession.selectOne("mypage.selectMemberMypageInfo", userNumber);
 	}
 
 	// 일반회원 비밀번호 확인
@@ -89,9 +89,9 @@ public class MypageDAO {
 //==========기업회원 마이페이지=============
 
 	// 기업회원 기본정보 조회
-	public CompanyMypageInfoDTO selectCompanyMemberMyPageInfo(int userNumber) {
+	public CompanyMypageInfoDTO selectCompanyMemberMypageInfo(int userNumber) {
 		System.out.println("기업회원 기본정보 조회 메소드 실행");
-		return sqlSession.selectOne("mypage.selectCompanyMemberMyPageInfo", userNumber);
+		return sqlSession.selectOne("mypage.selectCompanyMemberMypageInfo", userNumber);
 	}
 
 	// 기업회원 답변대기 Q&A글 총 개수
@@ -142,15 +142,15 @@ public class MypageDAO {
 //	}
 
 	// 기업정보페이지 존재 여부 확인
-	public int countCompanyPageByCompanyNumber(int companyNumber) {
+	public int countCompanyPageByUserNumber(int userNumber){
 		System.out.println("기업정보페이지 존재 여부 확인 메소드");
-		return sqlSession.selectOne("mypage.countCompanyPageByCompanyNumber", companyNumber);
+		return sqlSession.selectOne("mypage.countCompanyPageByUserNumber", userNumber);
 	}
 
 	// 기업정보페이지 상세조회
-	public CompanyDetailDTO selectCompanyPageDetail(int companyNumber) {
+	public CompanyDetailDTO selectCompanyPageDetail(int userNumber) {
 		System.out.println("기업정보페이지 상세조회 메소드");
-		return sqlSession.selectOne("mypage.selectCompanyPageDetail", companyNumber);
+		return sqlSession.selectOne("mypage.selectCompanyPageDetail", userNumber);
 	}
 
 	// 기업정보페이지 등록
@@ -175,9 +175,9 @@ public class MypageDAO {
 		sqlSession.update("mypage.updateCompInfo", companyInfoDTO);
 	}
 
-	public void updateFile(FileDTO fileDTO) {
+	public void updateFileByUserNumber(Map<String, Object> paramMap) {
 		System.out.println("기업정보페이지 수정(파일) 메소드");
-		sqlSession.update("mypage.updateFile", fileDTO);
+		sqlSession.update("mypage.updateFileByUserNumber", paramMap);
 	}
 
 	public void updateJobPost(JobPostDTO jobPostDTO) {
@@ -186,13 +186,15 @@ public class MypageDAO {
 	}
 
 	// 기업정보페이지 삭제
-	public void deleteFileByCompanyNumber(int companyNumber) {
-		System.out.println("기업정포페이지 삭제(파일) 메소드");
-		sqlSession.delete("mypage.deleteFileByCompanyNumber", companyNumber);
+	public void deleteJobPostByUserNumber(int userNumber) {
+		sqlSession.delete("mypage.deleteJobPostByUserNumber", userNumber);
 	}
 
-	public void deleteCompInfoByCompanyNumber(int companyNumber) {
-		System.out.println("기업정보페이지 삭제(기업소개) 메소드 ");
-		sqlSession.delete("mypage.deleteCompInfoByCompanyNumber", companyNumber);
+	public void deleteFileByUserNumber(int userNumber) {
+		sqlSession.delete("mypage.deleteFileByUserNumber", userNumber);
+	}
+
+	public void deleteCompInfoByUserNumber(int userNumber) {
+		sqlSession.delete("mypage.deleteCompInfoByUserNumber", userNumber);
 	}
 }

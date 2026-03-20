@@ -46,8 +46,8 @@ public class MypageMemberEditPhonenumController implements Execute{
 		//전화번호 공백 체크
 		if( newPhone == null || newPhone.trim().isEmpty()) {
 			request.setAttribute("phoneMessage", "전화번호를 입력해주세요");
-			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMyPageInfo(userNumber));
-			result.setPath("/app/mypage/mypage-member-edit.jsp");
+			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
+			result.setPath("/app/main/mypage/mypage-member-edit.jsp");
 			result.setRedirect(false);
 			return result;
 		}	
@@ -57,8 +57,8 @@ public class MypageMemberEditPhonenumController implements Execute{
 		//인증번호 공백 체크
 		if (authCode == null || authCode.trim().isEmpty()) {
 		    request.setAttribute("authMessage", "인증번호를 입력해주세요.");
-		    request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMyPageInfo(userNumber));
-		    result.setPath("/app/mypage/mypage-member-edit.jsp");
+		    request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
+		    result.setPath("/app/main/mypage/mypage-member-edit.jsp");
 		    result.setRedirect(false);
 		    return result;
 		}

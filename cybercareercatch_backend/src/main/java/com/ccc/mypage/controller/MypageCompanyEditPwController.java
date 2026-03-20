@@ -10,13 +10,14 @@ import javax.servlet.http.HttpSession;
 import com.ccc.common.Execute;
 import com.ccc.common.Result;
 import com.ccc.mypage.dao.MypageDAO;
+import com.ccc.mypage.dto.CompanyMypageInfoDTO;
 
-public class MypageMemberEditPwController implements Execute {
+public class MypageCompanyEditPwController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("MypageMemberEditPwController 실행");
+		System.out.println("MypageCompanyEditPwController 실행");
 
 		MypageDAO mypageDAO = new MypageDAO();
 		Result result = new Result();
@@ -36,8 +37,8 @@ public class MypageMemberEditPwController implements Execute {
 			return result;
 		}
 
-		// 일반회원 아님
-		if (!"일반회원".equals(userType)) {
+		// 기업회원 아님
+		if (!"기업회원".equals(userType)) {
 			result.setPath(request.getContextPath() + "/main/main.mafc");
 			result.setRedirect(true);
 			return result;
@@ -51,8 +52,11 @@ public class MypageMemberEditPwController implements Execute {
 		// 현재 비밀번호 공백 체크
 		if (currentUserPw == null || currentUserPw.trim().isEmpty()) {
 			request.setAttribute("currentPwMessage", "현재 비밀번호를 입력해주세요.");
-			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
-			result.setPath("/app/main/mypage/mypage-member-edit.jsp");
+
+			CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+			request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
+
+			result.setPath("/app/main/mypage/mypage-company-edit.jsp");
 			result.setRedirect(false);
 			return result;
 		}
@@ -60,18 +64,24 @@ public class MypageMemberEditPwController implements Execute {
 		// 새 비밀번호 공백 체크
 		if (newUserPw == null || newUserPw.trim().isEmpty()) {
 			request.setAttribute("newPwMessage", "변경할 비밀번호를 입력해주세요.");
-			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
-			result.setPath("/app/main/mypage/mypage-member-edit.jsp");
+
+			CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+			request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
+
+			result.setPath("/app/main/mypage/mypage-company-edit.jsp");
 			result.setRedirect(false);
 			return result;
 		}
-		
-		Boolean memberPwChecked = (Boolean) session.getAttribute("memberPwChecked");
 
-		if (memberPwChecked == null || !memberPwChecked) {
+		// 현재 비밀번호 확인 선행 여부 체크
+		Boolean companyCurrentPwChecked = (Boolean) session.getAttribute("companyCurrentPwChecked");
+		if (companyCurrentPwChecked == null || !companyCurrentPwChecked) {
 			request.setAttribute("currentPwMessage", "먼저 현재 비밀번호 확인을 진행해주세요.");
-			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
-			result.setPath("/app/main/mypage/mypage-member-edit.jsp");
+
+			CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+			request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
+
+			result.setPath("/app/main/mypage/mypage-company-edit.jsp");
 			result.setRedirect(false);
 			return result;
 		}
@@ -79,44 +89,58 @@ public class MypageMemberEditPwController implements Execute {
 		// 새 비밀번호 확인 공백 체크
 		if (newUserPwConfirm == null || newUserPwConfirm.trim().isEmpty()) {
 			request.setAttribute("newPwConfirmMessage", "변경할 비밀번호 확인을 입력해주세요.");
-			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
-			result.setPath("/app/main/mypage/mypage-member-edit.jsp");
+
+			CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+			request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
+
+			result.setPath("/app/main/mypage/mypage-company-edit.jsp");
 			result.setRedirect(false);
 			return result;
 		}
 
-		
-		// 현재 비밀번호 일치 여부 확인
+		// trim 처리
 		currentUserPw = currentUserPw.trim();
 		newUserPw = newUserPw.trim();
 		newUserPwConfirm = newUserPwConfirm.trim();
-		boolean isCorrectPw = mypageDAO.checkMemberPw(userNumber, currentUserPw);
+
+		// 현재 비밀번호 일치 여부 확인
+		boolean isCorrectPw = mypageDAO.checkCompanyPw(userNumber, currentUserPw);
 
 		if (!isCorrectPw) {
 			request.setAttribute("currentPwMessage", "현재 비밀번호가 일치하지 않습니다.");
-			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
-			result.setPath("/app/main/mypage/mypage-member-edit.jsp");
+
+			CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+			request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
+
+			result.setPath("/app/main/mypage/mypage-company-edit.jsp");
 			result.setRedirect(false);
 			return result;
 		}
+
+
 
 		// 새 비밀번호 확인 일치 체크
 		if (!newUserPw.equals(newUserPwConfirm)) {
 			request.setAttribute("newPwConfirmMessage", "변경할 비밀번호가 일치하지 않습니다.");
-			request.setAttribute("memberMypageInfoDTO", mypageDAO.selectMemberMypageInfo(userNumber));
-			result.setPath("/app/main/mypage/mypage-member-edit.jsp");
+
+			CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+			request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
+
+			result.setPath("/app/main/mypage/mypage-company-edit.jsp");
 			result.setRedirect(false);
 			return result;
 		}
 
 		// 비밀번호 수정
-		mypageDAO.updateMemberPw(userNumber, newUserPw);
-		System.out.println("비밀번호 변경 완료");
-		
-		session.removeAttribute("memberPwChecked");
+		mypageDAO.updateCompanyPw(userNumber, newUserPw);
+		System.out.println("기업회원 비밀번호 변경 완료");
 
-		// 수정 후 마이페이지로 이동
-		result.setPath(request.getContextPath() + "/member/mypage.mpfc");
+		// 현재 비밀번호 확인 세션 제거
+		session.removeAttribute("companyCurrentPwChecked");
+		session.removeAttribute("companyPwChecked");
+
+		// 수정 후 기업회원 마이페이지 메인으로 이동
+		result.setPath(request.getContextPath() + "/company/mypage.mpfc");
 		result.setRedirect(true);
 
 		return result;

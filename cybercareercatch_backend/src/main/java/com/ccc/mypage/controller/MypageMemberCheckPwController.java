@@ -46,7 +46,7 @@ public class MypageMemberCheckPwController implements Execute{
 			return result;
 		}
 		
-		memberMypageInfoDTO = mypageDAO.selectMemberMyPageInfo(userNumber);
+		memberMypageInfoDTO = mypageDAO.selectMemberMypageInfo(userNumber);
 
 		// 비밀번호 확인 페이지로 이동
 		result.setPath("/app/main/mypage/member-password-check.jsp");

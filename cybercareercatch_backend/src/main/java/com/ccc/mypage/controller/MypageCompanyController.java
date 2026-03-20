@@ -48,13 +48,13 @@ public class MypageCompanyController implements Execute {
 		}
 
 		// 기업회원 기본정보 조회
-		CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMyPageInfo(userNumber);
-		request.setAttribute("CompanyMypageInfoDTO", companyMypageInfoDTO);
+		CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+		request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
 
-		// 기업정보페이지 개수 조회
+		// 기업정보페이지 개수 조회 - 등록 / 수정버튼 나눠서 보여주기용
 		int companyPageCount = 0;
 		if (companyMypageInfoDTO != null) {
-			companyPageCount = mypageDAO.countCompanyPageByCompanyNumber(companyMypageInfoDTO.getCompanyNumber());
+			companyPageCount = mypageDAO.countCompanyPageByUserNumber(userNumber);
 		}
 		request.setAttribute("companyPageCount", companyPageCount);
 
@@ -128,7 +128,7 @@ public class MypageCompanyController implements Execute {
 		System.out.println("=====================================");
 
 		// JSP 이동
-		result.setPath("/app/mypage/mypage-company.jsp");
+		result.setPath("/app/main/mypage/mypage-company.jsp");
 		result.setRedirect(false);
 
 		return result;

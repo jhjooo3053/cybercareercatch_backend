@@ -42,8 +42,17 @@
 	
 	<!-- Mapper.xml 등록 추후 필요 -->
 	<mappers>
-		<mapper resource="mapper/member/MemberMapper.xml" />
-		<mapper resource="mapper/expo/ExpoMapper.xml"/>
 		<mapper resource="mapper/admin/AdminMapper.xml"/>
+		<mapper resource="mapper/company/CompanyAdMapper.xml"/>
+		<mapper resource="mapper/company/CompanyInfoMapper.xml"/>
+		<mapper resource="mapper/company/CompanyMapper.xml"/>
+		<mapper resource="mapper/expo/ExpoMapper.xml"/>
+		<mapper resource="mapper/job/JobMapper.xml"/>
+		<mapper resource="mapper/main/MainMapper.xml"/>
+		<mapper resource="mapper/member/MemberMapper.xml" />
+		<mapper resource="mapper/mypage/MyPageMapper.xml" />
+		<mapper resource="mapper/Post/PostMapper.xml" />
+		<mapper resource="mapper/qna/QnaMapper.xml" />
+		<mapper resource="mapper/roadmap/RoadmapMapper.xml" />
 	</mappers>
 </configuration>

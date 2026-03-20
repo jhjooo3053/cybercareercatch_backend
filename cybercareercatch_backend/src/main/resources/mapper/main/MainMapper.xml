@@ -7,27 +7,27 @@
 
     <!-- 메인 상단 질문 1개 조회 -->
     <select id="selectMainQuestion"
-            resultType="com.ccc.job.dto.JobRecommendQuestionDTO">
+            parameterType="JobRecommendQuestionDTO" resultType="JobRecommendQuestionDTO">
         SELECT
             JOB_QUESTION_NUMBER AS jobQuestionNumber,
             JOB_QUESTION_CONTENT AS jobQuestionContent
         FROM TBL_JOB_RECOMMEND_QUESTION
-        WHERE JOB_QUESTION_NUMBER = 1
+        WHERE JOB_QUESTION_NUMBER = #{jobQuestionNumber}
     </select>
 
     <!-- 메인 추천 직군 유형 4개 조회 -->
     <select id="selectMainJobGroupList"
-            resultType="com.ccc.job.dto.JobGroupDTO">
+            resultType="JobGroupDTO">
         SELECT
             JOB_NUMBER AS jobNumber,
             JOB_NAME AS jobName
         FROM TBL_JOB_GROUP
-        ORDER BY JOB_NUMBER ASC
+        ORDER BY JOB_NUMBER ASC <!-- 오름차순정렬 -->
     </select>
 
     <!-- 메인 기업 홍보 카드 3개 조회 -->
     <select id="selectMainCompanyList"
-            resultType="com.ccc.company.dto.CompanyCardDTO">
+            resultType="CompanyCardDTO">
         SELECT *
         FROM (
             SELECT
@@ -65,7 +65,7 @@
 
     <!-- 메인 자유게시판 최신글 5개 조회 -->
     <select id="selectMainFreePostList"
-            resultType="com.ccc.post.dto.PostListDTO">
+            resultType="PostListDTO">
         SELECT *
         FROM (
             SELECT
@@ -85,7 +85,7 @@
 
     <!-- 메인 기업 Q&A 최신글 5개 조회 -->
     <select id="selectMainQnaList"
-            resultType="com.ccc.qna.dto.QnaListDTO">
+            resultType="QnaListDTO">
         SELECT *
         FROM (
             SELECT
@@ -109,7 +109,7 @@
 
     <!-- 메인 박람회 일정 조회 -->
     <select id="selectMainExpoList"
-            resultType="com.ccc.expo.dto.ExpoListDTO">
+            resultType="ExpoListDTO">
         SELECT
             EXPO_NUMBER AS expoNumber,
             EXPO_NAME AS expoName,
@@ -118,8 +118,24 @@
             LOCATION AS location,
             TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS regDate
         FROM TBL_EXPO
-        WHERE END_DATE &gt;= TRUNC(SYSDATE)
+        WHERE END_DATE >= TRUNC(SYSDATE)
         ORDER BY START_DATE ASC, EXPO_NUMBER ASC
     </select>
+    
+    <!-- 추가 노션에 없음 -->
+    <insert id="insertMainAnswer"
+        parameterType="JobTestSubmitDTO">
+    INSERT INTO TBL_JOB_RESULT_ANSWER (
+        JOB_RESULT_NUMBER,
+        JOB_QUESTION_NUMBER,
+        JOB_QUESTION_CONTENT_SNAPSHOT,
+        ANSWER_CONTENT
+    ) VALUES (
+        #{jobResultNumber},
+        #{jobQuestionNumber},
+        #{jobQuestionContentSnapshot},
+        #{answerContent}
+    )
+</insert>
 
 </mapper>

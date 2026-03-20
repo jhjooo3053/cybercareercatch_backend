@@ -2,7 +2,7 @@ package com.ccc.expo.dto;
 
 public class ExpoListDTO {
 	   private int expoNumber;
-	   private int expoName;
+	   private String expoName;
 	   private String startDate;
 	   private String endDate;
 	   private String location;
@@ -13,10 +13,10 @@ public class ExpoListDTO {
 	   public void setExpoNumber(int expoNumber) {
 		   this.expoNumber = expoNumber;
 	   }
-	   public int getExpoName() {
+	   public String getExpoName() {
 		   return expoName;
 	   }
-	   public void setExpoName(int expoName) {
+	   public void setExpoName(String expoName) {
 		   this.expoName = expoName;
 	   }
 	   public String getStartDate() {

@@ -46,7 +46,7 @@ public class MypageMemberQuitController implements Execute{
 			return result;
 		}
 		
-		memberMypageInfoDTO = mypageDAO.selectMemberMyPageInfo(userNumber);
+		memberMypageInfoDTO = mypageDAO.selectMemberMypageInfo(userNumber);
 
 		result.setPath("/app/main/mypage/mypage-member-quit.jsp");
 		result.setRedirect(false);

@@ -45,7 +45,7 @@ public class MypageMemberEditInfoController implements Execute{
 		}
 		
 		if(memberPwChecked == null || !memberPwChecked) {
-			result.setPath(request.getContextPath() + "/mypage/member/checkPw.mpfc");
+			result.setPath(request.getContextPath() + "/member/mypage/checkPw.mpfc");
 			result.setRedirect(true);
 			return result;
 		}
@@ -54,7 +54,7 @@ public class MypageMemberEditInfoController implements Execute{
 			
 		//보여줄 아이디 조회
 		MemberMypageInfoDTO memberMypageInfoDTO = new MemberMypageInfoDTO();
-		memberMypageInfoDTO = mypageDAO.selectMemberMyPageInfo(userNumber);
+		memberMypageInfoDTO = mypageDAO.selectMemberMypageInfo(userNumber);
 		
 		// 조회결과가 없는 경우
 		if (memberMypageInfoDTO == null) {
@@ -65,7 +65,7 @@ public class MypageMemberEditInfoController implements Execute{
 		
 		request.setAttribute("memberMypageInfoDTO", memberMypageInfoDTO);
 		
-		result.setPath("/app/mypage/mypage-member-edit.jsp");
+		result.setPath("/app/main/mypage/mypage-member-edit.jsp");
 		result.setRedirect(false);
 		
 		return result;

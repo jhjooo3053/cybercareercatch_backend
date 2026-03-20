@@ -101,7 +101,7 @@ public class MypageMemberViewQnaController implements Execute {
 		System.out.println("next : " + next);
 		System.out.println("=========================");
 
-		result.setPath("/app/mypage/mypage-member-edit-postlist.jsp");
+		result.setPath("/app/main/mypage/mypage-member-edit-postlist.jsp");
 		result.setRedirect(false);
 
 		return result;
