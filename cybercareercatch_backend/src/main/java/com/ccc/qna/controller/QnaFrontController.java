@@ -9,77 +9,81 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ccc.common.Result;
 
-
 public class QnaFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public QnaFrontController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
-	
+
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+
 		String target = request.getRequestURI().substring(request.getContextPath().length());
-		System.out.println("BoardFrontController 현재 경로 : " + target);
-		Result result = new Result();
-		
+		System.out.println("QnaFrontController 현재 경로 : " + target);
+
+		Result result = null;
+
 		switch(target) {
-		case  "/board/boardListOk.bo":
-			System.out.println("게시물 목록 처리 요청");
-			result = new BoardListOkController().execute(request, response);
-			System.out.println("게시물 목록 처리 완료");
+
+		case "/qna/list.qfc":
+			System.out.println("QnA 목록 처리 요청");
+			result = new QnaListController().execute(request, response);
+			System.out.println("QnA 목록 처리 완료");
 			break;
-		case "/board/boardReadOk.bo":
-			System.out.println("게시물 상세 페이지 처리 요청");
-			result = new BoardReadOkController().execute(request, response);
-			System.out.println("게시물 상세 페이지 처리 완료");
+
+		case "/qna/detail.qfc":
+			System.out.println("QnA 상세 처리 요청");
+			result = new QnaDetailController().execute(request, response);
+			System.out.println("QnA 상세 처리 완료");
 			break;
-		case "/board/boardWrite.bo":
-			System.out.println("게시글 작성 페이지 이동 요청");
-			result = new BoardWriteController().execute(request, response);
-			System.out.println("게시글 작성 페이지 이동 완료");
+
+		case "/qna/comment-write.qfc":
+			System.out.println("QnA 댓글 등록 처리 요청");
+			result = new QnaCommentWriteController().execute(request, response);
+			System.out.println("QnA 댓글 등록 처리 완료");
 			break;
-		case "/board/boardWriteOk.bo":
-			System.out.println("게시글 작성 요청");
-			result = new BoardWriteOkController().execute(request, response);
-			System.out.println("게시글 작성 완료");
+
+		case "/qna/comment-delete.qfc":
+			System.out.println("QnA 댓글 삭제 처리 요청");
+			result = new QnaCommentDeleteController().execute(request, response);
+			System.out.println("QnA 댓글 삭제 처리 완료");
 			break;
-		case "/board/boardUpdate.bo":
-			System.out.println("게시글 수정 페이지 이동 요청");
-			result = new BoardUpdateController().execute(request, response);
-			System.out.println("게시글 수정 페이지 이동 완료");
+			//게시글 추가
+		case "/qna/write.qfc":
+			System.out.println("QnA 게시글 등록 처리 요청");
+			result = new QnaWriteController().execute(request, response);
+			System.out.println("QnA 게시글 등록 처리 완료");
 			break;
-		case "/board/boardUpdateOk.bo":
-			System.out.println("게시글 수정 완료 요청");
-			result = new BoardUpdateOkController().execute(request, response);
-			System.out.println("게시글 수정 완료");
+		case "/qna/write-form.qfc":
+			System.out.println("QnA 글쓰기 폼 이동 요청");
+			result = new QnaWriteFormController().execute(request, response);
+			System.out.println("QnA 글쓰기 폼 이동 완료");
 			break;
-		case "/board/boardDeleteOk.bo":
-			System.out.println("게시글 삭제 완료 요청");
-			result = new BoardDeleteOkController().execute(request, response);
-			
+		case "/qna/delete.qfc":
+			System.out.println("QnA 게시글 삭제 처리 요청");
+			result = new QnaDeleteController().execute(request, response);
+			System.out.println("QnA 게시글 삭제 처리 완료");
+			break;
+		default:
+			System.out.println("QnA 요청 경로 없음 : " + target);
+			result = new Result();
+			result.setPath(request.getContextPath() + "/qna/list.qfc");
+			result.setRedirect(true);
+			break;
 		}
-		
+
 		if(result != null && result.getPath() != null) {
 			if(result.isRedirect()) {
 				response.sendRedirect(result.getPath());
@@ -87,8 +91,5 @@ public class QnaFrontController extends HttpServlet {
 				request.getRequestDispatcher(result.getPath()).forward(request, response);
 			}
 		}
-		
-		
 	}
-
 }

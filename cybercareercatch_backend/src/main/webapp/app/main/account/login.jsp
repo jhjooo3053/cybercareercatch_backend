@@ -101,7 +101,7 @@
 
           <!-- 회원가입 링크 영역 -->
           <div class="account_login_signup_wrap">
-            <a href="signup.html" class="account_login_signup_link">회원가입</a>
+            <a href="${pageContext.request.contextPath}/member/signup.mefc" class="account_login_signup_link">회원가입</a>
           </div>
         </form>
 

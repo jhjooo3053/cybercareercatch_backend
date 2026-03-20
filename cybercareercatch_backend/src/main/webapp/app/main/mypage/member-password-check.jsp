@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +8,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>일반회원마이페이지-비밀번호확인</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/mypage/member-password-check.css">
+  <link rel="stylesheet" href="./../../../assets/css/main/mypage/member-password-check.css">
   <script defer
-	src="${pageContext.request.contextPath}/assets/js/main/mypage/member-password-check.js"></script>
+	src="${contextPath}/assets/js/main/mypage/member-password-check.js"></script>
 </head>
 
 <body>

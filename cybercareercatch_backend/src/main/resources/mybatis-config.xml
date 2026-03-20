@@ -17,8 +17,15 @@
 
 	<!-- DTO 별칭 설정 -->
 	<typeAliases>
-		<typeAlias type="com.ccc.member.dto.UserDTO" alias="UserDTO"></typeAlias>
-		<typeAlias type="com.ccc.member.dto.MemberJoinDTO" alias="MemberJoinDTO"></typeAlias>
+		<package name="com.ccc.admin.dto"/>
+		<package name="com.ccc.company.dto"/>
+		<package name="com.ccc.expo.dto"/>
+		<package name="com.ccc.job.dto"/>
+		<package name="com.ccc.member.dto"/>
+		<package name="com.ccc.mypage.dto"/>
+		<package name="com.ccc.post.dto"/>
+		<package name="com.ccc.qna.dto"/>
+		<package name="com.ccc.roadmap.dto"/>
 	</typeAliases>
 
 	<environments default="oracle">
@@ -37,5 +44,6 @@
 	<mappers>
 		<mapper resource="mapper/member/MemberMapper.xml" />
 		<mapper resource="mapper/expo/ExpoMapper.xml"/>
+		<mapper resource="mapper/admin/AdminMapper.xml"/>
 	</mappers>
 </configuration>

@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 3. 폼 제출(확인 버튼) 시 필수 체크 확인
   formMem.addEventListener('submit', function(event) {
-    event.preventDefault(); // 기본 폼 제출 동작(새로고침) 방지
     
     let isAllChecked = true;
     reqCheckboxesMem.forEach(function(checkbox) {

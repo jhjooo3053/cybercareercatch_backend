@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        // 모든 질문이 입력되었으면 저장 안내를 띄운다.
+        // 모든 질문이 입력되었으면 안내 문구를 띄운다.
         alert("질의문이 저장됩니다.");
     });
 });

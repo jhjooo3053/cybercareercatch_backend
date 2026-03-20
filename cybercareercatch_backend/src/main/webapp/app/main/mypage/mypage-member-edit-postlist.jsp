@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -9,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>일반회원 마이페이지 - 게시물목록확인</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main/mypage/mypage-member-edit-postlist.css">
+	href="${contextPath}/assets/css/main/mypage/mypage-member-edit-postlist.css">
 </head>
 
 <body>
@@ -21,7 +24,7 @@
 				<div class="mypage-subtitle">나의 Q&amp;A 게시글</div>
 				<div class="mypage-subtitle">Q&amp;A 리스트</div>
 
-				<form action="${pageContext.request.contextPath}/member/mypage/deleteMyQna.mpfc"
+				<form action="${contextPath}/mypage/member/delete-my-qna.my"
 					method="post">
 					<ul class="mypage-QnAlist">
 						<li class="mypage-QnAlist-header">
@@ -51,7 +54,7 @@
 										</div>
 
 										<div class="no">${qna.postNumber}</div> <a
-										href="${pageContext.request.contextPath}/qna/detail.qfc?postNumber=${qna.postNumber}"
+										href="${contextPath}/qna/detail.qna?postNumber=${qna.postNumber}"
 										class="QnAlist-title"> ${qna.postTitle} </a>
 
 										<div class="companyname">${qna.companyName}</div>
@@ -79,19 +82,19 @@
 
 							<c:if test="${prev}">
 								<a class="page-btn page-arrow"
-									href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${startPage - 1}">
+									href="${contextPath}/mypage/member/my-qna-list.my?page=${startPage - 1}">
 									&lt; </a>
 							</c:if>
 
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
 								<a class="page-btn ${page == i ? 'page-btn-active' : ''}"
-									href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${i}">
+									href="${contextPath}/mypage/member/my-qna-list.my?page=${i}">
 									${i} </a>
 							</c:forEach>
 
 							<c:if test="${next}">
 								<a class="page-btn page-arrow"
-									href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${endPage + 1}">
+									href="${contextPath}/mypage/member/my-qna-list.my?page=${endPage + 1}">
 									&gt; </a>
 							</c:if>
 

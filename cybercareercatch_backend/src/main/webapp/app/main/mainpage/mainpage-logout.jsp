@@ -91,9 +91,9 @@
     <div class="mainpage-section-companyad">
       <div class="mainpage-section-titlebox">
         <div class="mainpage-section-title">기업 홍보</div>
-        <a href="./../company/company-ad.html">
-          <img id="showmore" src="../../../assets/img/showmore.png" alt="더보기">
-        </a>
+        <a href="${pageContext.request.contextPath}/company/companyAd.cfc">
+  <img id="showmore" src="../../../assets/img/showmore.png" alt="더보기">
+</a>
       </div>
 
       <div class="mainpage-companyad-companycards">

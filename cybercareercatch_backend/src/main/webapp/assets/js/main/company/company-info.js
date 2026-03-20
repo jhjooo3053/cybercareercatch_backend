@@ -1,5 +1,15 @@
-// cmp-qna-box : QnA 클릭 이벤트
-document.querySelector('.cmp-qna-box').addEventListener('click', () => {
-  alert('기업 QnA 게시판으로 이동합니다.');
-  window.location.href = "../../../../html/main/qna/qna-list.html";
+document.addEventListener("DOMContentLoaded", function () {
+    const qnaBox = document.querySelector(".cmp-qna-box");
+
+    if (!qnaBox) {
+        return;
+    }
+
+    qnaBox.addEventListener("click", function () {
+        const targetUrl = qnaBox.dataset.url;
+
+        if (targetUrl) {
+            window.location.href = targetUrl;
+        }
+    });
 });

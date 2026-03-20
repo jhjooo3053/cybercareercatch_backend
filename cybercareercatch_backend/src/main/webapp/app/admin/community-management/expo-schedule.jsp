@@ -23,7 +23,7 @@
                 <a href="../community-management/expo-schedule.html">커뮤니티 관리</a>
             </nav>
 
-            <button class="expoSchedule-logout" type="button">로그아웃</button>
+           <a href="${pageContext.request.contextPath}/admin/logout.adfc" class="logout-btn">로그아웃</a>
 
         </header>
 

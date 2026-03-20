@@ -1,6 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
 .companyInfo-body {
     margin: 0;
     background: #ffffff;
+    font-family: sans-serif;
 }
 
 .companyInfo-ctr {
@@ -10,25 +15,34 @@
     padding: 30px;
 }
 
-/* header */
+/* ---------------------- 상단 헤더 ---------------------- */
 
 .companyInfo-hdr {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .companyInfo-title {
     background: #6b83d6;
-    color: white;
-    padding: 10px 20px;
     border-radius: 6px;
     font-weight: bold;
+    overflow: hidden;
+}
+
+.companyInfo-title a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
 }
 
 .companyInfo-nav {
     display: flex;
+    justify-content: center;
     gap: 40px;
+    flex: 1;
 }
 
 .companyInfo-nav a {
@@ -43,6 +57,21 @@
     background: #5569c1;
 }
 
+.companyInfo-logout {
+    display: inline-block;
+    background: #6b83d6;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.companyInfo-logout:hover {
+    background: #5569c1;
+}
+
+/* ---------------------- 메인 ---------------------- */
+
 .companyInfo-main {
     display: flex;
     margin-top: 30px;
@@ -53,12 +82,13 @@
     flex: 1;
 }
 
+/* ---------------------- 왼쪽 사이드바 ---------------------- */
+
 .companyInfo-leftbar {
     width: 200px;
     background: #adbbdb;
     padding-top: 20px;
 }
-
 
 .companyInfo-left-item {
     padding: 20px;
@@ -68,13 +98,11 @@
     background: #adbbdb;
 }
 
-
 .companyInfo-left-item a {
     color: black;
     text-decoration: none;
     display: block;
 }
-
 
 .companyInfo-left-item:hover {
     background: #949fca;
@@ -83,7 +111,6 @@
 .companyInfo-left-item:hover a {
     color: white;
 }
-
 
 .companyInfo-left-item.companyInfo-active {
     background: #8a8a8a;
@@ -94,87 +121,97 @@
     font-weight: 700;
 }
 
+/* ---------------------- 오른쪽 콘텐츠 ---------------------- */
+
 .companyInfo-ct {
     flex: 1;
     background: white;
     padding: 40px;
+    min-height: 800px;
 }
 
+.companyInfo-topbox {
+    margin-bottom: 25px;
+}
 
+.companyInfo-subtitle {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* ---------------------- 검색 ---------------------- */
 
 .companyInfo-search {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
 }
 
 .companyInfo-search input {
-    width: 250px;
-    height: 40px;
+    width: 280px;
+    height: 42px;
     border-radius: 20px;
-    border: none;
-    background: #ddd;
+    border: 1px solid #d0d0d0;
+    background: #f2f2f2;
     text-align: center;
+    outline: none;
 }
 
 .companyInfo-search button {
     background: #6b83d6;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 22px;
     border-radius: 6px;
     cursor: pointer;
 }
 
-/* table */
+.companyInfo-search button:hover {
+    background: #5569c1;
+}
+
+/* ---------------------- 테이블 ---------------------- */
 
 .companyInfo-tblHead {
-    display: flex;
+    display: grid;
+    grid-template-columns: 80px 90px 180px 120px 1fr;
+    align-items: center;
     font-weight: bold;
-    margin-bottom: 10px;
+    padding: 14px 0;
+    border-bottom: 2px solid #dcdcdc;
 }
 
 .companyInfo-row {
-    display: flex;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 80px 90px 180px 120px 1fr;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #ececec;
 }
 
-/* column */
-
-.col1 {
-    width: 80px;
+.col1,
+.col2,
+.col3,
+.col4,
+.col5 {
     text-align: center;
-}
-
-.col2 {
-    width: 100px;
-    text-align: center;
-}
-
-.col3 {
-    flex: 1;
-    text-align: center;
-}
-
-.col4 {
-    width: 120px;
-    text-align: center;
+    word-break: keep-all;
 }
 
 .col5 {
-    width: 150px;
-    text-align: center;
+    text-align: left;
+    padding-left: 10px;
 }
 
-/* pagination */
+/* ---------------------- 페이지네이션 ---------------------- */
 
 .companyInfo-page {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 40px;
+    gap: 12px;
+    margin-top: 35px;
 }
 
 .companyInfo-page span {
@@ -186,7 +223,7 @@
     font-weight: bold;
 }
 
-/* delete */
+/* ---------------------- 삭제 버튼 ---------------------- */
 
 .companyInfo-del {
     display: flex;
@@ -201,4 +238,8 @@
     padding: 10px 25px;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.companyInfo-del button:hover {
+    background: #c86b6b;
 }

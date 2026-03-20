@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>기업회원마이페이지</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main/mypage/mypage-company.css">
+	href="${contextPath}/assets/css/main/mypage/mypage-company.css">
 </head>
 
 <body>
@@ -50,7 +52,7 @@
 						<div class="mypage-info-title">채용담당자 연락처</div>
 						<div class="mypage-info-text" id="company-manager-phonenumber">${companyMypageInfoDTO.userPhone}</div>
 
-						<a href="${pageContext.request.contextPath}/company/mypage/checkPw.mpfc"
+						<a href="${contextPath}/mypage/company/check-password.my"
 							class="btn" id="company-phonenumber-submit-btn">회원정보수정</a>
 					</div>
 
@@ -94,7 +96,7 @@
 								<c:forEach var="qna" items="${waitingQnaList}">
 									<li class="mypage-QnAlist-content">
 										<div class="no">${qna.postNumber}</div> <a
-										href="${pageContext.request.contextPath}/qna/detail.qna?postNumber=${qna.postNumber}"
+										href="${contextPath}/qna/detail.qna?postNumber=${qna.postNumber}"
 										class="QnAlist-title"> ${qna.postTitle} </a>
 
 										<div class="companyname">${qna.companyName}</div>
@@ -102,7 +104,7 @@
 										<div class="date">${qna.postDate}</div>
 
 										<div
-											class="answer-status ${qna.answerStatus}">
+											class="answer-status ${qna.answerStatus eq '답변완료' ? 'answer-status-active' : ''}">
 											${qna.answerStatus}</div>
 									</li>
 								</c:forEach>

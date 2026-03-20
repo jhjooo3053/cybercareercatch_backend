@@ -29,7 +29,7 @@
 		FROM TBL_EXPO
 	</select>
 
-	<!--
+	
 	<!-- 관리자 박람회 일정 상세 조회 
 	<select id="selectExpoDetail" parameterType="int" resultType="com.ccc.expo.dto.ExpoDetailDTO">
 		SELECT

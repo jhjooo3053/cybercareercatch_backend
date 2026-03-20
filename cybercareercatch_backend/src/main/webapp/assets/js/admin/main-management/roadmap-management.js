@@ -1,25 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 로드맵 카테고리 버튼을 가져온다.
-    const categoryButtons = document.querySelectorAll(".roadmap-btn");
 
-    // 수정 버튼을 가져온다.
-    const editButtons = document.querySelectorAll(".roadmap-edit-btn");
+    const roadmapForm = document.getElementById("roadmapForm");
+    const resetBtn = document.getElementById("roadmapResetBtn");
+    const textareas = document.querySelectorAll(".rm-textarea");
 
-    // 카테고리 버튼 클릭 시 active 표시를 바꾼다.
-    categoryButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            categoryButtons.forEach(function (item) {
-                item.classList.remove("active");
-            });
+    function resizeTextarea(textarea) {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+    }
 
-            button.classList.add("active");
+    textareas.forEach(function (textarea) {
+        resizeTextarea(textarea);
+
+        textarea.addEventListener("input", function () {
+            resizeTextarea(textarea);
         });
     });
 
-    // 수정 버튼 클릭 시 안내를 띄운다.
-    editButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            alert("로드맵 수정 페이지로 이동합니다.");
+    if (roadmapForm) {
+        roadmapForm.addEventListener("submit", function (e) {
+            const isOk = confirm("로드맵 내용을 수정하시겠습니까?");
+
+            if (!isOk) {
+                e.preventDefault();
+            }
         });
-    });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener("click", function (e) {
+            const isOk = confirm("입력한 내용을 초기화하시겠습니까?");
+
+            if (!isOk) {
+                e.preventDefault();
+            }
+        });
+    }
 });

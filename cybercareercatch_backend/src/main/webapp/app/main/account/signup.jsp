@@ -63,7 +63,7 @@
           </a>
 
           <!-- 기업회원 카드 -->
-          <a href="${pageContext.request.contextPath}/user-agreement-company.mefc" class="account_signup_card" aria-label="기업회원 회원가입 페이지로 이동">
+          <a href="${pageContext.request.contextPath}/member/user-agreement-company.mefc" class="account_signup_card" aria-label="기업회원 회원가입 페이지로 이동">
             <div class="account_signup_card_icon" aria-hidden="true">
               <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <rect x="14" y="24" width="14" height="26"></rect>

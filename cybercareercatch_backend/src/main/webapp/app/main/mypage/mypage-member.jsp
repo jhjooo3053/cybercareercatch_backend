@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -9,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>일반회원 마이페이지</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main/mypage/mypage-member.css">
+	href="${contextPath}/assets/css/main/mypage/mypage-member.css">
 </head>
 
 <body>
@@ -21,41 +24,41 @@
 			<div class="main-container-section">
 				<div class="mypage-info-box">
 					<div class="mypage-info-title">아이디</div>
-					<div class="mypage-info-text">${memberMypageInfoDTO.userId}</div>
+					<div class="mypage-info-text">${memberInfo.userId}</div>
 				</div>
 
 				<div class="mypage-info-box">
 					<div class="mypage-info-title">이름</div>
-					<div class="mypage-info-text">${memberMypageInfoDTO.userName}</div>
+					<div class="mypage-info-text">${memberInfo.userName}</div>
 				</div>
 
 				<div class="mypage-info-box">
 					<div class="mypage-info-title">생년월일</div>
-					<div class="mypage-info-text">${memberMypageInfoDTO.memberDob}</div>
+					<div class="mypage-info-text">${memberInfo.memberDob}</div>
 				</div>
 
 				<div class="mypage-info-box">
 					<div class="mypage-info-title">성별</div>
 					<div class="mypage-info-text">
 						<c:choose>
-							<c:when test="${memberMypageInfoDTO.memberGender eq 'M'}">남</c:when>
-							<c:when test="${memberMypageInfoDTO.memberGender eq 'F'}">여</c:when>
-							<c:otherwise>${memberMypageInfoDTO.memberGender}</c:otherwise>
+							<c:when test="${memberInfo.memberGender eq 'M'}">남</c:when>
+							<c:when test="${memberInfo.memberGender eq 'F'}">여</c:when>
+							<c:otherwise>${memberInfo.memberGender}</c:otherwise>
 						</c:choose>
 					</div>
 				</div>
 
 				<div class="mypage-info-box">
 					<div class="mypage-info-title">전화번호</div>
-					<div class="mypage-info-text">${memberMypageInfoDTO.userPhone}</div>
+					<div class="mypage-info-text">${memberInfo.userPhone}</div>
 				</div>
 
 				<div class="mypage-info-box">
 					<div class="mypage-info-title">직군</div>
 					<div class="mypage-info-text">
 						<c:choose>
-							<c:when test="${not empty memberMypageInfoDTO.jobName}">
-								${memberMypageInfoDTO.jobName}
+							<c:when test="${not empty memberInfo.jobName}">
+								${memberInfo.jobName}
 							</c:when>
 							<c:otherwise>미판정</c:otherwise>
 						</c:choose>
@@ -66,8 +69,8 @@
 					<div class="mypage-info-title">직군판정일</div>
 					<div class="mypage-info-text">
 						<c:choose>
-							<c:when test="${not empty memberMypageInfoDTO.jobConfirmDate}">
-								${memberMypageInfoDTO.jobConfirmDate}
+							<c:when test="${not empty memberInfo.jobConfirmDate}">
+								${memberInfo.jobConfirmDate}
 							</c:when>
 							<c:otherwise>-</c:otherwise>
 						</c:choose>
@@ -84,7 +87,6 @@
 			</div>
 		</div>
 	</main>
-	<script src="${pageContext.request.contextPath}/assets/js/main/mypage/mypage-member.js"></script>
 </body>
 
 </html>

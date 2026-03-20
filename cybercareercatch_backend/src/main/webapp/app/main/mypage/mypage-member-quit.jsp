@@ -1,17 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>일반회원 마이페이지 - 회원탈퇴</title>
+<title>기업회원 마이페이지 - 회원탈퇴</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main/mypage/mypage-member-quit.css">
+	href="${contextPath}/assets/css/main/mypage/mypage-member-quit.css">
+
+<script>
+	const contextPath = "${contextPath}";
+</script>
 <script defer
-	src="${pageContext.request.contextPath}/assets/js/main/mypage/mypage-member-quit.js"></script>
+	src="${contextPath}/assets/js/main/mypage/mypage-member-quit.js"></script>
 </head>
 
 <body>
@@ -32,11 +39,11 @@
 						name="userPw"
 						placeholder="비밀번호 입력">
 
-					<div class="pw-error" id="pwError">${pwMessage}</div>
+					<div class="pw-error" id="pwError" aria-live="polite"></div>
 
 					<div class="btn-box">
-						<button type="submit" class="btn" id="confirm">확인</button>
-						<a href="${pageContext.request.contextPath}/member/mypage.mpfc" class="btn" id="return">돌아가기</a>
+						<button type="button" class="btn" id="confirm">확인</button>
+						<a href="./mypage-member.js" class="btn" id="return">돌아가기</a>
 					</div>
 				</form>
 			</div>

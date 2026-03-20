@@ -7,12 +7,12 @@
 
     <!-- 메인 상단 질문 1개 조회 -->
     <select id="selectMainQuestion"
-            resultType="com.ccc.job.dto.JobRecommendQuestionDTO">
+            resultType="com.ccc.job.dto.JobRecommendQuestionDTO" parameterType="int">
         SELECT
             JOB_QUESTION_NUMBER AS jobQuestionNumber,
             JOB_QUESTION_CONTENT AS jobQuestionContent
         FROM TBL_JOB_RECOMMEND_QUESTION
-        WHERE JOB_QUESTION_NUMBER = 1
+        WHERE JOB_QUESTION_NUMBER = #{value}
     </select>
 
     <!-- 메인 추천 직군 유형 4개 조회 -->
@@ -22,7 +22,7 @@
             JOB_NUMBER AS jobNumber,
             JOB_NAME AS jobName
         FROM TBL_JOB_GROUP
-        ORDER BY JOB_NUMBER ASC
+        ORDER BY JOB_NUMBER ASC <!-- 오름차순정렬 -->
     </select>
 
     <!-- 메인 기업 홍보 카드 3개 조회 -->
@@ -121,5 +121,21 @@
         WHERE END_DATE &gt;= TRUNC(SYSDATE)
         ORDER BY START_DATE ASC, EXPO_NUMBER ASC
     </select>
+    
+    <!-- 추가 노션에 없음 -->
+    <insert id="insertMainAnswer"
+        parameterType="com.ccc.job.dto.JobTestSubmitDTO">
+    INSERT INTO TBL_JOB_RESULT_ANSWER (
+        JOB_RESULT_NUMBER,
+        JOB_QUESTION_NUMBER,
+        JOB_QUESTION_CONTENT_SNAPSHOT,
+        ANSWER_CONTENT
+    ) VALUES (
+        #{jobResultNumber},
+        #{jobQuestionNumber},
+        #{jobQuestionContentSnapshot},
+        #{answerContent}
+    )
+</insert>
 
 </mapper>

@@ -1,91 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>기업별 채용담당자 회원정보</title>
-<link rel="stylesheet" href="/assets/css/admin/member-management/recruiter-info.css">
+<link rel="stylesheet"
+	href="/assets/css/admin/member-management/recruiter-info.css">
 </head>
 
 <body class="recruiter-info-body">
 
-<div class="recruiter-info-container">
+	<div class="recruiter-info-container">
 
-<header class="recruiter-info-header">
+		<header class="recruiter-info-header">
 
-<div class="recruiter-info-title">
- <a href="../admin-main.html">관리자 페이지</a>
-</div>
+			<div class="recruiter-info-title">
+				<a href="../admin-main.html">관리자 페이지</a>
+			</div>
 
-<nav class="recruiter-info-menu">
-<a href="../member-management/member-info.html">회원 관리</a>
-<a href="../main-management/qna-management.html">메인 관리</a>
-<a href="../community-management/expo-schedule.html">커뮤니티 관리</a>
-</nav>
+			<nav class="recruiter-info-menu">
+				<a href="../member-management/member-info.html">회원 관리</a> <a
+					href="../main-management/qna-management.html">메인 관리</a> <a
+					href="../community-management/expo-schedule.html">커뮤니티 관리</a>
+			</nav>
 
-<button class="recruiter-info-logout">로그아웃</button>
+			<a href="${pageContext.request.contextPath}/admin/logout.adfc"
+				class="logout-btn">로그아웃</a>
 
-</header>
-
-
-<main class="recruiter-info-main">
-
-<!-- 왼쪽 사이드바 -->
-<aside class="recruiter-info-sidebar">
-
-<div class="recruiter-info-sidebar-item">
-<a href="./member-info.html">일반회원 정보 조회</a>
-</div>
-
-<div class="recruiter-info-sidebar-item">
-<a href="./company-check.html">기업회원 승인,반려</a>
-</div>
-
-<div class="recruiter-info-sidebar-item recruiter-info-active">
-<a href="./recruiter-info.html">기업회원 정보 조회</a>
-</div>
-
-</aside>
+		</header>
 
 
-<!-- 오른쪽 콘텐츠 -->
-<section class="recruiter-info-content">
+		<main class="recruiter-info-main">
 
-<h2 class="recruiter-info-content-title">기업회원 정보 및 관리</h2>
+			<!-- 왼쪽 사이드바 -->
+			<aside class="recruiter-info-sidebar">
 
-<!-- 검색 -->
-<div class="recruiter-info-search-box">
+				<div class="recruiter-info-sidebar-item">
+					<a href="./member-info.html">일반회원 정보 조회</a>
+				</div>
 
-<span class="recruiter-info-search-label">- 검색</span>
+				<div class="recruiter-info-sidebar-item">
+					<a href="./company-check.html">기업회원 승인,반려</a>
+				</div>
 
-<select class="recruiter-info-search-select">
-<option>이름</option>
-<option>아이디</option>
-</select>
+				<div class="recruiter-info-sidebar-item recruiter-info-active">
+					<a href="./recruiter-info.html">기업회원 정보 조회</a>
+				</div>
 
-<input type="text" class="recruiter-info-search-input">
-
-<button class="recruiter-info-search-btn">검색</button>
-
-</div>
+			</aside>
 
 
-<!-- 회원 리스트 -->
-<div class="recruiter-info-table">
+			<!-- 오른쪽 콘텐츠 -->
+			<section class="recruiter-info-content">
 
-<!-- 헤더 -->
-<div class="recruiter-info-table-header">
+				<h2 class="recruiter-info-content-title">기업회원 정보 및 관리</h2>
 
-<div class="recruiter-info-col recruiter-info-col-num">번호</div>
-<div class="recruiter-info-col recruiter-info-col-id">아이디</div>
-<div class="recruiter-info-col recruiter-info-col-name">이름</div>
-<div class="recruiter-info-col recruiter-info-col-manage">관리</div>
+				<!-- 검색 -->
+				<div class="recruiter-info-search-box">
 
-</div>
+					<span class="recruiter-info-search-label">- 검색</span> <select
+						class="recruiter-info-search-select">
+						<option>이름</option>
+						<option>아이디</option>
+					</select> <input type="text" class="recruiter-info-search-input">
 
-<!-- row -->
-<!-- <div class="recruiter-info-row">
+					<button class="recruiter-info-search-btn">검색</button>
+
+				</div>
+
+
+				<!-- 회원 리스트 -->
+				<div class="recruiter-info-table">
+
+					<!-- 헤더 -->
+					<div class="recruiter-info-table-header">
+
+						<div class="recruiter-info-col recruiter-info-col-num">번호</div>
+						<div class="recruiter-info-col recruiter-info-col-id">아이디</div>
+						<div class="recruiter-info-col recruiter-info-col-name">이름</div>
+						<div class="recruiter-info-col recruiter-info-col-manage">관리</div>
+
+					</div>
+
+					<!-- row -->
+					<!-- <div class="recruiter-info-row">
 <div class="recruiter-info-col recruiter-info-col-num">210</div>
 <div class="recruiter-info-col recruiter-info-col-id">zaps00121</div>
 <div class="recruiter-info-col recruiter-info-col-name">김성민</div>
@@ -93,141 +93,137 @@
 <button class="recruiter-info-delete-btn">삭제</button>
 </div>
 </div> -->
-<div class="recruiter-info-row">
-<a href="./recruiter-infodetail.html" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">210</div>
-<div class="recruiter-info-col recruiter-info-col-id">zaps00121</div>
-<div class="recruiter-info-col recruiter-info-col-name">김성민</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="./recruiter-infodetail.html"
+							class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">210</div>
+							<div class="recruiter-info-col recruiter-info-col-id">zaps00121</div>
+							<div class="recruiter-info-col recruiter-info-col-name">김성민</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
 
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">209</div>
-<div class="recruiter-info-col recruiter-info-col-id">dkoskd457</div>
-<div class="recruiter-info-col recruiter-info-col-name">김민석</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">209</div>
+							<div class="recruiter-info-col recruiter-info-col-id">dkoskd457</div>
+							<div class="recruiter-info-col recruiter-info-col-name">김민석</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">208</div>
-<div class="recruiter-info-col recruiter-info-col-id">sadswo212</div>
-<div class="recruiter-info-col recruiter-info-col-name">김지훈</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">208</div>
+							<div class="recruiter-info-col recruiter-info-col-id">sadswo212</div>
+							<div class="recruiter-info-col recruiter-info-col-name">김지훈</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">207</div>
-<div class="recruiter-info-col recruiter-info-col-id">zzdooop2122</div>
-<div class="recruiter-info-col recruiter-info-col-name">이지훈</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">207</div>
+							<div class="recruiter-info-col recruiter-info-col-id">zzdooop2122</div>
+							<div class="recruiter-info-col recruiter-info-col-name">이지훈</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">206</div>
-<div class="recruiter-info-col recruiter-info-col-id">ppap2232</div>
-<div class="recruiter-info-col recruiter-info-col-name">이상혁</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">206</div>
+							<div class="recruiter-info-col recruiter-info-col-id">ppap2232</div>
+							<div class="recruiter-info-col recruiter-info-col-name">이상혁</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">205</div>
-<div class="recruiter-info-col recruiter-info-col-id">zzdkk223</div>
-<div class="recruiter-info-col recruiter-info-col-name">손흥민</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">205</div>
+							<div class="recruiter-info-col recruiter-info-col-id">zzdkk223</div>
+							<div class="recruiter-info-col recruiter-info-col-name">손흥민</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">204</div>
-<div class="recruiter-info-col recruiter-info-col-id">zdjjjj122</div>
-<div class="recruiter-info-col recruiter-info-col-name">김민아</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">204</div>
+							<div class="recruiter-info-col recruiter-info-col-id">zdjjjj122</div>
+							<div class="recruiter-info-col recruiter-info-col-name">김민아</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">203</div>
-<div class="recruiter-info-col recruiter-info-col-id">qese2232</div>
-<div class="recruiter-info-col recruiter-info-col-name">변준호</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">203</div>
+							<div class="recruiter-info-col recruiter-info-col-id">qese2232</div>
+							<div class="recruiter-info-col recruiter-info-col-name">변준호</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">202</div>
-<div class="recruiter-info-col recruiter-info-col-id">illdl2232</div>
-<div class="recruiter-info-col recruiter-info-col-name">고길동</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">202</div>
+							<div class="recruiter-info-col recruiter-info-col-id">illdl2232</div>
+							<div class="recruiter-info-col recruiter-info-col-name">고길동</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<div class="recruiter-info-row">
-<a href="#" class="recruiter-info-link-group">
-<div class="recruiter-info-col recruiter-info-col-num">201</div>
-<div class="recruiter-info-col recruiter-info-col-id">ksm92313</div>
-<div class="recruiter-info-col recruiter-info-col-name">이재용</div>
-</a>
-<div class="recruiter-info-col recruiter-info-col-manage">
-<button class="recruiter-info-delete-btn">삭제</button>
-</div>
-</div>
+					<div class="recruiter-info-row">
+						<a href="#" class="recruiter-info-link-group">
+							<div class="recruiter-info-col recruiter-info-col-num">201</div>
+							<div class="recruiter-info-col recruiter-info-col-id">ksm92313</div>
+							<div class="recruiter-info-col recruiter-info-col-name">이재용</div>
+						</a>
+						<div class="recruiter-info-col recruiter-info-col-manage">
+							<button class="recruiter-info-delete-btn">삭제</button>
+						</div>
+					</div>
 
-<!-- 페이지네이션 -->
+					<!-- 페이지네이션 -->
 
-<div class="recruiter-info-pagination">
+					<div class="recruiter-info-pagination">
 
-<!-- <span>&lt;&lt;</span> -->
-<span>&lt;</span>
+						<!-- <span>&lt;&lt;</span> -->
+						<span>&lt;</span> <a
+							class="recruiter-info-page recruiter-info-page-active">1</a> <a
+							class="recruiter-info-page">2</a> <a class="recruiter-info-page">3</a>
+						<a class="recruiter-info-page">4</a> <a
+							class="recruiter-info-page">5</a> <span>&gt;</span>
+						<!-- <span>&gt;&gt;</span> -->
 
-<a class="recruiter-info-page recruiter-info-page-active">1</a>
-<a class="recruiter-info-page">2</a>
-<a class="recruiter-info-page">3</a>
-<a class="recruiter-info-page">4</a>
-<a class="recruiter-info-page">5</a>
+					</div>
+			</section>
 
-<span>&gt;</span>
-<!-- <span>&gt;&gt;</span> -->
+		</main>
 
-</div>
-
-</section>
-
-</main>
-
-</div>
+	</div>
 
 </body>
 </html>

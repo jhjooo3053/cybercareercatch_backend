@@ -5,7 +5,7 @@
 
 <mapper namespace="roadmap">
 
-	<!-- 로드맵 기본 조회 -->
+	<!-- 로드맵 기본 정보 -->
 	<select id="selectRoadmap" parameterType="int" resultType="RoadmapDTO">
 		SELECT
 			JOB_NUMBER,
@@ -14,14 +14,13 @@
 		WHERE JOB_NUMBER = #{jobNumber}
 	</select>
 
-	<!-- 로드맵 이미지 수정 -->
 	<update id="updateRoadmap" parameterType="RoadmapDTO">
 		UPDATE TBL_ROADMAP
 		SET ROADMAP_IMAGE_PATH = #{roadmapImagePath}
 		WHERE JOB_NUMBER = #{jobNumber}
 	</update>
 
-	<!-- 로드맵 직업 목록 조회 -->
+	<!-- 관련 직업 -->
 	<select id="selectRoadmapJobList" parameterType="int" resultType="RoadmapJobDTO">
 		SELECT
 			ROADMAP_JOB_NUMBER,
@@ -33,15 +32,14 @@
 		ORDER BY ROADMAP_JOB_NUMBER
 	</select>
 
-	<!-- 로드맵 직업 수정 -->
 	<update id="updateRoadmapJob" parameterType="RoadmapJobDTO">
 		UPDATE TBL_ROADMAP_JOB
-		SET ROADMAP_JOB_NAME = #{roadmapJobName},
+		SET
+			ROADMAP_JOB_NAME = #{roadmapJobName},
 			ROADMAP_JOB_DESC = #{roadmapJobDesc}
 		WHERE ROADMAP_JOB_NUMBER = #{roadmapJobNumber}
 	</update>
 
-	<!-- 로드맵 직업 추가 -->
 	<insert id="insertRoadmapJob" parameterType="RoadmapJobDTO">
 		INSERT INTO TBL_ROADMAP_JOB (
 			ROADMAP_JOB_NUMBER,
@@ -56,13 +54,12 @@
 		)
 	</insert>
 
-	<!-- 로드맵 직업 삭제 -->
 	<delete id="deleteRoadmapJob" parameterType="int">
 		DELETE FROM TBL_ROADMAP_JOB
 		WHERE ROADMAP_JOB_NUMBER = #{roadmapJobNumber}
 	</delete>
 
-	<!-- 로드맵 커리큘럼 목록 조회 -->
+	<!-- 커리큘럼 -->
 	<select id="selectCurriculumList" parameterType="int" resultType="RoadmapCurriculumDTO">
 		SELECT
 			CURRICULUM_NUMBER,
@@ -72,19 +69,26 @@
 			SKILL_DESC
 		FROM TBL_ROADMAP_CURRICULUM
 		WHERE JOB_NUMBER = #{jobNumber}
-		ORDER BY CURRICULUM_NUMBER
+		ORDER BY
+			CASE
+				WHEN SKILL_TYPE = '기초 다지기' THEN 1
+				WHEN SKILL_TYPE = '보안기초 다지기' THEN 2
+				WHEN SKILL_TYPE = '실습' THEN 3
+				WHEN SKILL_TYPE = '결과물' THEN 4
+				ELSE 99
+			END,
+			CURRICULUM_NUMBER
 	</select>
 
-	<!-- 로드맵 커리큘럼 수정 -->
 	<update id="updateCurriculum" parameterType="RoadmapCurriculumDTO">
 		UPDATE TBL_ROADMAP_CURRICULUM
-		SET SKILL_TYPE = #{skillType},
+		SET
+			SKILL_TYPE = #{skillType},
 			SKILL_NAME = #{skillName},
 			SKILL_DESC = #{skillDesc}
 		WHERE CURRICULUM_NUMBER = #{curriculumNumber}
 	</update>
 
-	<!-- 로드맵 커리큘럼 추가 -->
 	<insert id="insertCurriculum" parameterType="RoadmapCurriculumDTO">
 		INSERT INTO TBL_ROADMAP_CURRICULUM (
 			CURRICULUM_NUMBER,
@@ -101,13 +105,12 @@
 		)
 	</insert>
 
-	<!-- 로드맵 커리큘럼 삭제 -->
 	<delete id="deleteCurriculum" parameterType="int">
 		DELETE FROM TBL_ROADMAP_CURRICULUM
 		WHERE CURRICULUM_NUMBER = #{curriculumNumber}
 	</delete>
 
-	<!-- 로드맵 추천 목록 조회 -->
+	<!-- 추천 -->
 	<select id="selectRecList" parameterType="int" resultType="RoadmapRecDTO">
 		SELECT
 			REC_NUMBER,
@@ -116,18 +119,24 @@
 			REC_NAME
 		FROM TBL_ROADMAP_REC
 		WHERE JOB_NUMBER = #{jobNumber}
-		ORDER BY REC_NUMBER
+		ORDER BY
+			CASE
+				WHEN REC_TYPE = '추천기술' THEN 1
+				WHEN REC_TYPE = '추천성향' THEN 2
+				WHEN REC_TYPE = '추천자격증' THEN 3
+				ELSE 99
+			END,
+			REC_NUMBER
 	</select>
 
-	<!-- 로드맵 추천 수정 -->
 	<update id="updateRec" parameterType="RoadmapRecDTO">
 		UPDATE TBL_ROADMAP_REC
-		SET REC_TYPE = #{recType},
+		SET
+			REC_TYPE = #{recType},
 			REC_NAME = #{recName}
 		WHERE REC_NUMBER = #{recNumber}
 	</update>
 
-	<!-- 로드맵 추천 추가 -->
 	<insert id="insertRec" parameterType="RoadmapRecDTO">
 		INSERT INTO TBL_ROADMAP_REC (
 			REC_NUMBER,
@@ -142,7 +151,6 @@
 		)
 	</insert>
 
-	<!-- 로드맵 추천 삭제 -->
 	<delete id="deleteRec" parameterType="int">
 		DELETE FROM TBL_ROADMAP_REC
 		WHERE REC_NUMBER = #{recNumber}

@@ -91,9 +91,9 @@
     <div class="mainpage-section-companyad">
       <div class="mainpage-section-titlebox">
         <div class="mainpage-section-title">기업 홍보</div>
-        <a href="./../company/company-ad.html">
-          <img id="showmore" src="../../../assets/img/showmore.png" alt="더보기">
-        </a>
+        <a href="${pageContext.request.contextPath}/company/companyAd.cfc">
+  <img id="showmore" src="../../../assets/img/showmore.png" alt="더보기">
+</a>
       </div>
 
       <div class="mainpage-companyad-companycards">
@@ -174,7 +174,7 @@
               <div class="mainpage-community-calendartitle">박람회 일정</div>
               <div class="mainpage-community-calendardesc">다가오는 행사 일정을 확인해보세요.</div>
             </div>
-            <a href="./../expo/expo-calendar.html" class="mainpage-community-calendarlink">전체보기</a>
+            <a href="./../expo/expo-calendar.jsp" class="mainpage-community-calendarlink">전체보기</a>
           </div>
 
           <div id="mainpageCalendar"></div>

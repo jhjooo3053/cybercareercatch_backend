@@ -37,8 +37,8 @@
         <div class="qna-detail-top">
           <h2 class="qna-detail-section-title">기업 QnA</h2>
           <a href="${pageContext.request.contextPath}/app/main/qna/qna-list.jsp" class="qna-btn-primary">
-		    기업 QnA 목록 이동하기
-	    </a>
+            기업 QnA 목록 이동하기
+          </a>
         </div>
 
         <c:choose>

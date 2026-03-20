@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>관리자 메인 페이지</title>
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/assets/css/admin/admin-main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 메인 페이지</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/admin/admin-main.css">
 </head>
 
 <body>
@@ -17,32 +18,45 @@
 
 		<header class="top-bar">
 			<div class="logo">
-				<a href="${pageContext.request.contextPath}/app/admin/admin-main.jsp">관리자 페이지</a>
+				<a
+					href="${pageContext.request.contextPath}/app/admin/admin-main.jsp">관리자
+					페이지</a>
 			</div>
 
 			<nav class="main-nav">
-				<a href="${pageContext.request.contextPath}/app/admin/member-management/member-info.jsp">회원 관리</a>
-				<a href="${pageContext.request.contextPath}/app/admin/main-management/qna-management.jsp">메인 관리</a>
-				<a href="${pageContext.request.contextPath}/app/admin/community-management/expo-schedule.jsp">커뮤니티 관리</a>
+				<a
+					href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인
+					관리</a> <a
+					href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">질의문
+					관리</a> <a href="${pageContext.request.contextPath}/admin/logout.adfc"
+					class="logout-btn">로그아웃</a>
 			</nav>
 
-			<button class="logout-btn" type="button">로그아웃</button>
+			<a href="${pageContext.request.contextPath}/admin/logout.ad"
+				class="logout-btn">로그아웃</a>
 		</header>
 
 		<main class="main-content">
 
 			<aside class="sidebar">
 				<div class="sidebar-item sidebar-active">
-					<a href="${pageContext.request.contextPath}/app/admin/admin-main.jsp">대시보드</a>
+					<a
+						href="${pageContext.request.contextPath}/app/admin/admin-main.jsp">대시보드</a>
 				</div>
 				<div class="sidebar-item">
-					<a href="${pageContext.request.contextPath}/app/admin/main-management/qna-management.jsp">질의문 관리</a>
+					<a
+						href="${pageContext.request.contextPath}/app/admin/main-management/qna-management.jsp">질의문
+						관리</a>
 				</div>
 				<div class="sidebar-item">
-					<a href="${pageContext.request.contextPath}/app/admin/main-management/company-info.jsp">기업 정보페이지</a>
+					<a
+						href="${pageContext.request.contextPath}/app/admin/main-management/company-info.jsp">기업
+						정보페이지</a>
 				</div>
 				<div class="sidebar-item">
-					<a href="${pageContext.request.contextPath}/app/admin/main-management/roadmap-management.jsp">로드맵 관리</a>
+					<a
+						href="${pageContext.request.contextPath}/app/admin/main-management/roadmap-management.jsp">로드맵
+						관리</a>
 				</div>
 			</aside>
 

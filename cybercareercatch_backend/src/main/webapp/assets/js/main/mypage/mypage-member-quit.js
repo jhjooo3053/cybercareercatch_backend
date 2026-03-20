@@ -1,47 +1,58 @@
-// 회원탈퇴 폼
-const quitForm = document.getElementById("member-quit-form");
+document.addEventListener("DOMContentLoaded", () => {
+  const quitForm = document.getElementById("member-quit-form");
+  const passwordInput = document.getElementById("member-quit-password");
+  const confirmBtn = document.getElementById("confirm");
+  const errorMessage = document.getElementById("pwError");
 
-// 비밀번호 입력칸
-const passwordInput = document.getElementById("member-quit-password");
+  function setMessage(message = "", type = "") {
+    errorMessage.textContent = message;
+    errorMessage.classList.remove("error", "success");
 
-// 에러 메시지 영역
-const pwError = document.getElementById("pwError");
+    if (type) {
+      errorMessage.classList.add(type);
+    }
+  }
 
-// 확인 버튼
-const confirmBtn = document.getElementById("confirm");
+  confirmBtn.addEventListener("click", async () => {
+    const userPw = passwordInput.value.trim();
 
-// 메시지 출력 함수
-function showMessage(message, color = "red") {
-	if (!pwError) return;
-	pwError.textContent = message;
-	pwError.style.color = color;
-}
+    if (!userPw) {
+      setMessage("비밀번호를 입력해주세요.", "error");
+      passwordInput.focus();
+      return;
+    }
 
-// 비밀번호 입력 시 메시지 초기화
-if (passwordInput) {
-	passwordInput.addEventListener("input", function () {
-		showMessage("");
-	});
-}
+    try {
+      const response = await fetch(`${contextPath}/mypage/member/check-password.ajax`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: new URLSearchParams({
+          userPw: userPw
+        })
+      });
 
-// 폼 제출 시 검사
-if (quitForm) {
-	quitForm.addEventListener("submit", function (e) {
-		const userPw = passwordInput.value.trim();
+      const result = await response.json();
 
-		// 공백 체크
-		if (userPw === "") {
-			e.preventDefault();
-			showMessage("비밀번호를 입력해주세요.");
-			passwordInput.focus();
-			return;
-		}
+      if (!result.success) {
+        setMessage(result.message || "비밀번호가 일치하지 않습니다.", "error");
+        passwordInput.focus();
+        return;
+      }
 
-		// 최종 확인창
-		const isDelete = confirm("정말 회원탈퇴 하시겠습니까? 탈퇴 후에는 되돌릴 수 없습니다.");
+      const isConfirmed = confirm("회원탈퇴를 진행하면 계정을 복구할 수 없습니다.\n정말 탈퇴하시겠습니까?");
 
-		if (!isDelete) {
-			e.preventDefault();
-		}
-	});
-}
+      if (isConfirmed) {
+        quitForm.submit();
+      }
+    } catch (error) {
+      setMessage("비밀번호 확인 중 오류가 발생했습니다.", "error");
+      console.error(error);
+    }
+  });
+
+  passwordInput.addEventListener("input", () => {
+    setMessage("");
+  });
+});

@@ -51,7 +51,9 @@
 			<h2 class="user_agree_mem_main_title">일반회원가입 약관동의</h2>
 
 			<!-- 약관 폼 시작 -->
-			<form action="${pageContext.request.contextPath}/member/signup-member.mefc" method="POST" id="userAgreeMemForm" class="user_agree_mem_form">
+			<form
+				action="${pageContext.request.contextPath}/member/signup-member.mefc"
+				method="POST" id="userAgreeMemForm" class="user_agree_mem_form">
 
 				<!-- 1. 서비스 이용약관 동의 -->
 				<section class="user_agree_mem_section">
@@ -137,7 +139,8 @@
 	</script>
 	<script
 		src="${pageContext.request.contextPath}/assets/js/main/account/user-agreement-member.js"
-		defer></script>
+		defer>
+		
 	</script>
 </body>
 </html>

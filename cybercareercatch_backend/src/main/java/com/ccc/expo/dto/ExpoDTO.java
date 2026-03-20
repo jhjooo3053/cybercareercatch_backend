@@ -11,7 +11,7 @@ public class ExpoDTO {
 	
 	   private int expoNumber;
 	   private int adminNumber;
-	   private int expoName;
+	   private String expoName;
 	   private String startDate;
 	   private String endDate;
 	   private String location;
@@ -28,10 +28,10 @@ public class ExpoDTO {
 	   public void setAdminNumber(int adminNumber) {
 		   this.adminNumber = adminNumber;
 	   }
-	   public int getExpoName() {
+	   public String getExpoName() {
 		   return expoName;
 	   }
-	   public void setExpoName(int expoName) {
+	   public void setExpoName(String expoName) {
 		   this.expoName = expoName;
 	   }
 	   public String getStartDate() {

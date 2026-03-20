@@ -2,194 +2,244 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <title>관리자 페이지</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/main-management/roadmap-management.css">
+<meta charset="UTF-8">
+<title>기업 승인여부 리스트</title>
+<link rel="stylesheet" href="/assets/css/admin/member-management/company-check.css">
 </head>
 
-<body class="rm-body">
+<body class="company-check-body">
 
-    <div class="rm-container">
+<div class="company-check-container">
 
-        <main class="rm-main">
+<header class="company-check-header">
 
+<div class="company-check-title">
+ <a href="../admin-main.html">관리자 페이지</a>
+</div>
 
-            <aside class="rm-leftbar">
+<nav class="company-check-menu">
+<a href="../member-management/member-info.html">회원 관리</a>
+<a href="../main-management/qna-management.html">메인 관리</a>
+<a href="../community-management/expo-schedule.html">커뮤니티 관리</a>
+</nav>
 
-                <div class="rm-left-item"><a href="./qna-management.html">질의문 관리</a></div>
-                <div class="rm-left-item"><a href="./company-info.html">기업 정보페이지</a></div>
-                <div class="rm-left-item rm-active"><a href="./roadmap-management.html">로드맵 관리</a> </div>
+<a href="${pageContext.request.contextPath}/admin/logout.adfc" class="logout-btn">로그아웃</a>
 
-            </aside>
+</header>
 
+<main class="company-check-main">
 
-            <section class="rm-content">
+<!-- 사이드바 -->
+<aside class="company-check-sidebar">
 
-                <form>
+<div class="company-check-sidebar-item">
+<a href="./member-info.html">일반회원 정보 조회</a>
+</div>
 
+<div class="company-check-sidebar-item company-check-active">
+<a href="./company-check.html">기업회원 승인, 반려</a>
+</div>
 
-                    <div class="rm-tabmenu">
-                        <a href="#">침해사고/디지털포렌식</a>
-                        <a href="#">보안관제</a>
-                        <a href="#">보안컨설팅</a>
-                        <a href="#">시스템/네트워크 엔지니어</a>
-                    </div>
+<div class="company-check-sidebar-item">
+<a href="./recruiter-info.html">기업회원 정보 조회</a>
+</div>
 
+</aside>
 
-                    <div class="rm-img">
-                        <label>이미지</label>
-                        <input type="text">
-                        <button type="button" class="rm-upload-btn">업로드</button>
-                    </div>
 
+<!-- 오른쪽 영역 -->
+<section class="company-check-content">
 
-                    <div class="rm-sec100">
+<div class="company-check-title-area">
+<h2>기업회원 승인 및 반려</h2>
+</div>
 
-                        <div><label>직군 이름</label><input></div>
-                        <div><label>이름 설명</label><input></div>
+<div class="company-check-subtitle">
+신규 기업회원가입자 목록
+</div>
 
-                        <h3>직업</h3>
 
-                        <div><label>직업1</label><input></div>
-                        <div><label>직업1 설명</label><input></div>
+<!-- 리스트 헤더 -->
 
-                        <div><label>직업2</label><input></div>
-                        <div><label>직업2 설명</label><input></div>
+<div class="company-check-table">
 
-                        <div><label>직업3</label><input></div>
-                        <div><label>직업3 설명</label><input></div>
+<div class="company-check-row company-check-head">
 
-                        <div><label>직업4</label><input></div>
-                        <div><label>직업4 설명</label><input></div>
+<div class="company-check-col number">번호</div>
+<div class="company-check-col id">아이디</div>
+<div class="company-check-col company">기업이름</div>
+<div class="company-check-col date">가입날짜</div>
+<div class="company-check-col status">승인/반려</div>
 
-                        <div><label>직업5</label><input></div>
-                        <div><label>직업5 설명</label><input></div>
+</div>
 
-                        <div><label>직업6</label><input></div>
-                        <div><label>직업6 설명</label><input></div>
 
-                    </div>
 
 
-                    <div class="rm-sec200">
+<!-- <div class="company-check-row">
+<div class="company-check-col number">1</div>
+<div class="company-check-col id">
+<a class="company-check-link" href="#">SsamSsong</a>
+</div>
+<div class="company-check-col company">
+<a class="company-check-link" href="#">쌈쏭쌈싸머거</a>
+</div>
+<div class="company-check-col date">26.02.12</div>
+<div class="company-check-col status">대기</div> -->
 
-                        <h3>1. 기초 다지기</h3>
 
-                        <div><label>내용1</label><input></div>
-                        <div><label>내용1 설명</label><input></div>
+<!-- 리스트 1 -->
 
-                        <div><label>내용2</label><input></div>
-                        <div><label>내용2 설명</label><input></div>
 
-                        <div><label>내용3</label><input></div>
-                        <div><label>내용3 설명</label><input></div>
+<a href="./company-checkdetail.html" class="company-check-row">
 
-                    </div>
+<div class="company-check-col number">1</div>
+<div class="company-check-col id">SsamSsong</div>
+<div class="company-check-col company">쌈쏭쌈싸머거</div>
+<div class="company-check-col date">26.02.12</div>
+<div class="company-check-col status">대기</div>
 
+</a>
 
-                    <div class="rm-sec300">
+<!-- 리스트 2 -->
 
-                        <h3>2. 보안 기초 다지기</h3>
+<a href="#" class="company-check-row">
 
-                        <div><label>내용1</label><input></div>
-                        <div><label>내용1 설명</label><input></div>
+<div class="company-check-col number">2</div>
+<div class="company-check-col id">HEAJJunBaBo</div>
+<div class="company-check-col company">헤준BABO</div>
+<div class="company-check-col date">26.02.24</div>
+<div class="company-check-col status">대기</div>
 
-                        <div><label>내용2</label><input></div>
-                        <div><label>내용2 설명</label><input></div>
+</a>
 
-                        <div><label>내용3</label><input></div>
-                        <div><label>내용3 설명</label><input></div>
 
-                    </div>
+<!-- 리스트 3 -->
 
+<a href="#" class="company-check-row">
 
-                    <div class="rm-sec400">
+<div class="company-check-col number">3</div>
+<div class="company-check-col id">Jinokispretty</div>
+<div class="company-check-col company">진옥IT</div>
+<div class="company-check-col date">26.02.26</div>
+<div class="company-check-col status">대기</div>
 
-                        <h3>3. 실습</h3>
+</a>
 
-                        <div><label>내용1</label><input></div>
-                        <div><label>내용1 설명</label><input></div>
 
-                        <div><label>내용2</label><input></div>
-                        <div><label>내용2 설명</label><input></div>
+<!-- 리스트 4 -->
 
-                        <div><label>내용3</label><input></div>
-                        <div><label>내용3 설명</label><input></div>
+<a href="#" class="company-check-row">
 
-                    </div>
+<div class="company-check-col number">4</div>
+<div class="company-check-col id">adorableJinok</div>
+<div class="company-check-col company">doradora컴퓨터</div>
+<div class="company-check-col date">26.02.28</div>
+<div class="company-check-col status">대기</div>
 
+</a>
 
-                    <div class="rm-sec500">
 
-                        <h3>4. 결과물</h3>
+<!-- 리스트 5 -->
 
-                        <div><label>내용1</label><input></div>
-                        <div><label>내용1 설명</label><input></div>
+<a href="#" class="company-check-row">
 
-                        <div><label>내용2</label><input></div>
-                        <div><label>내용2 설명</label><input></div>
+<div class="company-check-col number">5</div>
+<div class="company-check-col id">IWantSleep</div>
+<div class="company-check-col company">IT솔리드</div>
+<div class="company-check-col date">26.03.01</div>
+<div class="company-check-col status">대기</div>
 
-                        <div><label>내용3</label><input></div>
-                        <div><label>내용3 설명</label><input></div>
+</a>
 
-                    </div>
+<!-- 리스트 6 -->
 
+<a href="#" class="company-check-row">
 
-                    <div class="rm-sec600">
+<div class="company-check-col number">5</div>
+<div class="company-check-col id">IWantSleep</div>
+<div class="company-check-col company">IT솔리드</div>
+<div class="company-check-col date">26.03.01</div>
+<div class="company-check-col status">대기</div>
 
-                        <h3>추천 기술</h3>
+</a>
 
-                        <div><label>내용1</label><input></div>
-                        <div><label>내용2</label><input></div>
-                        <div><label>내용3</label><input></div>
-                        <div><label>내용4</label><input></div>
-                        <div><label>내용5</label><input></div>
-                        <div><label>내용6</label><input></div>
-                        <div><label>내용7</label><input></div>
+<!-- 리스트 7 -->
 
-                    </div>
+<a href="#" class="company-check-row">
 
+<div class="company-check-col number">5</div>
+<div class="company-check-col id">IWantSleep</div>
+<div class="company-check-col company">IT솔리드</div>
+<div class="company-check-col date">26.03.01</div>
+<div class="company-check-col status">대기</div>
 
-                    <div class="rm-sec700">
+</a>
 
-                        <h3>추천 성향</h3>
+<!-- 리스트 8 -->
 
-                        <div><label>내용1</label><input></div>
-                        <div><label>내용2</label><input></div>
-                        <div><label>내용3</label><input></div>
-                        <div><label>내용4</label><input></div>
+<a href="#" class="company-check-row">
 
-                    </div>
+<div class="company-check-col number">5</div>
+<div class="company-check-col id">IWantSleep</div>
+<div class="company-check-col company">IT솔리드</div>
+<div class="company-check-col date">26.03.01</div>
+<div class="company-check-col status">대기</div>
 
+</a>
 
-                    <div class="rm-sec800">
+<!-- 리스트 9 -->
 
-                        <h3>추천 자격증</h3>
+<a href="#" class="company-check-row">
 
-                        <div><label>내용1</label><input></div>
-                        <div><label>내용2</label><input></div>
-                        <div><label>내용3</label><input></div>
-                        <div><label>내용4</label><input></div>
+<div class="company-check-col number">5</div>
+<div class="company-check-col id">IWantSleep</div>
+<div class="company-check-col company">IT솔리드</div>
+<div class="company-check-col date">26.03.01</div>
+<div class="company-check-col status">대기</div>
 
-                    </div>
+</a>
 
-                    <div class="rm-buttons">
-                        <button class="rm-btn1">확인</button>
-                        <button class="rm-btn2">수정</button>
-                        <button type="reset" class="rm-btn3">취소</button>
-                    </div>
+<!-- 리스트 10 -->
 
-                </form>
+<a href="#" class="company-check-row">
 
-            </section>
+<div class="company-check-col number">5</div>
+<div class="company-check-col id">IWantSleep</div>
+<div class="company-check-col company">IT솔리드</div>
+<div class="company-check-col date">26.03.01</div>
+<div class="company-check-col status">대기</div>
 
-        </main>
+</a>
 
-    </div>
+</div>
 
-    <script src="${pageContext.request.contextPath}/assets/js/admin/main-management/roadmap-management.js"></script>
+
+<!-- 페이지네이션 -->
+
+<div class="company-check-pagination">
+
+<!-- <span>&lt;&lt;</span> -->
+<span>&lt;</span>
+
+<a class="company-check-page company-check-page-active">1</a>
+<a class="company-check-page">2</a>
+<a class="company-check-page">3</a>
+<a class="company-check-page">4</a>
+<a class="company-check-page">5</a>
+
+<span>&gt;</span>
+<!-- <span>&gt;&gt;</span> -->
+
+</div>
+
+
+</section>
+
+</main>
+
+</div>
+
 </body>
-
 </html>
