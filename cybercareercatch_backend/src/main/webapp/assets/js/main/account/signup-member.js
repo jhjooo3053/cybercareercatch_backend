@@ -183,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 
 		try {
-			// signup-member.js
 			const r = await fetch(`${base}/member/checkIdOk.mefc?userId=${encodeURIComponent(value)}`, {
 				headers: { "Accept": "application/json" }
 			});
