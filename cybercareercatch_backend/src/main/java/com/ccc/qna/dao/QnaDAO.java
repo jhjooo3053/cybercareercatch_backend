@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.ccc.common.config.MyBatisConfig;
-import com.ccc.qna.dto.CompanyDTO;
+import com.ccc.company.dto.CompanyDTO;
 import com.ccc.qna.dto.QnaCommentDTO;
 import com.ccc.qna.dto.QnaDetailDTO;
 import com.ccc.qna.dto.QnaListDTO;
