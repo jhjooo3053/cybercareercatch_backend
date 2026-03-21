@@ -2,19 +2,20 @@ package com.ccc.post.dto;
 
 public class PostWriteDTO {
 	private String postType;
-	private Long userNumber;
+	private int userNumber;
 	private String postTitle;
 	private String postContent;
+	
 	public String getPostType() {
 		return postType;
 	}
 	public void setPostType(String postType) {
 		this.postType = postType;
 	}
-	public Long getUserNumber() {
+	public int getUserNumber() {
 		return userNumber;
 	}
-	public void setUserNumber(Long userNumber) {
+	public void setUserNumber(int userNumber) {
 		this.userNumber = userNumber;
 	}
 	public String getPostTitle() {
@@ -34,6 +35,8 @@ public class PostWriteDTO {
 		return "PostWriteDTO [postType=" + postType + ", userNumber=" + userNumber + ", postTitle=" + postTitle
 				+ ", postContent=" + postContent + "]";
 	}
+	
+	
 
 	
 	

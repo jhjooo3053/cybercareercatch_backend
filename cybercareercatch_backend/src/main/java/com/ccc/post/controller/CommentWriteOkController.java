@@ -10,41 +10,44 @@ import javax.servlet.http.HttpSession;
 import com.ccc.common.Execute;
 import com.ccc.common.Result;
 import com.ccc.post.dao.PostDAO;
-import com.ccc.post.dto.PostWriteDTO;
+import com.ccc.post.dto.CommentWriteDTO;
 
-public class PostWriteOkController implements Execute {
+public class CommentWriteOkController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// 한글 깨짐 방지
+		System.out.println("댓글 작성 처리 요청");
+
 		request.setCharacterEncoding("UTF-8");
 
-		// 게시글 정보를 담을 DTO 객체 생성
-		PostWriteDTO postWriteDTO = new PostWriteDTO();
-
-		// 게시글 등록용 DAO 객체 생성
 		PostDAO postDAO = new PostDAO();
-
-		// 이동 경로와 이동 방식을 담을 객체 생성
+		CommentWriteDTO commentWriteDTO = new CommentWriteDTO();
 		Result result = new Result();
 
-		// 세션 객체 가져오기
 		HttpSession session = request.getSession();
-
-		// 로그인한 사용자 번호 가져오기
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
 
-		// 현재 로그인한 회원 번호 확인용 출력
-		System.out.println("현재 로그인한 회원 번호 : " + userNumber);
+		String tempPostNumber = request.getParameter("postNumber");
+		String commentContent = request.getParameter("commentContent");
+
+		int postNumber = 0;
+
+		try {
+			postNumber = Integer.parseInt(tempPostNumber);
+		} catch (Exception e) {
+			System.out.println("오류 : postNumber 파라미터가 잘못되었습니다. -> " + tempPostNumber);
+			result.setPath(request.getContextPath() + "/post/list.pfc");
+			result.setRedirect(true);
+			return result;
+		}
 
 		/* =========================================================
 		   TEMP START
 		   로그인 기능 연결 전 임시 테스트용
-		   - 세션에 userNumber가 없으면 글 등록이 막히므로
-		   - DB에 실제 존재하는 회원번호 2번을 강제로 사용
-		   - 로그인 기능 붙인 뒤 이 구간 삭제
+		   - 세션에 userNumber가 없으면 member 2로 댓글 작성
+		   - 로그인 기능 연결 후 이 구간 삭제
 		   ========================================================= */
 		if (userNumber == null) {
 			userNumber = 2;
@@ -66,27 +69,25 @@ public class PostWriteOkController implements Execute {
 		   }
 		   ========================================================= */
 
-		// 글 타입 세팅
-		postWriteDTO.setPostType(request.getParameter("postType"));
+		if (commentContent == null || commentContent.trim().isEmpty()) {
+			System.out.println("오류 : 댓글 내용이 비어 있습니다.");
+			result.setPath(request.getContextPath() + "/post/read.pfc?postNumber=" + postNumber);
+			result.setRedirect(true);
+			return result;
+		}
 
-		// 작성자 번호 세팅
-		postWriteDTO.setUserNumber(userNumber);
+		commentWriteDTO.setPostNumber(postNumber);
+		commentWriteDTO.setUserNumber(userNumber);
+		commentWriteDTO.setCommentContent(commentContent.trim());
 
-		// 제목 세팅
-		postWriteDTO.setPostTitle(request.getParameter("postTitle"));
+		System.out.println("댓글 추가 - CommentWriteDTO : " + commentWriteDTO);
 
-		// 내용 세팅
-		postWriteDTO.setPostContent(request.getParameter("postContent"));
+		postDAO.insertComment(commentWriteDTO);
 
-		// DTO 값 확인용 출력
-		System.out.println("게시글 추가 - PostWriteDTO : " + postWriteDTO);
-
-		// DB insert 실행
-		postDAO.insert(postWriteDTO);
-
-		// 등록 완료 후 목록 컨트롤러로 이동
-		result.setPath(request.getContextPath() + "/post/list.pfc");
+		result.setPath(request.getContextPath() + "/post/read.pfc?postNumber=" + postNumber);
 		result.setRedirect(true);
+
+		System.out.println("댓글 작성 처리 완료");
 
 		return result;
 	}

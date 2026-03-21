@@ -13,7 +13,6 @@ import com.ccc.post.dto.NoticeDTO;
 import com.ccc.post.dto.PostDTO;
 import com.ccc.post.dto.PostDetailDTO;
 import com.ccc.post.dto.PostListDTO;
-import com.ccc.post.dto.PostPageDTO;
 import com.ccc.post.dto.PostWriteDTO;
 
 public class PostDAO {
@@ -73,11 +72,10 @@ public class PostDAO {
     // 자유게시판 일반 게시글
     // =========================================================
 
-    // 자유게시판 일반 게시글 총 개수 조회
-    // mapper id : post.getTotal
-    public int getTotal() {
+ // 자유게시판 일반 게시글 총 개수 조회
+    public int getTotal(Map<String, Object> pageMap) {
         System.out.println("자유게시판 게시글 총 개수 조회 - getTotal 실행");
-        return sqlSession.selectOne("post.getTotal");
+        return sqlSession.selectOne("post.getTotal", pageMap);
     }
 
     // 자유게시판 게시글 조회수 증가
@@ -116,16 +114,13 @@ public class PostDAO {
         return postDetailDTO;
     }
 
-    // 자유게시판 일반 게시글 목록 조회
-    // 페이징용 DTO(page, rowCount 등)를 받아서 목록 조회
-    // mapper id : post.selectAll
-    public List<PostListDTO> selectAll(Map<String, Integer> pageMap) {
+ // 자유게시판 일반 게시글 목록 조회
+    public List<PostListDTO> selectAll(Map<String, Object> pageMap) {
         System.out.println("자유게시판 전체 게시글 조회 - selectAll 실행 : " + pageMap);
         List<PostListDTO> postList = sqlSession.selectList("post.selectAll", pageMap);
         System.out.println("조회 결과 : " + postList);
         return postList;
     }
-    
 
 
     // =========================================================
@@ -158,5 +153,7 @@ public class PostDAO {
         System.out.println("댓글 삭제 - deleteComment 실행");
         int result = sqlSession.delete("post.deleteComment", commentDTO);
         System.out.println("댓글 삭제 결과 : " + result);
+        
+  
     }
 }

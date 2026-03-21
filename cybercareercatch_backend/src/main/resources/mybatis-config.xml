@@ -51,7 +51,7 @@
 		<mapper resource="mapper/main/MainMapper.xml"/>
 		<mapper resource="mapper/member/MemberMapper.xml" />
 		<mapper resource="mapper/mypage/MyPageMapper.xml" />
-		<mapper resource="mapper/Post/PostMapper.xml" />
+		<mapper resource="mapper/post/PostMapper.xml" />
 		<mapper resource="mapper/qna/QnaMapper.xml" />
 		<mapper resource="mapper/roadmap/RoadmapMapper.xml" />
 	</mappers>

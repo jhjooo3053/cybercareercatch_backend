@@ -5,6 +5,15 @@
 
 <mapper namespace="post">
 
+    <resultMap id="postListResultMap" type="com.ccc.post.dto.PostListDTO">
+        <result property="postNumber" column="POST_NUMBER"/>
+        <result property="postTitle" column="POST_TITLE"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="postDate" column="POST_DATE"/>
+        <result property="editDate" column="EDIT_DATE"/>
+        <result property="viewCount" column="VIEW_COUNT"/>
+    </resultMap>
+
     <!-- 자유게시판 공지 목록 -->
     <select id="selectFreeNoticeList" resultType="com.ccc.post.dto.NoticeDTO">
         SELECT
@@ -46,10 +55,25 @@
     </select>
 
     <!-- 자유게시판 글 개수 -->
-    <select id="getTotal" resultType="int">
-        SELECT COUNT(POST_NUMBER)
-        FROM TBL_POST
-        WHERE POST_TYPE = 'FREE_POST'
+    <select id="getTotal" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_POST P
+        JOIN TBL_USER U
+          ON P.USER_NUMBER = U.USER_NUMBER
+        WHERE P.POST_TYPE = 'FREE_POST'
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="searchType == 'title'">
+                    AND P.POST_TITLE LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="searchType == 'writer'">
+                    AND U.USER_ID LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="searchType == 'content'">
+                    AND P.POST_CONTENT LIKE '%' || #{keyword} || '%'
+                </when>
+            </choose>
+        </if>
     </select>
 
     <!-- 조회수 증가 -->
@@ -138,54 +162,58 @@
     <select id="select"
             parameterType="int"
             resultType="com.ccc.post.dto.PostDetailDTO">
-        <![CDATA[
-            SELECT
-                P.POST_NUMBER,
-                P.POST_TITLE,
-                U.USER_ID,
-                TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
-                TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE,
-                P.VIEW_COUNT,
-                P.POST_CONTENT,
-                P.USER_NUMBER
-            FROM TBL_POST P
-            JOIN TBL_USER U
-              ON P.USER_NUMBER = U.USER_NUMBER
-            WHERE P.POST_NUMBER = #{postNumber}
-              AND P.POST_TYPE = 'FREE_POST'
-        ]]>
+        SELECT
+            P.POST_NUMBER,
+            P.POST_TITLE,
+            U.USER_ID,
+            TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
+            TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE,
+            P.VIEW_COUNT,
+            P.POST_CONTENT,
+            P.USER_NUMBER
+        FROM TBL_POST P
+        JOIN TBL_USER U
+          ON P.USER_NUMBER = U.USER_NUMBER
+        WHERE P.POST_NUMBER = #{postNumber}
+          AND P.POST_TYPE = 'FREE_POST'
     </select>
 
     <!-- 자유게시판 글 목록 -->
-    <select id="selectAll"
-            parameterType="com.ccc.post.dto.PostPageDTO"
-            resultType="com.ccc.post.dto.PostListDTO">
-
-        <bind name="startRow" value="(page - 1) * rowCount + 1"/>
-        <bind name="endRow" value="page * rowCount"/>
-
-        <![CDATA[
-            SELECT *
+    <select id="selectAll" parameterType="map" resultMap="postListResultMap">
+        SELECT *
+        FROM (
+            SELECT
+                ROWNUM AS RNUM,
+                SUBQUERY.*
             FROM (
                 SELECT
-                    ROWNUM AS RNUM,
-                    SUBQUERY.*
-                FROM (
-                    SELECT
-                        P.POST_NUMBER,
-                        P.POST_TITLE,
-                        U.USER_ID,
-                        TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
-                        TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE
-                    FROM TBL_POST P
-                    JOIN TBL_USER U
-                      ON P.USER_NUMBER = U.USER_NUMBER
-                    WHERE P.POST_TYPE = 'FREE_POST'
-                    ORDER BY P.POST_NUMBER DESC
-                ) SUBQUERY
-            )
-            WHERE RNUM BETWEEN #{startRow} AND #{endRow}
-        ]]>
+                    P.POST_NUMBER,
+                    P.POST_TITLE,
+                    U.USER_ID,
+                    TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
+                    TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE,
+                    P.VIEW_COUNT
+                FROM TBL_POST P
+                JOIN TBL_USER U
+                  ON P.USER_NUMBER = U.USER_NUMBER
+                WHERE P.POST_TYPE = 'FREE_POST'
+                <if test="keyword != null and keyword != ''">
+                    <choose>
+                        <when test="searchType == 'title'">
+                            AND P.POST_TITLE LIKE '%' || #{keyword} || '%'
+                        </when>
+                        <when test="searchType == 'writer'">
+                            AND U.USER_ID LIKE '%' || #{keyword} || '%'
+                        </when>
+                        <when test="searchType == 'content'">
+                            AND P.POST_CONTENT LIKE '%' || #{keyword} || '%'
+                        </when>
+                    </choose>
+                </if>
+                ORDER BY P.POST_NUMBER DESC
+            ) SUBQUERY
+        )
+        WHERE RNUM BETWEEN #{startRow} AND #{endRow}
     </select>
 
     <!-- 댓글 목록 -->
