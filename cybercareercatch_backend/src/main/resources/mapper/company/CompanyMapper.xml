@@ -56,93 +56,72 @@
         </if>
     </select>
 
-<<<<<<< HEAD
-    <!-- 상세 조회는 지금 화면에서 안 쓰지만 유지 -->
-    <select id="selectCompanyDetail" parameterType="int" resultType="CompanyDetailDTO">
+<select id="selectCompanyDetail" parameterType="int" resultType="CompanyDetailDTO">
+    SELECT
+        C.COMPANY_NUMBER AS companyNumber,
+        C.COMPANY_NAME AS companyName,
+        C.COMPANY_ADDRESS AS companyAddress,
+        C.COMPANY_STATE AS companyState,
+        C.COMPANY_BRN AS companyBrn,
+
+        F.FILE_PATH AS filePath,
+
+        CI.COMP_CEO_NAME AS compCeoName,
+        CI.COMP_FND_YEAR AS compFndYear,
+        CI.COMP_EMPL_CNT AS compEmplCnt,
+        CI.COMP_REV AS compRev,
+        CI.COMP_CAP AS compCap,
+        CI.COMP_TYPE AS compType,
+        CI.COMP_SUMMARY AS compSummary,
+        CI.COMP_TECH AS compTech,
+        CI.COMP_MAIN_BIZ AS compMainBiz,
+        CI.COMP_INFO AS compInfo,
+        CI.COMP_SVC_HIST AS compSvcHist,
+
+        JP.JOB_POST_PROFILE AS jobPostProfile,
+        JP.JOB_POST_CONTENT AS jobPostContent,
+        JP.JOB_POST_PROCESS AS jobPostProcess,
+        JP.JOB_POST_METHOD AS jobPostMethod,
+        TO_CHAR(JP.JOB_POST_DATE, 'YYYY.MM.DD') AS jobPostDate,
+        NVL(JP.CAT1_IS_HIRING, 0) AS cat1IsHiring,
+        NVL(JP.CAT2_IS_HIRING, 0) AS cat2IsHiring,
+        NVL(JP.CAT3_IS_HIRING, 0) AS cat3IsHiring,
+        NVL(JP.CAT4_IS_HIRING, 0) AS cat4IsHiring
+
+    FROM TBL_COMPANY C
+
+    LEFT JOIN TBL_COMP_INFO CI
+        ON C.COMPANY_NUMBER = CI.COMPANY_NUMBER
+
+    LEFT JOIN (
         SELECT
-            C.COMPANY_NUMBER,
-            C.COMPANY_NAME,
-            C.COMPANY_ADDRESS,
-            C.COMPANY_STATE,
-            C.COMPANY_BRN,
-            F.FILE_PATH,
-            CI.COMP_CEO_NAME,
-            CI.COMP_FND_YEAR,
-            CI.COMP_EMPL_CNT,
-            CI.COMP_REV,
-            CI.COMP_CAP,
-            CI.COMP_TYPE,
-            CI.COMP_SUMMARY,
-            CI.COMP_TECH,
-            CI.COMP_MAIN_BIZ,
-            CI.COMP_INFO,
-            CI.COMP_SVC_HIST,
-            JP.JOB_POST_PROFILE,
-            JP.JOB_POST_CONTENT,
-            JP.JOB_POST_PROCESS,
-            JP.JOB_POST_METHOD,
-            TO_CHAR(JP.JOB_POST_DATE, 'YYYY.MM.DD') AS JOB_POST_DATE,
-            NVL(JP.CAT1_IS_HIRING, 0) AS CAT1_IS_HIRING,
-            NVL(JP.CAT2_IS_HIRING, 0) AS CAT2_IS_HIRING,
-            NVL(JP.CAT3_IS_HIRING, 0) AS CAT3_IS_HIRING,
-            NVL(JP.CAT4_IS_HIRING, 0) AS CAT4_IS_HIRING
-        FROM TBL_COMPANY C
-        JOIN TBL_COMP_INFO CI
-            ON C.COMPANY_NUMBER = CI.COMPANY_NUMBER
-        LEFT JOIN TBL_FILE F
-            ON C.COMPANY_NUMBER = F.COMPANY_NUMBER
-        LEFT JOIN TBL_JOB_POST JP
-            ON C.COMPANY_NUMBER = JP.COMPANY_NUMBER
-        WHERE C.COMPANY_NUMBER = #{value}
-    </select>
-=======
-	<!-- 공개 기업 상세 정보 조회 -->
-	<select id="selectCompanyDetail" parameterType="int" resultType="CompanyDetailDTO">
-		SELECT
-			C.COMPANY_NUMBER AS companyNumber,
-			C.COMPANY_NAME AS companyName,
-			C.COMPANY_ADDRESS AS companyAddress,
-			C.COMPANY_STATE AS companyState,
-			C.COMPANY_BRN AS companyBrn,
-			F.FILE_PATH AS filePath,
-			CI.COMP_CEO_NAME AS compCeoName,
-			CI.COMP_FND_YEAR AS compFndYear,
-			CI.COMP_EMPL_CNT AS compEmplCnt,
-			CI.COMP_REV AS compRev,
-			CI.COMP_CAP AS compCap,
-			CI.COMP_TYPE AS compType,
-			CI.COMP_SUMMARY AS compSummary,
-			CI.COMP_TECH AS compTech,
-			CI.COMP_MAIN_BIZ AS compMainBiz,
-			CI.COMP_INFO AS compInfo,
-			CI.COMP_SVC_HIST AS compSvcHist,
-			JP.JOB_POST_PROFILE AS jobPostProfile,
-			JP.JOB_POST_CONTENT AS jobPostContent,
-			JP.JOB_POST_PROCESS AS jobPostProcess,
-			JP.JOB_POST_METHOD AS jobPostMethod,
-			TO_CHAR(JP.JOB_POST_DATE, 'YYYY.MM.DD') AS jobPostDate,
-			NVL(JP.CAT1_IS_HIRING, 0) AS cat1IsHiring,
-			NVL(JP.CAT2_IS_HIRING, 0) AS cat2IsHiring,
-			NVL(JP.CAT3_IS_HIRING, 0) AS cat3IsHiring,
-			NVL(JP.CAT4_IS_HIRING, 0) AS cat4IsHiring
-		FROM TBL_COMPANY C
-		LEFT JOIN TBL_COMP_INFO CI
-		  ON C.COMPANY_NUMBER = CI.COMPANY_NUMBER
-		LEFT JOIN (
-			SELECT
-				COMPANY_NUMBER,
-				MIN(FILE_NUMBER) AS FILE_NUMBER
-			FROM TBL_FILE
-			GROUP BY COMPANY_NUMBER
-		) FM
-		  ON C.COMPANY_NUMBER = FM.COMPANY_NUMBER
-		LEFT JOIN TBL_FILE F
-		  ON FM.FILE_NUMBER = F.FILE_NUMBER
-		LEFT JOIN TBL_JOB_POST JP
-		  ON C.COMPANY_NUMBER = JP.COMPANY_NUMBER
-		WHERE C.COMPANY_NUMBER = #{value}
-	</select>
->>>>>>> 8158ab0 (260322 김진옥메인 수정)
+            COMPANY_NUMBER,
+            MIN(FILE_NUMBER) AS FILE_NUMBER
+        FROM TBL_FILE
+        GROUP BY COMPANY_NUMBER
+    ) FM
+        ON C.COMPANY_NUMBER = FM.COMPANY_NUMBER
+
+    LEFT JOIN TBL_FILE F
+        ON FM.FILE_NUMBER = F.FILE_NUMBER
+
+    LEFT JOIN (
+        SELECT *
+        FROM (
+            SELECT
+                JP.*,
+                ROW_NUMBER() OVER (
+                    PARTITION BY JP.COMPANY_NUMBER
+                    ORDER BY JP.JOB_POST_DATE DESC, JP.JOB_POST_NUMBER DESC
+                ) AS RN
+            FROM TBL_JOB_POST JP
+        )
+        WHERE RN = 1
+    ) JP
+        ON C.COMPANY_NUMBER = JP.COMPANY_NUMBER
+
+    WHERE C.COMPANY_NUMBER = #{value}
+</select>
 
     <!-- 기업 대표 이미지 삭제 -->
     <delete id="deleteFileByCompanyNumber" parameterType="int">
