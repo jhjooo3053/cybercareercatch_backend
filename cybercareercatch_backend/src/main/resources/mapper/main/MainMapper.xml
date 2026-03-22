@@ -7,8 +7,8 @@
 
 	<!-- 메인 상단 질문 1개 조회 -->
 	<select id="selectMainQuestion"
-		parameterType="JobRecommendQuestionDTO"
-		resultType="int">
+		parameterType="int"
+		resultType="JobRecommendQuestionDTO">
 		SELECT
 		JOB_QUESTION_NUMBER AS jobQuestionNumber,
 		JOB_QUESTION_CONTENT AS jobQuestionContent
