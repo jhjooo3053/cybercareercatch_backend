@@ -22,15 +22,16 @@ public class MypageMemberCheckPwController implements Execute{
 		HttpSession session = request.getSession();
 		MypageDAO mypageDAO = new MypageDAO();
 		
-		//로그인 한 회원 정보 가져오기
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		System.out.println("로그인한 회원 번호 : " + userNumber);
 		String userType = (String) session.getAttribute("userType");
+		
+		//테스트용 - 삭제
+		session.setAttribute("userNumber", 1);
+		session.setAttribute("userType", "일반회원");
+		
+		System.out.println("로그인한 회원 번호 : " + userNumber);
 		System.out.println("로그인한 회원 타입 : " + userType);
 		
-		
-		//결과를 저장할 MemberMypageInfoDTO 생성
-		MemberMypageInfoDTO memberMypageInfoDTO = new MemberMypageInfoDTO();
 		
 		// 비로그인
 		if (userNumber == null) {
@@ -41,12 +42,12 @@ public class MypageMemberCheckPwController implements Execute{
 
 		// 일반회원이 아님
 		if (!"일반회원".equals(userType)) {
-			result.setPath(request.getContextPath() + "/main/main.mafc");
+			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
 			result.setRedirect(true);
 			return result;
 		}
 		
-		memberMypageInfoDTO = mypageDAO.selectMemberMyPageInfo(userNumber);
+//		MemberMypageInfoDTO memberMypageInfoDTO = mypageDAO.selectMemberMypageInfo(userNumber);
 
 		// 비밀번호 확인 페이지로 이동
 		result.setPath("/app/main/mypage/member-password-check.jsp");

@@ -19,11 +19,11 @@
 
 	<!-- 메인 페이지 -->
 	<servlet>
-		<servlet-name>MainFrontController</servlet-name>
-		<servlet-class>com.ccc.main.controller.MainFrontController</servlet-class>
+		<servlet-name>MainpageFrontController</servlet-name>
+		<servlet-class>com.ccc.mainpage.controller.MainpageFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>MainFrontController</servlet-name>
+		<servlet-name>MainpageFrontController</servlet-name>
 		<url-pattern>*.mafc</url-pattern>
 	</servlet-mapping>
 

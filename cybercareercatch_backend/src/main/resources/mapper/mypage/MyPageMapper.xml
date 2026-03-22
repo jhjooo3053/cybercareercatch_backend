@@ -39,7 +39,7 @@
 		ON M.USER_NUMBER = JR.USER_NUMBER
 		AND
 		JR.RN = 1
-		WHERE U.USER_NUMBER = #{userNumber}
+		WHERE U.USER_NUMBER = #{value}
 	</select>
 
 	<!-- 일반회원 마이페이지 - 정보수정 전 비밀번호 확인 -->
@@ -154,7 +154,7 @@
 		JOIN TBL_COMPANY C
 		ON CM.COMPANY_NUMBER = C.COMPANY_NUMBER
 		WHERE
-		U.USER_NUMBER = #{userNumber}
+		U.USER_NUMBER = #{value}
 	</select>
 
 	<!-- 기업회원 마이페이지 - 답변대기 QnA 목록 조회 -->
@@ -185,10 +185,11 @@
 		P.POST_TYPE = 'QNA_POST'
 		AND P.ANSWER_STATUS = '답변대기'
 		AND CM.USER_NUMBER
-		= #{userNumber}
+		= #{value}
 		AND CM.COMPANY_MANAGER_STATE = 'ACTIVE'
 		ORDER BY
-		P.POST_DATE DESC,
+		P.POST_DATE
+		DESC,
 		P.POST_NUMBER DESC
 	</select>
 
@@ -203,7 +204,7 @@
 		WHERE P.POST_TYPE = 'QNA_POST'
 		AND P.ANSWER_STATUS =
 		'답변대기'
-		AND CM.USER_NUMBER = #{userNumber}
+		AND CM.USER_NUMBER = #{value}
 		AND CM.COMPANY_MANAGER_STATE =
 		'ACTIVE'
 	</select>
@@ -244,18 +245,21 @@
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 등록 전 체크 -->
 	<!-- 사용페이지 : companyPageForm.jsp -->
-	<select id="countCompanyPageByCompanyNumber" parameterType="int"
+	<select id="countCompanyPageByUserNumber" parameterType="int"
 		resultType="int">
 		SELECT COUNT(*)
-		FROM TBL_COMP_INFO
-		WHERE COMPANY_NUMBER =
-		#{companyNumber}
+		FROM TBL_COMP_INFO CI
+		JOIN TBL_COMPANY_MEMBER
+		CM
+		ON CI.COMPANY_NUMBER = CM.COMPANY_NUMBER
+		WHERE CM.USER_NUMBER =
+		#{value}
 	</select>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 상세 조회 -->
-	<!-- 사용페이지 companyPageForm.jsp(수정시 기존 기업정보를 화면에 뿌려주기 위함 -->
+	<!-- 사용페이지 : companyPageForm.jsp (수정 시 기존 기업정보 출력) -->
 	<select id="selectCompanyPageDetail" parameterType="int"
-		resultType="CompanyDetailDTO">
+		resultType="com.ccc.company.dto.CompanyDetailDTO">
 		SELECT
 		C.COMPANY_NUMBER AS companyNumber,
 		C.COMPANY_NAME AS
@@ -265,15 +269,18 @@
 		companyState,
 		C.COMPANY_BRN AS companyBrn,
 		F.FILE_PATH AS filePath,
-		CI.COMP_CEO_NAME AS compCeoName,
+		CI.COMP_CEO_NAME
+		AS compCeoName,
 		CI.COMP_FND_YEAR AS compFndYear,
-		CI.COMP_EMPL_CNT AS compEmplCnt,
+		CI.COMP_EMPL_CNT AS
+		compEmplCnt,
 		CI.COMP_REV AS compRev,
 		CI.COMP_CAP AS
 		compCap,
 		CI.COMP_TYPE AS compType,
 		CI.COMP_SUMMARY AS compSummary,
-		CI.COMP_TECH AS compTech,
+		CI.COMP_TECH
+		AS compTech,
 		CI.COMP_MAIN_BIZ AS compMainBiz,
 		CI.COMP_INFO
 		AS compInfo,
@@ -281,31 +288,29 @@
 		JP.JOB_POST_PROFILE AS
 		jobPostProfile,
 		JP.JOB_POST_CONTENT AS jobPostContent,
-		JP.JOB_POST_PROCESS AS jobPostProcess,
+		JP.JOB_POST_PROCESS AS
+		jobPostProcess,
 		JP.JOB_POST_METHOD AS
 		jobPostMethod,
 		TO_CHAR(JP.JOB_POST_DATE, 'YYYY.MM.DD') AS jobPostDate,
-		JP.CAT1_IS_HIRING AS
-		cat1IsHiring,
+		JP.CAT1_IS_HIRING AS cat1IsHiring,
 		JP.CAT2_IS_HIRING AS cat2IsHiring,
-		JP.CAT3_IS_HIRING AS
-		cat3IsHiring,
+		JP.CAT3_IS_HIRING AS cat3IsHiring,
 		JP.CAT4_IS_HIRING AS cat4IsHiring
-		FROM TBL_COMPANY C
-		JOIN
-		TBL_COMP_INFO CI
+		FROM TBL_COMPANY_MEMBER CM
+		JOIN TBL_COMPANY C
+		ON CM.COMPANY_NUMBER =
+		C.COMPANY_NUMBER
+		JOIN TBL_COMP_INFO CI
 		ON C.COMPANY_NUMBER =
 		CI.COMPANY_NUMBER
-		LEFT JOIN
-		TBL_FILE F
+		LEFT JOIN TBL_FILE F
 		ON C.COMPANY_NUMBER =
 		F.COMPANY_NUMBER
-		LEFT JOIN TBL_JOB_POST
-		JP
-		ON CI.COMPANY_NUMBER =
+		LEFT JOIN TBL_JOB_POST JP
+		ON C.COMPANY_NUMBER =
 		JP.COMPANY_NUMBER
-		WHERE C.COMPANY_NUMBER =
-		#{companyNumber}
+		WHERE CM.USER_NUMBER = #{value}
 	</select>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 등록(기업소개등록) -->
@@ -414,13 +419,17 @@
 	</update>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 수정(대표 이미지 경로 수정) -->
-	<!-- 사용 페이지 : companyPageEdit.jsp -->
-	<update id="updateFile"
-		parameterType="com.ccc.company.dto.FileDTO">
-		UPDATE TBL_FILE
+	<update id="updateFileByUserNumber" parameterType="map">
+		UPDATE
+		TBL_FILE
 		SET FILE_PATH = #{filePath}
+		WHERE COMPANY_NUMBER = (
+		SELECT
+		COMPANY_NUMBER
+		FROM TBL_COMPANY_MEMBER
 		WHERE
-		COMPANY_NUMBER = #{companyNumber}
+		USER_NUMBER = #{userNumber}
+		)
 	</update>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 수정(채용정보수정) -->
@@ -442,32 +451,64 @@
 	</update>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 삭제 -->
-	<!-- companyPageEdit.jsp -->
-	<delete id="deleteFileByCompanyNumber" parameterType="int">
+	<delete id="deleteJobPostByUserNumber" parameterType="int">
 		DELETE FROM
-		TBL_FILE
-		WHERE COMPANY_NUMBER = #{companyNumber}
+		TBL_JOB_POST
+		WHERE COMPANY_NUMBER = (
+		SELECT COMPANY_NUMBER
+		FROM
+		TBL_COMPANY_MEMBER
+		WHERE
+		USER_NUMBER = #{value}
+		)
 	</delete>
 
-	<delete id="deleteCompInfoByCompanyNumber" parameterType="int">
+	<delete id="deleteFileByUserNumber" parameterType="int">
+		DELETE FROM
+		TBL_FILE
+		WHERE COMPANY_NUMBER = (
+		SELECT COMPANY_NUMBER
+		FROM
+		TBL_COMPANY_MEMBER
+		WHERE
+		USER_NUMBER = #{value}
+		)
+	</delete>
+
+	<delete id="deleteCompInfoByUserNumber" parameterType="int">
 		DELETE
 		FROM TBL_COMP_INFO
-		WHERE COMPANY_NUMBER = #{companyNumber}
+		WHERE COMPANY_NUMBER = (
+		SELECT COMPANY_NUMBER
+		FROM
+		TBL_COMPANY_MEMBER
+		WHERE
+		USER_NUMBER = #{value}
+		)
 	</delete>
 
 	<!-- 일반회원 마이페이지 - 회원탈퇴 -->
 	<delete id="deleteMemberByUserNumber" parameterType="int">
 		DELETE FROM
 		TBL_USER
-		WHERE USER_NUMBER = #{userNumber}
+		WHERE USER_NUMBER = #{value}
 		AND USER_TYPE = '일반회원'
 	</delete>
 
-	<!-- 기업회원 마이페이지 - 회원탈탈퇴 -->
+	<!-- 기업회원 마이페이지 - 회원탈퇴 -->
 	<delete id="deleteCompanyUserByUserNumber" parameterType="int">
 		DELETE
 		FROM TBL_USER
-		WHERE USER_NUMBER = #{userNumber}
+		WHERE USER_NUMBER = #{value}
 		AND USER_TYPE = '기업회원'
 	</delete>
+
+	<!-- 직군조회 -->
+	<select id="selectJobGroupList" resultType="JobGroupDTO">
+		SELECT
+		JOB_NUMBER AS jobNumber,
+		JOB_NAME AS jobName
+		FROM TBL_JOB_GROUP
+		ORDER BY JOB_NUMBER
+	</select>
 </mapper>

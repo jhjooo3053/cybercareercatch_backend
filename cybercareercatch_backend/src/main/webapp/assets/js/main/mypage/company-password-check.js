@@ -1,20 +1,28 @@
-const form = document.getElementById("passwordCheckForm");
-const userPw = document.getElementById("userPw");
+const passwordCheckForm = document.getElementById("passwordCheckForm");
+const userPwInput = document.getElementById("userPw");
 const pwError = document.getElementById("pwError");
 
-if (form && userPw && pwError) {
-  form.addEventListener("submit", function (e) {
-    pwError.textContent = "";
+function showMessage(message, color = "red") {
+	if (!pwError) return;
+	pwError.textContent = message;
+	pwError.style.color = color;
+}
 
-    if (!userPw.value.trim()) {
-      e.preventDefault();
-      pwError.textContent = "비밀번호를 입력해주세요.";
-      userPw.focus();
-      return;
-    }
-  });
+if (userPwInput) {
+	userPwInput.addEventListener("input", function () {
+		showMessage("");
+	});
+}
 
-  userPw.addEventListener("input", function () {
-    pwError.textContent = "";
-  });
+if (passwordCheckForm) {
+	passwordCheckForm.addEventListener("submit", function (e) {
+		const userPw = userPwInput.value.trim();
+
+		if (userPw === "") {
+			e.preventDefault();
+			showMessage("비밀번호를 입력해주세요.");
+			userPwInput.focus();
+			return;
+		}
+	});
 }

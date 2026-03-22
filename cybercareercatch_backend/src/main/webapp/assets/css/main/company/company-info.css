@@ -255,4 +255,363 @@
 
 .companyInfo-del button:hover {
     background: #c86b6b;
+body {
+    font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+    background: #f7f8fc;
+    color: #222;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+header {
+    height: 166px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* cmp-wrap : 전체 본문 래퍼 */
+.cmp-wrap {
+    width: 100%;
+    padding: 0 36px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 공통 카드 폭 */
+.cmp-hdr,
+.cmp-sec {
+    width: min(1240px, 96%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* cmp-hdr : 상단 기업 헤더 카드 */
+.cmp-hdr {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 40px 44px;
+    margin-bottom: 8px;
+    box-shadow: 0 8px 24px rgba(44, 62, 128, 0.08);
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+}
+
+/* cmp-hdr-inner : 헤더 내부 정렬 */
+.cmp-hdr-inner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 28px;
+    align-items: center;
+}
+
+/* cmp-hdr-meta : 왼쪽 정보 영역 */
+.cmp-hdr-meta {
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* cmp-hdr-meta-title : 브랜드명 + 회사명 */
+.cmp-hdr-meta-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.cmp-hdr-meta-brand {
+    font-size: 22px;
+    font-weight: 700;
+    color: #6c7fe8;
+}
+
+.cmp-hdr-meta-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333333;
+    word-break: keep-all;
+}
+
+/* cmp-hdr-meta-tbl : 헤더 정보 테이블 */
+.cmp-hdr-meta-tbl {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cmp-hdr-meta-tbl td {
+    padding: 6px 14px 6px 0;
+    font-size: 15px;
+    line-height: 1.8;
+    vertical-align: top;
+    text-align: left;
+    color: #333333;
+    word-break: keep-all;
+}
+
+.cmp-hdr-meta-lbl {
+    width: 96px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #7b7b7b;
+}
+
+.cmp-hdr-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #d9d9d9;
+    margin: 14px 0 16px;
+}
+
+/* cmp-hdr-logo : 오른쪽 로고 영역 */
+.cmp-hdr-logo {
+    width: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* cmp-hdr-logo-img : 로고 박스 */
+.cmp-hdr-logo-img {
+    width: 100%;
+    max-width: 240px;
+    aspect-ratio: 1 / 1;
+    background: #d9dce3;
+    border-radius: 24px;
+    flex-shrink: 0;
+}
+
+/* cmp-sec : 아래 본문 섹션 공통 */
+.cmp-sec {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 34px 40px;
+    margin-top: 24px;
+    box-shadow: 0 8px 24px rgba(44, 62, 128, 0.06);
+}
+
+/* cmp-sec-title : 섹션 제목 */
+.cmp-sec-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #111111;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #232834;
+}
+
+/* cmp-sec-body : 섹션 본문 */
+.cmp-sec-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #4a4f5f;
+    padding: 0 6px;
+}
+
+/* cmp-sec-sub : 기업 정보 상단 소개 */
+.cmp-sec-sub {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2f3c76;
+    word-break: keep-all;
+    white-space: pre-line;
+}
+
+/* cmp-sec-hlgt : 본문 박스 */
+.cmp-sec-hlgt {
+    width: 100%;
+    padding: 22px 24px;
+    border-radius: 18px;
+    background: #f8faff;
+    border: 1px solid #e6edff;
+    color: #4a4f5f;
+    font-size: 15px;
+    line-height: 1.9;
+    word-break: keep-all;
+    white-space: pre-line;
+}
+
+/* cmp-qna : QnA 섹션 */
+.cmp-qna {
+    margin-bottom: 20px;
+}
+
+/* cmp-qna-box : 클릭 박스 */
+.cmp-qna-box {
+    border: 2px solid #6c7fe8;
+    border-radius: 18px;
+    padding: 34px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.cmp-qna-box:hover {
+    background: #f3f6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(108, 127, 232, 0.12);
+}
+
+.cmp-qna-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #6c7fe8;
+    margin-bottom: 8px;
+}
+
+.cmp-qna-sub {
+    font-size: 14px;
+    color: #7d8597;
+}
+
+.cmp-sec-body p {
+    color: #4a4f5f;
+    line-height: 1.9;
+    word-break: keep-all;
+}
+
+/* 태블릿 대응 */
+@media (max-width: 1024px) {
+    .cmp-wrap {
+        padding: 0 24px 52px;
+    }
+
+    .cmp-hdr,
+    .cmp-sec {
+        width: min(100%, 980px);
+    }
+
+    .cmp-hdr {
+        padding: 32px 30px;
+        min-height: 340px;
+    }
+
+    .cmp-hdr-inner {
+        grid-template-columns: minmax(0, 1fr) 220px;
+        gap: 24px;
+    }
+
+    .cmp-hdr-logo {
+        width: 220px;
+    }
+
+    .cmp-hdr-logo-img {
+        max-width: 210px;
+    }
+
+    .cmp-hdr-meta-name {
+        font-size: 24px;
+    }
+
+    .cmp-sec {
+        padding: 30px 30px;
+    }
+
+    .cmp-sec-title {
+        font-size: 26px;
+    }
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    header {
+        height: 120px;
+    }
+
+    .cmp-wrap {
+        padding: 0 16px 40px;
+    }
+
+    .cmp-hdr,
+    .cmp-sec {
+        width: 100%;
+    }
+
+    .cmp-hdr {
+        padding: 24px 20px;
+        border-radius: 20px;
+        min-height: auto;
+    }
+
+    .cmp-hdr-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .cmp-hdr-meta {
+        max-width: none;
+    }
+
+    .cmp-hdr-meta-title {
+        justify-content: flex-start;
+        margin-bottom: 16px;
+    }
+
+    .cmp-hdr-meta-brand {
+        font-size: 18px;
+    }
+
+    .cmp-hdr-meta-name {
+        font-size: 22px;
+    }
+
+    .cmp-hdr-meta-tbl td {
+        font-size: 14px;
+        padding: 5px 8px 5px 0;
+    }
+
+    .cmp-hdr-meta-lbl {
+        width: 78px;
+    }
+
+    .cmp-hdr-logo {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cmp-hdr-logo-img {
+        width: 180px;
+        max-width: 180px;
+        border-radius: 20px;
+    }
+
+    .cmp-sec {
+        padding: 24px 20px;
+        border-radius: 20px;
+        margin-top: 18px;
+    }
+
+    .cmp-sec-body {
+        padding: 0;
+    }
+
+    .cmp-sec-title {
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+
+    .cmp-sec-sub {
+        font-size: 15px;
+    }
+
+    .cmp-sec-hlgt {
+        font-size: 14px;
+        padding: 18px 18px;
+    }
+
+    .cmp-qna-title {
+        font-size: 19px;
+    }
 }

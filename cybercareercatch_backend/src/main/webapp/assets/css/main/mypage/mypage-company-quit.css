@@ -1,82 +1,71 @@
 *{
-  margin:0px;
-  padding:0px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
   background-color: white;
 }
 
 .main-container{
-  display:flex;
-  flex-direction: column;
-  max-width:1200px;
-  margin:auto;
-  /* border:1px solid black; */
-  padding: 70px 0px;  /* 위아래 + 좌우 */
-  min-height: 700px;   /* 화면 큰 경우 대비 */
+  max-width: 1200px;
+  margin: auto;
+  padding: 70px 0;
+  min-height: 700px;
 }
 
 .mypage-title{
-  font-size:40px;
-  margin-bottom:30px;
+  font-size: 40px;
+  margin-bottom: 30px;
   font-weight: bold;
 }
 
 .main-session{
-  margin:0px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
 }
 
-.mypageedit-subtitle{
-  display:flex;
-  flex-direction: column;
-  margin:10px 0px;
+.mypage-notice-box{
+  width: 500px;
+  padding: 50px 40px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  text-align: center;
 }
 
-.mypageedit-inputpw{
-  width:500px;
-  height:50px;
-  border-radius:6px;
-  border:1px solid rgba(0, 0, 0, 0.2);
-  font-size:20px;
-  color:#222;
-  padding:0 14px;
+.mypage-notice-title{
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
-.pw-error{
-  margin-top:6px;
-  font-size:12px;
-  color:rgb(220, 38, 38);
-  text-align:right;
-  display:block;            /* 기본 숨김 */
-}
-
-.mypageedit-inputpw::placeholder{
-  color:rgba(0, 0, 0, 0.35);
+.mypage-notice-text{
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 35px;
 }
 
 .btn-box{
   display: flex;
-  justify-content: flex-end;
-  margin-top:10px;
+  justify-content: center;
 }
 
 .btn{
-  font-size:14px;
-  color:white;
-  text-align:center;
-  padding:0 12px;
-  height:36px;
-  background-color:rgba(0, 26, 255, 0.5);
-  border-radius:6px;
-  border:1px solid rgba(0, 0, 0, 0.2);
-  cursor:pointer;
-  margin-left:10px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  box-sizing:border-box;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  padding: 0 18px;
+  height: 40px;
+  background-color: rgba(0, 26, 255, 0.5);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
-
-#return{
-  background-color: rgba(244,7,7,0.5)
-}
-

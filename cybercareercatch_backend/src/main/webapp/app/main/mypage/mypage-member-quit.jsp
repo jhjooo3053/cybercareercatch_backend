@@ -1,24 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>기업회원 마이페이지 - 회원탈퇴</title>
+<title>일반회원 마이페이지 - 회원탈퇴</title>
 <link rel="stylesheet"
-	href="${contextPath}/assets/css/main/mypage/mypage-member-quit.css">
-
-<script>
-	const contextPath = "${contextPath}";
-</script>
+	href="${pageContext.request.contextPath}/assets/css/main/mypage/mypage-member-quit.css">
 <script defer
-	src="${contextPath}/assets/js/main/mypage/mypage-member-quit.js"></script>
+	src="${pageContext.request.contextPath}/assets/js/main/mypage/mypage-member-quit.js"></script>
 </head>
 
 <body>
@@ -28,22 +21,20 @@
 
 			<div class="main-session">
 				<form id="member-quit-form"
-					action="${contextPath}/mypage/member/delete.my"
+					action="${pageContext.request.contextPath}/member/mypage/quitOk.mpfc"
 					method="post">
 
 					<div class="mypageedit-subtitle">회원탈퇴를 위해 비밀번호를 입력하세요</div>
 
-					<input type="password"
-						class="mypageedit-inputpw"
-						id="member-quit-password"
-						name="userPw"
-						placeholder="비밀번호 입력">
+					<input type="password" class="mypageedit-inputpw"
+						id="member-quit-password" name="userPw" placeholder="비밀번호 입력">
 
-					<div class="pw-error" id="pwError" aria-live="polite"></div>
+					<div class="pw-error" id="pwError" aria-live="polite">${pwMessage}</div>
 
 					<div class="btn-box">
 						<button type="button" class="btn" id="confirm">확인</button>
-						<a href="./mypage-member.js" class="btn" id="return">돌아가기</a>
+						<a href="#" class="btn" id="return"
+							data-move-url="${pageContext.request.contextPath}/member/mypage.mpfc">돌아가기</a>
 					</div>
 				</form>
 			</div>

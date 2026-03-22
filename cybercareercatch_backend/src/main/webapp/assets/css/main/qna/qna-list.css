@@ -77,7 +77,6 @@ header {
     margin-bottom: 4px;
 }
 
-/* 열 순서: 번호 | 제목 | 기업명 | 작성일 | 조회 | (빈칸) */
 .qna-list-tbl-row {
     display: flex;
     align-items: center;
@@ -86,20 +85,12 @@ header {
     gap: 8px;
 }
 
-/* qna-list-tbl-header : 헤더 행 */
 .qna-list-tbl-header {
     font-size: 12px;
     font-weight: 600;
     color: #888;
     background: #fafafa;
     border-bottom: 2px solid #ddd;
-    cursor: default;
-}
-
-/* qna-list-tbl-notice : 공지 행 */
-.qna-list-tbl-notice {
-    background: #fffbe6;
-    font-weight: 700;
     cursor: default;
 }
 
@@ -123,59 +114,16 @@ header {
     text-align: center;
 }
 
-.qna-list-tbl-views {
-    flex: 0 0 50px;
-    text-align: center;
-}
-
-/* qna-list-tbl-row 클릭 가능한 행 hover */
-.qna-list-tbl-row:not(.qna-list-tbl-header):not(.qna-list-tbl-notice):hover {
-    background: #f5f7ff;
-    cursor: pointer;
-}
-
-/* 기업명 열 */
-.qna-list-tbl-row>div:nth-child(3) {
+.qna-list-tbl-status {
     flex: 0 0 100px;
     text-align: center;
 }
 
-/* qna-list-pg : 페이지네이션 */
-.qna-list-pg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin: 20px 0;
-}
-
-.qna-list-pg button {
-    background: none;
-    border: none;
-    font-size: 14px;
-    color: #333;
+.qna-list-tbl-row:not(.qna-list-tbl-header):hover {
+    background: #f5f7ff;
     cursor: pointer;
-    padding: 2px 0;
-    font-family: inherit;
 }
 
-.qna-list-pg button:hover {
-    color: #6c7fe8;
-}
-
-/* active : 현재 페이지 — 파란색 + 밑줄 */
-.qna-list-pg button.active {
-    color: #6c7fe8;
-    font-weight: 600;
-    border-bottom: 2px solid #6c7fe8;
-}
-
-.qna-list-pg button:disabled {
-    color: #ccc;
-    cursor: default;
-}
-
-/* qna-list-search : 검색 영역 */
 .qna-list-search {
     display: flex;
     align-items: center;
@@ -183,7 +131,6 @@ header {
     margin-top: 8px;
 }
 
-/* qna-list-search-sel : 검색 필드 select */
 .qna-list-search-sel {
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -192,7 +139,6 @@ header {
     background: #fff;
 }
 
-/* qna-list-search-inp : 검색 입력창 (inp = input 축약) */
 .qna-list-search-inp {
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -201,7 +147,6 @@ header {
     flex: 1;
 }
 
-/* qna-list-search-btn : 검색/글쓰기 버튼 */
 .qna-list-search-btn {
     border: 1px solid #ccc;
     background: #fff;
@@ -219,7 +164,6 @@ header {
     background: #f0f0f0;
 }
 
-/* qna-list-search-btn-write : 글쓰기 버튼 강조 */
 .qna-list-search-btn-write {
     background: #6c7fe8;
     color: white !important;
@@ -228,4 +172,41 @@ header {
 
 .qna-list-search-btn-write:hover {
     background: #5a6ed6;
+}
+
+.qna-status {
+    display: inline-block;
+    min-width: 70px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.qna-status-wait {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.qna-status-done {
+    background: #e7f7ee;
+    color: #1f7a4d;
+}
+
+.qna-list-empty {
+    padding: 24px 12px;
+    text-align: center;
+    color: #999;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+}
+
+
+
+.qna-list-empty {
+    padding: 24px 12px;
+    text-align: center;
+    color: #999;
+    border-bottom: 1px solid #eee;
+    background: #fff;
 }

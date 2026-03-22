@@ -12,36 +12,36 @@ import com.ccc.qna.dao.QnaDAO;
 
 public class QnaDeleteController implements Execute {
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+   @Override
+   public Result execute(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
 
-		QnaDAO qnaDAO = new QnaDAO();
-		Result result = new Result();
+      QnaDAO qnaDAO = new QnaDAO();
+      Result result = new Result();
 
-		String postNumberStr = request.getParameter("postNumber");
+      String postNumberStr = request.getParameter("postNumber");
 
-		System.out.println("게시글 삭제 요청 들어옴");
-		System.out.println("postNumberStr : " + postNumberStr);
+      System.out.println("게시글 삭제 요청 들어옴");
+      System.out.println("postNumberStr : " + postNumberStr);
 
-		if (postNumberStr == null || postNumberStr.trim().isEmpty()) {
-			result.setPath(request.getContextPath() + "/qna/list.qfc");
-			result.setRedirect(true);
-			return result;
-		}
+      if (postNumberStr == null || postNumberStr.trim().isEmpty()) {
+         result.setPath(request.getContextPath() + "/qna/list.qfc");
+         result.setRedirect(true);
+         return result;
+      }
 
-		Long postNumber = Long.parseLong(postNumberStr);
+      Long postNumber = Long.parseLong(postNumberStr);
 
-		// 1. 해당 게시글의 댓글 전체 삭제
-		qnaDAO.deleteCommentsByPostNumber(postNumber);
+      // 1. 해당 게시글의 댓글 전체 삭제
+      qnaDAO.deleteCommentsByPostNumber(postNumber);
 
-		// 2. 게시글 삭제
-		qnaDAO.deleteQna(postNumber);
+      // 2. 게시글 삭제
+      qnaDAO.deleteQna(postNumber);
 
-		// 3. 목록으로 이동
-		result.setPath(request.getContextPath() + "/qna/list.qfc");
-		result.setRedirect(true);
+      // 3. 목록으로 이동
+      result.setPath(request.getContextPath() + "/qna/list.qfc");
+      result.setRedirect(true);
 
-		return result;
-	}
+      return result;
+   }
 }

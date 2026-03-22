@@ -9,24 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ccc.common.Execute;
 import com.ccc.common.Result;
+import com.ccc.company.dto.CompanyDTO;
 import com.ccc.qna.dao.QnaDAO;
 import com.ccc.qna.dto.QnaCompanyDTO;
 
 public class QnaWriteFormController implements Execute {
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+   @Override
+   public Result execute(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
 
-		QnaDAO qnaDAO = new QnaDAO();
-		Result result = new Result();
+      QnaDAO qnaDAO = new QnaDAO();
+      Result result = new Result();
 
-		List<QnaCompanyDTO> companyList = qnaDAO.selectCompanyList();
-		request.setAttribute("companyList", companyList);
+      List<CompanyDTO> companyList = qnaDAO.selectCompanyList();
+      request.setAttribute("companyList", companyList);
 
-		result.setPath("/app/main/qna/add-qna.jsp");
-		result.setRedirect(false);
+      result.setPath("/app/main/qna/add-qna.jsp");
+      result.setRedirect(false);
 
-		return result;
-	}
+      return result;
+   }
 }

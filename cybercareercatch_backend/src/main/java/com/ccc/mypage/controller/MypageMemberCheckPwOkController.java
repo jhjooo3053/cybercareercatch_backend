@@ -21,11 +21,16 @@ public class MypageMemberCheckPwOkController implements Execute{
 		Result result = new Result();
 		HttpSession session = request.getSession();
 		
-		//로그인 정보 확인
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		System.out.println("로그인한 회원 번호 : " + userNumber);
 		String userType = (String) session.getAttribute("userType");
+		
+		//테스트용 - 삭제
+		session.setAttribute("userNumber", 1);
+		session.setAttribute("userType", "일반회원");
+		
+		System.out.println("로그인한 회원 번호 : " + userNumber);
 		System.out.println("로그인한 회원 타입 : " + userType);
+		
 		
 		// 비로그인
 		if (userNumber == null) {
@@ -34,9 +39,9 @@ public class MypageMemberCheckPwOkController implements Execute{
 			return result;
 		}
 
-		// 일반회원 아님
+		// 일반회원이 아님
 		if (!"일반회원".equals(userType)) {
-			result.setPath(request.getContextPath() + "/main/main.mafc");
+			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
 			result.setRedirect(true);
 			return result;
 		}
@@ -46,7 +51,7 @@ public class MypageMemberCheckPwOkController implements Execute{
 		
 		if (userPw == null || userPw.trim().isEmpty()) {
 			request.setAttribute("passwordError", "비밀번호를 입력해주세요.");
-			result.setPath("/app/mypage/member-password-check.jsp");
+			result.setPath("/app/main/mypage/member-password-check.jsp");
 			result.setRedirect(false);
 			return result;
 		}
@@ -58,14 +63,14 @@ public class MypageMemberCheckPwOkController implements Execute{
 		
 		if(isCheck) {
 			session.setAttribute("memberPwChecked", true);
-			result.setPath(request.getContextPath() + "/mypage/member/edit.mpfc");
+			result.setPath(request.getContextPath() + "/member/mypage/editInfo.mpfc");
 			result.setRedirect(true);
 			return result;
 		}
 		
 		//비밀번호 불일치
 		request.setAttribute("passwordError", "비밀번호가 일치하지 않습니다.");
-		result.setPath("/app/mypage/member-password-check.jsp");
+		result.setPath("/app/main/mypage/member-password-check.jsp");
 		result.setRedirect(false);
 		return result;
 

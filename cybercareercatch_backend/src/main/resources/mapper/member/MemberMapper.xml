@@ -5,25 +5,51 @@
 
 	<!-- 로그인 -->
 	<select id="login" parameterType="UserDTO" resultType="int">
-		SELECT user_number
+		SELECT
+		user_number
 		FROM tbl_user
 		WHERE user_id = #{userId}
-		AND user_pw = #{userPassword}
+		AND user_pw =
+		#{userPassword}
 	</select>
 
 	<!-- 회원가입 - TBL_USER -->
 	<insert id="userJoin" parameterType="MemberJoinDTO">
-		INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PW, USER_NAME, USER_PHONE,
-		USER_JOIN_DATE, USER_TYPE)
-		VALUES (SEQ_USER_NUMBER.NEXTVAL, #{userId}, #{userPw}, #{userName},
+		INSERT INTO TBL_USER
+		(USER_NUMBER, USER_ID, USER_PW, USER_NAME, USER_PHONE,
+		USER_JOIN_DATE,
+		USER_TYPE)
+		VALUES (SEQ_USER_NUMBER.NEXTVAL, #{userId}, #{userPw},
+		#{userName},
 		#{userPhone}, SYSDATE, '일반회원')
 	</insert>
 
 	<!-- 회원가입 - TBL_MEMBER -->
 	<insert id="memberJoin" parameterType="MemberJoinDTO">
-		INSERT INTO TBL_MEMBER (USER_NUMBER, MEMBER_DOB, MEMBER_GENDER)
-		VALUES ((SELECT MAX(USER_NUMBER) FROM TBL_USER), #{memberDob},
+		INSERT INTO TBL_MEMBER
+		(USER_NUMBER, MEMBER_DOB, MEMBER_GENDER)
+		VALUES ((SELECT
+		MAX(USER_NUMBER) FROM TBL_USER), #{memberDob},
 		#{memberGender})
 	</insert>
+
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT
+		COUNT(*) FROM TBL_USER
+		WHERE USER_ID = #{userId}
+	</select>
+
+	<select id="checkIdAndPhone" parameterType="UserDTO"
+		resultType="int">
+		SELECT COUNT(*) FROM TBL_USER
+		WHERE USER_ID = #{userId}
+		AND USER_PHONE = #{userPhone}
+	</select>
+
+	<update id="updatePw" parameterType="UserDTO">
+		UPDATE TBL_USER
+		SET USER_PW = #{userPassword}
+		WHERE USER_ID = #{userId}
+	</update>
 
 </mapper>

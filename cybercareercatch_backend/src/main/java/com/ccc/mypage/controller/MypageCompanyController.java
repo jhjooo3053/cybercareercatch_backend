@@ -15,7 +15,6 @@ import com.ccc.mypage.dao.MypageDAO;
 import com.ccc.mypage.dto.CompanyMypageInfoDTO;
 import com.ccc.mypage.dto.MypageQnaListDTO;
 
-
 public class MypageCompanyController implements Execute {
 
 	@Override
@@ -27,35 +26,44 @@ public class MypageCompanyController implements Execute {
 		Result result = new Result();
 		HttpSession session = request.getSession();
 
-		// 로그인 정보 확인
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		System.out.println("로그인한 회원 번호 : " + userNumber);
 		String userType = (String) session.getAttribute("userType");
+		
+		//테스트용 - 삭제
+		session.setAttribute("userNumber", 51);
+		session.setAttribute("userType", "기업회원");
+		
+		System.out.println("로그인한 회원 번호 : " + userNumber);
 		System.out.println("로그인한 회원 타입 : " + userType);
-
-		// 비로그인
+		
+		// 로그인 안 된 경우
 		if (userNumber == null) {
-			result.setPath(request.getContextPath() + "/member/login.mefc");
 			result.setRedirect(true);
+			result.setPath(request.getContextPath() + "/member/login.mefc");
 			return result;
 		}
 
-		// 기업회원 아님
-		if (!"기업회원".equals(userType)) {
+		// 기업회원이 아니면 접근 불가
+		if (userType == null || !userType.equals("기업회원")) {
+			result.setRedirect(true);
+			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
+			return result;
+		}
+		
+		// 기업회원 기본정보 조회
+		CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMypageInfo(userNumber);
+
+		// 조회 실패 시 메인으로 이동
+		if (companyMypageInfoDTO == null) {
 			result.setPath(request.getContextPath() + "/main/main.mafc");
 			result.setRedirect(true);
 			return result;
 		}
 
-		// 기업회원 기본정보 조회
-		CompanyMypageInfoDTO companyMypageInfoDTO = mypageDAO.selectCompanyMemberMyPageInfo(userNumber);
-		request.setAttribute("CompanyMypageInfoDTO", companyMypageInfoDTO);
+		request.setAttribute("companyMypageInfoDTO", companyMypageInfoDTO);
 
-		// 기업정보페이지 개수 조회
-		int companyPageCount = 0;
-		if (companyMypageInfoDTO != null) {
-			companyPageCount = mypageDAO.countCompanyPageByCompanyNumber(companyMypageInfoDTO.getCompanyNumber());
-		}
+		// 기업정보페이지 개수 조회 - 등록 / 수정버튼 나눠서 보여주기용
+		int companyPageCount = mypageDAO.countCompanyPageByUserNumber(userNumber);
 		request.setAttribute("companyPageCount", companyPageCount);
 
 		// ===== 페이징 처리 =====
@@ -78,7 +86,12 @@ public class MypageCompanyController implements Execute {
 
 		// 답변대기 Q&A 전체 목록 조회
 		List<MypageQnaListDTO> allWaitingQnaList = mypageDAO.selectWaitingQnaListByCompanyUser(userNumber);
-		int total = mypageDAO.compQnaTotal(userNumber);
+		if (allWaitingQnaList == null) {
+			allWaitingQnaList = Collections.emptyList();
+		}
+
+		// 전체 개수
+		int total = allWaitingQnaList.size();
 
 		// 현재 페이지에 보여줄 시작/끝 인덱스
 		int startRow = (page - 1) * rowCount;
@@ -128,7 +141,7 @@ public class MypageCompanyController implements Execute {
 		System.out.println("=====================================");
 
 		// JSP 이동
-		result.setPath("/app/mypage/mypage-company.jsp");
+		result.setPath("/app/main/mypage/mypage-company.jsp");
 		result.setRedirect(false);
 
 		return result;

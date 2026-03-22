@@ -270,6 +270,11 @@
 
   <footer></footer>
 
-  <script src="../../../assets/js/main/account/signup-company.js"></script>
+  <script>
+		const base = "${pageContext.request.contextPath}";
+	</script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/main/account/signup-member.js">
+	</script>
 </body>
 </html>

@@ -12,14 +12,14 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/main/mypage/company-password-check.css">
 <script defer
-	src="${contextPath}/assets/js/main/mypage/company-password-check.js"></script>
+	src="${pageContext.request.contextPath}/assets/js/main/mypage/company-password-check.js"></script>
 </head>
 <body>
 	<main>
 		<div class="main-container">
 			<div class="mypage-title">마이페이지</div>
 			<div class="main-session">
-				<form id="passwordCheckForm" action="#" method="post">
+				<form id="passwordCheckForm" action="${pageContext.request.contextPath}/company/mypage/checkPwOk.mpfc" method="post">
 					<div class="mypageedit-subtitle">기업 정보 변경을 위해 비밀번호를 입력하세요</div>
 					<input type="password" id="userPw" name="userPw" class="mypageedit-inputpw"
 						placeholder="비밀번호 입력">
@@ -28,7 +28,7 @@
 					</div>
 					<div class="btn-box">
 						<button type="submit" class="btn" id="confirm">확인</button>
-						<a href="./mypage-member.html" class="btn" id="return">돌아가기</a>
+						<a href="${pageContext.request.contextPath}/company/mypage.mpfc" class="btn" id="return">돌아가기</a>
 					</div>
 				</form>
 

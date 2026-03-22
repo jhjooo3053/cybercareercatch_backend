@@ -15,42 +15,42 @@ import com.ccc.qna.dto.QnaDetailDTO;
 
 public class QnaDetailController implements Execute {
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+   @Override
+   public Result execute(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
 
-		QnaDAO qnaDAO = new QnaDAO();
-		Result result = new Result();
+      QnaDAO qnaDAO = new QnaDAO();
+      Result result = new Result();
 
-		String postNumberStr = request.getParameter("postNumber");
+      String postNumberStr = request.getParameter("postNumber");
 
-		if(postNumberStr == null || postNumberStr.trim().isEmpty()) {
-			result.setPath(request.getContextPath() + "/qna/list.qfc");
-			result.setRedirect(true);
-			return result;
-		}
+      if(postNumberStr == null || postNumberStr.trim().isEmpty()) {
+         result.setPath(request.getContextPath() + "/qna/list.qfc");
+         result.setRedirect(true);
+         return result;
+      }
 
-		Long postNumber = Long.parseLong(postNumberStr);
+      Long postNumber = Long.parseLong(postNumberStr);
 
-		QnaDetailDTO qnaDetail = qnaDAO.selectQnaDetail(postNumber);
-		List<QnaCommentDTO> commentList = qnaDAO.selectCommentListByPostNumber(postNumber);
+      QnaDetailDTO qnaDetail = qnaDAO.selectQnaDetail(postNumber);
+      List<QnaCommentDTO> commentList = qnaDAO.selectCommentListByPostNumber(postNumber);
 
-		System.out.println("상세 postNumber : " + postNumber);
-		System.out.println("qnaDetail : " + qnaDetail);
-		System.out.println("commentList size : " + (commentList == null ? "null" : commentList.size()));
+      System.out.println("상세 postNumber : " + postNumber);
+      System.out.println("qnaDetail : " + qnaDetail);
+      System.out.println("commentList size : " + (commentList == null ? "null" : commentList.size()));
 
-		if(qnaDetail == null) {
-			result.setPath(request.getContextPath() + "/qna/list.qfc");
-			result.setRedirect(true);
-			return result;
-		}
+      if(qnaDetail == null) {
+         result.setPath(request.getContextPath() + "/qna/list.qfc");
+         result.setRedirect(true);
+         return result;
+      }
 
-		request.setAttribute("qnaDetail", qnaDetail);
-		request.setAttribute("commentList", commentList);
+      request.setAttribute("qnaDetail", qnaDetail);
+      request.setAttribute("commentList", commentList);
 
-		result.setPath("/app/main/qna/qna-detail.jsp");
-		result.setRedirect(false);
+      result.setPath("/app/main/qna/qna-detail.jsp");
+      result.setRedirect(false);
 
-		return result;
-	}
+      return result;
+   }
 }

@@ -38,7 +38,7 @@ public class LoginOkController implements Execute {
 		System.out.println(memberNumber);
 
 		if (memberNumber != -1) {
-			path = "/post/postListOk.bo";
+			path = "/main/mainpage.mafc";
 			session.setAttribute("memberNumber", memberNumber);
 			System.out.println("세션값 : " + memberNumber);
 

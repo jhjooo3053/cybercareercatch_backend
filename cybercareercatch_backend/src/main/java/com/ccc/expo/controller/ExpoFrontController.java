@@ -1,4 +1,3 @@
-
 package com.ccc.expo.controller;
 
 import java.io.IOException;
@@ -43,7 +42,11 @@ public class ExpoFrontController extends HttpServlet {
         Result result = null;
 
         switch (target) {
-
+        case "/expo/calendar.ex":
+            System.out.println("박람회 페이지 진입");
+            result = new ExpoCalendarController().execute(request, response);
+            break;
+            
         case "/expo/list.ex":
             System.out.println("박람회 일정 목록 요청");
             result = new ExpoListOkController().execute(request, response);

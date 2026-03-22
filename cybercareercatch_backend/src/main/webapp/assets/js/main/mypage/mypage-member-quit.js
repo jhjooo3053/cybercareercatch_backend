@@ -1,58 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const quitForm = document.getElementById("member-quit-form");
-  const passwordInput = document.getElementById("member-quit-password");
-  const confirmBtn = document.getElementById("confirm");
-  const errorMessage = document.getElementById("pwError");
+document.addEventListener("DOMContentLoaded", function () {
+	const quitForm = document.getElementById("member-quit-form");
+	const passwordInput = document.getElementById("member-quit-password");
+	const confirmBtn = document.getElementById("confirm");
+	const errorMessage = document.getElementById("pwError");
+	const returnBtn = document.getElementById("return");
 
-  function setMessage(message = "", type = "") {
-    errorMessage.textContent = message;
-    errorMessage.classList.remove("error", "success");
+	function setMessage(message = "", color = "red") {
+		if (!errorMessage) return;
+		errorMessage.textContent = message;
+		errorMessage.style.color = color;
+	}
 
-    if (type) {
-      errorMessage.classList.add(type);
-    }
-  }
+	// 확인 버튼
+	if (confirmBtn) {
+		confirmBtn.addEventListener("click", function () {
+			const userPw = passwordInput.value.trim();
 
-  confirmBtn.addEventListener("click", async () => {
-    const userPw = passwordInput.value.trim();
+			if (userPw === "") {
+				setMessage("비밀번호를 입력해주세요.");
+				passwordInput.focus();
+				return;
+			}
 
-    if (!userPw) {
-      setMessage("비밀번호를 입력해주세요.", "error");
-      passwordInput.focus();
-      return;
-    }
+			const isConfirmed = confirm("회원탈퇴를 진행하면 계정을 복구할 수 없습니다.\n정말 탈퇴하시겠습니까?");
 
-    try {
-      const response = await fetch(`${contextPath}/mypage/member/check-password.ajax`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-        },
-        body: new URLSearchParams({
-          userPw: userPw
-        })
-      });
+			if (isConfirmed) {
+				quitForm.submit();
+			}
+		});
+	}
 
-      const result = await response.json();
+	// 입력 중 메시지 초기화
+	if (passwordInput) {
+		passwordInput.addEventListener("input", function () {
+			setMessage("");
+		});
+	}
 
-      if (!result.success) {
-        setMessage(result.message || "비밀번호가 일치하지 않습니다.", "error");
-        passwordInput.focus();
-        return;
-      }
+	// 돌아가기 버튼
+	if (returnBtn) {
+		returnBtn.addEventListener("click", function (e) {
+			e.preventDefault();
 
-      const isConfirmed = confirm("회원탈퇴를 진행하면 계정을 복구할 수 없습니다.\n정말 탈퇴하시겠습니까?");
+			const moveUrl = returnBtn.dataset.moveUrl;
 
-      if (isConfirmed) {
-        quitForm.submit();
-      }
-    } catch (error) {
-      setMessage("비밀번호 확인 중 오류가 발생했습니다.", "error");
-      console.error(error);
-    }
-  });
+			if (!moveUrl) return;
 
-  passwordInput.addEventListener("input", () => {
-    setMessage("");
-  });
+			const isOk = confirm("회원탈퇴를 취소하고 마이페이지로 돌아가시겠습니까?");
+			if (isOk) {
+				location.href = moveUrl;
+			}
+		});
+	}
 });

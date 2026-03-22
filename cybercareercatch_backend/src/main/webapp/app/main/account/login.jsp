@@ -92,7 +92,7 @@
             <div class="account_login_options">
               <!-- JS 연동 시 에러가 났을 때만 보이도록 클래스(is-show) 제어 가능 -->
               <span class="account_login_error" id="loginErrorMsg">아이디 또는 비밀번호가 잘못되었습니다.</span>
-              <a href="find-password.html" class="account_login_find_pw">비밀번호 찾기</a>
+              <a href="${pageContext.request.contextPath}/member/find-password.mefc" class="account_login_find_pw">비밀번호 찾기</a>
             </div>
           </div>
 

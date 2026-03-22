@@ -1,24 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>비밀번호 찾기</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>비밀번호 찾기</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
 
-  <link rel="stylesheet" href="../../../assets/css/main/account/find-password.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/main/account/find-password.css" />
 </head>
 
 <body>
-  <header></header>
+	<header></header>
 
-  <!--
+	<!--
    /*
   =============================================================
   [클래스명 뜻]
@@ -50,121 +54,134 @@
 */
   -->
 
-  <main class="account-find-pw-container">
-    <div class="account-find-pw-inner">
+	<main class="account-find-pw-container">
+		<div class="account-find-pw-inner">
 
 
 
-      <h2 class="account-find-pw-title">비밀번호 찾기</h2>
+			<h2 class="account-find-pw-title">비밀번호 찾기</h2>
 
-      <form id="findPwForm">
+			<form id="findPwForm">
 
-        <!-- 1. 아이디 입력 -->
-        <div class="account-find-pw-group">
-          <label class="account-find-pw-label">아이디를 입력해 주세요.</label>
-          <div class="account-find-pw-input-box has-icon">
-            <span class="account-find-pw-icon">
-              <!-- 사람 아이콘 -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round">
+				<!-- 1. 아이디 입력 -->
+				<div class="account-find-pw-group">
+					<label class="account-find-pw-label">아이디를 입력해 주세요.</label>
+					<div class="account-find-pw-input-box has-icon">
+						<span class="account-find-pw-icon"> <!-- 사람 아이콘 --> <svg
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="1.5" stroke-linecap="round"
+								stroke-linejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                 <circle cx="9" cy="7" r="4"></circle>
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
-            </span>
-            <input type="text" id="findId" class="account-find-pw-input" />
-          </div>
-        </div>
+						</span> <input type="text" id="findId" class="account-find-pw-input" />
+					</div>
+				</div>
 
-        <!-- 2. 전화번호 입력 -->
-        <div class="account-find-pw-group">
-          <label class="account-find-pw-label">전화번호를 입력해 주세요.</label>
-          <div class="account-find-pw-input-box has-icon">
-            <span class="account-find-pw-icon">
-              <!-- 핸드폰 아이콘 -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round">
+				<!-- 2. 전화번호 입력 -->
+				<div class="account-find-pw-group">
+					<label class="account-find-pw-label">전화번호를 입력해 주세요.</label>
+					<div class="account-find-pw-input-box has-icon">
+						<span class="account-find-pw-icon"> <!-- 핸드폰 아이콘 --> <svg
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="1.5" stroke-linecap="round"
+								stroke-linejoin="round">
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
                 <line x1="12" y1="18" x2="12.01" y2="18"></line>
               </svg>
-            </span>
-            <input type="tel" id="findPhone" class="account-find-pw-input" />
-          </div>
+						</span> <input type="tel" id="findPhone" class="account-find-pw-input" />
+					</div>
 
-          <!-- 하단 메시지 & 전송 버튼 -->
-          <div class="account-find-pw-action-row">
-            <div class="account-find-pw-msg-area">
-              <!-- JS 제어: 보이게 하려면 style="display: block;" 처리 또는 클래스 제어 -->
-              <span class="account-find-pw-msg red" id="phoneErrorMsg">아이디 또는 전화번호가 잘못 되었습니다. 정확히 입력해 주세요.</span>
-              <span class="account-find-pw-msg blue" id="phoneSuccessMsg">문자로 전송 완료했습니다</span>
-            </div>
-            <button type="button" class="account-find-pw-btn" id="sendSmsBtn">전송</button>
-          </div>
-        </div>
+					<!-- 하단 메시지 & 전송 버튼 -->
+					<div class="account-find-pw-action-row">
+						<div class="account-find-pw-msg-area">
+							<!-- JS 제어: 보이게 하려면 style="display: block;" 처리 또는 클래스 제어 -->
+							<span class="account-find-pw-msg red" id="phoneErrorMsg">아이디
+								또는 전화번호가 잘못 되었습니다. 정확히 입력해 주세요.</span> <span
+								class="account-find-pw-msg blue" id="phoneSuccessMsg">문자로
+								전송 완료했습니다</span>
+						</div>
+						<button type="button" class="account-find-pw-btn" id="sendSmsBtn">전송</button>
+					</div>
+				</div>
 
-        <!-- 3. 인증번호 입력 -->
-        <div class="account-find-pw-group">
-          <div class="account-find-pw-input-box">
-            <input type="text" id="authCode" class="account-find-pw-input" placeholder="인증번호" />
-          </div>
+				<!-- 3. 인증번호 입력 -->
+				<div class="account-find-pw-group">
+					<div class="account-find-pw-input-box">
+						<input type="text" id="authCode" class="account-find-pw-input"
+							placeholder="인증번호" />
+					</div>
 
-          <!-- 하단 메시지 & 입력완료 버튼 -->
-          <div class="account-find-pw-action-row">
-            <div class="account-find-pw-msg-area">
-              <span class="account-find-pw-msg red" id="authErrorMsg">인증번호가 잘못 되었습니다.</span>
-              <span class="account-find-pw-msg blue" id="authSuccessMsg">인증완료되었습니다.</span>
-            </div>
-            <button type="button" class="account-find-pw-btn" id="verifyAuthBtn">입력 완료</button>
-          </div>
-        </div>
+					<!-- 하단 메시지 & 입력완료 버튼 -->
+					<div class="account-find-pw-action-row">
+						<div class="account-find-pw-msg-area">
+							<span class="account-find-pw-msg red" id="authErrorMsg">인증번호가
+								잘못 되었습니다.</span> <span class="account-find-pw-msg blue"
+								id="authSuccessMsg">인증완료되었습니다.</span>
+						</div>
+						<button type="button" class="account-find-pw-btn"
+							id="verifyAuthBtn">입력 완료</button>
+					</div>
+				</div>
 
-        <!-- ==============================================================
+				<!-- ==============================================================
              JS에서 제어하기 쉽도록 화살표와 새 비밀번호 영역을 하나의 div로 묶음
              초기 상태: hidden-section 클래스로 숨김 처리
              ============================================================== -->
-        <div id="newPasswordSection" class="hidden-section">
-          <!-- 화살표 (인증 완료 후 아래 비밀번호 입력창으로 시선 유도) -->
-          <div class="account-find-pw-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
+				<div id="newPasswordSection" class="hidden-section">
+					<!-- 화살표 (인증 완료 후 아래 비밀번호 입력창으로 시선 유도) -->
+					<div class="account-find-pw-arrow">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <polyline points="19 12 12 19 5 12"></polyline>
             </svg>
-          </div>
+					</div>
 
-          <!-- 4. 새로운 비밀번호 입력 (회색 둥근창) -->
-          <div class="account-find-pw-group">
-            <div class="account-find-pw-input-pill">
-              <input type="password" id="newPw" class="account-find-pw-input" placeholder="새로운 비밀번호 입력" />
-            </div>
-          </div>
+					<!-- 4. 새로운 비밀번호 입력 (회색 둥근창) -->
+					<div class="account-find-pw-group">
+						<div class="account-find-pw-input-pill">
+							<input type="password" id="newPw" class="account-find-pw-input"
+								placeholder="새로운 비밀번호 입력" />
+						</div>
+					</div>
 
-          <!-- 5. 새로운 비밀번호 재입력 (회색 둥근창) -->
-          <div class="account-find-pw-group">
-            <!-- 둥근창과 버튼이 한 줄에 배치됨 -->
-            <div class="account-find-pw-row-flex">
-              <div class="account-find-pw-input-pill" style="flex: 1;">
-                <input type="password" id="newPwConfirm" class="account-find-pw-input" placeholder="새로운 비밀번호 재입력" />
-              </div>
-              <button type="button" class="account-find-pw-btn-pill" id="confirmPwBtn">확인</button>
-            </div>
+					<!-- 5. 새로운 비밀번호 재입력 (회색 둥근창) -->
+					<div class="account-find-pw-group">
+						<!-- 둥근창과 버튼이 한 줄에 배치됨 -->
+						<div class="account-find-pw-row-flex">
+							<div class="account-find-pw-input-pill" style="flex: 1;">
+								<input type="password" id="newPwConfirm"
+									class="account-find-pw-input" placeholder="새로운 비밀번호 재입력" />
+							</div>
+							<button type="button" class="account-find-pw-btn-pill"
+								id="confirmPwBtn">확인</button>
+						</div>
 
-            <div class="account-find-pw-action-row" style="margin-top: 8px;">
-              <div class="account-find-pw-msg-area">
-                <span class="account-find-pw-msg red" id="pwMatchErrorMsg">비밀번호가 일치하지 않습니다.</span>
-              </div>
-              <span class="account-find-pw-bottom-info">확인 시 메인페이지로 이동합니다.</span>
-            </div>
-          </div>
-        </div>
-        <!-- ============================================================== -->
+						<div class="account-find-pw-action-row" style="margin-top: 8px;">
+							<div class="account-find-pw-msg-area">
+								<span class="account-find-pw-msg red" id="pwMatchErrorMsg">비밀번호가
+									일치하지 않습니다.</span>
+							</div>
+							<span class="account-find-pw-bottom-info">확인 시 메인페이지로
+								이동합니다.</span>
+						</div>
+					</div>
+				</div>
+				<!-- ============================================================== -->
 
-      </form>
-    </div>
-  </main>
+			</form>
+		</div>
+	</main>
 
-
+	<script>
+		const base = "${pageContext.request.contextPath}";
+	</script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/main/account/find-password.js"></script>
+</body>
 </body>
 
 </html>

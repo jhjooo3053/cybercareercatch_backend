@@ -1,220 +1,192 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>일반회원가입</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/account/signup-member.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>기업회원가입</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/main/account/signup-member.css" />
 </head>
 <body class="signup-member_body">
-  <header></header>
+	<header></header>
 
-  <main class="signup-member_page">
-    <section class="signup-member_wrap" aria-labelledby="signupMemberTitle">
-      <h1 id="signupMemberTitle" class="signup-member_tit">회원가입</h1>
+	<main class="signup-member_page">
+		<section class="signup-member_wrap"
+			aria-labelledby="signupMemberTitle">
+			<h1 id="signupMemberTitle" class="signup-member_tit">회원가입</h1>
 
-      <form action="${pageContext.request.contextPath}/member/signupOk-member.mefc" method="POST" class="signup-member_form" id="signupMemberForm">
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <label class="signup-member_lab" for="signupMemberName">
-              이름
-              <span class="signup-member_req">*</span>
-            </label>
-          </div>
-          <div class="signup-member_ctl">
-            <div class="signup-member_inpbox" id="signupMemberNameBox">
-              <input class="signup-member_inp"type="text" id="signupMemberName" name="userName" placeholder="ex) 홍길동" autocomplete="name"
-              />
-            </div>
-          </div>
-        </div>
+			<form
+				action="${pageContext.request.contextPath}/member/signupOk-member.mefc"
+				method="POST" class="signup-member_form" id="signupMemberForm">
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<label class="signup-member_lab" for="signupMemberName">
+							이름 <span class="signup-member_req">*</span>
+						</label>
+					</div>
+					<div class="signup-member_ctl">
+						<div class="signup-member_inpbox" id="signupMemberNameBox">
+							<input class="signup-member_inp" type="text"
+								id="signupMemberName" name="userName" placeholder="ex) 홍길동"
+								autocomplete="name" />
+						</div>
+					</div>
+				</div>
 
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <label class="signup-member_lab" for="signupMemberBirth">
-              생년월일
-              <span class="signup-member_req">*</span>
-            </label>
-          </div>
-          <div class="signup-member_ctl">
-            <div class="signup-member_inpbox" id="signupMemberBirthBox">
-              <input class="signup-member_inp" type="text" id="signupMemberBirth" name="memberDob" placeholder="ex) 000111" inputmode="numeric" 
-                maxlength="6" autocomplete="bday"
-              />
-            </div>
-          </div>
-        </div>
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<label class="signup-member_lab" for="signupMemberBirth">
+							생년월일 <span class="signup-member_req">*</span>
+						</label>
+					</div>
+					<div class="signup-member_ctl">
+						<div class="signup-member_inpbox" id="signupMemberBirthBox">
+							<input class="signup-member_inp" type="text"
+								id="signupMemberBirth" name="memberDob" placeholder="ex) 000111"
+								inputmode="numeric" maxlength="6" autocomplete="bday" />
+						</div>
+					</div>
+				</div>
 
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <span class="signup-member_lab" id="signupMemberGenderLabel">
-              성별
-              <span class="signup-member_req">*</span>
-            </span>
-          </div>
-          <div class="signup-member_ctl">
-            <div class="signup-member_gender" role="radiogroup" aria-labelledby="signupMemberGenderLabel">
-              <label class="signup-member_gender_item" for="signupMemberGenderM">
-                <input type="radio" id="signupMemberGenderM" name="memberGender" value="M" />
-                <span>남성</span>
-              </label>
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<span class="signup-member_lab" id="signupMemberGenderLabel">
+							성별 <span class="signup-member_req">*</span>
+						</span>
+					</div>
+					<div class="signup-member_ctl">
+						<div class="signup-member_gender" role="radiogroup"
+							aria-labelledby="signupMemberGenderLabel">
+							<label class="signup-member_gender_item"
+								for="signupMemberGenderM"> <input type="radio"
+								id="signupMemberGenderM" name="memberGender" value="M" /> <span>남성</span>
+							</label> <label class="signup-member_gender_item"
+								for="signupMemberGenderF"> <input type="radio"
+								id="signupMemberGenderF" name="memberGender" value="F" /> <span>여성</span>
+							</label>
+						</div>
+					</div>
+				</div>
 
-              <label class="signup-member_gender_item" for="signupMemberGenderF">
-                <input type="radio" id="signupMemberGenderF" name="memberGender" value="F" />
-                <span>여성</span>
-              </label>
-            </div>
-          </div>
-        </div>
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<label class="signup-member_lab" for="signupMemberPhone">
+							전화번호 <span class="signup-member_req">*</span>
+						</label>
+					</div>
+					<div class="signup-member_ctl signup-member_ctl_row">
+						<div class="signup-member_inpbox" id="signupMemberPhoneBox">
+							<input class="signup-member_inp" type="tel"
+								id="signupMemberPhone" name="userPhone"
+								placeholder="ex) 01012345678 (- 제외 입력)" inputmode="numeric"
+								maxlength="11" autocomplete="tel" />
+						</div>
+						<button type="button" class="signup-member_btn_sm"
+							id="signupMemberSendBtn">문자인증</button>
+					</div>
+				</div>
 
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <label class="signup-member_lab" for="signupMemberPhone">
-              전화번호
-              <span class="signup-member_req">*</span>
-            </label>
-          </div>
-          <div class="signup-member_ctl signup-member_ctl_row">
-            <div class="signup-member_inpbox" id="signupMemberPhoneBox">
-              <input class="signup-member_inp" type="tel" id="signupMemberPhone" name="userPhone"
-                placeholder="ex) 01012345678 (- 제외 입력)" inputmode="numeric" maxlength="11" autocomplete="tel"
-              />
-            </div>
-            <button type="button" class="signup-member_btn_sm" id="signupMemberSendBtn">
-              문자인증
-            </button>
-          </div>
-        </div>
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<label class="signup-member_lab" for="signupMemberAuthCode">
+							인증번호 입력 <span class="signup-member_req">*</span>
+						</label>
+						<div class="signup-member_msgs" aria-live="polite">
+							<span class="signup-member_msg signup-member_msg_err"
+								id="signupMemberAuthErr"> 잘못된 인증번호입니다 </span> <span
+								class="signup-member_msg signup-member_msg_ok"
+								id="signupMemberAuthOk"> 인증되었습니다 </span>
+						</div>
+					</div>
+					<div class="signup-member_ctl signup-member_ctl_row">
+						<div class="signup-member_inpbox" id="signupMemberAuthBox">
+							<input class="signup-member_inp" type="text"
+								id="signupMemberAuthCode" name="authCode"
+								placeholder="ex) 123456" inputmode="numeric" maxlength="6"
+								autocomplete="one-time-code" />
+						</div>
+						<button type="button" class="signup-member_btn_sm"
+							id="signupMemberAuthBtn">확인</button>
+					</div>
+				</div>
 
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <label class="signup-member_lab" for="signupMemberAuthCode">
-              인증번호 입력
-              <span class="signup-member_req">*</span>
-            </label>
-            <div class="signup-member_msgs" aria-live="polite">
-              <span class="signup-member_msg signup-member_msg_err" id="signupMemberAuthErr">
-                잘못된 인증번호입니다
-              </span>
-              <span class="signup-member_msg signup-member_msg_ok" id="signupMemberAuthOk">
-                인증되었습니다
-              </span>
-            </div>
-          </div>
-          <div class="signup-member_ctl signup-member_ctl_row">
-            <div class="signup-member_inpbox" id="signupMemberAuthBox">
-              <input
-                class="signup-member_inp" type="text"
-                id="signupMemberAuthCode" name="authCode"
-                placeholder="ex) 123456" inputmode="numeric"
-                maxlength="6" autocomplete="one-time-code"
-              />
-            </div>
-            <button type="button" class="signup-member_btn_sm" id="signupMemberAuthBtn">
-              확인
-            </button>
-          </div>
-        </div>
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<label class="signup-member_lab" for="signupMemberUserId">
+							아이디 <span class="signup-member_req">*</span>
+						</label>
+						<div class="signup-member_msgs" aria-live="polite">
+							<span class="signup-member_msg signup-member_msg_err"
+								id="signupMemberIdErr"> 아이디는 영어와 숫자의 조합으로 입력해주세요 </span> <span
+								class="signup-member_msg signup-member_msg_ok"
+								id="signupMemberIdOk"> 아이디 형식이 올바릅니다 </span>
+						</div>
+					</div>
+					<div class="signup-member_ctl">
+						<div class="signup-member_inpbox" id="signupMemberUserIdBox">
+							<input class="signup-member_inp" type="text"
+								id="signupMemberUserId" name="userId"
+								placeholder="ex) hong1234 (영문, 숫자 포함 5자 이상 20자 미만)"
+								minlength="5" maxlength="20" autocomplete="username" />
+						</div>
+					</div>
+				</div>
 
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <label class="signup-member_lab" for="signupMemberUserId">
-              아이디
-              <span class="signup-member_req">*</span>
-            </label>
-            <div class="signup-member_msgs" aria-live="polite">
-              <span class="signup-member_msg signup-member_msg_err" id="signupMemberIdErr">
-                아이디는 영어와 숫자의 조합으로 입력해주세요
-              </span>
-              <span class="signup-member_msg signup-member_msg_ok" id="signupMemberIdOk">
-                아이디 형식이 올바릅니다
-              </span>
-            </div>
-          </div>
-          <div class="signup-member_ctl">
-            <div class="signup-member_inpbox" id="signupMemberUserIdBox">
-              <input
-                class="signup-member_inp"
-                type="text"
-                id="signupMemberUserId"
-                name="userId"
-                placeholder="ex) hong1234 (영문, 숫자 포함 5자 이상 20자 미만)"
-                minlength="5"
-                maxlength="20"
-                autocomplete="username"
-              />
-            </div>
-          </div>
-        </div>
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<label class="signup-member_lab" for="signupMemberPwd">
+							비밀번호 <span class="signup-member_req">*</span>
+						</label>
+					</div>
+					<div class="signup-member_ctl">
+						<div class="signup-member_inpbox" id="signupMemberPwdBox">
+							<input class="signup-member_inp" type="password"
+								id="signupMemberPwd" name="userPw"
+								placeholder="영문, 숫자, 특수문자 포함 8자 이상 20자 미만" minlength="8"
+								maxlength="20" autocomplete="new-password" />
+						</div>
+					</div>
+				</div>
 
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <label class="signup-member_lab" for="signupMemberPwd">
-              비밀번호
-              <span class="signup-member_req">*</span>
-            </label>
-          </div>
-          <div class="signup-member_ctl">
-            <div class="signup-member_inpbox" id="signupMemberPwdBox">
-              <input
-                class="signup-member_inp"
-                type="password"
-                id="signupMemberPwd"
-                name="userPw"
-                placeholder="영문, 숫자, 특수문자 포함 8자 이상 20자 미만"
-                minlength="8"
-                maxlength="20"
-                autocomplete="new-password"
-              />
-            </div>
-          </div>
-        </div>
+				<div class="signup-member_sec">
+					<div class="signup-member_head">
+						<label class="signup-member_lab" for="signupMemberPwdRe">
+							비밀번호 재확인 <span class="signup-member_req">*</span>
+						</label>
+						<div class="signup-member_msgs" aria-live="polite">
+							<span class="signup-member_msg signup-member_msg_err"
+								id="signupMemberPwdErr"> 비밀번호가 일치하지 않습니다 </span> <span
+								class="signup-member_msg signup-member_msg_ok"
+								id="signupMemberPwdOk"> 비밀번호가 일치합니다 </span>
+						</div>
+					</div>
+					<div class="signup-member_ctl signup-member_ctl_row">
+						<div class="signup-member_inpbox" id="signupMemberPwdReBox">
+							<input class="signup-member_inp" type="password"
+								id="signupMemberPwdRe" name="userPwConfirm"
+								placeholder="다시 입력하세요." minlength="8" maxlength="20"
+								autocomplete="new-password" />
+						</div>
+						<button type="button" class="signup-member_btn_sm"
+							id="signupMemberPwdChkBtn">확인</button>
+					</div>
+				</div>
 
-        <div class="signup-member_sec">
-          <div class="signup-member_head">
-            <label class="signup-member_lab" for="signupMemberPwdRe">
-              비밀번호 재확인
-              <span class="signup-member_req">*</span>
-            </label>
-            <div class="signup-member_msgs" aria-live="polite">
-              <span class="signup-member_msg signup-member_msg_err" id="signupMemberPwdErr">
-                비밀번호가 일치하지 않습니다
-              </span>
-              <span class="signup-member_msg signup-member_msg_ok" id="signupMemberPwdOk">
-                비밀번호가 일치합니다
-              </span>
-            </div>
-          </div>
-          <div class="signup-member_ctl signup-member_ctl_row">
-            <div class="signup-member_inpbox" id="signupMemberPwdReBox">
-              <input
-                class="signup-member_inp"
-                type="password"
-                id="signupMemberPwdRe"
-                name="userPwConfirm"
-                placeholder="다시 입력하세요."
-                minlength="8"
-                maxlength="20"
-                autocomplete="new-password"
-              />
-            </div>
-            <button type="button" class="signup-member_btn_sm" id="signupMemberPwdChkBtn">
-              확인
-            </button>
-          </div>
-        </div>
+				<button type="submit" class="signup-member_submit"
+					id="signupMemberSubmitBtn">회원가입</button>
+			</form>
+		</section>
+	</main>
 
-        <button type="submit" class="signup-member_submit" id="signupMemberSubmitBtn">
-          회원가입
-        </button>
-      </form>
-    </section>
-  </main>
-
-  <footer></footer>
-
-  <script src="${pageContext.request.contextPath}/assets/js/main/account/signup-member.js"></script>
+	<footer></footer>
+	<script>
+		const base = "${pageContext.request.contextPath}";
+	</script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/main/account/signup-member.js">
+	</script>
 </body>
 </html>

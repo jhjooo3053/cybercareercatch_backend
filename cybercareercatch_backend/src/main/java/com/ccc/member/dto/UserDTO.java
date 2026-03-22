@@ -4,6 +4,7 @@ public class UserDTO {
 	private int userNumber;
 	private String userId;
 	private String userPassword;
+	private String userPhone;
 
 	public int getUserNumber() {
 		return userNumber;
@@ -27,6 +28,14 @@ public class UserDTO {
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
 	@Override
