@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ccc.common.config.MyBatisConfig;
 import com.ccc.company.dto.CompanyCardDTO;
 import com.ccc.company.dto.CompanyDetailDTO;
+import com.ccc.company.dto.CompanyJoinDTO;
 
 /*
  * 기업 정보 관련 DAO이다.
@@ -55,5 +56,9 @@ public class CompanyDAO {
 	 */
 	public void deleteCompInfoByCompanyNumber(int companyNumber) {
 		sqlSession.delete("company.deleteCompInfoByCompanyNumber", companyNumber);
+	}
+	
+	public void join(CompanyJoinDTO companyJoinDTO) {
+		sqlSession.insert("company.addCompany", companyJoinDTO);
 	}
 }

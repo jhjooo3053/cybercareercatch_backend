@@ -461,7 +461,7 @@
                             <div class="mainpage-community-calendartitle">박람회 일정</div>
                             <div class="mainpage-community-calendardesc">등록 최신순 박람회 3개를 확인해보세요.</div>
                         </div>
-                        <a href="${pageContext.request.contextPath}/expo/calendar.ex"
+                        <a href="${pageContext.request.contextPath}/expo/calendar.efc"
                            class="mainpage-community-calendarlink">전체보기</a>
                     </div>
 
@@ -470,7 +470,7 @@
                             <c:when test="${not empty mainExpoList}">
                                 <c:forEach var="expo" items="${mainExpoList}">
                                     <div class="expo-preview-card-force"
-                                         onclick="location.href='${pageContext.request.contextPath}/expo/calendar.ex'">
+                                         onclick="location.href='${pageContext.request.contextPath}/expo/calendar.efc'">
 
                                         <div class="expo-preview-title-force">
                                             <c:out value="${expo.expoName}" />

@@ -1,8 +1,5 @@
 package com.ccc.member.dao;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 
 import com.ccc.common.config.MyBatisConfig;
