@@ -256,62 +256,55 @@
 		#{value}
 	</select>
 
-	<!-- 기업회원 마이페이지 - 기업정보페이지 상세 조회 -->
-	<!-- 사용페이지 : companyPageForm.jsp (수정 시 기존 기업정보 출력) -->
-	<select id="selectCompanyPageDetail" parameterType="int"
-		resultType="com.ccc.company.dto.CompanyDetailDTO">
-		SELECT
+<!-- 기업회원 마이페이지 - 기업정보페이지 상세 조회 -->
+<select id="selectCompanyPageDetail" parameterType="int"
+	resultType="com.ccc.company.dto.CompanyDetailDTO">
+	SELECT
 		C.COMPANY_NUMBER AS companyNumber,
-		C.COMPANY_NAME AS
-		companyName,
+		C.COMPANY_NAME AS companyName,
 		C.COMPANY_ADDRESS AS companyAddress,
-		C.COMPANY_STATE AS
-		companyState,
+		C.COMPANY_STATE AS companyState,
 		C.COMPANY_BRN AS companyBrn,
 		F.FILE_PATH AS filePath,
-		CI.COMP_CEO_NAME
-		AS compCeoName,
+		CI.COMP_CEO_NAME AS compCeoName,
 		CI.COMP_FND_YEAR AS compFndYear,
-		CI.COMP_EMPL_CNT AS
-		compEmplCnt,
+		CI.COMP_EMPL_CNT AS compEmplCnt,
 		CI.COMP_REV AS compRev,
-		CI.COMP_CAP AS
-		compCap,
+		CI.COMP_CAP AS compCap,
 		CI.COMP_TYPE AS compType,
 		CI.COMP_SUMMARY AS compSummary,
-		CI.COMP_TECH
-		AS compTech,
+		CI.COMP_TECH AS compTech,
 		CI.COMP_MAIN_BIZ AS compMainBiz,
-		CI.COMP_INFO
-		AS compInfo,
+		CI.COMP_INFO AS compInfo,
 		CI.COMP_SVC_HIST AS compSvcHist,
-		JP.JOB_POST_PROFILE AS
-		jobPostProfile,
+		JP.JOB_POST_PROFILE AS jobPostProfile,
 		JP.JOB_POST_CONTENT AS jobPostContent,
-		JP.JOB_POST_PROCESS AS
-		jobPostProcess,
-		JP.JOB_POST_METHOD AS
-		jobPostMethod,
+		JP.JOB_POST_PROCESS AS jobPostProcess,
+		JP.JOB_POST_METHOD AS jobPostMethod,
 		TO_CHAR(JP.JOB_POST_DATE, 'YYYY.MM.DD') AS jobPostDate,
 		JP.CAT1_IS_HIRING AS cat1IsHiring,
 		JP.CAT2_IS_HIRING AS cat2IsHiring,
 		JP.CAT3_IS_HIRING AS cat3IsHiring,
 		JP.CAT4_IS_HIRING AS cat4IsHiring
-		FROM TBL_COMPANY_MEMBER CM
-		JOIN TBL_COMPANY C
-		ON CM.COMPANY_NUMBER =
-		C.COMPANY_NUMBER
-		JOIN TBL_COMP_INFO CI
-		ON C.COMPANY_NUMBER =
-		CI.COMPANY_NUMBER
-		LEFT JOIN TBL_FILE F
-		ON C.COMPANY_NUMBER =
-		F.COMPANY_NUMBER
-		LEFT JOIN TBL_JOB_POST JP
-		ON C.COMPANY_NUMBER =
-		JP.COMPANY_NUMBER
-		WHERE CM.USER_NUMBER = #{value}
-	</select>
+	FROM TBL_COMPANY_MEMBER CM
+	JOIN TBL_COMPANY C
+		ON CM.COMPANY_NUMBER = C.COMPANY_NUMBER
+	JOIN TBL_COMP_INFO CI
+		ON C.COMPANY_NUMBER = CI.COMPANY_NUMBER
+	LEFT JOIN (
+		SELECT
+			COMPANY_NUMBER,
+			MIN(FILE_NUMBER) AS FILE_NUMBER
+		FROM TBL_FILE
+		GROUP BY COMPANY_NUMBER
+	) FM
+		ON C.COMPANY_NUMBER = FM.COMPANY_NUMBER
+	LEFT JOIN TBL_FILE F
+		ON FM.FILE_NUMBER = F.FILE_NUMBER
+	LEFT JOIN TBL_JOB_POST JP
+		ON C.COMPANY_NUMBER = JP.COMPANY_NUMBER
+	WHERE CM.USER_NUMBER = #{value}
+</select>
 
 	<!-- 기업회원 마이페이지 - 기업정보페이지 등록(기업소개등록) -->
 	<!-- 사용 페이지: companyPageForm.jsp -->
@@ -366,6 +359,7 @@
 		#{companyNumber}
 		)
 	</insert>
+	
 	<!-- 기업회원 마이페이지 - 기업정보페이지 등록(채용공고등록) -->
 	<!-- 사용 페이지 : companyPageForm.jsp -->
 	<insert id="insertJobPost" parameterType="JobPostDTO">
@@ -414,7 +408,7 @@
 		COMP_INFO =
 		#{compInfo},
 		COMP_SVC_HIST = #{compSvcHist},
-		COMP_PAGE_DATE = SYSDATE
+		COMP_EDIT_DATE = SYSDATE
 		WHERE COMPANY_NUMBER = #{companyNumber}
 	</update>
 
@@ -436,13 +430,12 @@
 	<!-- 사용 페이지 : companyPageEdit.jsp -->
 	<update id="updateJobPost" parameterType="JobPostDTO">
 		UPDATE TBL_JOB_POST
-		SET
-		JOB_POST_PROFILE = #{jobPostProfile},
+		SET JOB_POST_PROFILE = #{jobPostProfile},
 		JOB_POST_CONTENT =
 		#{jobPostContent},
 		JOB_POST_PROCESS = #{jobPostProcess},
 		JOB_POST_METHOD = #{jobPostMethod},
-		JOB_POST_DATE = SYSDATE,
+		JOB_POST_EDIT_DATE = SYSDATE,
 		CAT1_IS_HIRING = #{cat1IsHiring},
 		CAT2_IS_HIRING = #{cat2IsHiring},
 		CAT3_IS_HIRING = #{cat3IsHiring},
@@ -506,7 +499,8 @@
 	<!-- 직군조회 -->
 	<select id="selectJobGroupList" resultType="JobGroupDTO">
 		SELECT
-		JOB_NUMBER AS jobNumber,
+		JOB_NUMBER AS
+		jobNumber,
 		JOB_NAME AS jobName
 		FROM TBL_JOB_GROUP
 		ORDER BY JOB_NUMBER

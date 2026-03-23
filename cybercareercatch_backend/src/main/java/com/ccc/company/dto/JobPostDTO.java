@@ -11,7 +11,7 @@ public class JobPostDTO {
 	   private int cat2IsHiring;
 	   private int cat3IsHiring;
 	   private int cat4IsHiring;
-	   
+	   private String jobPostEditDate;
 	   public int getCompanyNumber() {
 		   return companyNumber;
 	   }
@@ -72,12 +72,21 @@ public class JobPostDTO {
 	   public void setCat4IsHiring(int cat4IsHiring) {
 		   this.cat4IsHiring = cat4IsHiring;
 	   }
+	   public String getJobPostEditDate() {
+		   return jobPostEditDate;
+	   }
+	   public void setJobPostEditDate(String jobPostEditDate) {
+		   this.jobPostEditDate = jobPostEditDate;
+	   }
+	   
 	   @Override
 	   public String toString() {
 		return "JobPostDTO [companyNumber=" + companyNumber + ", jobPostProfile=" + jobPostProfile + ", jobPostContent="
 				+ jobPostContent + ", jobPostProcess=" + jobPostProcess + ", jobPostMethod=" + jobPostMethod
 				+ ", jobPostDate=" + jobPostDate + ", cat1IsHiring=" + cat1IsHiring + ", cat2IsHiring=" + cat2IsHiring
-				+ ", cat3IsHiring=" + cat3IsHiring + ", cat4IsHiring=" + cat4IsHiring + "]";
+				+ ", cat3IsHiring=" + cat3IsHiring + ", cat4IsHiring=" + cat4IsHiring + ", jobPostEditDate="
+				+ jobPostEditDate + "]";
 	   }
 	   
+
 }

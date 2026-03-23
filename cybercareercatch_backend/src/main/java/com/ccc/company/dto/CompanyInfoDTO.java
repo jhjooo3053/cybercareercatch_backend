@@ -14,6 +14,9 @@ public class CompanyInfoDTO {
 	private String compInfo;
 	private String compSvcHist;
 	private String compPageDate;
+	private String compEditDate;
+	
+	
 	public int getCompanyNumber() {
 		return companyNumber;
 	}
@@ -92,14 +95,23 @@ public class CompanyInfoDTO {
 	public void setCompPageDate(String compPageDate) {
 		this.compPageDate = compPageDate;
 	}
+	public String getCompEditDate() {
+		return compEditDate;
+	}
+	public void setCompEditDate(String compEditDate) {
+		this.compEditDate = compEditDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "CompanyInfoDTO [companyNumber=" + companyNumber + ", compCeoName=" + compCeoName + ", compFndYear="
 				+ compFndYear + ", compEmplCnt=" + compEmplCnt + ", compRev=" + compRev + ", compCap=" + compCap
 				+ ", compType=" + compType + ", compSummary=" + compSummary + ", compTech=" + compTech
 				+ ", compMainBiz=" + compMainBiz + ", compInfo=" + compInfo + ", compSvcHist=" + compSvcHist
-				+ ", compPageDate=" + compPageDate + "]";
+				+ ", compPageDate=" + compPageDate + ", compEditDate=" + compEditDate + "]";
 	}
+	
+
 	
 	
 }
