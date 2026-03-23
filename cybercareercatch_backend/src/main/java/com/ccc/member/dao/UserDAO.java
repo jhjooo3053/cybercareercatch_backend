@@ -32,3 +32,11 @@ public class UserDAO {
 	}
 
 }
+	public String selectUserType(int userNumber) {
+		return sqlSession.selectOne("user.selectUserType", userNumber);
+	}
+
+	public Integer selectCompanyNumberByUserNumber(int userNumber) {
+		return sqlSession.selectOne("user.selectCompanyNumberByUserNumber", userNumber);
+	}
+}

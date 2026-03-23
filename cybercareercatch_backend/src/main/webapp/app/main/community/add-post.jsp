@@ -25,6 +25,7 @@
     <div class="cmw-pnl">
       <form action="${pageContext.request.contextPath}/post/writeOk.pfc" method="post" class="cmw-frm" id="postWriteForm">
 
+        <!-- 글 타입 전달 -->
         <input type="hidden" name="postType" value="FREE_POST">
 
         <div class="cmw-row">
@@ -36,7 +37,9 @@
             class="cmw-inp"
             placeholder="제목을 입력해주세요"
             required
+            value="${param.postTitle}"
           >
+          <div id="titleCount">0 / 66</div>
         </div>
 
         <div class="cmw-row">
@@ -47,7 +50,8 @@
             class="cmw-ta"
             placeholder="자유롭게 내용을 입력하세요"
             required
-          ></textarea>
+          >${param.postContent}</textarea>
+          <div id="contentCount">0 / 1000</div>
         </div>
 
         <div class="cmw-btm">

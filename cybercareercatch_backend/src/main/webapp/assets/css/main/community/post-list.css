@@ -1,209 +1,163 @@
-/* 기본 초기화 */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 페이지 기본 */
 body {
-  background-color: white;
-  color: black;
-  font-size: 14px;
+    background-color: #f5f5f5;
+    color: #111;
+    font-family: Arial, sans-serif;
 }
 
-/* 전체 영역 */
-.cml-wrap {
-  width: 1200px;
-  margin: 0 auto;
-  padding: 50px 0 80px;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-/* 상단 */
-.cml-top {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+.post-list-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
 }
 
-.cml-top-ttl {
-  font-size: 28px;
-  font-weight: 700;
+.post-list-container {
+    width: 100%;
+    max-width: 1000px;
 }
 
-/* 헤더 */
-.cml-head {
-  width: 100%;
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  border-top: 2px solid #7d84e6;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+.post-list-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 30px;
 }
 
-.cml-head-col-num {
-  width: 8%;
-  text-align: center;
-  font-weight: 700;
+.post-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
-.cml-head-col-ttl {
-  width: 44%;
-  text-align: center;
-  font-weight: 700;
-  padding: 0 10px;
+.post-list-table thead tr {
+    border-top: 2px solid #7f88ff;
+    border-bottom: 1px solid #cfcfcf;
 }
 
-.cml-head-col-wrt {
-  width: 14%;
-  text-align: center;
-  font-weight: 700;
+.post-list-table tbody tr {
+    border-bottom: 1px solid #cfcfcf;
 }
 
-.cml-head-col-date {
-  width: 16%;
-  text-align: center;
-  font-weight: 700;
+.post-list-table th,
+.post-list-table td {
+    padding: 18px 10px;
+    text-align: center;
+    font-size: 16px;
 }
 
-.cml-head-col-view {
-  width: 18%;
-  text-align: center;
-  font-weight: 700;
-  white-space: nowrap;
+.col-no {
+    width: 80px;
 }
 
-/* 목록 */
-.cml-list {
-  width: 100%;
+.col-title {
+    width: 480px;
 }
 
-.cml-row {
-  width: 100%;
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+.col-writer {
+    width: 120px;
 }
 
-.cml-row-col-num {
-  width: 8%;
-  text-align: center;
+.col-date {
+    width: 140px;
 }
 
-.cml-row-col-ttl {
-  width: 44%;
-  text-align: center;
-  padding: 0 10px;
+.col-view {
+    width: 100px;
 }
 
-.cml-row-col-wrt {
-  width: 14%;
-  text-align: center;
+/* 제목 셀 */
+.post-title-td {
+    width: 480px;
+    max-width: 480px;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.cml-row-col-date {
-  width: 16%;
-  text-align: center;
+/* 제목 링크를 한 줄로 고정 + 넘치면 ... */
+.post-title-link {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.cml-row-col-view {
-  width: 18%;
-  text-align: center;
-  white-space: nowrap;
+.post-page-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 22px 0 30px;
 }
 
-.cml-row-col-empty {
-  width: 100%;
-  text-align: center;
-  padding: 18px 0;
+.page-btn {
+    display: inline-block;
+    min-width: 28px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    text-align: center;
+    color: #333;
 }
 
-/* 링크 */
-.cml-link {
-  color: black;
-  text-decoration: none;
+.page-btn.active {
+    background-color: #7f88ff;
+    color: #fff;
 }
 
-.cml-link:hover {
-  text-decoration: underline;
+.post-search-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
-/* 페이지네이션 */
-.cml-pg {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 25px;
+.post-search-box form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.cml-pg-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
-  text-decoration: none;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.post-search-box select,
+.post-search-box input,
+.post-search-box button,
+.write-btn {
+    height: 40px;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    font-size: 14px;
 }
 
-.cml-pg-btn-now {
-  background-color: #7d84e6;
-  color: white;
-  border: 1px solid #7d84e6;
+.post-search-box select {
+    width: 90px;
+    padding: 0 10px;
+    background-color: #fff;
 }
 
-/* 검색 영역 */
-.cml-sch {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 30px;
+.post-search-box input {
+    width: 260px;
+    padding: 0 12px;
+    background-color: #fff;
 }
 
-.cml-sch-sel {
-  width: 110px;
-  height: 38px;
-  padding: 0 10px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-radius: 6px;
+.post-search-box button,
+.write-btn {
+    padding: 0 16px;
+    background-color: #7f88ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    line-height: 40px;
 }
 
-.cml-sch-inp {
-  width: 320px;
-  height: 38px;
-  padding: 0 12px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-radius: 6px;
-}
-
-.cml-sch-btn {
-  width: 80px;
-  height: 38px;
-  background-color: #7d84e6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* 글쓰기 버튼 */
-.cml-write-btn {
-  width: 80px;
-  height: 38px;
-  background-color: #7d84e6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.write-btn {
+    display: inline-block;
 }

@@ -1,142 +1,108 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>자유게시판</title>
-<%--   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/community/post-list.css"> --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/community/post-list.css?v=3">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자유게시판</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/community/post-list.css">
 </head>
-
 <body>
-  <c:set var="listUrl" value="${pageContext.request.contextPath}/post/list.pfc" />
-  <c:set var="readUrl" value="${pageContext.request.contextPath}/post/read.pfc" />
-  <c:set var="writeUrl" value="${pageContext.request.contextPath}/post/write.pfc" />
 
-  <main class="cml-wrap">
+    <main class="post-list-wrap">
+        <section class="post-list-container">
+            <h2 class="post-list-title">자유게시판</h2>
 
-    <div class="cml-top">
-      <h2 class="cml-top-ttl">자유게시판</h2>
-    </div>
+            <table class="post-list-table">
+                <thead>
+                    <tr>
+                        <th class="col-no">번호</th>
+                        <th class="col-title">제목</th>
+                        <th class="col-writer">작성자</th>
+                        <th class="col-date">작성일</th>
+                        <th class="col-view">조회수</th>
+                    </tr>
+                </thead>
 
-    <div class="cml-head">
-      <div class="cml-head-col-num">번호</div>
-      <div class="cml-head-col-ttl">제목</div>
-      <div class="cml-head-col-wrt">작성자</div>
-      <div class="cml-head-col-date">작성일</div>
-      <div class="cml-head-col-view">조회수</div>
-    </div>
+                <tbody>
+                    <!-- 공지 -->
+                    <c:if test="${not empty noticeList}">
+                        <c:forEach var="notice" items="${noticeList}">
+                            <tr>
+                                <td>공지</td>
+                                <td class="post-title-td">
+                                    <a href="${pageContext.request.contextPath}/post/noticeDetail.pfc?postNumber=${notice.postNumber}"
+                                       class="post-title-link">
+                                        ${notice.postTitle}
+                                    </a>
+                                </td>
+                                <td>${notice.adminId}</td>
+                                <td>${notice.postDate}</td>
+                                <td>${notice.viewCount}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
 
-    <div class="cml-list">
+                    <!-- 일반 게시글 -->
+                    <c:if test="${not empty postList}">
+                        <c:forEach var="post" items="${postList}">
+                            <tr>
+                                <td>${post.postNumber}</td>
+                                <td class="post-title-td">
+                                    <a href="${pageContext.request.contextPath}/post/readOk.pfc?postNumber=${post.postNumber}"
+                                       class="post-title-link">
+                                        ${post.postTitle}
+                                    </a>
+                                </td>
+                                <td>${post.userId}</td>
+                                <td>${post.postDate}</td>
+                                <td>${post.viewCount}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                </tbody>
+            </table>
 
-      <c:if test="${not empty noticeList}">
-        <c:forEach var="notice" items="${noticeList}">
-          <div class="cml-row">
-            <div class="cml-row-col-num">공지</div>
+            <!-- 페이지네이션 -->
+            <div class="post-page-box">
+                <c:if test="${prev}">
+                    <a href="${pageContext.request.contextPath}/post/list.pfc?page=${startPage - 1}" class="page-btn">이전</a>
+                </c:if>
 
-            <div class="cml-row-col-ttl">
-              <a href="${readUrl}?postNumber=${notice.postNumber}" class="cml-link">
-                <c:out value="${notice.postTitle}" />
-              </a>
+                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                    <c:choose>
+                        <c:when test="${page == i}">
+                            <span class="page-btn active">${i}</span>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath}/post/list.pfc?page=${i}" class="page-btn">${i}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <c:if test="${next}">
+                    <a href="${pageContext.request.contextPath}/post/list.pfc?page=${endPage + 1}" class="page-btn">다음</a>
+                </c:if>
             </div>
 
-            <div class="cml-row-col-wrt">
-              <c:out value="${notice.adminId}" />
+            <!-- 검색 -->
+            <div class="post-search-box">
+                <form action="${pageContext.request.contextPath}/post/list.pfc" method="get">
+                    <select name="searchType">
+                        <option value="title">제목</option>
+                        <option value="writer">작성자</option>
+                        <option value="content">내용</option>
+                    </select>
+
+                    <input type="text" name="keyword" placeholder="검색할 내용을 입력하세요">
+                    <button type="submit">검색</button>
+                    <a href="${pageContext.request.contextPath}/post/write.pfc" class="write-btn">글쓰기</a>
+                </form>
             </div>
+        </section>
+    </main>
 
-            <div class="cml-row-col-date">
-              <c:out value="${notice.postDate}" />
-            </div>
-
-            <div class="cml-row-col-view">
-              <c:out value="${notice.viewCount}" />
-            </div>
-          </div>
-        </c:forEach>
-      </c:if>
-
-      <c:choose>
-        <c:when test="${not empty postList}">
-          <c:forEach var="post" items="${postList}">
-            <div class="cml-row">
-              <div class="cml-row-col-num">
-                <c:out value="${post.postNumber}" />
-              </div>
-
-              <div class="cml-row-col-ttl">
-                <a href="${readUrl}?postNumber=${post.postNumber}" class="cml-link">
-                  <c:out value="${post.postTitle}" />
-                </a>
-              </div>
-
-              <div class="cml-row-col-wrt">
-                <c:out value="${post.userId}" />
-              </div>
-
-              <div class="cml-row-col-date">
-                <c:out value="${post.postDate}" />
-              </div>
-
-              <div class="cml-row-col-view">
-                <c:out value="${post.viewCount}" />
-              </div>
-            </div>
-          </c:forEach>
-        </c:when>
-
-        <c:otherwise>
-          <div class="cml-row">
-            <div class="cml-row-col-empty">
-              등록된 게시글이 없습니다.
-            </div>
-          </div>
-        </c:otherwise>
-      </c:choose>
-    </div>
-
-    <div class="cml-pg">
-      <c:if test="${prev}">
-        <a href="${listUrl}?page=${startPage - 1}" class="cml-pg-btn">&lt;</a>
-      </c:if>
-
-      <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
-        <a
-          href="${listUrl}?page=${pageNum}"
-          class="cml-pg-btn ${page == pageNum ? 'cml-pg-btn-now' : ''}">
-          <c:out value="${pageNum}" />
-        </a>
-      </c:forEach>
-
-      <c:if test="${next}">
-        <a href="${listUrl}?page=${endPage + 1}" class="cml-pg-btn">&gt;</a>
-      </c:if>
-    </div>
-
-    <form action="${listUrl}" method="get" class="cml-sch">
-      <select name="searchType" class="cml-sch-sel">
-        <option value="title" ${param.searchType == 'title' ? 'selected' : ''}>제목</option>
-        <option value="writer" ${param.searchType == 'writer' ? 'selected' : ''}>작성자</option>
-        <option value="content" ${param.searchType == 'content' ? 'selected' : ''}>내용</option>
-      </select>
-
-      <input
-        type="text"
-        name="keyword"
-        class="cml-sch-inp"
-        placeholder="검색할 내용을 입력하세요"
-        value="${param.keyword}"
-      >
-
-      <button type="submit" class="cml-sch-btn">검색</button>
-
-      <a href="${writeUrl}" class="cml-write-btn">글쓰기</a>
-    </form>
-  </main>
-
-  <script src="${pageContext.request.contextPath}/assets/js/main/community/post-list.js"></script>
 </body>
 </html>

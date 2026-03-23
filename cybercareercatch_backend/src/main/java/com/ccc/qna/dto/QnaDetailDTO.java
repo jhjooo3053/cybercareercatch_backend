@@ -1,76 +1,128 @@
 package com.ccc.qna.dto;
 
 public class QnaDetailDTO {
-   private Long postNumber;
-   private String postTitle;
-   private String postContent;
-   private String memberId;
-   private String postCreatedDate;
-   private String answerStatus;
-   private String companyName;
-   
-   public QnaDetailDTO() {;}
+	private Long postNumber;
+	private Long userNumber;
+	private Long companyNumber;
+	private String postTitle;
+	private String postContent;
+	private String memberId;
+	private String userId;
+	private String postCreatedDate;
+	private String postDate;
+	private int viewCount;
+	private String answerStatus;
+	private String companyName;
 
-   public Long getPostNumber() {
-      return postNumber;
-   }
+	public QnaDetailDTO() {
+		;
+	}
 
-   public void setPostNumber(Long postNumber) {
-      this.postNumber = postNumber;
-   }
+	public Long getPostNumber() {
+		return postNumber;
+	}
 
-   public String getPostTitle() {
-      return postTitle;
-   }
+	public void setPostNumber(Long postNumber) {
+		this.postNumber = postNumber;
+	}
 
-   public void setPostTitle(String postTitle) {
-      this.postTitle = postTitle;
-   }
+	public Long getUserNumber() {
+		return userNumber;
+	}
 
-   public String getPostContent() {
-      return postContent;
-   }
+	public void setUserNumber(Long userNumber) {
+		this.userNumber = userNumber;
+	}
 
-   public void setPostContent(String postContent) {
-      this.postContent = postContent;
-   }
+	public Long getCompanyNumber() {
+		return companyNumber;
+	}
 
-   public String getMemberId() {
-      return memberId;
-   }
+	public void setCompanyNumber(Long companyNumber) {
+		this.companyNumber = companyNumber;
+	}
 
-   public void setMemberId(String memberId) {
-      this.memberId = memberId;
-   }
+	public String getPostTitle() {
+		return postTitle;
+	}
 
-   public String getPostCreatedDate() {
-      return postCreatedDate;
-   }
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
+	}
 
-   public void setPostCreatedDate(String postCreatedDate) {
-      this.postCreatedDate = postCreatedDate;
-   }
+	public String getPostContent() {
+		return postContent;
+	}
 
-   public String getAnswerStatus() {
-      return answerStatus;
-   }
+	public void setPostContent(String postContent) {
+		this.postContent = postContent;
+	}
 
-   public void setAnswerStatus(String answerStatus) {
-      this.answerStatus = answerStatus;
-   }
+	public String getMemberId() {
+		return memberId;
+	}
 
-   public String getCompanyName() {
-      return companyName;
-   }
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+		this.userId = memberId;
+	}
 
-   public void setCompanyName(String companyName) {
-      this.companyName = companyName;
-   }
+	public String getUserId() {
+		return userId;
+	}
 
-   @Override
-   public String toString() {
-      return "QnaDetailDTO [postNumber=" + postNumber + ", postTitle=" + postTitle + ", postContent=" + postContent
-            + ", memberId=" + memberId + ", postCreatedDate=" + postCreatedDate + ", answerStatus=" + answerStatus
-            + ", companyName=" + companyName + "]";
-   }
+	public void setUserId(String userId) {
+		this.userId = userId;
+		this.memberId = userId;
+	}
+
+	public String getPostCreatedDate() {
+		return postCreatedDate;
+	}
+
+	public void setPostCreatedDate(String postCreatedDate) {
+		this.postCreatedDate = postCreatedDate;
+		this.postDate = postCreatedDate;
+	}
+
+	public String getPostDate() {
+		return postDate;
+	}
+
+	public void setPostDate(String postDate) {
+		this.postDate = postDate;
+		this.postCreatedDate = postDate;
+	}
+
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public String getAnswerStatus() {
+		return answerStatus;
+	}
+
+	public void setAnswerStatus(String answerStatus) {
+		this.answerStatus = answerStatus;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	@Override
+	public String toString() {
+		return "QnaDetailDTO [postNumber=" + postNumber + ", userNumber=" + userNumber + ", companyNumber="
+				+ companyNumber + ", postTitle=" + postTitle + ", postContent=" + postContent + ", userId=" + userId
+				+ ", postDate=" + postDate + ", viewCount=" + viewCount + ", answerStatus=" + answerStatus
+				+ ", companyName=" + companyName + "]";
+	}
 }

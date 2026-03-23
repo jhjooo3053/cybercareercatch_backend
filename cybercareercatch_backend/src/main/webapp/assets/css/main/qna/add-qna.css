@@ -1,113 +1,146 @@
+/* 
+축약어 규칙
+qnl = qna list
+top = 상단 제목 영역
+tbl = 목록 테이블
+sel = select
+inp = input
+btn = button
+page = pagination
+*/
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #f4f6fb;
-    color: #333;
-    font-size: 14px;
-    line-height: 1.6;
+  background-color: #fff;
+  color: #111;
+  font-size: 14px;
 }
 
-header {
-    height: 166px;
+.qnl-wrap {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0 80px;
 }
 
-.qna-write-main {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 32px 24px 60px;
+.qnl-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-.qna-write-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.qnl-top-ttl {
+  font-size: 28px;
+  font-weight: 700;
 }
 
-.qna-write-title {
-    font-size: 22px;
-    font-weight: 700;
+.qnl-write-btn {
+  width: 110px;
+  height: 42px;
+  border: 1px solid #111;
+  background-color: #111;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.qna-write-form {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 24px;
+.qnl-search-box {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.qna-write-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 18px;
+.qnl-search-box form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.qna-write-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #444;
+.qnl-sel,
+.qnl-inp {
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 12px;
 }
 
-.qna-write-input,
-.qna-write-select,
-.qna-write-textarea {
-    width: 100%;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    background: #fff;
+.qnl-sel {
+  min-width: 140px;
 }
 
-.qna-write-input:focus,
-.qna-write-select:focus,
-.qna-write-textarea:focus {
-    border-color: #6c7fe8;
+.qnl-inp {
+  width: 260px;
 }
 
-.qna-write-textarea {
-    min-height: 220px;
-    resize: vertical;
+.qnl-btn {
+  width: 90px;
+  height: 40px;
+  border: 1px solid #111;
+  background-color: #111;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.qna-write-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+.qnl-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
-.qna-btn-primary {
-    background: #6c7fe8;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
+.qnl-tbl th,
+.qnl-tbl td {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 16px 10px;
+  text-align: center;
 }
 
-.qna-btn-primary:hover {
-    background: #5a6ed6;
+.qnl-tbl th {
+  background-color: #fafafa;
+  font-weight: 600;
 }
 
-.qna-btn-secondary {
-    background: #fff;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 9px 18px;
-    font-size: 14px;
-    text-decoration: none;
+.qnl-tbl td {
+  cursor: pointer;
 }
 
-.qna-btn-secondary:hover {
-    background: #f3f3f3;
+.qnl-left {
+  text-align: left !important;
+}
+
+.qnl-notice-row {
+  background-color: #fff8e8;
+  font-weight: 600;
+}
+
+.qnl-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.qnl-page-link {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qnl-page-link.active {
+  background-color: #111;
+  color: #fff;
+  border-color: #111;
 }

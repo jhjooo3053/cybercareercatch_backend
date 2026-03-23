@@ -1,212 +1,271 @@
+/* 
+  축약어 규칙
+  qnl = qna list
+  top = 상단 제목 영역
+  head = 목록 헤더
+  row = 목록 행
+  sch = 검색 영역
+  sel = select
+  inp = input
+  btn = button
+  pg = pagination
+*/
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    font-size: 14px;
-    line-height: 1.6;
+  background-color: white;
+  color: black;
+  font-size: 14px;
 }
 
 header {
-    height: 166px;
+  height: 166px;
 }
 
-.qna-list-main {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 32px 24px 60px;
+.qnl-wrap {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0 80px;
 }
 
-.qna-list-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.qnl-top {
+  width: 100%;
+  margin-bottom: 30px;
 }
 
-.qna-list-title {
-    font-size: 20px;
-    font-weight: 700;
+.qnl-top-ttl {
+  font-size: 28px;
+  font-weight: 700;
 }
 
-.qna-list-top-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
+.qnl-head {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  border-top: 2px solid #7d84e6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.qna-list-filter {
-    margin-bottom: 12px;
+.qnl-head-col-num {
+  width: 8%;
+  text-align: center;
+  font-weight: 700;
 }
 
-.qna-list-filter-sel {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 6px 28px 6px 10px;
-    font-size: 13px;
-    cursor: pointer;
-    background: #fff;
-    appearance: none;
+.qnl-head-col-ttl {
+  width: 32%;
+  text-align: center;
+  font-weight: 700;
+  padding: 0 10px;
 }
 
-.qna-list-sort-sel {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 5px 14px;
-    font-size: 12px;
-    cursor: pointer;
-    background: #fff;
-    color: #333;
-    width: 100px;
+.qnl-head-col-company {
+  width: 18%;
+  text-align: center;
+  font-weight: 700;
 }
 
-.qna-list-sort-sel:focus {
-    outline: none;
-    border-color: #6c7fe8;
+.qnl-head-col-date {
+  width: 16%;
+  text-align: center;
+  font-weight: 700;
 }
 
-.qna-list-tbl {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 4px;
+.qnl-head-col-view {
+  width: 12%;
+  text-align: center;
+  font-weight: 700;
 }
 
-.qna-list-tbl-row {
-    display: flex;
-    align-items: center;
-    padding: 10px 8px;
-    border-bottom: 1px solid #eee;
-    gap: 8px;
+.qnl-head-col-state {
+  width: 14%;
+  text-align: center;
+  font-weight: 700;
 }
 
-.qna-list-tbl-header {
-    font-size: 12px;
-    font-weight: 600;
-    color: #888;
-    background: #fafafa;
-    border-bottom: 2px solid #ddd;
-    cursor: default;
+.qnl-list {
+  width: 100%;
 }
 
-.qna-list-tbl-num {
-    flex: 0 0 60px;
-    text-align: center;
-    color: #aaa;
+.qnl-row {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
-.qna-list-tbl-title {
-    flex: 1;
+.qnl-row-notice {
+  background-color: #f5f6ff;
+  font-weight: 700;
 }
 
-.qna-list-tbl-company {
-    flex: 0 0 100px;
-    text-align: center;
+.qnl-row-col-num {
+  width: 8%;
+  text-align: center;
 }
 
-.qna-list-tbl-date {
-    flex: 0 0 80px;
-    text-align: center;
+.qnl-row-col-ttl {
+  width: 32%;
+  text-align: center;
+  padding: 0 10px;
 }
 
-.qna-list-tbl-status {
-    flex: 0 0 100px;
-    text-align: center;
+.qnl-row-col-company {
+  width: 18%;
+  text-align: center;
 }
 
-.qna-list-tbl-row:not(.qna-list-tbl-header):hover {
-    background: #f5f7ff;
-    cursor: pointer;
+.qnl-row-col-date {
+  width: 16%;
+  text-align: center;
 }
 
-.qna-list-search {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 8px;
+.qnl-row-col-view {
+  width: 12%;
+  text-align: center;
 }
 
-.qna-list-search-sel {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 13px;
-    background: #fff;
+.qnl-row-col-state {
+  width: 14%;
+  text-align: center;
 }
 
-.qna-list-search-inp {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 13px;
-    flex: 1;
+.qnl-row-col-empty {
+  width: 100%;
+  text-align: center;
+  padding: 18px 0;
 }
 
-.qna-list-search-btn {
-    border: 1px solid #ccc;
-    background: #fff;
-    border-radius: 6px;
-    padding: 6px 16px;
-    font-size: 13px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #333;
-    width: 100px;
-    text-align: center;
+.qnl-link {
+  color: black;
+  text-decoration: none;
 }
 
-.qna-list-search-btn:hover {
-    background: #f0f0f0;
+.qnl-link:hover {
+  text-decoration: underline;
 }
 
-.qna-list-search-btn-write {
-    background: #6c7fe8;
-    color: white !important;
-    border-color: #6c7fe8;
+.qnl-state-wait {
+  color: #666666;
 }
 
-.qna-list-search-btn-write:hover {
-    background: #5a6ed6;
+.qnl-state-done {
+  color: #7d84e6;
+  font-weight: 700;
 }
 
-.qna-status {
-    display: inline-block;
-    min-width: 70px;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
+.qnl-pg {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 25px;
 }
 
-.qna-status-wait {
-    background: #fff3cd;
-    color: #856404;
+.qnl-pg-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.qna-status-done {
-    background: #e7f7ee;
-    color: #1f7a4d;
+.qnl-pg-btn-now {
+  background-color: #7d84e6;
+  color: white;
+  border: 1px solid #7d84e6;
 }
 
-.qna-list-empty {
-    padding: 24px 12px;
-    text-align: center;
-    color: #999;
-    border-bottom: 1px solid #eee;
-    background: #fff;
+.qnl-sch {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  flex-wrap: nowrap;
 }
 
+.qnl-sch-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  margin: 0;
+  width: auto;
+}
 
+.qnl-company-sel,
+.qnl-sel {
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  background-color: white;
+  font-size: 14px;
+  flex-shrink: 0;
+}
 
-.qna-list-empty {
-    padding: 24px 12px;
-    text-align: center;
-    color: #999;
-    border-bottom: 1px solid #eee;
-    background: #fff;
+.qnl-company-sel {
+  width: 160px;
+}
+
+.qnl-sel {
+  width: 110px;
+}
+
+.qnl-inp {
+  width: 270px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.qnl-company-sel:focus,
+.qnl-sel:focus,
+.qnl-inp:focus {
+  outline: none;
+  border: 1px solid #7d84e6;
+}
+
+.qnl-btn {
+  width: 80px;
+  height: 38px;
+  background-color: #7d84e6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.qnl-write-btn {
+  width: 80px;
+  height: 38px;
+  background-color: #7d84e6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
 }

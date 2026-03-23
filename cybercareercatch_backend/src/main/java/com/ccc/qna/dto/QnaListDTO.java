@@ -4,14 +4,14 @@ public class QnaListDTO {
 	private Long postNumber;
 	private String postTitle;
 	private String memberId;
+	private String userId;
 	private String companyName;
 	private String postCreatedDate;
-	private String answerStatus;
+	private String postDate;
 	private int viewCount;
+	private String answerStatus;
 
-	public QnaListDTO() {
-		;
-	}
+	public QnaListDTO() {;}
 
 	public Long getPostNumber() {
 		return postNumber;
@@ -35,6 +35,16 @@ public class QnaListDTO {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+		this.userId = memberId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+		this.memberId = userId;
 	}
 
 	public String getCompanyName() {
@@ -51,14 +61,16 @@ public class QnaListDTO {
 
 	public void setPostCreatedDate(String postCreatedDate) {
 		this.postCreatedDate = postCreatedDate;
+		this.postDate = postCreatedDate;
 	}
 
-	public String getAnswerStatus() {
-		return answerStatus;
+	public String getPostDate() {
+		return postDate;
 	}
 
-	public void setAnswerStatus(String answerStatus) {
-		this.answerStatus = answerStatus;
+	public void setPostDate(String postDate) {
+		this.postDate = postDate;
+		this.postCreatedDate = postDate;
 	}
 
 	public int getViewCount() {
@@ -69,10 +81,18 @@ public class QnaListDTO {
 		this.viewCount = viewCount;
 	}
 
+	public String getAnswerStatus() {
+		return answerStatus;
+	}
+
+	public void setAnswerStatus(String answerStatus) {
+		this.answerStatus = answerStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "QnaListDTO [postNumber=" + postNumber + ", postTitle=" + postTitle + ", memberId=" + memberId
-				+ ", companyName=" + companyName + ", postCreatedDate=" + postCreatedDate + ", answerStatus="
-				+ answerStatus + ", viewCount=" + viewCount + "]";
+				+ ", companyName=" + companyName + ", postDate=" + postDate + ", viewCount=" + viewCount
+				+ ", answerStatus=" + answerStatus + "]";
 	}
 }

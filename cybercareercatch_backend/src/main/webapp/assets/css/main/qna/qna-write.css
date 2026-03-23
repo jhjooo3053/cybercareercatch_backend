@@ -1,0 +1,152 @@
+/* 
+  축약어 규칙
+  qnw = qna write
+  top = 상단 타이틀 영역
+  ttl = title
+  mv = move button
+  pnl = panel
+  frm = form
+  row = 한 줄 영역
+  lbl = label
+  sel = select
+  inp = input
+  ta = textarea
+  btm = 하단 버튼 영역
+  btn = button
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: white;
+  color: black;
+  font-size: 14px;
+}
+
+header {
+  height: 166px;
+}
+
+.qnw-wrap {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0 80px;
+}
+
+.qnw-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.qnw-top-ttl {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.qnw-top-mv {
+  background-color: #7d84e6;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+}
+
+.qnw-pnl {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  background-color: white;
+  padding: 35px 30px 30px;
+}
+
+.qnw-frm,
+#qnaWriteForm {
+  width: 100%;
+}
+
+.qnw-row {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.qnw-row-col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.qnw-lbl {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.qnw-sel,
+.qnw-inp {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.qnw-ta {
+  width: 100%;
+  height: 420px;
+  padding: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  resize: none;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.qnw-sel:focus,
+.qnw-inp:focus,
+.qnw-ta:focus {
+  outline: none;
+  border: 1px solid #7d84e6;
+}
+
+.qnw-btm {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.qnw-btn {
+  min-width: 90px;
+  height: 38px;
+  border: none;
+  border-radius: 6px;
+  padding: 0 16px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.qnw-btn-cancel {
+  background-color: white;
+  color: #7d84e6;
+  border: 1px solid #7d84e6;
+}
+
+.qnw-btn-submit {
+  background-color: #7d84e6;
+  color: white;
+}
