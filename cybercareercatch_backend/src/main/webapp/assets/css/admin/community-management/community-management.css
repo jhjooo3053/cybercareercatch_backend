@@ -297,3 +297,88 @@
 	word-break: break-word;
 	overflow-wrap: anywhere;
 }
+/* ===== 추가만 : 긴 글 들어와도 오른쪽으로 안 밀리게 ===== */
+
+.qnaMgmt-ctr {
+	max-width: 1300px;
+	width: calc(100% - 40px);
+}
+
+.qnaMgmt-ct,
+.qnaMgmt-table,
+.qnaMgmt-row,
+.qnaMgmt-row > div,
+.qnaMgmt-notice-row,
+.qnaMgmt-notice-row > div {
+	min-width: 0 !important;
+}
+
+.qnaMgmt-row {
+	width: 100%;
+	align-items: flex-start;
+}
+
+.qnaMgmt-row > div {
+	white-space: normal !important;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+	overflow: hidden;
+}
+
+.qnaMgmt-row .col2,
+.qnaMgmt-notice-row .col2 {
+	flex: 1 1 0 !important;
+	min-width: 0 !important;
+}
+
+#free-notice-box {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0 !important;
+	white-space: pre-wrap;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+}
+/* ===== 자유게시판 제목 / ID 한 줄 말줄임 ===== */
+
+.qnaMgmt-table,
+.qnaMgmt-row,
+.qnaMgmt-row > div {
+	min-width: 0;
+}
+
+.qnaMgmt-row .col2,
+.qnaMgmt-row .col3 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
+}
+
+.qnaMgmt-row .col2 {
+	flex: 1 1 0;
+}
+
+.qnaMgmt-row .col3 {
+	width: 160px;
+	flex: 0 0 160px;
+}/* ===== 최종 덮어쓰기: 자유게시판 제목 / ID 말줄임 ===== */
+
+.qnaMgmt-row:not(.qnaMgmt-head) .col2,
+.qnaMgmt-row:not(.qnaMgmt-head) .col3 {
+	min-width: 0 !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+	word-break: normal !important;
+	overflow-wrap: normal !important;
+}
+
+.qnaMgmt-row:not(.qnaMgmt-head) .col2 {
+	flex: 1 1 0 !important;
+}
+
+.qnaMgmt-row:not(.qnaMgmt-head) .col3 {
+	flex: 0 0 160px !important;
+	width: 160px !important;
+}

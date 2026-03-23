@@ -23,7 +23,7 @@ public class QnaDAO {
 	}
 
 	// 회사 목록 조회
-	public List<QnaCompanyDTO> selectCompanyList() {
+	public List<CompanyDTO> selectCompanyList() {
 		return sqlSession.selectList("qna.selectCompanyList");
 	}
 

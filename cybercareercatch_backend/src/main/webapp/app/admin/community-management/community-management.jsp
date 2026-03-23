@@ -24,13 +24,17 @@ if (session.getAttribute("adminNumber") == null) {
 		<header class="qnaMgmt-hdr">
 
 			<div class="qnaMgmt-title">
-				<a href="${pageContext.request.contextPath}/admin/main.adfc">관리자 페이지</a>
+				<a href="${pageContext.request.contextPath}/admin/main.adfc">관리자
+					페이지</a>
 			</div>
 
 			<nav class="qnaMgmt-nav">
-				<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원 관리</a>
-				<a href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인 관리</a>
-				<a href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">커뮤니티 관리</a>
+				<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원
+					관리</a> <a
+					href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인
+					관리</a> <a
+					href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">커뮤니티
+					관리</a>
 			</nav>
 
 			<a href="${pageContext.request.contextPath}/admin/logout.adfc"
@@ -41,21 +45,28 @@ if (session.getAttribute("adminNumber") == null) {
 
 			<aside class="qna-leftbar">
 				<div class="qna-left-item">
-					<a href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">박람회 일정</a>
+					<a
+						href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">박람회
+						일정</a>
 				</div>
 
 				<div class="qna-left-item qna-active">
-					<a href="${pageContext.request.contextPath}/admin/communityManagement.adfc">자유 게시판</a>
+					<a
+						href="${pageContext.request.contextPath}/admin/communityManagement.adfc">자유
+						게시판</a>
 				</div>
 
 				<div class="qna-left-item">
-					<a href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc">기업 QnA</a>
+					<a
+						href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc">기업
+						QnA</a>
 				</div>
 			</aside>
 
 			<section class="qnaMgmt-ct">
 
-				<form action="${pageContext.request.contextPath}/admin/saveFreeNotice.adfc"
+				<form
+					action="${pageContext.request.contextPath}/admin/saveFreeNotice.adfc"
 					method="post" id="freeNoticeForm">
 
 					<h2 class="qnaMgmt-notice-title">자유게시판 공지</h2>
@@ -91,7 +102,7 @@ if (session.getAttribute("adminNumber") == null) {
 						<c:if test="${not empty freeNotice}">
 							<div class="qnaMgmt-row qnaMgmt-notice-row">
 								<div class="col1">공지</div>
-								<div class="col2">${freeNotice.postContent}</div>
+								<div class="col2">관리자 공지사항</div>
 								<div class="col3">관리자</div>
 								<div class="col4">${freeNotice.postDate}</div>
 								<div class="col5"></div>
@@ -107,8 +118,8 @@ if (session.getAttribute("adminNumber") == null) {
 								<c:forEach var="post" items="${postList}">
 									<div class="qnaMgmt-row">
 										<div class="col1">${post.postNumber}</div>
-										<div class="col2">${post.postTitle}</div>
-										<div class="col3">${post.userId}</div>
+										<div class="col2" title="${post.postTitle}">${post.postTitle}</div>
+										<div class="col3" title="${post.userId}">${post.userId}</div>
 										<div class="col4">${post.postDate}</div>
 										<div class="col5">
 											<input type="checkbox" name="postNumber"
@@ -126,7 +137,8 @@ if (session.getAttribute("adminNumber") == null) {
 
 							<c:choose>
 								<c:when test="${prev}">
-									<a href="${pageContext.request.contextPath}/admin/communityManagement.adfc?page=${startPage - 1}">&lt;</a>
+									<a
+										href="${pageContext.request.contextPath}/admin/communityManagement.adfc?page=${startPage - 1}">&lt;</a>
 								</c:when>
 								<c:otherwise>
 									<span>&lt;</span>
@@ -139,14 +151,16 @@ if (session.getAttribute("adminNumber") == null) {
 										<span class="active">${i}</span>
 									</c:when>
 									<c:otherwise>
-										<a href="${pageContext.request.contextPath}/admin/communityManagement.adfc?page=${i}">${i}</a>
+										<a
+											href="${pageContext.request.contextPath}/admin/communityManagement.adfc?page=${i}">${i}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 
 							<c:choose>
 								<c:when test="${next}">
-									<a href="${pageContext.request.contextPath}/admin/communityManagement.adfc?page=${endPage + 1}">&gt;</a>
+									<a
+										href="${pageContext.request.contextPath}/admin/communityManagement.adfc?page=${endPage + 1}">&gt;</a>
 								</c:when>
 								<c:otherwise>
 									<span>&gt;</span>
@@ -192,6 +206,11 @@ if (session.getAttribute("adminNumber") == null) {
 			});
 		});
 	</script>
+	<c:if test="${param.result eq 'saved'}">
+		<script>
+			alert("작성 완료했습니다.");
+		</script>
+	</c:if>
 </body>
 
 </html>

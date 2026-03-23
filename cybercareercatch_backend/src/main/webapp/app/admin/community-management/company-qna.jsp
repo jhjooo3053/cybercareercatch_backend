@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 if (session.getAttribute("adminNumber") == null) {
@@ -10,10 +11,10 @@ if (session.getAttribute("adminNumber") == null) {
 <html lang="ko">
 
 <head>
-	<meta charset="UTF-8">
-	<title>기업 QnA 관리</title>
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/assets/css/admin/main-management/company-qna.css">
+<meta charset="UTF-8">
+<title>기업 QnA 관리</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/admin/main-management/company-qna.css">
 </head>
 
 <body class="qna-body">
@@ -21,35 +22,48 @@ if (session.getAttribute("adminNumber") == null) {
 
 		<header class="qna-top">
 			<div class="qna-title">
-				<a href="${pageContext.request.contextPath}/admin/main.adfc">관리자 페이지</a>
+				<a href="${pageContext.request.contextPath}/admin/main.adfc">관리자
+					페이지</a>
 			</div>
 
 			<nav class="qna-menu">
-				<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원 관리</a>
-				<a href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인 관리</a>
-				<a href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">커뮤니티 관리</a>
+				<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원
+					관리</a> <a
+					href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인
+					관리</a> <a
+					href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">커뮤니티
+					관리</a>
 			</nav>
 
-			<a href="${pageContext.request.contextPath}/admin/logout.adfc" class="qna-logout">로그아웃</a>
+			<a href="${pageContext.request.contextPath}/admin/logout.adfc"
+				class="qna-logout">로그아웃</a>
 		</header>
 
 		<main class="qna-main">
 
 			<aside class="qna-leftbar">
 				<div class="qna-left-item">
-					<a href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">박람회 일정</a>
+					<a
+						href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">박람회
+						일정</a>
 				</div>
 				<div class="qna-left-item">
-					<a href="${pageContext.request.contextPath}/admin/communityManagement.adfc">자유 게시판</a>
+					<a
+						href="${pageContext.request.contextPath}/admin/communityManagement.adfc">자유
+						게시판</a>
 				</div>
 				<div class="qna-left-item qna-active">
-					<a href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc">기업 QnA</a>
+					<a
+						href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc">기업
+						QnA</a>
 				</div>
 			</aside>
 
 			<section class="qna-content">
 
-				<form action="${pageContext.request.contextPath}/admin/saveCompanyQnaNotice.adfc" method="post" id="qnaNoticeForm">
+				<form
+					action="${pageContext.request.contextPath}/admin/saveCompanyQnaNotice.adfc"
+					method="post" id="qnaNoticeForm">
 
 					<h2 class="qna-notice-title">기업 QnA 공지</h2>
 
@@ -64,25 +78,27 @@ if (session.getAttribute("adminNumber") == null) {
 
 				<h2 class="qna-title-text">기업 QnA</h2>
 
-				<form action="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc" method="get">
+				<form
+					action="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc"
+					method="get">
 					<div class="qna-filter">
 						<select name="companyNumber" onchange="this.form.submit()">
 							<option value="">기업 전체</option>
 							<c:forEach var="company" items="${companyList}">
 								<option value="${company.companyNumber}"
 									<c:if test="${companyNumber == company.companyNumber}">selected="selected"</c:if>>
-									${company.companyName}
-								</option>
+									${company.companyName}</option>
 							</c:forEach>
 						</select>
 					</div>
 				</form>
 
-				<form action="${pageContext.request.contextPath}/admin/deleteCompanyQna.adfc"
+				<form
+					action="${pageContext.request.contextPath}/admin/deleteCompanyQna.adfc"
 					method="post" id="qnaDeleteForm">
 
-					<input type="hidden" name="page" value="${page}">
-					<input type="hidden" name="companyNumber" value="${companyNumber}">
+					<input type="hidden" name="page" value="${page}"> <input
+						type="hidden" name="companyNumber" value="${companyNumber}">
 
 					<div class="qna-table">
 
@@ -100,7 +116,7 @@ if (session.getAttribute("adminNumber") == null) {
 						<c:if test="${not empty qnaNotice}">
 							<div class="qna-row qna-notice-row">
 								<div class="col1">공지</div>
-								<div class="col2">${qnaNotice.postContent}</div>
+								<div class="col2">관리자 공지사항</div>
 								<div class="col3">-</div>
 								<div class="col4">관리자</div>
 								<div class="col5">${qnaNotice.postDate}</div>
@@ -119,18 +135,19 @@ if (session.getAttribute("adminNumber") == null) {
 								<c:forEach var="qna" items="${qnaList}">
 									<div class="qna-row">
 										<div class="col1">${qna.postNumber}</div>
-										<div class="col2">
-											<a href="${pageContext.request.contextPath}/qna/detail.qfc?postNumber=${qna.postNumber}">
-												${qna.postTitle}
-											</a>
+										<div class="col2" title="${qna.postTitle}">
+											<a
+												href="${pageContext.request.contextPath}/qna/detail.qfc?postNumber=${qna.postNumber}">
+												${qna.postTitle} </a>
 										</div>
-										<div class="col3">${qna.companyName}</div>
-										<div class="col4">${qna.memberId}</div>
+										<div class="col3" title="${qna.companyName}">${qna.companyName}</div>
+										<div class="col4" title="${qna.memberId}">${qna.memberId}</div>
 										<div class="col5">${qna.postCreatedDate}</div>
 										<div class="col6">${qna.answerStatus}</div>
 										<div class="col7">${qna.viewCount}</div>
 										<div class="col8">
-											<input type="checkbox" name="postNumber" value="${qna.postNumber}">
+											<input type="checkbox" name="postNumber"
+												value="${qna.postNumber}">
 										</div>
 									</div>
 								</c:forEach>
@@ -143,7 +160,8 @@ if (session.getAttribute("adminNumber") == null) {
 						<div class="qna-page">
 							<c:choose>
 								<c:when test="${prev}">
-									<a href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc?page=${startPage - 1}&companyNumber=${companyNumber}">&lt;</a>
+									<a
+										href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc?page=${startPage - 1}&companyNumber=${companyNumber}">&lt;</a>
 								</c:when>
 								<c:otherwise>
 									<span>&lt;</span>
@@ -156,14 +174,16 @@ if (session.getAttribute("adminNumber") == null) {
 										<span class="active">${i}</span>
 									</c:when>
 									<c:otherwise>
-										<a href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc?page=${i}&companyNumber=${companyNumber}">${i}</a>
+										<a
+											href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc?page=${i}&companyNumber=${companyNumber}">${i}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 
 							<c:choose>
 								<c:when test="${next}">
-									<a href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc?page=${endPage + 1}&companyNumber=${companyNumber}">&gt;</a>
+									<a
+										href="${pageContext.request.contextPath}/admin/companyQnaManagement.adfc?page=${endPage + 1}&companyNumber=${companyNumber}">&gt;</a>
 								</c:when>
 								<c:otherwise>
 									<span>&gt;</span>
@@ -184,7 +204,8 @@ if (session.getAttribute("adminNumber") == null) {
 
 	</div>
 
-	<script src="${pageContext.request.contextPath}/assets/js/admin/main-management/company-qna.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/admin/main-management/company-qna.js"></script>
 	<script>
 		function getByteLength(value) {
 			return new TextEncoder().encode(value).length;
@@ -209,6 +230,11 @@ if (session.getAttribute("adminNumber") == null) {
 			});
 		});
 	</script>
+	<c:if test="${param.result eq 'saved'}">
+		<script>
+			alert("작성 완료했습니다.");
+		</script>
+	</c:if>
 </body>
 
 </html>

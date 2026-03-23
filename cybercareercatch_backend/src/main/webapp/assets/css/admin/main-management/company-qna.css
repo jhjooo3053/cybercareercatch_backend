@@ -338,3 +338,122 @@ html {
 	word-break: break-word;
 	overflow-wrap: anywhere;
 }
+/* ===== 기업 QnA 긴 글 줄바꿈 보정 : 추가만 ===== */
+
+.qna-content,
+.qna-table,
+.qna-row,
+.qna-row > div,
+.qna-notice-row,
+.qna-notice-row > div {
+	min-width: 0 !important;
+}
+
+.qna-row {
+	width: 100%;
+	align-items: flex-start;
+}
+
+.qna-row > div {
+	white-space: normal !important;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+}
+
+.col2 {
+	flex: 1 1 0 !important;
+	min-width: 0 !important;
+	white-space: normal !important;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+}
+
+.col2 a {
+	white-space: normal !important;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+	display: inline-block;
+	max-width: 100%;
+}
+
+#notice-box {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0 !important;
+	white-space: pre-wrap;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+}
+/* ===== 기업 QnA 제목 / 기업명 / 작성자 한 줄 말줄임 ===== */
+
+.qna-table,
+.qna-row,
+.qna-row > div {
+	min-width: 0;
+}
+
+.qna-row .col2,
+.qna-row .col3,
+.qna-row .col4 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
+}
+
+.qna-row .col2 {
+	flex: 1 1 0;
+}
+
+.qna-row .col2 a {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.qna-row .col3 {
+	width: 140px;
+	flex: 0 0 140px;
+}
+
+.qna-row .col4 {
+	width: 110px;
+	flex: 0 0 110px;
+}
+/* ===== 최종 덮어쓰기: 기업 QnA 제목 / 기업명 / 작성자 말줄임 ===== */
+
+.qna-row:not(.qna-head) .col2,
+.qna-row:not(.qna-head) .col3,
+.qna-row:not(.qna-head) .col4 {
+	min-width: 0 !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+	word-break: normal !important;
+	overflow-wrap: normal !important;
+}
+
+.qna-row:not(.qna-head) .col2 {
+	flex: 1 1 0 !important;
+}
+
+.qna-row:not(.qna-head) .col2 a {
+	display: block !important;
+	width: 100% !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+	word-break: normal !important;
+	overflow-wrap: normal !important;
+}
+
+.qna-row:not(.qna-head) .col3 {
+	flex: 0 0 140px !important;
+	width: 140px !important;
+}
+
+.qna-row:not(.qna-head) .col4 {
+	flex: 0 0 110px !important;
+	width: 110px !important;
+}

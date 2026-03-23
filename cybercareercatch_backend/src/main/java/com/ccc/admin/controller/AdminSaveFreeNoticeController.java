@@ -27,7 +27,7 @@ public class AdminSaveFreeNoticeController implements Execute {
 			postDAO.saveAdminFreeNotice(noticeContent, adminNumber);
 		}
 
-		result.setPath(request.getContextPath() + "/admin/communityManagement.adfc");
+		result.setPath(request.getContextPath() + "/admin/communityManagement.adfc?result=saved");
 		result.setRedirect(true);
 
 		return result;

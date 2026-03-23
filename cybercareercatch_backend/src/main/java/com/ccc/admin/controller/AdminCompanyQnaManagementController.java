@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ccc.common.Execute;
 import com.ccc.common.Result;
+import com.ccc.company.dto.CompanyDTO;
 import com.ccc.qna.dao.QnaDAO;
 import com.ccc.qna.dto.QnaCompanyDTO;
 import com.ccc.qna.dto.QnaDTO;
@@ -67,7 +68,7 @@ public class AdminCompanyQnaManagementController implements Execute {
 		pageMap.put("endRow", endRow);
 		pageMap.put("companyNumber", companyNumber);
 
-		List<QnaCompanyDTO> companyList = qnaDAO.selectCompanyList();
+		List<CompanyDTO> companyList = qnaDAO.selectCompanyList();
 		List<QnaListDTO> qnaList = qnaDAO.selectAdminQnaList(pageMap);
 		QnaDTO qnaNotice = qnaDAO.selectAdminQnaNotice();
 

@@ -1,5 +1,6 @@
 package com.ccc.post.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -156,4 +157,53 @@ public class PostDAO {
         
   
     }
+    
+
+	public NoticeDTO selectAdminFreeNotice() {
+		return sqlSession.selectOne("post.selectAdminFreeNotice");
+	}
+
+	public void saveAdminFreeNotice(String noticeContent, int adminNumber) {
+		Integer count = sqlSession.selectOne("post.getAdminFreeNoticeCount");
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("noticeContent", noticeContent);
+		params.put("adminNumber", adminNumber);
+
+		if (count == null || count == 0) {
+			sqlSession.insert("post.insertAdminFreeNotice", params);
+			return;
+		}
+
+		sqlSession.update("post.updateAdminFreeNotice", params);
+	}
+
+	// =========================================================
+	// 자유게시판 게시글
+	// =========================================================
+
+	public int getTotal() {
+		Integer total = sqlSession.selectOne("post.getTotal");
+		return total == null ? 0 : total;
+	}
+
+
+	// =========================================================
+	// 관리자 자유게시판 관리
+	// =========================================================
+
+	public int getAdminFreePostTotal() {
+		Integer total = sqlSession.selectOne("post.getAdminFreePostTotal");
+		return total == null ? 0 : total;
+	}
+
+	public List<PostListDTO> selectAdminFreePostList(Map<String, Integer> pageMap) {
+		return sqlSession.selectList("post.selectAdminFreePostList", pageMap);
+	}
+
+	public void deleteAdminFreePost(int postNumber) {
+		sqlSession.delete("post.deleteAdminFreePost", postNumber);
+	}
+
+
 }

@@ -303,39 +303,96 @@
 	background: #c86b6b;
 }
 
-/* ===== 긴 글 입력/출력 시 가로로 안 밀리고 아래로 줄바꿈 ===== */
 
-.expoSchedule-content {
-	min-width: 0;
+/* ===== 추가만 : 긴 글 들어와도 오른쪽으로 안 밀리게 ===== */
+
+.expoSchedule-container {
+	max-width: 1300px;
+	width: calc(100% - 40px);
 }
 
-.expoSchedule-addForm,
+.expoSchedule-content,
+.expoSchedule-table,
+.expoSchedule-row,
+.expoSchedule-row > div {
+	min-width: 0 !important;
+}
+
+.expoSchedule-row {
+	width: 100%;
+	align-items: flex-start;
+}
+
+.expoSchedule-row > div {
+	white-space: normal !important;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+	overflow: hidden;
+}
+
+.expoSchedule-row .col2 {
+	flex: 0 1 260px;
+	min-width: 0 !important;
+}
+
+.expoSchedule-row .col5 {
+	flex: 1 1 0;
+	min-width: 0 !important;
+}
+
+.expoSchedule-addRow {
+	width: 100%;
+	align-items: flex-start;
+}
+
+.expoSchedule-addRow input[type="text"] {
+	min-width: 0 !important;
+	width: 100%;
+}
+
+
+
+/* ===== 박람회명 / 장소 한 줄 말줄임 ===== */
+
 .expoSchedule-table,
 .expoSchedule-row,
 .expoSchedule-row > div {
 	min-width: 0;
 }
 
-.expoSchedule-addRow input[type="text"] {
-	min-width: 0;
-	width: 100%;
-}
-
-.expoSchedule-row > div {
-	white-space: normal;
-	word-break: break-word;
-	overflow-wrap: anywhere;
-}
-
-.col2,
-.col5 {
+.expoSchedule-row .col2,
+.expoSchedule-row .col5 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	min-width: 0;
 }
 
-.col2,
-.col5,
-.col6 {
-	white-space: normal;
-	word-break: break-word;
-	overflow-wrap: anywhere;
+.expoSchedule-row .col2 {
+	width: 260px;
+	flex: 0 0 260px;
+}
+
+.expoSchedule-row .col5 {
+	flex: 1 1 0;
+}
+/* ===== 최종 덮어쓰기: 박람회명 / 장소 말줄임 ===== */
+
+.expoSchedule-row:not(.expoSchedule-head) .col2,
+.expoSchedule-row:not(.expoSchedule-head) .col5 {
+	min-width: 0 !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+	word-break: normal !important;
+	overflow-wrap: normal !important;
+}
+
+.expoSchedule-row:not(.expoSchedule-head) .col2 {
+	flex: 0 0 260px !important;
+	width: 260px !important;
+}
+
+.expoSchedule-row:not(.expoSchedule-head) .col5 {
+	flex: 1 1 0 !important;
 }

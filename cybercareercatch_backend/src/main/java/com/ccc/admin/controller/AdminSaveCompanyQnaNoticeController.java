@@ -27,7 +27,7 @@ public class AdminSaveCompanyQnaNoticeController implements Execute {
 			qnaDAO.saveAdminQnaNotice(noticeContent, adminNumber);
 		}
 
-		result.setPath(request.getContextPath() + "/admin/companyQnaManagement.adfc");
+		result.setPath(request.getContextPath() + "/admin/companyQnaManagement.adfc?result=saved");
 		result.setRedirect(true);
 
 		return result;
