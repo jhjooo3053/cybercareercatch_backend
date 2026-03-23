@@ -12,12 +12,11 @@
 
 <body>
   <%--
-    자유게시판 공지도
-    비회원 + 일반회원은 조회 가능
-    기업회원은 접근 불가
+    자유게시판 공지는 전 회원 접근 가능
   --%>
   <c:choose>
-    <c:when test="${empty sessionScope.userType or sessionScope.userType == '일반회원'}">
+   <c:when test="${empty sessionScope.userType or sessionScope.userType == '일반회원'}">
+    
 
       <!--
         NoticeDTO 기준
@@ -31,17 +30,17 @@
         - editDate
         - viewCount
 
-        중요:
-        이 공지는 관리자 페이지에서 작성/관리됩니다.
-        사용자 화면에서는 조회만 합니다.
+
+        공지는 관리자 페이지에서 작성/관리됩니다.
+        사용자 화면에서는 조회만함
       -->
 
       <main class="cnd-wrap">
         <div class="cnd-top">
           <h2 class="cnd-top-ttl">공지사항</h2>
-          <a href="${pageContext.request.contextPath}/app/main/community/post-list.jsp" class="cnd-top-mv">
-            자유게시판으로 이동하기
-          </a>
+		      <a href="${pageContext.request.contextPath}/post/list.pfc" class="cnd-top-mv">
+		  자유게시판으로 이동하기
+		</a>
         </div>
 
         <div class="cnd-pnl">
@@ -71,10 +70,6 @@
                 <c:out value="${notice.postContent}" />
               </div>
 
-              <%--
-                공지는 관리자 페이지에서 관리하므로
-                사용자 화면에는 수정/삭제 버튼을 두지 않습니다.
-              --%>
 
             </c:when>
 
@@ -84,7 +79,7 @@
           </c:choose>
 
           <div class="cnd-btm">
-            <a href="${pageContext.request.contextPath}/app/main/community/post-list.jsp" class="cnd-btn">목록으로</a>
+            <a href="${pageContext.request.contextPath}/post/list.pfc" class="cnd-btn">목록으로</a>
           </div>
         </div>
       </main>

@@ -5,13 +5,18 @@
 
 <mapper namespace="post">
 
+    <!-- =========================================================
+         자유게시판 공지
+         ========================================================= -->
+
     <!-- 자유게시판 공지 목록 -->
-    <select id="selectFreeNoticeList" resultType="com.ccc.post.dto.NoticeDTO">
+    <select id="selectFreeNoticeList"
+            resultType="com.ccc.post.dto.NoticeDTO">
         SELECT
             P.POST_NUMBER,
             P.POST_TYPE,
             P.ADMIN_NUMBER,
-            A.ADMIN_ID,
+            A.ADMIN_ID AS ADMIN_ID,
             P.POST_TITLE,
             P.POST_CONTENT,
             TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
@@ -32,7 +37,7 @@
             P.POST_NUMBER,
             P.POST_TYPE,
             P.ADMIN_NUMBER,
-            A.ADMIN_ID,
+            A.ADMIN_ID AS ADMIN_ID,
             P.POST_TITLE,
             P.POST_CONTENT,
             TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
@@ -41,42 +46,13 @@
         FROM TBL_POST P
         JOIN TBL_ADMIN A
           ON P.ADMIN_NUMBER = A.ADMIN_NUMBER
-        WHERE P.POST_NUMBER = #{postNumber}
+        WHERE P.POST_NUMBER = #{value}
           AND P.POST_TYPE = 'FREE_NOTICE'
     </select>
 
-    <!-- 관리자 자유게시판 공지 개수 -->
-    <select id="getAdminFreeNoticeCount" resultType="int">
-        SELECT COUNT(POST_NUMBER)
-        FROM TBL_POST
-        WHERE POST_TYPE = 'FREE_NOTICE'
-    </select>
-
-    <!-- 관리자 자유게시판 공지 조회 -->
-    <select id="selectAdminFreeNotice" resultType="com.ccc.post.dto.NoticeDTO">
-        SELECT *
-        FROM (
-            SELECT
-                P.POST_NUMBER,
-                P.POST_TYPE,
-                P.ADMIN_NUMBER,
-                A.ADMIN_ID,
-                P.POST_TITLE,
-                P.POST_CONTENT,
-                TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
-                TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE,
-                P.VIEW_COUNT
-            FROM TBL_POST P
-            JOIN TBL_ADMIN A
-              ON P.ADMIN_NUMBER = A.ADMIN_NUMBER
-            WHERE P.POST_TYPE = 'FREE_NOTICE'
-            ORDER BY P.POST_NUMBER DESC
-        )
-        WHERE ROWNUM = 1
-    </select>
-
-    <!-- 관리자 자유게시판 공지 등록 -->
-    <insert id="insertAdminFreeNotice" parameterType="map">
+    <!-- 자유게시판 공지 작성 -->
+    <insert id="insertNotice"
+            parameterType="com.ccc.post.dto.NoticeDTO">
         INSERT INTO TBL_POST (
             POST_NUMBER,
             POST_TYPE,
@@ -89,105 +65,9 @@
             POST_DATE,
             VIEW_COUNT,
             EDIT_DATE
-        )
-        VALUES (
+        ) VALUES (
             SEQ_POST_NUMBER.NEXTVAL,
             'FREE_NOTICE',
-            NULL,
-            #{adminNumber},
-            NULL,
-            NULL,
-            '자유게시판 공지',
-            #{noticeContent},
-            SYSDATE,
-            0,
-            SYSDATE
-        )
-    </insert>
-
-    <!-- 관리자 자유게시판 공지 수정 -->
-    <update id="updateAdminFreeNotice" parameterType="map">
-        UPDATE TBL_POST
-        SET POST_CONTENT = #{noticeContent},
-            EDIT_DATE = SYSDATE,
-            ADMIN_NUMBER = #{adminNumber}
-        WHERE POST_NUMBER = (
-            SELECT MAX(POST_NUMBER)
-            FROM TBL_POST
-            WHERE POST_TYPE = 'FREE_NOTICE'
-        )
-    </update>
-
-    <!-- 자유게시판 글 개수 -->
-    <select id="getTotal" resultType="int">
-        SELECT COUNT(POST_NUMBER)
-        FROM TBL_POST
-        WHERE POST_TYPE = 'FREE_POST'
-    </select>
-
-    <!-- 조회수 증가 -->
-    <update id="updateReadCount" parameterType="int">
-        UPDATE TBL_POST
-        SET VIEW_COUNT = VIEW_COUNT + 1
-        WHERE POST_NUMBER = #{postNumber}
-    </update>
-
-    <!-- 자유게시판 글 작성 -->
-    <insert id="insert" parameterType="com.ccc.post.dto.PostWriteDTO">
-        INSERT INTO TBL_POST (
-            POST_NUMBER,
-            POST_TYPE,
-            USER_NUMBER,
-            ADMIN_NUMBER,
-            COMPANY_NUMBER,
-            ANSWER_STATUS,
-            POST_TITLE,
-            POST_CONTENT,
-            POST_DATE,
-            VIEW_COUNT,
-            EDIT_DATE
-        )
-        VALUES (
-            SEQ_POST_NUMBER.NEXTVAL,
-            #{postType},
-            #{userNumber},
-            NULL,
-            NULL,
-            NULL,
-            #{postTitle},
-            #{postContent},
-            SYSDATE,
-            0,
-            SYSDATE
-        )
-    </insert>
-
-    <!-- 자유게시판 글 삭제 -->
-    <delete id="delete" parameterType="com.ccc.post.dto.PostDTO">
-        DELETE FROM TBL_POST
-        WHERE POST_NUMBER = #{postNumber}
-          AND USER_NUMBER = #{userNumber}
-          AND POST_TYPE = 'FREE_POST'
-    </delete>
-
-    <!-- 자유게시판 공지 작성 -->
-    <insert id="insertNotice" parameterType="com.ccc.post.dto.NoticeDTO">
-        INSERT INTO TBL_POST (
-            POST_NUMBER,
-            POST_TYPE,
-            USER_NUMBER,
-            ADMIN_NUMBER,
-            COMPANY_NUMBER,
-            ANSWER_STATUS,
-            POST_TITLE,
-            POST_CONTENT,
-            POST_DATE,
-            VIEW_COUNT,
-            EDIT_DATE
-        )
-        VALUES (
-            SEQ_POST_NUMBER.NEXTVAL,
-            #{postType},
             NULL,
             #{adminNumber},
             NULL,
@@ -201,35 +81,110 @@
     </insert>
 
     <!-- 자유게시판 공지 삭제 -->
-    <delete id="deleteNotice" parameterType="int">
+    <delete id="deleteNotice"
+            parameterType="int">
         DELETE FROM TBL_POST
-        WHERE POST_NUMBER = #{postNumber}
+        WHERE POST_NUMBER = #{value}
           AND POST_TYPE = 'FREE_NOTICE'
     </delete>
 
-    <!-- 자유게시판 글 상세 -->
+
+    <!-- =========================================================
+         자유게시판 일반 게시글
+         ========================================================= -->
+
+    <!-- 자유게시판 일반 게시글 총 개수 -->
+    <select id="getTotal"
+            parameterType="map"
+            resultType="int">
+        SELECT COUNT(P.POST_NUMBER)
+        FROM TBL_POST P
+        JOIN TBL_USER U
+          ON P.USER_NUMBER = U.USER_NUMBER
+        WHERE P.POST_TYPE = 'FREE_POST'
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="searchType == 'title'">
+                    AND P.POST_TITLE LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="searchType == 'writer'">
+                    AND U.USER_ID LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="searchType == 'content'">
+                    AND P.POST_CONTENT LIKE '%' || #{keyword} || '%'
+                </when>
+            </choose>
+        </if>
+    </select>
+
+    <!-- 조회수 증가 -->
+    <update id="updateReadCount"
+            parameterType="int">
+        UPDATE TBL_POST
+        SET VIEW_COUNT = NVL(VIEW_COUNT, 0) + 1
+        WHERE POST_NUMBER = #{value}
+    </update>
+
+    <!-- 자유게시판 일반 게시글 작성 -->
+    <insert id="insert"
+            parameterType="com.ccc.post.dto.PostWriteDTO">
+        INSERT INTO TBL_POST (
+            POST_NUMBER,
+            POST_TYPE,
+            USER_NUMBER,
+            ADMIN_NUMBER,
+            COMPANY_NUMBER,
+            ANSWER_STATUS,
+            POST_TITLE,
+            POST_CONTENT,
+            POST_DATE,
+            VIEW_COUNT,
+            EDIT_DATE
+        ) VALUES (
+            SEQ_POST_NUMBER.NEXTVAL,
+            #{postType},
+            #{userNumber},
+            NULL,
+            NULL,
+            NULL,
+            #{postTitle},
+            #{postContent},
+            SYSDATE,
+            0,
+            NULL
+        )
+    </insert>
+
+    <!-- 자유게시판 일반 게시글 삭제 -->
+    <delete id="delete"
+            parameterType="com.ccc.post.dto.PostDTO">
+        DELETE FROM TBL_POST
+        WHERE POST_NUMBER = #{postNumber}
+          AND USER_NUMBER = #{userNumber}
+          AND POST_TYPE = 'FREE_POST'
+    </delete>
+
+    <!-- 자유게시판 일반 게시글 상세 -->
     <select id="select"
             parameterType="int"
             resultType="com.ccc.post.dto.PostDetailDTO">
-        <![CDATA[
-            SELECT
-                P.POST_NUMBER,
-                P.POST_TITLE,
-                U.USER_ID,
-                TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
-                TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE,
-                P.VIEW_COUNT,
-                P.POST_CONTENT,
-                P.USER_NUMBER
-            FROM TBL_POST P
-            JOIN TBL_USER U
-              ON P.USER_NUMBER = U.USER_NUMBER
-            WHERE P.POST_NUMBER = #{postNumber}
-              AND P.POST_TYPE = 'FREE_POST'
-        ]]>
+        SELECT
+            P.POST_NUMBER,
+            P.POST_TITLE,
+            U.USER_ID AS USER_ID,
+            TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
+            TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE,
+            P.VIEW_COUNT,
+            P.POST_CONTENT,
+            P.USER_NUMBER
+        FROM TBL_POST P
+        JOIN TBL_USER U
+          ON P.USER_NUMBER = U.USER_NUMBER
+        WHERE P.POST_NUMBER = #{value}
+          AND P.POST_TYPE = 'FREE_POST'
     </select>
 
-    <!-- 자유게시판 글 목록 -->
+    <!-- 자유게시판 일반 게시글 목록 -->
     <select id="selectAll"
             parameterType="map"
             resultType="com.ccc.post.dto.PostListDTO">
@@ -237,63 +192,43 @@
         FROM (
             SELECT
                 ROWNUM AS RNUM,
-                SUBQUERY.*
+                A.*
             FROM (
                 SELECT
                     P.POST_NUMBER,
                     P.POST_TITLE,
-                    U.USER_ID,
+                    U.USER_ID AS USER_ID,
                     TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
-                    TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE
+                    TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE,
+                    P.VIEW_COUNT
                 FROM TBL_POST P
                 JOIN TBL_USER U
                   ON P.USER_NUMBER = U.USER_NUMBER
                 WHERE P.POST_TYPE = 'FREE_POST'
+                <if test="keyword != null and keyword != ''">
+                    <choose>
+                        <when test="searchType == 'title'">
+                            AND P.POST_TITLE LIKE '%' || #{keyword} || '%'
+                        </when>
+                        <when test="searchType == 'writer'">
+                            AND U.USER_ID LIKE '%' || #{keyword} || '%'
+                        </when>
+                        <when test="searchType == 'content'">
+                            AND P.POST_CONTENT LIKE '%' || #{keyword} || '%'
+                        </when>
+                    </choose>
+                </if>
                 ORDER BY P.POST_NUMBER DESC
-            ) SUBQUERY
+            ) A
+            WHERE ROWNUM &lt;= #{endRow}
         )
-        WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+        WHERE RNUM &gt;= #{startRow}
     </select>
 
-    <!-- 관리자 자유게시판 글 총 개수 -->
-    <select id="getAdminFreePostTotal" resultType="int">
-        SELECT COUNT(POST_NUMBER)
-        FROM TBL_POST
-        WHERE POST_TYPE = 'FREE_POST'
-    </select>
 
-    <!-- 관리자 자유게시판 글 목록 -->
-    <select id="selectAdminFreePostList"
-            parameterType="map"
-            resultType="com.ccc.post.dto.PostListDTO">
-        SELECT *
-        FROM (
-            SELECT
-                ROWNUM AS RNUM,
-                SUBQUERY.*
-            FROM (
-                SELECT
-                    P.POST_NUMBER,
-                    P.POST_TITLE,
-                    U.USER_ID,
-                    TO_CHAR(P.POST_DATE, 'YYYY-MM-DD') AS POST_DATE,
-                    TO_CHAR(P.EDIT_DATE, 'YYYY-MM-DD') AS EDIT_DATE
-                FROM TBL_POST P
-                JOIN TBL_USER U
-                  ON P.USER_NUMBER = U.USER_NUMBER
-                WHERE P.POST_TYPE = 'FREE_POST'
-                ORDER BY P.POST_NUMBER DESC
-            ) SUBQUERY
-        )
-        WHERE RNUM BETWEEN #{startRow} AND #{endRow}
-    </select>
-
-    <!-- 관리자 자유게시판 글 삭제 -->
-    <delete id="deleteAdminFreePost" parameterType="int">
-        DELETE FROM TBL_POST
-        WHERE POST_NUMBER = #{postNumber}
-          AND POST_TYPE = 'FREE_POST'
-    </delete>
+    <!-- =========================================================
+         댓글
+         ========================================================= -->
 
     <!-- 댓글 목록 -->
     <select id="selectCommentList"
@@ -303,26 +238,26 @@
             C.COMMENT_NUMBER,
             C.POST_NUMBER,
             C.USER_NUMBER,
-            U.USER_ID,
+            U.USER_ID AS USER_ID,
             C.COMMENT_CONTENT,
             TO_CHAR(C.COMMENT_DATE, 'YYYY-MM-DD') AS COMMENT_DATE
         FROM TBL_COMMENT C
         JOIN TBL_USER U
           ON C.USER_NUMBER = U.USER_NUMBER
-        WHERE C.POST_NUMBER = #{postNumber}
+        WHERE C.POST_NUMBER = #{value}
         ORDER BY C.COMMENT_NUMBER ASC
     </select>
 
     <!-- 댓글 작성 -->
-    <insert id="insertComment" parameterType="com.ccc.post.dto.CommentWriteDTO">
+    <insert id="insertComment"
+            parameterType="com.ccc.post.dto.CommentWriteDTO">
         INSERT INTO TBL_COMMENT (
             COMMENT_NUMBER,
             POST_NUMBER,
             USER_NUMBER,
             COMMENT_CONTENT,
             COMMENT_DATE
-        )
-        VALUES (
+        ) VALUES (
             SEQ_COMMENT_NUMBER.NEXTVAL,
             #{postNumber},
             #{userNumber},
@@ -332,7 +267,8 @@
     </insert>
 
     <!-- 댓글 삭제 -->
-    <delete id="deleteComment" parameterType="com.ccc.post.dto.CommentDTO">
+    <delete id="deleteComment"
+            parameterType="com.ccc.post.dto.CommentDTO">
         DELETE FROM TBL_COMMENT
         WHERE COMMENT_NUMBER = #{commentNumber}
           AND USER_NUMBER = #{userNumber}

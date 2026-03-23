@@ -1,6 +1,5 @@
 package com.ccc.post.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,110 +16,144 @@ import com.ccc.post.dto.PostListDTO;
 import com.ccc.post.dto.PostWriteDTO;
 
 public class PostDAO {
-	private SqlSession sqlSession;
 
-	public PostDAO() {
-		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
-	}
+    // MyBatis와 연결되는 SqlSession 객체
+    // SQL 실행(select, insert, update, delete)을 담당
+    private SqlSession sqlSession;
 
-	// =========================================================
-	// 공지
-	// =========================================================
+    // 생성자
+    // DAO 객체가 생성될 때 sqlSession을 자동으로 열어둠
+    // openSession(true) : 자동 커밋 설정
+    public PostDAO() {
+        sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
+    }
 
-	public List<NoticeDTO> selectFreeNoticeList() {
-		return sqlSession.selectList("post.selectFreeNoticeList");
-	}
+    // =========================================================
+    // 자유게시판 공지
+    // =========================================================
 
-	public NoticeDTO selectFreeNoticeDetail(int postNumber) {
-		return sqlSession.selectOne("post.selectFreeNoticeDetail", postNumber);
-	}
+    // 자유게시판 공지 목록 조회
+    // mapper id : post.selectFreeNoticeList
+    public List<NoticeDTO> selectFreeNoticeList() {
+        System.out.println("자유게시판 공지 목록 조회 - selectFreeNoticeList 실행");
+        List<NoticeDTO> noticeList = sqlSession.selectList("post.selectFreeNoticeList");
+        System.out.println("조회 결과 : " + noticeList);
+        return noticeList;
+    }
 
-	public void insertNotice(NoticeDTO noticeDTO) {
-		sqlSession.insert("post.insertNotice", noticeDTO);
-	}
+    // 자유게시판 공지 상세 조회
+    // parameter : postNumber
+    // mapper id : post.selectFreeNoticeDetail
+    public NoticeDTO selectFreeNoticeDetail(int postNumber) {
+        System.out.println("자유게시판 공지 상세 조회 - selectFreeNoticeDetail 실행 : " + postNumber);
+        NoticeDTO noticeDTO = sqlSession.selectOne("post.selectFreeNoticeDetail", postNumber);
+        System.out.println("조회 결과 : " + noticeDTO);
+        return noticeDTO;
+    }
 
-	public void deleteNotice(int postNumber) {
-		sqlSession.delete("post.deleteNotice", postNumber);
-	}
+    // 자유게시판 공지 추가
+    // mapper id : post.insertNotice
+    public void insertNotice(NoticeDTO noticeDTO) {
+        System.out.println("자유게시판 공지 작성 - insertNotice 실행");
+        int result = sqlSession.insert("post.insertNotice", noticeDTO);
+        System.out.println("공지 작성 결과 : " + result);
+    }
 
-	public NoticeDTO selectAdminFreeNotice() {
-		return sqlSession.selectOne("post.selectAdminFreeNotice");
-	}
+    // 자유게시판 공지 삭제
+    // parameter : postNumber
+    // mapper id : post.deleteNotice
+    public void deleteNotice(int postNumber) {
+        System.out.println("자유게시판 공지 삭제 - deleteNotice 실행 : " + postNumber);
+        int result = sqlSession.delete("post.deleteNotice", postNumber);
+        System.out.println("공지 삭제 결과 : " + result);
+    }
 
-	public void saveAdminFreeNotice(String noticeContent, int adminNumber) {
-		Integer count = sqlSession.selectOne("post.getAdminFreeNoticeCount");
+    // =========================================================
+    // 자유게시판 일반 게시글
+    // =========================================================
 
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("noticeContent", noticeContent);
-		params.put("adminNumber", adminNumber);
+ // 자유게시판 일반 게시글 총 개수 조회
+    public int getTotal(Map<String, Object> pageMap) {
+        System.out.println("자유게시판 게시글 총 개수 조회 - getTotal 실행");
+        return sqlSession.selectOne("post.getTotal", pageMap);
+    }
 
-		if (count == null || count == 0) {
-			sqlSession.insert("post.insertAdminFreeNotice", params);
-			return;
-		}
+    // 자유게시판 게시글 조회수 증가
+    // 게시글 상세페이지 들어가기 전에 보통 실행
+    // mapper id : post.updateReadCount
+    public void updateReadCount(int postNumber) {
+        System.out.println("조회수 증가 - updateReadCount 실행 : " + postNumber);
+        int result = sqlSession.update("post.updateReadCount", postNumber);
+        System.out.println("조회수 증가 결과 : " + result);
+    }
 
-		sqlSession.update("post.updateAdminFreeNotice", params);
-	}
+    // 자유게시판 게시글 작성
+    // mapper id : post.insert
+    public void insert(PostWriteDTO postWriteDTO) {
+        System.out.println("자유게시판 게시글 작성 - insert 실행");
+        int result = sqlSession.insert("post.insert", postWriteDTO);
+        System.out.println("게시글 작성 결과 : " + result);
+    }
 
-	// =========================================================
-	// 자유게시판 게시글
-	// =========================================================
+    // 자유게시판 게시글 삭제
+    // postNumber + userNumber 둘 다 받아서
+    // '내가 쓴 글만 삭제' 조건으로 처리
+    // mapper id : post.delete
+    public void delete(PostDTO postDTO) {
+        System.out.println("자유게시판 게시글 삭제 - delete 실행");
+        int result = sqlSession.delete("post.delete", postDTO);
+        System.out.println("게시글 삭제 결과 : " + result);
+    }
 
-	public int getTotal() {
-		Integer total = sqlSession.selectOne("post.getTotal");
-		return total == null ? 0 : total;
-	}
+    // 자유게시판 게시글 상세 조회
+    // mapper id : post.select
+    public PostDetailDTO select(int postNumber) {
+        System.out.println("자유게시판 게시글 상세 조회 - select 실행 : " + postNumber);
+        PostDetailDTO postDetailDTO = sqlSession.selectOne("post.select", postNumber);
+        System.out.println("조회 결과 : " + postDetailDTO);
+        return postDetailDTO;
+    }
 
-	public void updateReadCount(int postNumber) {
-		sqlSession.update("post.updateReadCount", postNumber);
-	}
+ // 자유게시판 일반 게시글 목록 조회
+    public List<PostListDTO> selectAll(Map<String, Object> pageMap) {
+        System.out.println("자유게시판 전체 게시글 조회 - selectAll 실행 : " + pageMap);
+        List<PostListDTO> postList = sqlSession.selectList("post.selectAll", pageMap);
+        System.out.println("조회 결과 : " + postList);
+        return postList;
+    }
 
-	public void insert(PostWriteDTO postWriteDTO) {
-		sqlSession.insert("post.insert", postWriteDTO);
-	}
 
-	public void delete(PostDTO postDTO) {
-		sqlSession.delete("post.delete", postDTO);
-	}
+    // =========================================================
+    // 댓글
+    // =========================================================
 
-	public PostDetailDTO select(int postNumber) {
-		return sqlSession.selectOne("post.select", postNumber);
-	}
+    // 댓글 목록 조회
+    // 특정 게시글 번호(postNumber)에 달린 댓글 전체 조회
+    // mapper id : post.selectCommentList
+    public List<CommentViewDTO> selectCommentList(int postNumber) {
+        System.out.println("댓글 목록 조회 - selectCommentList 실행 : " + postNumber);
+        List<CommentViewDTO> commentList = sqlSession.selectList("post.selectCommentList", postNumber);
+        System.out.println("조회 결과 : " + commentList);
+        return commentList;
+    }
 
-	public List<PostListDTO> selectAll(Map<String, Integer> pageMap) {
-		return sqlSession.selectList("post.selectAll", pageMap);
-	}
+    // 댓글 작성
+    // mapper id : post.insertComment
+    public void insertComment(CommentWriteDTO commentWriteDTO) {
+        System.out.println("댓글 작성 - insertComment 실행");
+        int result = sqlSession.insert("post.insertComment", commentWriteDTO);
+        System.out.println("댓글 작성 결과 : " + result);
+    }
 
-	// =========================================================
-	// 관리자 자유게시판 관리
-	// =========================================================
-
-	public int getAdminFreePostTotal() {
-		Integer total = sqlSession.selectOne("post.getAdminFreePostTotal");
-		return total == null ? 0 : total;
-	}
-
-	public List<PostListDTO> selectAdminFreePostList(Map<String, Integer> pageMap) {
-		return sqlSession.selectList("post.selectAdminFreePostList", pageMap);
-	}
-
-	public void deleteAdminFreePost(int postNumber) {
-		sqlSession.delete("post.deleteAdminFreePost", postNumber);
-	}
-
-	// =========================================================
-	// 댓글
-	// =========================================================
-
-	public List<CommentViewDTO> selectCommentList(int postNumber) {
-		return sqlSession.selectList("post.selectCommentList", postNumber);
-	}
-
-	public void insertComment(CommentWriteDTO commentWriteDTO) {
-		sqlSession.insert("post.insertComment", commentWriteDTO);
-	}
-
-	public void deleteComment(CommentDTO commentDTO) {
-		sqlSession.delete("post.deleteComment", commentDTO);
-	}
+    // 댓글 삭제
+    // commentNumber + userNumber 조건으로
+    // 내가 작성한 댓글만 삭제
+    // mapper id : post.deleteComment
+    public void deleteComment(CommentDTO commentDTO) {
+        System.out.println("댓글 삭제 - deleteComment 실행");
+        int result = sqlSession.delete("post.deleteComment", commentDTO);
+        System.out.println("댓글 삭제 결과 : " + result);
+        
+  
+    }
 }

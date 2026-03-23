@@ -1,50 +1,25 @@
-/* 
-  축약어 규칙
-  cml = Community List (커뮤니티 게시글 목록 페이지 공통 prefix)
-  top = 상단 타이틀 영역
-  ttl = title(제목)
-  head = 게시글 목록 헤더 영역
-  row = 게시글 한 줄 영역
-  col = column(열)
-  num = number(번호)
-  wrt = writer(작성자)
-  date = 작성일
-  list = 게시글 목록 묶음 영역
-  pg = pagination(페이지 번호 영역)
-  btn = button(버튼)
-  now = current page(현재 페이지)
-  sch = search(검색 영역)
-  sel = select(검색 조건 선택)
-  inp = input(검색 입력창)
-  write = 글쓰기 이동 버튼
-  link = 게시글 이동 링크
-
-  요약 기준
-  community = cm
-  list = l
-  writer = wrt
-  pagination = pg
-  search = sch
-*/
-
+/* 기본 초기화 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 페이지 기본 */
 body {
   background-color: white;
   color: black;
   font-size: 14px;
 }
 
+/* 전체 영역 */
 .cml-wrap {
   width: 1200px;
   margin: 0 auto;
   padding: 50px 0 80px;
 }
 
+/* 상단 */
 .cml-top {
   width: 100%;
   display: flex;
@@ -58,6 +33,7 @@ body {
   font-weight: 700;
 }
 
+/* 헤더 */
 .cml-head {
   width: 100%;
   min-height: 60px;
@@ -68,36 +44,40 @@ body {
 }
 
 .cml-head-col-num {
-  width: 10%;
+  width: 8%;
   text-align: center;
   font-weight: 700;
 }
 
 .cml-head-col-ttl {
-  width: 55%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 44%;
   text-align: center;
   font-weight: 700;
   padding: 0 10px;
 }
 
 .cml-head-col-wrt {
-  width: 15%;
+  width: 14%;
   text-align: center;
   font-weight: 700;
 }
 
 .cml-head-col-date {
-  width: 20%;
+  width: 16%;
   text-align: center;
   font-weight: 700;
 }
 
+.cml-head-col-view {
+  width: 18%;
+  text-align: center;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 목록 */
 .cml-list {
   width: 100%;
-  min-height: auto;
 }
 
 .cml-row {
@@ -109,34 +89,49 @@ body {
 }
 
 .cml-row-col-num {
-  width: 10%;
+  width: 8%;
   text-align: center;
 }
 
 .cml-row-col-ttl {
-  width: 55%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 44%;
   text-align: center;
   padding: 0 10px;
 }
 
 .cml-row-col-wrt {
-  width: 15%;
+  width: 14%;
   text-align: center;
 }
 
 .cml-row-col-date {
-  width: 20%;
+  width: 16%;
   text-align: center;
 }
 
+.cml-row-col-view {
+  width: 18%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cml-row-col-empty {
+  width: 100%;
+  text-align: center;
+  padding: 18px 0;
+}
+
+/* 링크 */
 .cml-link {
   color: black;
   text-decoration: none;
 }
 
+.cml-link:hover {
+  text-decoration: underline;
+}
+
+/* 페이지네이션 */
 .cml-pg {
   width: 100%;
   display: flex;
@@ -149,7 +144,6 @@ body {
 .cml-pg-btn {
   width: 34px;
   height: 34px;
-  /* border: 1px solid rgba(0, 0, 0, 0.4); */
   border-radius: 6px;
   text-decoration: none;
   color: black;
@@ -158,12 +152,13 @@ body {
   align-items: center;
 }
 
-.cml-pg-now {
+.cml-pg-btn-now {
   background-color: #7d84e6;
   color: white;
   border: 1px solid #7d84e6;
 }
 
+/* 검색 영역 */
 .cml-sch {
   width: 100%;
   display: flex;
@@ -196,13 +191,16 @@ body {
   color: white;
   border: none;
   border-radius: 6px;
+  cursor: pointer;
 }
 
-.cml-sch-write {
+/* 글쓰기 버튼 */
+.cml-write-btn {
   width: 80px;
   height: 38px;
   background-color: #7d84e6;
   color: white;
+  border: none;
   border-radius: 6px;
   text-decoration: none;
   display: flex;

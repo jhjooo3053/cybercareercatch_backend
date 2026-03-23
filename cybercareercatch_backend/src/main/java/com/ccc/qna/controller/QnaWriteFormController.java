@@ -11,7 +11,6 @@ import com.ccc.common.Execute;
 import com.ccc.common.Result;
 import com.ccc.company.dto.CompanyDTO;
 import com.ccc.qna.dao.QnaDAO;
-import com.ccc.qna.dto.QnaCompanyDTO;
 
 public class QnaWriteFormController implements Execute {
 

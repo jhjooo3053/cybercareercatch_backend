@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ccc.common.Result;
 
 
+
 public class PostFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,45 +41,61 @@ public class PostFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String target = request.getRequestURI().substring(request.getContextPath().length());
-		System.out.println("BoardFrontController 현재 경로 : " + target);
+		System.out.println("PostFrontController 현재 경로 : " + target);
 		Result result = new Result();
+		System.out.println("커뮤니티 프컨 확인=======");
 		
 		switch(target) {
-		case  "/board/boardListOk.bo":
-			System.out.println("게시물 목록 처리 요청");
-			result = new postListController().execute(request, response);
+		case  "/post/list.pfc":
+			System.out.println("### 내가 수정한 새 FrontController 실행됨 ###");
+			result = new PostListController().execute(request, response);
+			System.out.println("### 내가 수정한 새 FrontController 실행됨 ###");
+			break;
+			
+		case  "/post/read.pfc":
+			System.out.println("게시물 읽기 처리 요청");
+			result = new PostReadOkController().execute(request, response);
+			System.out.println("게시물 읽기 처리 완료");
+			break;
+			
+		case  "/post/write.pfc":
+			System.out.println("게시물 작성 요청 시작");
+			result = new PostWriteController().execute(request, response);
 			System.out.println("게시물 목록 처리 완료");
 			break;
-		case "/board/boardReadOk.bo":
-			System.out.println("게시물 상세 페이지 처리 요청");
-			result = new BoardReadOkController().execute(request, response);
-			System.out.println("게시물 상세 페이지 처리 완료");
-			break;
-		case "/board/boardWrite.bo":
-			System.out.println("게시글 작성 페이지 이동 요청");
-			result = new BoardWriteController().execute(request, response);
-			System.out.println("게시글 작성 페이지 이동 완료");
-			break;
-		case "/board/boardWriteOk.bo":
-			System.out.println("게시글 작성 요청");
-			result = new BoardWriteOkController().execute(request, response);
-			System.out.println("게시글 작성 완료");
-			break;
-		case "/board/boardUpdate.bo":
-			System.out.println("게시글 수정 페이지 이동 요청");
-			result = new BoardUpdateController().execute(request, response);
-			System.out.println("게시글 수정 페이지 이동 완료");
-			break;
-		case "/board/boardUpdateOk.bo":
-			System.out.println("게시글 수정 완료 요청");
-			result = new BoardUpdateOkController().execute(request, response);
-			System.out.println("게시글 수정 완료");
-			break;
-		case "/board/boardDeleteOk.bo":
-			System.out.println("게시글 삭제 완료 요청");
-			result = new BoardDeleteOkController().execute(request, response);
 			
+		case  "/post/writeOk.pfc":
+			System.out.println("게시물 글쓰기ok 처리 요청");
+			result = new PostWriteOkController().execute(request, response);
+			System.out.println("게시물 글쓰기ok 처리 완료");
+			break;
+		
+		case  "/post/readOk.pfc":
+			System.out.println("게시물 읽기 ok 처리 요청");
+			result = new PostReadOkController().execute(request, response);
+			System.out.println("게시물 읽기 ok 처리 완료");
+			break;
+		
+		case  "/post/deleteOk.pfc":
+		System.out.println("게시물 삭제 처리 요청");
+		result = new PostDeleteOkController().execute(request, response);
+		System.out.println("게시물 삭제 처리 완료");
+			break;
+			
+		case "/post/commentWriteOk.pfc":
+			System.out.println("댓글 작성 처리 요청");
+			result = new CommentWriteOkController().execute(request, response);
+			System.out.println("댓글 작성 처리 완료");
+			break;
+			
+		case "/post/commentDeleteOk.pfc":
+			System.out.println("댓글 삭제 처리 요청");
+			result = new CommentDeleteOkController().execute(request, response);
+			System.out.println("댓글 삭제 처리 완료");
+			break;
+		
 		}
+		
 		
 		if(result != null && result.getPath() != null) {
 			if(result.isRedirect()) {
