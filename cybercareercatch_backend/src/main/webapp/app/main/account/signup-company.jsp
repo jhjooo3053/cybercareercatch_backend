@@ -15,7 +15,7 @@
     <section class="account_signup_company_wrap" aria-labelledby="corpJoinTitle">
       <h1 id="corpJoinTitle" class="account_signup_company_title">기업 회원가입</h1>
 
-      <form class="account_signup_company_form" id="signupCompanyForm" action="${pageContext.request.contextPath}/" method="post" novalidate>
+      <form action="${pageContext.request.contextPath}/member/signupOk-company.mefc" method="POST" class="account_signup_company_form" id="signupCompanyForm">
 
         <!-- 기업명 -->
         <div class="account_signup_company_field">
@@ -49,7 +49,7 @@
               <input
                 type="text"
                 id="businessNumber"
-                name="businessNumber"
+                name="companyBrn"
                 placeholder="ex) 123-45-67890"
                 inputmode="numeric"
                 maxlength="12"
@@ -90,7 +90,7 @@
               <input
                 type="text"
                 id="managerName"
-                name="managerName"
+                name="userName"
                 placeholder="ex) 홍길동"
                 autocomplete="name"
               />
@@ -110,7 +110,7 @@
               <input
                 type="tel"
                 id="managerPhone"
-                name="managerPhone"
+                name="userPhone"
                 placeholder="ex) 01012345678"
                 inputmode="numeric"
                 maxlength="11"
@@ -211,7 +211,7 @@
               <input
                 type="password"
                 id="password"
-                name="password"
+                name="userPw"
                 placeholder="영문, 숫자, 특수문자 포함 8자 이상 20자 이하"
                 minlength="8"
                 maxlength="20"
@@ -251,7 +251,7 @@
               <input
                 type="password"
                 id="passwordConfirm"
-                name="passwordConfirm"
+                name="userPwConfirm"
                 placeholder="비밀번호를 한 번 더 입력하세요"
                 autocomplete="new-password"
               />
@@ -274,7 +274,7 @@
 		const base = "${pageContext.request.contextPath}";
 	</script>
 	<script
-		src="${pageContext.request.contextPath}/assets/js/main/account/signup-member.js">
+		src="${pageContext.request.contextPath}/assets/js/main/account/signup-company.js">
 	</script>
 </body>
 </html>

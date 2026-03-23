@@ -279,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
 					message: "이미 사용중인 아이디입니다",
 					input: userIdInput,
 					box: userIdBox,
-					errorEl: idErr,
-					successEl: idOk,
+					errorEl: userIdErrorMsg,
+					successEl: userIdSuccessMsg,
 					popup
 				});
 			}
@@ -289,8 +289,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				message: "아이디 중복 검사 중 오류가 발생했습니다",
 				input: userIdInput,
 				box: userIdBox,
-				errorEl: idErr,
-				successEl: idOk,
+				errorEl: userIdErrorMsg,
+				successEl: userIdSuccessMsg,
 				popup
 			}
 
@@ -545,7 +545,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (!validatePasswordConfirm(true)) return;
 
 		alert("기업 회원가입이 완료되었습니다");
-		form.reset();
-		resetAllStates();
+		form.submit();
 	});
 });

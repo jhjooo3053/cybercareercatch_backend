@@ -32,6 +32,28 @@
 		MAX(USER_NUMBER) FROM TBL_USER), #{memberDob},
 		#{memberGender})
 	</insert>
+	
+		<!-- 회원가입 - TBL_USER -->
+	<insert id="companyUserJoin" parameterType="CompanyJoinDTO">
+		INSERT INTO TBL_USER
+		(USER_NUMBER, USER_ID, USER_PW, USER_NAME, USER_PHONE,
+		USER_JOIN_DATE,
+		USER_TYPE)
+		VALUES (SEQ_USER_NUMBER.NEXTVAL, #{userId}, #{userPw},
+		#{userName},
+		#{userPhone}, SYSDATE, '기업회원')
+	</insert>
+
+	<!-- 회원가입 - TBL_MEMBER -->
+	<insert id="companyMemberJoin" parameterType="CompanyJoinDTO">
+		INSERT INTO TBL_COMPANY_MEMBER
+		(USER_NUMBER, COMPANY_NUMBER, COMPANY_MANAGER_STATE)
+		VALUES ((SELECT
+		MAX(USER_NUMBER) FROM TBL_USER), 
+		(SELECT
+		MAX(COMPANY_NUMBER) FROM TBL_COMPANY),
+		'INACTIVE')
+	</insert>
 
 	<select id="checkId" parameterType="String" resultType="int">
 		SELECT
