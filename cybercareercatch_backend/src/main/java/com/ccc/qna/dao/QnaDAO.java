@@ -38,22 +38,22 @@ public class QnaDAO {
 	}
 
 	// 기업 QnA 상세 조회
-	public QnaDetailDTO selectQnaDetail(int postNumber) {
+	public QnaDetailDTO selectQnaDetail(long postNumber) {
 		return sqlSession.selectOne("qna.selectQnaDetail", postNumber);
 	}
 
 	// 조회수 증가
-	public void updateViewCount(int postNumber) {
+	public void updateViewCount(long postNumber) {
 		sqlSession.update("qna.updateViewCount", postNumber);
 	}
 
 	// 댓글 목록 조회
-	public List<QnaCommentDTO> selectCommentListByPostNumber(int postNumber) {
+	public List<QnaCommentDTO> selectCommentListByPostNumber(long postNumber) {
 		return sqlSession.selectList("qna.selectCommentListByPostNumber", postNumber);
 	}
 
 	// 댓글 단건 조회
-	public QnaCommentDTO selectComment(int commentNumber) {
+	public QnaCommentDTO selectComment(long commentNumber) {
 		return sqlSession.selectOne("qna.selectComment", commentNumber);
 	}
 
@@ -63,22 +63,22 @@ public class QnaDAO {
 	}
 
 	// 댓글 삭제
-	public void deleteComment(int commentNumber) {
+	public void deleteComment(long commentNumber) {
 		sqlSession.delete("qna.deleteComment", commentNumber);
 	}
 
 	// 게시글별 댓글 개수 조회
-	public int selectCommentCountByPostNumber(int postNumber) {
+	public int selectCommentCountByPostNumber(long postNumber) {
 		return sqlSession.selectOne("qna.selectCommentCountByPostNumber", postNumber);
 	}
 
 	// 답변완료 처리
-	public void updateAnswerStatusToDone(int postNumber) {
+	public void updateAnswerStatusToDone(long postNumber) {
 		sqlSession.update("qna.updateAnswerStatusToDone", postNumber);
 	}
 
 	// 답변대기 처리
-	public void updateAnswerStatusToWait(int postNumber) {
+	public void updateAnswerStatusToWait(long postNumber) {
 		sqlSession.update("qna.updateAnswerStatusToWait", postNumber);
 	}
 
@@ -99,12 +99,12 @@ public class QnaDAO {
 	}
 
 	// 게시글 댓글 전체 삭제
-	public void deleteCommentsByPostNumber(int postNumber) {
+	public void deleteCommentsByPostNumber(long postNumber) {
 		sqlSession.delete("qna.deleteCommentsByPostNumber", postNumber);
 	}
 
 	// 게시글 삭제
-	public void deleteQna(int postNumber) {
+	public void deleteQna(long postNumber) {
 		sqlSession.delete("qna.deleteQna", postNumber);
 	}
 

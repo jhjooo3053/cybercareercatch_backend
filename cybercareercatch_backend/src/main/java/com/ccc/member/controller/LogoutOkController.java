@@ -16,7 +16,7 @@ public class LogoutOkController implements Execute {
 			throws ServletException, IOException {
 		Result result = new Result();
 		request.getSession().invalidate();
-		result.setPath("/member/login.mefc");
+		result.setPath("/mainpage/mainpage.mafc");
 		result.setRedirect(true);
 		
 		return result;

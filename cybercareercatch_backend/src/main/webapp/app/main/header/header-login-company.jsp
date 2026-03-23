@@ -1,17 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Header - Login Company</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main/header/header-login-company.css" />
-</head>
-<body>
   <header class="header">
     <div class="header-inner">
       <h1 class="logo">
@@ -52,12 +44,12 @@
 
       <div class="auth-area">
         <a href="${pageContext.request.contextPath}/app/main/mypage/company-password-check.jsp" class="auth-btn auth-btn--member" aria-label="마이페이지로 이동">
-          <span class="member-name" id="headerMemberName">${sessionScope.memberName}님</span>
+          <span class="member-name" id="headerMemberName">${sessionScope.userName}님</span>
           <svg class="member-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 12a4.25 4.25 0 1 0-4.25-4.25A4.25 4.25 0 0 0 12 12Zm0 1.75c-4.14 0-7.5 2.52-7.5 5.63A1.12 1.12 0 0 0 5.63 20.5h12.74A1.12 1.12 0 0 0 19.5 19.38C19.5 16.27 16.14 13.75 12 13.75Z" fill="currentColor" />
           </svg>
         </a>
-        <a href="${pageContext.request.contextPath}/member/logout.mefc" class="auth-btn auth-btn--logout">로그아웃</a>
+        <a href="${pageContext.request.contextPath}/member/logoutOk.mefc" class="auth-btn auth-btn--logout">로그아웃</a>
       </div>
     </div>
   </header>
@@ -85,5 +77,3 @@
         }
     });
   </script>
-</body>
-</html>

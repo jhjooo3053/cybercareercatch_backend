@@ -21,7 +21,7 @@ public class LoginOkController implements Execute {
 
 		UserDTO userDTO = new UserDTO();
 		UserDAO userDAO = new UserDAO();
-		int memberNumber = 0;
+		int userNumber = 0;
 		Result result = new Result();
 
 		String userId = request.getParameter("userId");
@@ -33,20 +33,21 @@ public class LoginOkController implements Execute {
 		userDTO.setUserId(userId);
 		userDTO.setUserPassword(userPassword);
 
-		memberNumber = userDAO.login(userDTO);
-		System.out.println(memberNumber);
+		userNumber = userDAO.login(userDTO);
+		String userName = userDAO.selectUserNameByUserNumber(userNumber);
+		System.out.println(userNumber);
 
-		if (memberNumber != -1) {
-			String userType = userDAO.selectUserType(memberNumber);
-			Integer companyNumber = userDAO.selectCompanyNumberByUserNumber(memberNumber);
+		if (userNumber != -1) {
+			String userType = userDAO.selectUserType(userNumber);
+			Integer companyNumber = userDAO.selectCompanyNumberByUserNumber(userNumber);
 
 			// 기존 프로젝트에서 쓰던 세션값 유지
-			session.setAttribute("memberNumber", memberNumber);
+			session.setAttribute("userNumber", userNumber);
 
 			// [수정] 다른 컨트롤러/QNA 쪽에서 실제로 쓰는 세션값도 같이 저장
 			// QnaListController, QnaDetailController 등은 userNumber, userType,
 			// companyNumber를 사용함
-			session.setAttribute("userNumber", memberNumber);
+			session.setAttribute("userName", userName);
 			session.setAttribute("userType", userType);
 
 			// [수정] 기업회원이면 companyNumber 저장, 아니면 제거
@@ -56,7 +57,7 @@ public class LoginOkController implements Execute {
 				session.removeAttribute("companyNumber");
 			}
 
-			System.out.println("세션 memberNumber : " + memberNumber);
+			System.out.println("세션 userNumber : " + userNumber);
 			System.out.println("세션 userType : " + userType);
 			System.out.println("세션 companyNumber : " + companyNumber);
 

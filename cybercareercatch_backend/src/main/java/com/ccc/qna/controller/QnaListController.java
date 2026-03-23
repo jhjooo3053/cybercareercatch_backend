@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ccc.common.Execute;
 import com.ccc.common.Result;
@@ -28,42 +29,16 @@ public class QnaListController implements Execute {
 		QnaDAO qnaDAO = new QnaDAO();
 		Result result = new Result();
 
-		// =========================================================
-		// [테스트용 로그인 분기]
-		// 아래 2줄 중 하나만 사용
-		// =========================================================
+		HttpSession session = request.getSession();
 
-		// 일반회원 테스트
-//		String testLoginId = "member01";
-
-		// 기업회원 테스트
-		 String testLoginId = "company08";
-
-		Integer userNumber = null;
-		String userType = null;
-		Integer companyNumber = null;
-
-		// =========================================================
-		// [테스트용 사용자 정보]
-		// 필요하면 여기 숫자 바꿔서 쓰세요
-		// =========================================================
-		if ("member01".equals(testLoginId)) {
-			userNumber = 1;
-			userType = "일반회원";
-			companyNumber = null;
-		} else if ("company03".equals(testLoginId)) {
-			userNumber = 53;
-			userType = "기업회원";
-			companyNumber = 3;
-		}
+		Integer userNumber = (Integer) session.getAttribute("userNumber");
+		String userType = (String) session.getAttribute("userType");
+		Integer companyNumber = (Integer) session.getAttribute("companyNumber");
 
 		boolean isLogin = (userNumber != null);
 		boolean isCompanyUser = "기업회원".equals(userType);
 		boolean isMemberUser = "일반회원".equals(userType);
 
-		// =========================================================
-		// 파라미터 받기
-		// =========================================================
 		String temp = request.getParameter("page");
 		int page = 1;
 
@@ -104,7 +79,6 @@ public class QnaListController implements Execute {
 			companyFilter = String.valueOf(companyNumber);
 		}
 
-		System.out.println("testLoginId = " + testLoginId);
 		System.out.println("userNumber = " + userNumber);
 		System.out.println("userType = " + userType);
 		System.out.println("companyNumber = " + companyNumber);
@@ -200,7 +174,6 @@ public class QnaListController implements Execute {
 		request.setAttribute("isMemberUser", isMemberUser);
 		request.setAttribute("userNumber", userNumber);
 		request.setAttribute("userType", userType);
-		request.setAttribute("testLoginId", testLoginId);
 
 		result.setPath("/app/main/qna/qna-list.jsp");
 		result.setRedirect(false);

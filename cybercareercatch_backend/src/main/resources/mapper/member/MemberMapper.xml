@@ -32,8 +32,8 @@
 		MAX(USER_NUMBER) FROM TBL_USER), #{memberDob},
 		#{memberGender})
 	</insert>
-	
-		<!-- 회원가입 - TBL_USER -->
+
+	<!-- 회원가입 - TBL_USER -->
 	<insert id="companyUserJoin" parameterType="CompanyJoinDTO">
 		INSERT INTO TBL_USER
 		(USER_NUMBER, USER_ID, USER_PW, USER_NAME, USER_PHONE,
@@ -46,10 +46,11 @@
 
 	<!-- 회원가입 - TBL_MEMBER -->
 	<insert id="companyMemberJoin" parameterType="CompanyJoinDTO">
-		INSERT INTO TBL_COMPANY_MEMBER
+		INSERT INTO
+		TBL_COMPANY_MEMBER
 		(USER_NUMBER, COMPANY_NUMBER, COMPANY_MANAGER_STATE)
 		VALUES ((SELECT
-		MAX(USER_NUMBER) FROM TBL_USER), 
+		MAX(USER_NUMBER) FROM TBL_USER),
 		(SELECT
 		MAX(COMPANY_NUMBER) FROM TBL_COMPANY),
 		'INACTIVE')
@@ -65,13 +66,38 @@
 		resultType="int">
 		SELECT COUNT(*) FROM TBL_USER
 		WHERE USER_ID = #{userId}
-		AND USER_PHONE = #{userPhone}
+		AND
+		USER_PHONE = #{userPhone}
 	</select>
 
 	<update id="updatePw" parameterType="UserDTO">
 		UPDATE TBL_USER
-		SET USER_PW = #{userPassword}
+		SET USER_PW =
+		#{userPassword}
 		WHERE USER_ID = #{userId}
 	</update>
+
+	<!-- 회원 타입 조회 -->
+	<select id="selectUserType" parameterType="int"
+		resultType="string">
+		SELECT USER_TYPE
+		FROM TBL_USER
+		WHERE USER_NUMBER = #{value}
+	</select>
+
+	<!-- 기업회원 회사번호 조회 -->
+	<select id="selectCompanyNumberByUserNumber" parameterType="int"
+		resultType="int">
+		SELECT COMPANY_NUMBER
+		FROM TBL_COMPANY_MEMBER
+		WHERE USER_NUMBER = #{value}
+	</select>
+
+	<select id="selectUserNameByUserNumber" parameterType="int"
+		resultType="String">
+		SELECT USER_NAME
+		FROM TBL_USER
+		WHERE USER_NUMBER = #{value}
+	</select>
 
 </mapper>

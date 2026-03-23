@@ -53,7 +53,7 @@
         
         <!-- 상단 로고 -->
         <div class="account_login_logo">
-          <span class="logo-strong">C</span><span class="logo-soft">yber</span><span class="logo-strong">C</span><span class="logo-soft">areer</span><span class="logo-strong">C</span><span class="logo-soft">atch</span>
+          <a href="${pageContextPath.request.contextPath }/mainpage/mainpage.mafc"><span class="logo-strong">C</span><span class="logo-soft">yber</span><span class="logo-strong">C</span><span class="logo-soft">areer</span><span class="logo-strong">C</span><span class="logo-soft">atch</span></a>
         </div>
 
         <!-- 로그인 폼 -->

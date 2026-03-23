@@ -31,12 +31,15 @@ public class UserDAO {
 		return sqlSession.update("user.updatePw", dto) > 0;
 	}
 
-}
 	public String selectUserType(int userNumber) {
 		return sqlSession.selectOne("user.selectUserType", userNumber);
 	}
 
 	public Integer selectCompanyNumberByUserNumber(int userNumber) {
 		return sqlSession.selectOne("user.selectCompanyNumberByUserNumber", userNumber);
+	}
+	
+	public String selectUserNameByUserNumber(int userNumber) {
+		return (String) sqlSession.selectOne("user.selectUserNameByUserNumber", userNumber);
 	}
 }

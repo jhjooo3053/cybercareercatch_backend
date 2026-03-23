@@ -17,7 +17,15 @@
 	href="${pageContext.request.contextPath}/assets/css/main/qna/qna-list.css">
 </head>
 <body>
-	<jsp:include page="/app/main/header/header-logout.jsp" />
+	<c:choose>
+		<c:when test="${isCompanyMember}">
+			<jsp:include page="/app/main/header/header-login-company.jsp" />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/app/main/header/header-login-member.jsp" />
+		</c:otherwise>
+	</c:choose>
+
 
 	<div id="qnaListPage" data-login-required="${loginRequired}"
 		data-login-message="기업 Q&A는 로그인 후 이용 가능합니다."

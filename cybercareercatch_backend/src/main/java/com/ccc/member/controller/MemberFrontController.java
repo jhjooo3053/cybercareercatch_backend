@@ -109,6 +109,9 @@ public class MemberFrontController extends HttpServlet {
 			System.out.println("인증번호 확인 요청");
 			result = new VerifyCodeController().execute(request, response);
 			break;
+		case "/member/logoutOk.mefc":
+			result = new LogoutOkController().execute(request, response);
+			break;
 		default:
 			System.out.println("어디로감?");
 		}

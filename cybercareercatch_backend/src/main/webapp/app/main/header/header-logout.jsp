@@ -42,7 +42,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" onclick="toggleDropdown(event)">커뮤니티</a>
                         <ul class="dropdown-menu community-menu">
-                            <li><a href="${pageContext.request.contextPath}/post/postListOk.pfc">자유게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/post/list.pfc">자유게시판</a></li>
                             <li><a href="${pageContext.request.contextPath}/qna/list.qfc">기업QnA</a></li>
                             <li><a href="${pageContext.request.contextPath}/app/main/expo/expo-calendar.jsp">박람회일정</a></li>
                         </ul>

@@ -27,9 +27,14 @@ body {
 }
 
 header{
-  height: 166px;
-  background-color: #ff0000;
+  height: 40px;
+  /* background-color: #ff0000; */
 }
+
+.account_login_logo>a {
+	text-decoration : none;
+}
+
 * {
   box-sizing: border-box;
 }

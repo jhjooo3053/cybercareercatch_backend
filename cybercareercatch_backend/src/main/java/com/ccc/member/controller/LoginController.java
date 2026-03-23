@@ -20,8 +20,8 @@ public class LoginController implements Execute {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if(cookie.getName().equals("userId")) { 
-					request.setAttribute("userId", cookie.getValue());
+				if(cookie.getName().equals("userNumber")) { 
+					request.setAttribute("userNumber", cookie.getValue());
 				}
 			}
 		}

@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 // import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import com.ccc.common.Execute;
 import com.ccc.common.Result;
@@ -28,50 +29,27 @@ public class QnaDetailController implements Execute {
 		// [원본 세션 방식]
 		// 테스트 끝나면 아래 주석 풀고 테스트용 코드는 지우면 됩니다.
 		// =========================================================
-		/*
-		 * HttpSession session = request.getSession(false);
-		 * 
-		 * if (session == null || session.getAttribute("userNumber") == null) {
-		 * HttpSession loginSession = request.getSession();
-		 * 
-		 * if (postNumberStr != null && !postNumberStr.trim().isEmpty()) {
-		 * loginSession.setAttribute("redirectAfterLogin", request.getContextPath() +
-		 * "/qna/detail.qfc?postNumber=" + postNumberStr); } else {
-		 * loginSession.setAttribute("redirectAfterLogin", request.getContextPath() +
-		 * "/qna/list.qfc"); }
-		 * 
-		 * result.setPath(request.getContextPath() + "/member/login.mefc");
-		 * result.setRedirect(true); return result; }
-		 * 
-		 * Integer loginUserNumber = (Integer) session.getAttribute("userNumber");
-		 * String userType = (String) session.getAttribute("userType"); Integer
-		 * loginCompanyNumber = (Integer) session.getAttribute("companyNumber");
-		 */
 
-		// =========================================================
-		// [테스트용 로그인 분기]
-		// 아래 2줄 중 하나만 사용
-		// =========================================================
+		HttpSession session = request.getSession(false);
 
-		// 일반회원 테스트
-//		String testLoginId = "member01";
+		if (session == null || session.getAttribute("userNumber") == null) {
+			HttpSession loginSession = request.getSession();
 
-		// 기업회원 테스트
-		String testLoginId = "company08";
+			if (postNumberStr != null && !postNumberStr.trim().isEmpty()) {
+				loginSession.setAttribute("redirectAfterLogin",
+						request.getContextPath() + "/qna/detail.qfc?postNumber=" + postNumberStr);
+			} else {
+				loginSession.setAttribute("redirectAfterLogin", request.getContextPath() + "/qna/list.qfc");
+			}
 
-		Integer loginUserNumber = null;
-		String userType = null;
-		Integer loginCompanyNumber = null;
-
-		if ("member01".equals(testLoginId)) {
-			loginUserNumber = 1;
-			userType = "일반회원";
-			loginCompanyNumber = null;
-		} else if ("company03".equals(testLoginId)) {
-			loginUserNumber = 53;
-			userType = "기업회원";
-			loginCompanyNumber = 3;
+			result.setPath(request.getContextPath() + "/member/login.mefc");
+			result.setRedirect(true);
+			return result;
 		}
+
+		Integer loginUserNumber = (Integer) session.getAttribute("userNumber");
+		String userType = (String) session.getAttribute("userType");
+		Integer loginCompanyNumber = (Integer) session.getAttribute("companyNumber");
 
 		// =========================================================
 		// 일반회원 / 기업회원만 접근 가능
@@ -187,7 +165,6 @@ public class QnaDetailController implements Execute {
 		request.setAttribute("showDeleteButton", showDeleteButton);
 		request.setAttribute("showCommentWriteForm", showCommentWriteForm);
 		request.setAttribute("showCommentDeleteButton", showCommentDeleteButton);
-		request.setAttribute("testLoginId", testLoginId);
 
 		result.setPath("/app/main/qna/qna-detail.jsp");
 		result.setRedirect(false);
