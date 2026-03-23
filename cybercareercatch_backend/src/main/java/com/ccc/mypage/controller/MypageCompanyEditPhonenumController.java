@@ -24,24 +24,6 @@ public class MypageCompanyEditPhonenumController implements Execute {
 		HttpSession session = request.getSession();
 
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		String userType = (String) session.getAttribute("userType");
-
-		
-		//테스트용 - 삭제
-		session.setAttribute("userNumber", 51);
-		session.setAttribute("userType", "기업회원");
-
-		if (userNumber == null) {
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/member/login.mefc");
-			return result;
-		}
-
-		if (userType == null || !userType.equals("기업회원")) {
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
-			return result;
-		}
 
 		Boolean companyPwChecked = (Boolean) session.getAttribute("companyPwChecked");
 		if (companyPwChecked == null || !companyPwChecked) {

@@ -23,29 +23,6 @@ public class MypageMemberEditPwController implements Execute {
 		HttpSession session = request.getSession();
 
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		String userType = (String) session.getAttribute("userType");
-		
-		//테스트용 - 삭제
-		session.setAttribute("userNumber", 1);
-		session.setAttribute("userType", "일반회원");
-		
-		System.out.println("로그인한 회원 번호 : " + userNumber);
-		System.out.println("로그인한 회원 타입 : " + userType);
-		
-		
-		// 비로그인
-		if (userNumber == null) {
-			result.setPath(request.getContextPath() + "/member/login.mefc");
-			result.setRedirect(true);
-			return result;
-		}
-
-		// 일반회원이 아님
-		if (!"일반회원".equals(userType)) {
-			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
-			result.setRedirect(true);
-			return result;
-		}
 
 		// 정보수정 전 비밀번호 확인 안 했으면 다시 비밀번호 확인 페이지로
 		Boolean memberPwChecked = (Boolean) session.getAttribute("memberPwChecked");

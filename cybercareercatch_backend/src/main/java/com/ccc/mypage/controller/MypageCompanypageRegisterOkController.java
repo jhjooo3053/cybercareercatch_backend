@@ -34,28 +34,6 @@ public class MypageCompanypageRegisterOkController implements Execute {
 		HttpSession session = request.getSession();
 
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		String userType = (String) session.getAttribute("userType");
-		
-		//테스트용 - 삭제
-		session.setAttribute("userNumber", 51);
-		session.setAttribute("userType", "기업회원");
-		
-		System.out.println("로그인한 회원 번호 : " + userNumber);
-		System.out.println("로그인한 회원 타입 : " + userType);
-		
-		// 로그인 안 된 경우
-		if (userNumber == null) {
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/member/login.mefc");
-			return result;
-		}
-
-		// 기업회원이 아니면 접근 불가
-		if (userType == null || !userType.equals("기업회원")) {
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
-			return result;
-		}
 		
 		// 이미 기업정보페이지가 있으면 수정페이지로 보냄
 		int companyPageCount = mypageDAO.countCompanyPageByUserNumber(userNumber);

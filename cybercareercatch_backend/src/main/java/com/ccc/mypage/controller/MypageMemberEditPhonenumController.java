@@ -23,26 +23,6 @@ public class MypageMemberEditPhonenumController implements Execute {
 		HttpSession session = request.getSession();
 
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		String userType = (String) session.getAttribute("userType");
-
-		//테스트용 - 삭제
-		session.setAttribute("userNumber", 2);
-		session.setAttribute("userType", "일반회원");
-		
-		System.out.println("로그인한 회원 번호 : " + userNumber);
-		System.out.println("로그인한 회원 타입 : " + userType);
-
-		if (userNumber == null) {
-			result.setPath(request.getContextPath() + "/member/login.mefc");
-			result.setRedirect(true);
-			return result;
-		}
-
-		if (!"일반회원".equals(userType)) {
-			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
-			result.setRedirect(true);
-			return result;
-		}
 
 		Boolean memberPwChecked = (Boolean) session.getAttribute("memberPwChecked");
 		if (memberPwChecked == null || !memberPwChecked) {

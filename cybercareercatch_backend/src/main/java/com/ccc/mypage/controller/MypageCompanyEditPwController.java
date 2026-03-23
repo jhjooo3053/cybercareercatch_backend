@@ -1,7 +1,6 @@
 package com.ccc.mypage.controller;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,28 +25,6 @@ public class MypageCompanyEditPwController implements Execute {
 		HttpSession session = request.getSession();
 
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
-		String userType = (String) session.getAttribute("userType");
-		
-		//테스트용 - 삭제
-		session.setAttribute("userNumber", 51);
-		session.setAttribute("userType", "기업회원");
-		
-		System.out.println("로그인한 회원 번호 : " + userNumber);
-		System.out.println("로그인한 회원 타입 : " + userType);
-		
-		// 로그인 안 된 경우
-		if (userNumber == null) {
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/member/login.mefc");
-			return result;
-		}
-
-		// 기업회원이 아니면 접근 불가
-		if (userType == null || !userType.equals("기업회원")) {
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/mainpage/mainpage.mafc");
-			return result;
-		}
 
 		// 정보수정 전 비밀번호 확인 안 했으면 다시 비밀번호 확인 페이지로
 		Boolean companyPwChecked = (Boolean) session.getAttribute("companyPwChecked");
