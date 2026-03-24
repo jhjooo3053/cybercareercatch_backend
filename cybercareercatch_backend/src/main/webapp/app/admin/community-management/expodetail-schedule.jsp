@@ -90,7 +90,7 @@ if (session.getAttribute("adminNumber") == null) {
 					</div>
 				</div>
 
-				<!-- 상세에서는 기업 추가만 -->
+				<!-- 상세에서는 박람회 추가가 아니라 기업 추가만 -->
 				<form action="${pageContext.request.contextPath}/admin/addExpoCompany.adfc"
 					method="post" class="expoDetail-addForm">
 
@@ -138,6 +138,7 @@ if (session.getAttribute("adminNumber") == null) {
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+
 				</div>
 
 				<div class="expoDetail-btnWrap">

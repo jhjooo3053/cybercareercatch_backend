@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 if (session.getAttribute("adminNumber") == null) {
 	response.sendRedirect(request.getContextPath() + "/admin/login.adfc");
@@ -71,16 +72,50 @@ if (session.getAttribute("adminNumber") == null) {
 				</div>
 
 				<form action="${pageContext.request.contextPath}/admin/updateRoadmap.adfc"
-					method="post" id="roadmapForm">
+					method="post" id="roadmapForm" enctype="multipart/form-data">
+
 					<input type="hidden" name="jobNumber" value="${jobNumber}">
+					<input type="hidden" name="currentRoadmapImagePath" value="${roadmap.roadmapImagePath}">
 
 					<div class="rm-section">
 						<div class="rm-section-title">기본 정보</div>
 
 						<div class="rm-row">
-							<label class="rm-label">이미지 경로</label>
-							<input class="rm-input" type="text" name="roadmapImagePath"
-								value="${roadmap.roadmapImagePath}" placeholder="예) roadmap_job1.png">
+							<label class="rm-label">현재 이미지</label>
+							<div style="flex:1;">
+								<c:choose>
+									<c:when test="${not empty roadmap.roadmapImagePath and fn:startsWith(roadmap.roadmapImagePath, '/')}">
+										<img
+											src="${pageContext.request.contextPath}${roadmap.roadmapImagePath}"
+											alt="로드맵 이미지"
+											style="max-width:300px; max-height:220px; border:1px solid #ddd; border-radius:8px; background:#fff; padding:8px;">
+									</c:when>
+
+									<c:when test="${not empty roadmap.roadmapImagePath}">
+										<img
+											src="${pageContext.request.contextPath}/assets/img/${roadmap.roadmapImagePath}"
+											alt="로드맵 이미지"
+											style="max-width:300px; max-height:220px; border:1px solid #ddd; border-radius:8px; background:#fff; padding:8px;">
+									</c:when>
+
+									<c:otherwise>
+										<div style="padding:20px; border:1px solid #ddd; border-radius:8px; background:#fafafa;">
+											등록된 이미지가 없습니다.
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+
+						<div class="rm-row">
+							<label class="rm-label">이미지 파일</label>
+							<input class="rm-input" type="file" name="roadmapImageFile" accept="image/*">
+						</div>
+
+						<div class="rm-row">
+							<label class="rm-label">저장된 경로</label>
+							<input class="rm-input rm-readonly" type="text"
+								value="${roadmap.roadmapImagePath}" readonly="readonly">
 						</div>
 
 						<div class="rm-row">
@@ -275,11 +310,6 @@ if (session.getAttribute("adminNumber") == null) {
 
 			if (roadmapForm) {
 				roadmapForm.addEventListener("submit", function(e) {
-					if (isOverLimit("input[name='roadmapImagePath']", 500)) {
-						e.preventDefault();
-						return;
-					}
-
 					if (isOverLimit("input[name^='roadmapJobName']", 100)) {
 						e.preventDefault();
 						return;

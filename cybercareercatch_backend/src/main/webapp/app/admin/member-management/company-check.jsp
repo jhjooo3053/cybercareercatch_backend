@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-/*
- * 로그인하지 않은 관리자는
- * 기업회원 승인/반려 페이지에 접근할 수 없도록 막는다.
- */
 if (session.getAttribute("adminNumber") == null) {
 	response.sendRedirect(request.getContextPath() + "/admin/login.adfc");
 	return;
@@ -27,17 +23,13 @@ if (session.getAttribute("adminNumber") == null) {
 		<header class="company-check-header">
 
 			<div class="company-check-title">
-				<a href="${pageContext.request.contextPath}/admin/main.adfc">관리자
-					페이지</a>
+				<a href="${pageContext.request.contextPath}/admin/main.adfc">관리자 페이지</a>
 			</div>
 
 			<nav class="company-check-menu">
-				<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원
-					관리</a> <a
-					href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인
-					관리</a> <a
-					href="${pageContext.request.contextPath}/app/admin/community-management/expo-schedule.jsp">커뮤니티
-					관리</a>
+				<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원 관리</a>
+				<a href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인 관리</a>
+				<a href="${pageContext.request.contextPath}/app/admin/community-management/expo-schedule.jsp">커뮤니티 관리</a>
 			</nav>
 
 			<a href="${pageContext.request.contextPath}/admin/logout.adfc"
@@ -47,40 +39,32 @@ if (session.getAttribute("adminNumber") == null) {
 
 		<main class="company-check-main">
 
-			<!-- 왼쪽 사이드바 -->
 			<aside class="company-check-sidebar">
 
 				<div class="company-check-sidebar-item">
-					<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">일반회원
-						정보 조회</a>
+					<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">일반회원 정보 조회</a>
 				</div>
 
 				<div class="company-check-sidebar-item company-check-active">
-					<a
-						href="${pageContext.request.contextPath}/admin/companyCheck.adfc">기업회원
-						승인, 반려</a>
+					<a href="${pageContext.request.contextPath}/admin/companyCheck.adfc">기업회원 승인, 반려</a>
 				</div>
 
 				<div class="company-check-sidebar-item">
-					<a
-						href="${pageContext.request.contextPath}/app/admin/member-management/recruiter-info.jsp">기업회원
-						정보 조회</a>
+					<a href="${pageContext.request.contextPath}/admin/recruiterInfo.adfc">기업회원 정보 조회</a>
 				</div>
+
 				<div class="company-check-sidebar-item">
-					<a href="${pageContext.request.contextPath}/admin/jobCheck.adfc">질의문
-						답변 조회</a>
+					<a href="${pageContext.request.contextPath}/admin/jobCheck.adfc">질의문 답변 조회</a>
 				</div>
 
 			</aside>
 
-			<!-- 오른쪽 콘텐츠 -->
 			<section class="company-check-content">
 
 				<h2 class="company-check-content-title">기업회원 승인 / 반려</h2>
 
 				<div class="company-check-table">
 
-					<!-- header -->
 					<div class="company-check-table-header">
 						<div class="company-check-col company-check-col-num">번호</div>
 						<div class="company-check-col company-check-col-id">아이디</div>
@@ -89,13 +73,11 @@ if (session.getAttribute("adminNumber") == null) {
 						<div class="company-check-col company-check-col-state">상태</div>
 					</div>
 
-					<!-- rows -->
 					<c:choose>
 						<c:when test="${empty companyList}">
 							<div class="company-check-row company-check-row-empty">
 								<div class="company-check-col company-check-col-num">-</div>
-								<div class="company-check-col company-check-col-id">등록된
-									기업회원이 없습니다.</div>
+								<div class="company-check-col company-check-col-id">등록된 기업회원이 없습니다.</div>
 								<div class="company-check-col company-check-col-name">-</div>
 								<div class="company-check-col company-check-col-date">-</div>
 								<div class="company-check-col company-check-col-state">-</div>
@@ -119,14 +101,12 @@ if (session.getAttribute("adminNumber") == null) {
 						</c:otherwise>
 					</c:choose>
 
-					<!-- 페이지네이션 -->
 					<c:if test="${total > 0}">
 						<div class="company-check-pagination">
 
 							<c:choose>
 								<c:when test="${prev}">
-									<a
-										href="${pageContext.request.contextPath}/admin/companyCheck.adfc?page=${startPage - 1}">&lt;</a>
+									<a href="${pageContext.request.contextPath}/admin/companyCheck.adfc?page=${startPage - 1}">&lt;</a>
 								</c:when>
 								<c:otherwise>
 									<span>&lt;</span>
@@ -147,8 +127,7 @@ if (session.getAttribute("adminNumber") == null) {
 
 							<c:choose>
 								<c:when test="${next}">
-									<a
-										href="${pageContext.request.contextPath}/admin/companyCheck.adfc?page=${endPage + 1}">&gt;</a>
+									<a href="${pageContext.request.contextPath}/admin/companyCheck.adfc?page=${endPage + 1}">&gt;</a>
 								</c:when>
 								<c:otherwise>
 									<span>&gt;</span>
