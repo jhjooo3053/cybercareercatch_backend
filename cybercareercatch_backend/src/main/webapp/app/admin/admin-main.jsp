@@ -30,7 +30,7 @@ if (session.getAttribute("adminNumber") == null) {
 			<nav class="admin-main-menu">
 				<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원 관리</a>
 				<a href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인 관리</a>
-				<a href="${pageContext.request.contextPath}/app/admin/community-management/expo-schedule.jsp">커뮤니티 관리</a>
+				<a href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">커뮤니티 관리</a>
 			</nav>
 
 			<a href="${pageContext.request.contextPath}/admin/logout.adfc" class="admin-main-logout">로그아웃</a>

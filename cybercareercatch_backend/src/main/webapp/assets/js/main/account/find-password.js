@@ -14,7 +14,7 @@ const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9])\S{8,20}$/;
 [phoneErrorMsg, phoneSuccessMsg, authErrorMsg, authSuccessMsg, pwMatchErrorMsg]
 	.forEach(el => el.style.display = 'none');
 
-const DEMO_AUTH_CODE = "123456";
+/*const DEMO_AUTH_CODE = "123456";*/
 let smsVerified = false;
 let verifiedUserId = null;
 
@@ -40,7 +40,22 @@ sendSmsBtn.addEventListener('click', async () => {
 
 		if (data.exists) {
 			verifiedUserId = userId;
-			phoneSuccessMsg.style.display = 'block';
+			const smsRes = await fetch(`${base}/member/sendSMS.mefc`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Accept': 'application/json'
+				},
+				body: `userPhone=${encodeURIComponent(phone)}`
+			});
+			const smsData = await smsRes.json();
+
+			if (smsData.success) {
+				phoneSuccessMsg.style.display = 'block';
+			} else {
+				phoneErrorMsg.textContent = 'SMS 전송에 실패했습니다.';
+				phoneErrorMsg.style.display = 'block';
+			}
 		} else {
 			phoneErrorMsg.textContent = '아이디 또는 전화번호가 잘못 되었습니다. 정확히 입력해 주세요.';
 			phoneErrorMsg.style.display = 'block';
@@ -51,7 +66,7 @@ sendSmsBtn.addEventListener('click', async () => {
 	}
 });
 
-verifyAuthBtn.addEventListener('click', () => {
+verifyAuthBtn.addEventListener('click', async () => {
 	const code = document.getElementById('authCode').value.trim();
 
 	authErrorMsg.style.display = 'none';
@@ -63,11 +78,30 @@ verifyAuthBtn.addEventListener('click', () => {
 		return;
 	}
 
-	if (code === DEMO_AUTH_CODE) {
-		smsVerified = true;
-		authSuccessMsg.style.display = 'block';
-		newPasswordSection.classList.remove('hidden-section');
-	} else {
+	if (!code) {
+		authErrorMsg.textContent = '인증번호를 입력해 주세요.';
+		authErrorMsg.style.display = 'block';
+		return;
+	}
+
+	try {
+		const res = await fetch(`${base}/member/verifyCode.mefc`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: `userId=${encodeURIComponent(verifiedUserId)}&code=${encodeURIComponent(code)}`
+		});
+		const data = await res.json();
+
+		if (data.verified) {
+			smsVerified = true;
+			authSuccessMsg.style.display = 'block';
+			newPasswordSection.classList.remove('hidden-section');
+		} else {
+			authErrorMsg.textContent = '인증번호가 올바르지 않습니다.';
+			authErrorMsg.style.display = 'block';
+		}
+	} catch {
+		authErrorMsg.textContent = '서버 오류가 발생했습니다.';
 		authErrorMsg.style.display = 'block';
 	}
 });

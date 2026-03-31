@@ -26,7 +26,7 @@ if (session.getAttribute("adminNumber") == null) {
 		<nav class="company-checkdetail-menu">
 			<a href="${pageContext.request.contextPath}/admin/memberInfo.adfc">회원 관리</a>
 			<a href="${pageContext.request.contextPath}/admin/insertQuestion.adfc">메인 관리</a>
-			<a href="${pageContext.request.contextPath}/app/admin/community-management/expo-schedule.jsp">커뮤니티 관리</a>
+			<a href="${pageContext.request.contextPath}/admin/expoSchedule.adfc">커뮤니티 관리</a>
 		</nav>
 
 		<a href="${pageContext.request.contextPath}/admin/logout.adfc" class="company-checkdetail-logout">로그아웃</a>
@@ -44,7 +44,7 @@ if (session.getAttribute("adminNumber") == null) {
 			</div>
 
 			<div class="company-checkdetail-sidebar-item">
-				<a href="${pageContext.request.contextPath}/app/admin/member-management/recruiter-info.jsp">기업회원 정보 조회</a>
+				<a href="${pageContext.request.contextPath}/admin/recruiterInfo.adfc">기업회원 정보 조회</a>
 			</div>
 
 			<div class="company-checkdetail-sidebar-item">
