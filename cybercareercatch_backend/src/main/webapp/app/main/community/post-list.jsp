@@ -54,7 +54,7 @@
 							<tr class="post-notice-row">
 								<td>공지</td>
 								<td class="post-title-td"><a
-									href="${pageContext.request.contextPath}/post/noticeDetail.pfc?postNumber=${post.noticeNumber}"
+									href="${pageContext.request.contextPath}/post/noticeDetail.pfc?postNumber=${notice.postNumber}"
 									class="post-title-link"> ${notice.postTitle} </a></td>
 								<td>${notice.adminId}</td>
 								<td>${notice.postDate}</td>
