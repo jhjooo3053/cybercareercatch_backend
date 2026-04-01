@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,122 +9,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>일반회원 마이페이지 - 게시물목록확인</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/main/mypage/mypage-member-edit-postlist.css">
+   href="${pageContext.request.contextPath}/assets/css/main/mypage/mypage-member-edit-postlist.css">
+<script defer
+   src="${pageContext.request.contextPath}/assets/js/main/mypage/mypage-member-edit-postlist.js"></script>
 </head>
 
 <body>
-	<c:set var="isLoggedIn"
-		value="${not empty sessionScope.user or not empty sessionScope.userNumber}" />
-	<c:set var="defaultCompanyImg"
-		value="${pageContext.request.contextPath}/assets/img/기업이미지_샘플1.jpg" />
+   <c:set var="isLoggedIn"
+      value="${not empty sessionScope.user or not empty sessionScope.userNumber}" />
+   <c:set var="defaultCompanyImg"
+      value="${pageContext.request.contextPath}/assets/img/기업이미지_샘플1.jpg" />
 
-	<c:choose>
-		<c:when test="${not empty sessionScope.userNumber}">
-			<c:choose>
-				<c:when test="${sessionScope.userType == '기업회원'}">
-					<jsp:include page="/app/main/header/header-login-company.jsp" />
-				</c:when>
-				<c:otherwise>
-					<jsp:include page="/app/main/header/header-login-member.jsp" />
-				</c:otherwise>
-			</c:choose>
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="/app/main/header/header-logout.jsp" />
-		</c:otherwise>
-	</c:choose>
-	<main>
-		<div class="main-container">
-			<div class="mypage-title">마이페이지</div>
+   <c:choose>
+      <c:when test="${not empty sessionScope.userNumber}">
+         <c:choose>
+            <c:when test="${sessionScope.userType == '기업회원'}">
+               <jsp:include page="/app/main/header/header-login-company.jsp" />
+            </c:when>
+            <c:otherwise>
+               <jsp:include page="/app/main/header/header-login-member.jsp" />
+            </c:otherwise>
+         </c:choose>
+      </c:when>
+      <c:otherwise>
+         <jsp:include page="/app/main/header/header-logout.jsp" />
+      </c:otherwise>
+   </c:choose>
+   <main>
+      <div class="main-container">
+         <div class="mypage-title">마이페이지</div>
 
-			<div class="mypage-section">
-				<div class="mypage-subtitle">나의 Q&amp;A 게시글</div>
-				<div class="mypage-subtitle">Q&amp;A 리스트</div>
+         <div class="mypage-section">
+            <div class="mypage-subtitle">나의 Q&amp;A 게시글</div>
+            <div class="mypage-subtitle">Q&amp;A 리스트</div>
 
-				<form
-					action="${pageContext.request.contextPath}/member/mypage/deleteMyQna.mpfc"
-					method="post">
-					<ul class="mypage-QnAlist">
-						<li class="mypage-QnAlist-header">
-							<div class="check">선택</div>
-							<div class="no">번호</div>
-							<div class="QnAlist-title">제목</div>
-							<div class="companyname">기업명</div>
-							<div class="writer">작성자</div>
-							<div class="date">날짜</div>
-							<div class="answer-status">답변상태</div>
-						</li>
+            <form
+               action="${pageContext.request.contextPath}/member/mypage/deleteMyQna.mpfc"
+               method="post">
+               <ul class="mypage-QnAlist">
+                  <li class="mypage-QnAlist-header">
+                     <div class="check">선택</div>
+                     <div class="no">번호</div>
+                     <div class="QnAlist-title">제목</div>
+                     <div class="companyname">기업명</div>
+                     <div class="writer">작성자</div>
+                     <div class="date">날짜</div>
+                     <div class="answer-status">답변상태</div>
+                  </li>
 
-						<c:choose>
-							<c:when test="${empty myQnaList}">
-								<li class="mypage-QnAlist-content">
-									<div style="width: 100%; text-align: center; padding: 20px 0;">
-										작성한 Q&amp;A 게시글이 없습니다.</div>
-								</li>
-							</c:when>
+                  <c:choose>
+                     <c:when test="${empty myQnaList}">
+                        <li class="mypage-QnAlist-content">
+                           <div style="width: 100%; text-align: center; padding: 20px 0;">
+                              작성한 Q&amp;A 게시글이 없습니다.</div>
+                        </li>
+                     </c:when>
 
-							<c:otherwise>
-								<c:forEach var="qna" items="${myQnaList}">
-									<li class="mypage-QnAlist-content">
-										<div class="check">
-											<input type="checkbox" name="postNumbers"
-												value="${qna.postNumber}">
-										</div>
+                     <c:otherwise>
+                        <c:forEach var="qna" items="${myQnaList}">
+                           <li class="mypage-QnAlist-content">
+                              <div class="check">
+                                 <input type="checkbox" name="postNumbers"
+                                    value="${qna.postNumber}">
+                              </div>
 
-										<div class="no">${qna.postNumber}</div> <a
-										href="${pageContext.request.contextPath}/qna/detail.qfc?postNumber=${qna.postNumber}"
-										class="QnAlist-title"> ${qna.postTitle} </a>
+                              <div class="no">${qna.postNumber}</div> <a
+                              href="${pageContext.request.contextPath}/qna/detail.qfc?postNumber=${qna.postNumber}"
+                              class="QnAlist-title"> ${qna.postTitle} </a>
 
-										<div class="companyname">${qna.companyName}</div>
-										<div class="writer">${qna.userId}</div>
-										<div class="date">${qna.postDate}</div>
+                              <div class="companyname">${qna.companyName}</div>
+                              <div class="writer">${qna.userId}</div>
+                              <div class="date">${qna.postDate}</div>
 
-										<div
-											class="answer-status ${qna.answerStatus eq '답변완료' ? 'answer-status-active' : ''}">
-											${qna.answerStatus}</div>
-									</li>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</ul>
+                              <div
+                                 class="answer-status ${qna.answerStatus eq '답변완료' ? 'answer-status-active' : ''}">
+                                 ${qna.answerStatus}</div>
+                           </li>
+                        </c:forEach>
+                     </c:otherwise>
+                  </c:choose>
+               </ul>
 
-					<div class="QnAlist-button-wrap">
-						<button type="submit" class="btn" id="mypage-delete-btn">삭제</button>
-					</div>
-				</form>
-
-
-				<c:if test="${not empty myQnaList}">
-					<div class="mypage-QnAlist-bottom">
-						<div class="mypage-pagination">
-
-							<c:if test="${prev}">
-								<a class="page-btn page-arrow"
-									href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${startPage - 1}">
-									&lt; </a>
-							</c:if>
-
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<a class="page-btn ${page == i ? 'page-btn-active' : ''}"
-									href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${i}">
-									${i} </a>
-							</c:forEach>
-
-							<c:if test="${next}">
-								<a class="page-btn page-arrow"
-									href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${endPage + 1}">
-									&gt; </a>
-							</c:if>
-
-						</div>
-					</div>
-				</c:if>
+               <div class="QnAlist-button-wrap">
+                  <button type="button" class="btn" id="mypage-delete-btn">삭제</button>
+               </div>
+            </form>
 
 
-			</div>
-		</div>
-	</main>
-	<footer><jsp:include page="/app/main/footer/footer.jsp" /></footer>
+            <c:if test="${not empty myQnaList}">
+               <div class="mypage-QnAlist-bottom">
+                  <div class="mypage-pagination">
+
+                     <c:if test="${prev}">
+                        <a class="page-btn page-arrow"
+                           href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${startPage - 1}">
+                           &lt; </a>
+                     </c:if>
+
+                     <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                        <a class="page-btn ${page == i ? 'page-btn-active' : ''}"
+                           href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${i}">
+                           ${i} </a>
+                     </c:forEach>
+
+                     <c:if test="${next}">
+                        <a class="page-btn page-arrow"
+                           href="${pageContext.request.contextPath}/member/mypage/myQna.mpfc?page=${endPage + 1}">
+                           &gt; </a>
+                     </c:if>
+
+                  </div>
+               </div>
+            </c:if>
+
+
+         </div>
+      </div>
+   </main>
+   <footer><jsp:include page="/app/main/footer/footer.jsp" /></footer>
 </body>
 
 </html>
