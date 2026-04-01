@@ -20,7 +20,7 @@ public class FindPwCheckController implements Execute {
 			throws ServletException, IOException {
 
 		String userId = request.getParameter("userId");
-		String userPhone = request.getParameter("userPhone");
+		String userPhone = request.getParameter("phoneNumber");
 
 		UserDTO dto = new UserDTO();
 		dto.setUserId(userId);
