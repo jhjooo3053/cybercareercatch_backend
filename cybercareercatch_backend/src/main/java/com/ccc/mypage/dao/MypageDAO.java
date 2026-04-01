@@ -86,6 +86,14 @@ public class MypageDAO {
 		System.out.println("일반회원 회원탈퇴 메호드 실행");
 		sqlSession.delete("mypage.deleteMemberByUserNumber", userNumber);
 	}
+	
+	public void deleteCommentsByUserNumber(int userNumber) {
+	    sqlSession.delete("mypage.deleteCommentsByUserNumber", userNumber);
+	}
+
+	public void deletePostsByUserNumber(int userNumber) {
+	    sqlSession.delete("mypage.deletePostsByUserNumber", userNumber);
+	}
 
 //==========기업회원 마이페이지=============
 

@@ -48,8 +48,10 @@ public class MypageMemberDeleteController implements Execute {
 		}
 
 		// 회원 탈퇴
+		mypageDAO.deleteCommentsByUserNumber(userNumber);
+		mypageDAO.deletePostsByUserNumber(userNumber);
 		mypageDAO.deleteMemberByUserNumber(userNumber);
-
+		
 		// 세션 무효화
 		session.invalidate();
 
